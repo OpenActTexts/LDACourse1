@@ -1,0 +1,265 @@
+1
+00:00:02,493 --> 00:00:02,640
+﻿
+
+2
+00:00:02,640 --> 00:00:07,680
+Hello! I am Shyamal Kumar from the Department of 
+Statistics and Actuarial Science at the University  
+
+3
+00:00:07,680 --> 00:00:15,920
+of Iowa. This lecture concerns the maximum 
+likelihood method for frequency distributions.
+
+4
+00:00:18,480 --> 00:00:23,120
+We are considering the following problem: 
+we have a random sample from some unknown  
+
+5
+00:00:23,120 --> 00:00:28,000
+count distribution, and we wish to 
+make informed data-driven decisions. 
+
+6
+00:00:29,200 --> 00:00:34,000
+Typically, an indexed set of distributions is 
+assumed to contain the unknown distribution,  
+
+7
+00:00:34,800 --> 00:00:37,760
+with the index commonly 
+referred to as the parameter.  
+
+8
+00:00:39,200 --> 00:00:45,600
+In this setup, making good decisions reduces 
+to arriving at a good data-driven guess  
+
+9
+00:00:45,600 --> 00:00:51,200
+for the parametric value, say theta_0, that 
+corresponds to the underlying distribution. 
+
+10
+00:00:52,000 --> 00:00:57,600
+Two simplifying features of the statistical 
+estimation problem described above are that  
+
+11
+00:00:57,600 --> 00:01:03,440
+the observations are non-negative integers 
+and the parameter space is a Euclidean subset.
+
+12
+00:01:05,360 --> 00:01:10,320
+When working with count data of size n, 
+a basic summary is the frequency table.  
+
+13
+00:01:11,200 --> 00:01:17,200
+The frequency table can be seen as a sequence 
+m_k, for non-negative integral values of k,  
+
+14
+00:01:18,080 --> 00:01:21,440
+with m_k denoting the number 
+of observations equal to k. 
+
+15
+00:01:23,040 --> 00:01:29,280
+While there can be at most n non-zero 
+m_k's, typically, there are far fewer.  
+
+16
+00:01:30,560 --> 00:01:33,600
+For example, when sampling 
+from a binomial distribution,  
+
+17
+00:01:34,160 --> 00:01:40,640
+there are at most m-plus-one many non-zero 
+m_k's regardless of the sample size n.
+
+18
+00:01:41,840 --> 00:01:48,000
+A natural question that arises is if this 
+summarization in terms of the frequency table  
+
+19
+00:01:48,000 --> 00:01:54,560
+comes at the cost of loss of statistical 
+information - the answer is no. This conclusion  
+
+20
+00:01:54,560 --> 00:02:00,400
+derives from either the likelihood principle or 
+the sufficiency principle. In the next slide,  
+
+21
+00:02:00,400 --> 00:02:03,440
+we present the argument using 
+the likelihood principle. 
+
+22
+00:02:06,800 --> 00:02:11,280
+Towards stating the likelihood principle, 
+we note that the likelihood function for a  
+
+23
+00:02:11,280 --> 00:02:16,720
+random sample is the product of the probability 
+mass function evaluated at the sample points,  
+
+24
+00:02:17,520 --> 00:02:19,760
+viewed as a function of the unknown parameter. 
+
+25
+00:02:20,640 --> 00:02:24,880
+The likelihood principle states that all 
+the information relevant to the statistical  
+
+26
+00:02:24,880 --> 00:02:28,960
+inference of the unknown parameter is 
+contained in the likelihood function.
+
+27
+00:02:30,080 --> 00:02:33,840
+The shown alternate expression for 
+the likelihood in terms of m_ks  
+
+28
+00:02:34,400 --> 00:02:39,200
+alone implies the lossless compression 
+that the frequency table affords.
+
+29
+00:02:41,760 --> 00:02:45,200
+The maximum likelihood estimation method posits  
+
+30
+00:02:45,200 --> 00:02:50,960
+that the arg max of the likelihood function is a 
+compelling estimator for the unknown parameter. 
+
+31
+00:02:51,840 --> 00:02:57,040
+To illustrate this method, consider a simple model 
+consisting of two probability mass functions,  
+
+32
+00:02:57,680 --> 00:03:00,960
+with common support consisting 
+of only three and five.  
+
+33
+00:03:02,080 --> 00:03:10,160
+p_1 assigns a probability of 0.8 to three, 
+whereas p_2 allocates a probability of only 0.4.  
+
+34
+00:03:11,600 --> 00:03:17,840
+Also, consider a sample of size three consisting 
+of observations equal to three, three, and five. 
+
+35
+00:03:18,800 --> 00:03:26,880
+The likelihood is a function defined on the set 
+containing 1 and 2, with L(1) equal to 0.128  
+
+36
+00:03:26,880 --> 00:03:34,000
+and L(2) equal to 0.096. Since 
+the likelihood is maximized at 1,  
+
+37
+00:03:34,000 --> 00:03:37,600
+the maximum likelihood estimate 
+for the unknown parameter is 1. 
+
+38
+00:03:40,080 --> 00:03:45,760
+Often it is easy to work with the logarithm of 
+the likelihood, the so-called log-likelihood.  
+
+39
+00:03:46,320 --> 00:03:51,440
+Towards understanding the reason behind its 
+use, we note that the logarithm is a strictly  
+
+40
+00:03:51,440 --> 00:03:56,480
+increasing function on the positive half of 
+the real line, the range of the likelihood  
+
+41
+00:03:56,480 --> 00:04:02,720
+function. The former implies that the arg max 
+of the log-likelihood coincides with the MLE. 
+
+42
+00:04:04,480 --> 00:04:08,080
+On the theoretical side, since 
+maximization often involves  
+
+43
+00:04:08,080 --> 00:04:13,360
+differentiation, working with the log-likelihood 
+automatically drops the likelihood factors  
+
+44
+00:04:13,360 --> 00:04:17,040
+that are free of the parameter 
+on taking the first derivative.  
+
+45
+00:04:18,640 --> 00:04:24,560
+This property offers much pedagogic ease 
+and hence is pervasively used in texts. 
+
+46
+00:04:26,080 --> 00:04:32,480
+On the numerical side, since the likelihood decays 
+exponentially with sample size n, working with the  
+
+47
+00:04:32,480 --> 00:04:38,480
+log-likelihood offers numerical stability by 
+reducing the impact of floating-point errors. 
+
+48
+00:04:40,160 --> 00:04:44,080
+The displayed graph contains the plots 
+in black of a likelihood function  
+
+49
+00:04:44,640 --> 00:04:49,600
+and its log-likelihood function in red. 
+Notice that they have the same domain  
+
+50
+00:04:49,600 --> 00:04:53,760
+and are maximized at the same 
+parametric value of 2.85.
+
+51
+00:04:54,800 --> 00:04:56,560
+In the following two exercises,  
+
+52
+00:04:56,560 --> 00:05:00,400
+you will implement two different data 
+structures to store the frequency table,  
+
+53
+00:05:00,960 --> 00:05:05,840
+which will give you a first-hand experience of 
+the data compression we have alluded to above. 
+
+54
+00:05:07,120 --> 00:05:08,720
+Thank you!
+

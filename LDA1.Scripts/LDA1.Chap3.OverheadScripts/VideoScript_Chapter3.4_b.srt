@@ -1,0 +1,538 @@
+1
+00:00:00,310 --> 00:00:04,540
+Hello, welcome back to this video on introduction
+to Loss Data Analytics
+
+2
+00:00:04,540 --> 00:00:10,470
+My name is Nii Okine; I am an assistant professor
+at the Maths Department of Appalachian State
+
+3
+00:00:10,470 --> 00:00:11,470
+University.
+
+4
+00:00:11,470 --> 00:00:17,529
+In this video, we are going to continue our
+discussion on the impacts of coverage modifications
+
+5
+00:00:17,529 --> 00:00:23,089
+with a focus on policy limits.
+
+6
+00:00:23,089 --> 00:00:29,259
+Under a limited policy, the insurer is responsible
+for covering the actual loss X up to the limit
+
+7
+00:00:29,259 --> 00:00:35,660
+of its coverage. This fixed limit of coverage
+is called the policy limit and often denoted
+
+8
+00:00:35,660 --> 00:00:44,940
+by u. If the loss exceeds the policy limit,
+the difference X?u has to be paid by the policyholder.
+
+9
+00:00:44,940 --> 00:00:50,190
+While a higher policy limit means a higher
+payout to the insured, it is usually associated
+
+10
+00:00:50,190 --> 00:00:52,210
+with a higher premium.
+
+11
+00:00:52,210 --> 00:00:58,830
+Let Y denote the amount of paid claim by the
+insurer. The variable Y is known as the limited
+
+12
+00:00:58,830 --> 00:01:09,320
+loss variable and is denoted by X?u and the
+wedge means take the minimum of X or u. Therefore,
+
+13
+00:01:09,320 --> 00:01:16,600
+the limited loss variable is equal to X for
+X less than or equal to u and equal u for
+
+14
+00:01:16,600 --> 00:01:18,280
+X greater than u.
+
+15
+00:01:18,280 --> 00:01:25,100
+The limited loss random variable Y is a right
+censored variable because values above u are
+
+16
+00:01:25,100 --> 00:01:27,159
+set equal to u.
+
+17
+00:01:27,159 --> 00:01:37,740
+It can be seen that the distinction between
+YL and YP is not needed under the limited
+
+18
+00:01:37,740 --> 00:01:42,499
+policy as the insurer will always make a payment.
+
+19
+00:01:42,499 --> 00:01:52,829
+Even when the distribution of X is continuous,
+the distribution of Y is a hybrid combination
+
+20
+00:01:52,829 --> 00:01:53,979
+of discrete and continuous components.
+
+21
+00:01:53,979 --> 00:02:02,909
+The discrete part of the distribution is concentrated
+at Y=u, when X>u, while the continuous part
+
+22
+00:02:02,909 --> 00:02:07,729
+is spread over the interval Y<u , when X?u.
+
+23
+00:02:07,729 --> 00:02:13,870
+Also, for the discrete part, the probability
+that the loss exceeds the policy limit u is
+
+24
+00:02:13,870 --> 00:02:22,010
+1? cdf of X at u. And for the continuous part
+of the distribution, Y=X.
+
+25
+00:02:22,010 --> 00:02:29,959
+Hence the pdf of Y is equal to the pdf of
+X for y between 0 and u and equal to 1? cdf
+
+26
+00:02:29,959 --> 00:02:34,090
+of X at u for y=u.
+
+27
+00:02:34,090 --> 00:02:40,709
+Accordingly, the distribution function of
+Y is equal to the cdf of X for y between 0
+
+28
+00:02:40,709 --> 00:02:53,049
+and u and equal to 1 for values y greater
+than or equal to u.
+
+29
+00:02:53,049 --> 00:02:58,760
+The raw moments of Y can be found directly
+using the pdf of X and given as the integral
+
+30
+00:02:58,760 --> 00:03:05,769
+from 0 to u of X to the power k multiplied
+by the pdf of X dx and to account for the
+
+31
+00:03:05,769 --> 00:03:15,390
+payments of u for X greater than u we add
+u to the power k multiplied by 1- cdf of X
+
+32
+00:03:15,390 --> 00:03:16,390
+at u.
+
+33
+00:03:16,390 --> 00:03:21,470
+Alternatively, an expression for the moments
+can be obtained using the survival function
+
+34
+00:03:21,470 --> 00:03:29,989
+which is given by the integral from 0 to u
+of kx to the power k-1 multiplied by 1- cdf
+
+35
+00:03:29,989 --> 00:03:31,400
+of X dx.
+
+36
+00:03:31,400 --> 00:03:38,629
+Therefore when k=1, the expected value of
+Y also known as the limited expected value
+
+37
+00:03:38,629 --> 00:03:50,550
+is equal to the integral from 0 to u of 1-
+cdf of X dx.
+
+38
+00:03:50,550 --> 00:03:55,470
+We now consider a situation where the loss
+random variable X follows a Pareto distribution
+
+39
+00:03:55,470 --> 00:03:57,430
+with parameters theta and alpha.
+
+40
+00:03:57,430 --> 00:04:03,760
+Recall that for the Pareto distribution, the
+survival function of X is given theta/ sum
+
+41
+00:04:03,760 --> 00:04:09,870
+of x and theta, all to the power alpha and
+the mean is given by theta divided by alpha
+
+42
+00:04:09,870 --> 00:04:10,870
+minus one.
+
+43
+00:04:10,870 --> 00:04:17,669
+Thus the expected value of Y is equal to the
+integral from 0 to u of the survival function
+
+44
+00:04:17,669 --> 00:04:24,870
+of x that is theta/ sum of x and theta, all
+to the power alpha dx.
+
+45
+00:04:24,870 --> 00:04:31,250
+With some algebra, we obtain the expected
+value of Y equals to theta divided by alpha-1
+
+46
+00:04:31,250 --> 00:04:46,630
+multiplied by 1- theta/ sum of u and theta,
+all to the power alpha-1.
+
+47
+00:04:46,630 --> 00:04:52,160
+Using the definitions of the payment per loss
+variable which takes the positive of X?d and
+
+48
+00:04:52,160 --> 00:04:56,520
+the limited loss variable which takes the
+minimum of X and d, it can be easily seen
+
+49
+00:04:56,520 --> 00:05:01,940
+that the loss random variable X is equal to
+the payment per loss random variable and the
+
+50
+00:05:01,940 --> 00:05:03,639
+limited loss random variable.
+
+51
+00:05:03,639 --> 00:05:08,720
+This implies, the expected payment without
+any coverage modification, E(X), is equal
+
+52
+00:05:08,720 --> 00:05:13,210
+to the sum of the expected payments with deductible
+d and limit d.
+
+53
+00:05:13,210 --> 00:05:18,080
+We now consider a scenario where the loss
+random variable X follows a Pareto distribution
+
+54
+00:05:18,080 --> 00:05:20,270
+with parameters theta and alpha.
+
+55
+00:05:20,270 --> 00:05:28,400
+Thus the expected value of X is equal to theta
+divided by alpha -1. From the previous slide
+
+56
+00:05:28,400 --> 00:05:33,949
+we saw the expression for the expected value
+of the limited loss variable using a Pareto
+
+57
+00:05:33,949 --> 00:05:34,949
+distribution.
+
+58
+00:05:34,949 --> 00:05:39,620
+Then we can find the expected value of the
+payment per loss random variable by subtracting
+
+59
+00:05:39,620 --> 00:05:44,560
+the expected limited loss random variable
+from the expected payment without any coverage
+
+60
+00:05:44,560 --> 00:05:50,389
+modification, E(X). With some algebra, the
+expression for the expected value of the payment
+
+61
+00:05:50,389 --> 00:05:54,290
+per loss random variable is given as shown.
+
+62
+00:05:54,290 --> 00:06:02,360
+Recall that, the expected payment without
+any coverage modification, E(X), is equal
+
+63
+00:06:02,360 --> 00:06:07,620
+to the sum of the expected payments with deductible
+d and limit d.
+
+64
+00:06:07,620 --> 00:06:13,090
+From our previous video on deductibles, the
+loss elimination ration is equal to the expected
+
+65
+00:06:13,090 --> 00:06:17,849
+value of the loss random variable without
+any coverage modification minus the expected
+
+66
+00:06:17,849 --> 00:06:23,590
+value of the payment per loss variable, all
+divided by the Expected value of the loss
+
+67
+00:06:23,590 --> 00:06:26,220
+random variable without any coverage modification.
+
+68
+00:06:26,220 --> 00:06:31,550
+Then the loss elimination ratio can be expressed
+as the expected value of the limited loss
+
+69
+00:06:31,550 --> 00:06:40,889
+variable with limit d divided by the Expected
+value of the loss random variable without
+
+70
+00:06:40,889 --> 00:06:43,120
+any coverage modification.
+
+71
+00:06:43,120 --> 00:06:46,220
+We now consider an actuarial exam question.
+
+72
+00:06:46,220 --> 00:06:52,050
+We have been given that under a group insurance
+policy, an insurer agrees to pay 100% of the
+
+73
+00:06:52,050 --> 00:06:58,370
+medical bills incurred during the year by
+employees of a small company, up to a maximum
+
+74
+00:06:58,370 --> 00:07:06,240
+total of one million dollars. The total amount
+of bills incurred, X, has pdf equal to x multiplied
+
+75
+00:07:06,240 --> 00:07:12,360
+by (4-x) all divided by 9 for x between 0
+and 3 and equal to zero elsewhere.
+
+76
+00:07:12,360 --> 00:07:17,960
+Note that x is in millions. We are to calculate
+the total amount, in millions of dollars,
+
+77
+00:07:17,960 --> 00:07:22,550
+the insurer would expect to pay under this
+policy.
+
+78
+00:07:22,550 --> 00:07:28,099
+To answer this question, first, we need to
+define the limited random variable Y, which
+
+79
+00:07:28,099 --> 00:07:35,410
+is equal to x for x less than or equal to
+1 and equal to 1 for x greater than 1.
+
+80
+00:07:35,410 --> 00:07:43,620
+Then, the expected value of the limited loss
+variable Y is given by the integral from 0
+
+81
+00:07:43,620 --> 00:07:54,150
+to 1 of x squared multiplied by (4-x) all
+divided by 9 dx + 1 multiplied by the integral
+
+82
+00:07:54,150 --> 00:08:06,580
+from 1 to 3 of x multiplied by 4-x divided
+by 9 dx. Solving gives us 0.935.
+
+83
+00:08:06,580 --> 00:08:16,069
+Now we discuss an example of R code that we
+can use to calculate the limited expected
+
+84
+00:08:16,069 --> 00:08:17,780
+values under a deductible policy.
+
+85
+00:08:17,780 --> 00:08:23,880
+For this example, we assume the claim severities
+follow a lognormal distribution, and we discuss
+
+86
+00:08:23,880 --> 00:08:27,960
+two functions to calculate expected values
+under a deductible policy.
+
+87
+00:08:27,960 --> 00:08:33,329
+The first chunk of codes assigns the parameters
+for the lognormal distribution and simulates
+
+88
+00:08:33,329 --> 00:08:35,519
+the claims severities based on lognormal distribution.
+
+89
+00:08:35,519 --> 00:08:43,079
+The second chunk of codes provides the mlnorm
+function, that calculates unlimited expected
+
+90
+00:08:43,079 --> 00:08:49,800
+values of claim severities and the levlnorm
+function that calculates the expected values
+
+91
+00:08:49,800 --> 00:08:54,550
+of the claims retained by the insured under
+a deductible policy based on the lognormal
+
+92
+00:08:54,550 --> 00:09:00,220
+distribution. As you can see these two functions
+are user defined.
+
+93
+00:09:00,220 --> 00:09:06,110
+The third chunk of codes calculates the lognormal
+function's expected value and compares it
+
+94
+00:09:06,110 --> 00:09:10,040
+to the mean of claims from the claims data.
+
+95
+00:09:10,040 --> 00:09:15,550
+The final chunk of code calculates the expected
+value of the claims retained by the insured
+
+96
+00:09:15,550 --> 00:09:21,251
+using the levlnorm function and compares it
+to the amounts retained by the insured from
+
+97
+00:09:21,251 --> 00:09:30,500
+claims data. Here the pmin function is different
+from the min function. The pmin are applied
+
+98
+00:09:30,500 --> 00:09:38,000
+to two or more numeric vectors with the same
+length. pmin returns the parallel minima of
+
+99
+00:09:38,000 --> 00:09:48,050
+two or more input vectors, where the output
+is a vector of the same length as the input
+
+100
+00:09:48,050 --> 00:09:49,380
+vectors.
+
+101
+00:09:49,380 --> 00:09:58,130
+In this video, we discussed the limited loss
+random variable which is equal to x for x
+
+102
+00:09:58,130 --> 00:10:04,680
+less than the policy limit u and equal to
+the policy limit u for x greater u.
+
+103
+00:10:04,680 --> 00:10:10,060
+The limited random variable is a right censored
+variable because values above u are set equal
+
+104
+00:10:10,060 --> 00:10:11,060
+to u.
+
+105
+00:10:11,060 --> 00:10:17,029
+The expected value of limited random variable
+is also known as the limited expected value.
+
+106
+00:10:17,029 --> 00:10:22,560
+We also showed that using the definitions
+of the payment per loss variable and the limited
+
+107
+00:10:22,560 --> 00:10:27,480
+loss variable, it can be easily seen that
+the loss random variable X is equal to the
+
+108
+00:10:27,480 --> 00:10:34,209
+sum of payment per loss random variable and
+the limited loss random variable. Which implies,
+
+109
+00:10:34,209 --> 00:10:38,160
+the expected payment without any coverage
+modification, E(X), is equal to the sum of
+
+110
+00:10:38,160 --> 00:10:43,310
+the expected payments with deductible u and
+policy limit. U.
+
+111
+00:10:43,310 --> 00:10:49,600
+Finally, the limited expected value is equal
+to the integral from 0 to u of the survival
+
+112
+00:10:49,600 --> 00:10:50,670
+function of X dx.
+
+113
+00:10:50,670 --> 00:10:53,390
+Thank you for watching this video.
+

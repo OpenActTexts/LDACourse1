@@ -1,0 +1,139 @@
+1
+00:00:01,969 --> 00:00:07,120
+Hello and welcome back. My name is Brian Hartman
+and I am an associate professor at Brigham
+
+2
+00:00:07,120 --> 00:00:10,720
+Young University.
+One important type of inference is to select
+
+3
+00:00:10,720 --> 00:00:16,080
+one of two candidate models, where one model
+(reduced model) is a special case of the other
+
+4
+00:00:16,080 --> 00:00:21,659
+model (full model). In a Likelihood Ratio
+Test, we conduct the following hypothesis
+
+5
+00:00:21,659 --> 00:00:29,099
+test: H0: Reduced model is correct against
+H1: Full model is correct.
+
+6
+00:00:29,099 --> 00:00:33,370
+To conduct the Likelihood Ratio Test we first
+determine the maximum likelihood estimator
+
+7
+00:00:33,370 --> 00:00:38,800
+for full model, theta hat full. Then we assume
+that p restrictions are placed on the parameters
+
+8
+00:00:38,800 --> 00:00:43,280
+of the full model to create the reduced model;
+determine the maximum likelihood estimator
+
+9
+00:00:43,280 --> 00:00:48,260
+for the reduced model, theta hat reduced.
+Two times the difference in log-likelihood
+
+10
+00:00:48,260 --> 00:00:55,280
+of the full and reduced models is the likelihood
+ratio or LRT. Under the null hypothesis, the
+
+11
+00:00:55,280 --> 00:00:59,990
+likelihood ratio has a chi-square distribution
+with degrees of freedom equal to p. Critical
+
+12
+00:00:59,990 --> 00:01:07,350
+value is a quantile from a chi-square distribution
+with degrees of freedom equal to p - If LRT
+
+13
+00:01:07,350 --> 00:01:12,380
+is large relative to the critical value, then
+we reject the reduced model in favor of the
+
+14
+00:01:12,380 --> 00:01:16,240
+full model.
+The following statistics can be used when
+
+15
+00:01:16,240 --> 00:01:20,240
+comparing several candidate models that are
+not necessarily nested (as in the Likelihood
+
+16
+00:01:20,240 --> 00:01:26,450
+Ratio Test). One picks the model that maximizes
+the criterion. Note that these are one version
+
+17
+00:01:26,450 --> 00:01:31,290
+of the criterion, other versions may be multiplied
+by two or may minimize a negative number,
+
+18
+00:01:31,290 --> 00:01:38,560
+but the relative order is what matter. Akaike’s
+Information Criterion (AIC) is the log-likelihood
+
+19
+00:01:38,560 --> 00:01:43,030
+minus the number of parameters in the model.
+The number of parameters term is a penalty
+
+20
+00:01:43,030 --> 00:01:50,110
+for the complexity of the model. Other things
+equal, a more complex model means more parameters,
+
+21
+00:01:50,110 --> 00:01:55,880
+resulting in a smaller value of the criterion.
+Similarly, to use a more complex model, there
+
+22
+00:01:55,880 --> 00:02:02,350
+must be a significant increase in the loglikelihood.
+Bayesian Information Criterion (BIC) is the
+
+23
+00:02:02,350 --> 00:02:14,490
+loglikelihood minus 0.5 times the number of
+parameters times the number of observations.
+
+24
+00:02:14,490 --> 00:02:18,340
+This measure gives greater weight to the number
+of parameters, resulting in a larger penalty.
+
+25
+00:02:18,340 --> 00:02:23,260
+Other things being equal, BIC will suggest
+a simpler model than AIC.
+
+26
+00:02:23,260 --> 00:02:29,120
+As mentioned in the previous slide, here is
+an alternative version of AIC and BIC where
+
+27
+00:02:29,120 --> 00:02:34,030
+you minimize the criterion. It is simply the
+AIC and BIC values from the previous slide
+
+28
+00:02:34,030 --> 00:02:41,120
+multiplied by negative two.
+

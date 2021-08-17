@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Loss Data Analytics: Short Course</title>
+  <meta name="description" content="This is an interactive, online, freely available short course. It will contain many interactive objects (quizzes, computer demonstrations, interactive graphs, video, and the like) to promote deeper learning." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Loss Data Analytics: Short Course" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is an interactive, online, freely available short course. It will contain many interactive objects (quizzes, computer demonstrations, interactive graphs, video, and the like) to promote deeper learning." />
+  <meta name="github-repo" content="https://github.com/OpenActTextDev/LDAShortCourse1" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Loss Data Analytics: Short Course" />
+  
+  <meta name="twitter:description" content="This is an interactive, online, freely available short course. It will contain many interactive objects (quizzes, computer demonstrations, interactive graphs, video, and the like) to promote deeper learning." />
+  
+
+<meta name="author" content="A short course authored by the Actuarial Community" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="introduction-to-loss-data-analytics.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<!-- Various toggle functions used throughout --> 
+<script language="javascript">
+function toggle(id1,id2) {
+	var ele = document.getElementById(id1); var text = document.getElementById(id2);
+	if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Solution";}
+		else {ele.style.display = "block"; text.innerHTML = "Hide Solution";}}
+function togglecode(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show R Code";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide R Code";}}
+function toggleEX(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Example";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide Example";}}
+function toggleTheory(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Theory";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide Theory";}}
+function toggleQuiz(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Quiz Solution";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide Quiz Solution";}}      
+</script>
+
+<!-- A few functions for revealing definitions -->
+<script language="javascript">
+<!--   $( function() {
+    $("#tabs").tabs();
+  } ); -->
+
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
+});
+</script>
+<script language="javascript">
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+
+<script language="javascript">
+function toggle(id1,id2) {
+	var ele = document.getElementById(id1); var text = document.getElementById(id2);
+	if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Solution";}
+		else {ele.style.display = "block"; text.innerHTML = "Hide Solution";}}
+</script>
+
+<script language="javascript">
+function togglecode(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show R Code";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide R Code";}}
+</script>
+<script language="javascript">
+function toggleEX(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Example";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide Example";}}
+</script>
+<script language="javascript">
+function toggleTheory(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Theory";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide Theory";}}
+</script>
+
+<script language="javascript">
+function toggleDet(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Details";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide  Details";}}
+</script>
+
+<script language="javascript">
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
+});
+</script>
+
+
+<script src=https://cdn.datacamp.com/datacamp-light-latest.min.js></script>
+
+
+<style>
+/* Rearrange console label */
+.datacamp-exercise ol li, .datacamp-exercise ul li {
+  margin-bottom: 0em !important;
+}
+
+/* Remove bullet marker */
+.datacamp-exercise ol li::before, .datacamp-exercise ul li::before {
+  content: '' !important;
+}
+</style>
+
+
+<script language="javascript">
+var submitAnswer = function() {
+
+  var radios = document.getElementsByName('choice');
+  var val= "";
+  for (var i = 0, length = radios.length; i < length; i++) {
+      if (radios[i].checked) {
+         val = radios[i].value; 
+         break;
+       }
+  }
+  
+  if (val == "" ) {
+    alert('please select choice answer');
+  } else if ( val == "Correct" ) {
+    alert('Answer is correct !');
+  } else {
+    alert('Answer is wrong');
+  }
+};
+</script>
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-125587869-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-125587869-1');
+</script>
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Loss Data Analytics: Short Course</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-loss-data-analytics"><i class="fa fa-check"></i>Why Loss Data Analytics?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i>Resources</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#how-to-navigate-this-tutorial"><i class="fa fa-check"></i>How to Navigate this Tutorial</a></li>
+<li><a href="index.html#a-word-from-our-sponsor-astin-education-astin-academy">A Word from our Sponsor: <br> Astin + Education = Astin Academy</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html"><i class="fa fa-check"></i><b>1</b> Introduction to Loss Data Analytics</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:Intro"><i class="fa fa-check"></i><b>1.1</b> Relevance of Analytics to Insurance Activities</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:PredModApps"><i class="fa fa-check"></i><b>1.2</b> Insurance Company Operations</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:LGPIF"><i class="fa fa-check"></i><b>1.3</b> Case Study: Property Fund Introduction</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-claim-frequency"><i class="fa fa-check"></i><b>1.3.1</b> Exercise. Claim Frequency</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:PropertyFundSeverity"><i class="fa fa-check"></i><b>1.4</b> Property Fund Claim Severity</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-exploring-claim-severities"><i class="fa fa-check"></i><b>1.4.1</b> Exercise. Exploring Claim Severities</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-skewness-of-the-claim-severity-distribution"><i class="fa fa-check"></i><b>1.4.2</b> Exercise. Skewness of the Claim Severity Distribution</a></li>
+<li class="chapter" data-level="1.4.3" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-claim-severity-by-year"><i class="fa fa-check"></i><b>1.4.3</b> Exercise. Claim Severity by Year</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:LGPIFRatingVariaables"><i class="fa fa-check"></i><b>1.5</b> Property Fund Rating Variables</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Ex:ClaimByType"><i class="fa fa-check"></i><b>1.5.1</b> Exercise. Claim by Entity Type, Fire Class, and No Claim Credit</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#contributors-1"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="frequency-modeling.html"><a href="frequency-modeling.html"><i class="fa fa-check"></i><b>2</b> Frequency Modeling</a><ul>
+<li class="chapter" data-level="2.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#basic-frequency-distributions"><i class="fa fa-check"></i><b>2.1</b> Basic Frequency Distributions</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-representing-the-number-of-cyber-events-with-a-binomial-distribution"><i class="fa fa-check"></i><b>2.1.1</b> Exercise. Representing the Number of Cyber Events with a Binomial Distribution</a></li>
+<li class="chapter" data-level="2.1.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-representing-the-number-of-cyber-events-with-a-poisson-distribution"><i class="fa fa-check"></i><b>2.1.2</b> Exercise. Representing the Number of Cyber Events with a Poisson Distribution</a></li>
+<li class="chapter" data-level="2.1.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-comparing-basic-count-distributions"><i class="fa fa-check"></i><b>2.1.3</b> Exercise. Comparing Basic Count Distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#the-ab0-class"><i class="fa fa-check"></i><b>2.2</b> The (a,b,0) Class</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-determining-probabilities-recursively"><i class="fa fa-check"></i><b>2.2.1</b> Exercise. Determining Probabilities Recursively</a></li>
+<li class="chapter" data-level="2.2.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-reverse-engineering-and-recursive-r-functions"><i class="fa fa-check"></i><b>2.2.2</b> Exercise. Reverse Engineering and Recursive <code>R</code> Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#estimating-frequency-distributions"><i class="fa fa-check"></i><b>2.3</b> Estimating Frequency Distributions</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#Ex:CountDataCompression"><i class="fa fa-check"></i><b>2.3.1</b> Exercise. Count Data Compression - 1</a></li>
+<li class="chapter" data-level="2.3.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-count-data-compression---2"><i class="fa fa-check"></i><b>2.3.2</b> Exercise. Count Data Compression - 2</a></li>
+<li class="chapter" data-level="2.3.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-graphing-likelihoods"><i class="fa fa-check"></i><b>2.3.3</b> Exercise. Graphing Likelihoods</a></li>
+<li class="chapter" data-level="2.3.4" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-fitting-a-binomial-distribution"><i class="fa fa-check"></i><b>2.3.4</b> Exercise. Fitting a Binomial Distribution</a></li>
+<li class="chapter" data-level="2.3.5" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-fitting-a-negative-binomial-distribution"><i class="fa fa-check"></i><b>2.3.5</b> Exercise. Fitting a Negative Binomial Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="frequency-modeling.html"><a href="frequency-modeling.html#other-frequency-distributions"><i class="fa fa-check"></i><b>2.4</b> Other Frequency Distributions</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-the-ab1-distribution-and-its-moments"><i class="fa fa-check"></i><b>2.4.1</b> Exercise. The (<em>a,b</em>,1) Distribution and its Moments</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="frequency-modeling.html"><a href="frequency-modeling.html#mixture-distributions"><i class="fa fa-check"></i><b>2.5</b> Mixture Distributions</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-mixtures-of-workers-compensation-claims"><i class="fa fa-check"></i><b>2.5.1</b> Exercise. Mixtures of Workers’ Compensation Claims</a></li>
+<li class="chapter" data-level="2.5.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-finite-number-of-mixture-distributions"><i class="fa fa-check"></i><b>2.5.2</b> Exercise. Finite Number of Mixture Distributions</a></li>
+<li class="chapter" data-level="2.5.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-gamma-mixture-of-poissons"><i class="fa fa-check"></i><b>2.5.3</b> Exercise. Gamma Mixture of Poissons</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="frequency-modeling.html"><a href="frequency-modeling.html#goodness-of-fit"><i class="fa fa-check"></i><b>2.6</b> Goodness of Fit</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-goodness-of-fit-zero-modified-poisson"><i class="fa fa-check"></i><b>2.6.1</b> Exercise. Goodness of Fit: Zero-Modified Poisson</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="frequency-modeling.html"><a href="frequency-modeling.html#contributors-2"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html"><i class="fa fa-check"></i><b>3</b> Modeling Loss Severity</a><ul>
+<li class="chapter" data-level="3.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#basic-distributional-quantities"><i class="fa fa-check"></i><b>3.1</b> Basic Distributional Quantities</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-moments-can-be-misleading"><i class="fa fa-check"></i><b>3.1.1</b> Exercise. Moments Can Be Misleading</a></li>
+<li class="chapter" data-level="3.1.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-determining-boxplots-and-quantiles"><i class="fa fa-check"></i><b>3.1.2</b> Exercise. Determining Boxplots and Quantiles</a></li>
+<li class="chapter" data-level="3.1.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-gamma-moment-generating-function"><i class="fa fa-check"></i><b>3.1.3</b> Exercise. Gamma Moment Generating Function</a></li>
+<li class="chapter" data-level="3.1.4" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-visualizing-moment-generating-functions"><i class="fa fa-check"></i><b>3.1.4</b> Exercise. Visualizing Moment Generating Functions</a></li>
+<li class="chapter" data-level="3.1.5" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-determining-moments-using-moment-generating-functions"><i class="fa fa-check"></i><b>3.1.5</b> Exercise. Determining Moments using Moment Generating Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#continuous-distributions"><i class="fa fa-check"></i><b>3.2</b> Continuous Distributions</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise."><i class="fa fa-check"></i><b>3.2.1</b> Exercise.</a></li>
+<li class="chapter" data-level="3.2.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-visualizing-the-gamma-distribution"><i class="fa fa-check"></i><b>3.2.2</b> Exercise. Visualizing the Gamma Distribution</a></li>
+<li class="chapter" data-level="3.2.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#Ex:CreateParetoDensityFct"><i class="fa fa-check"></i><b>3.2.3</b> Exercise. Creating a Pareto Density Function</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#methods-of-creating-new-distributions"><i class="fa fa-check"></i><b>3.3</b> Methods of Creating New Distributions</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-using-the-logarithmic-transformation-to-create-a-new-distribution"><i class="fa fa-check"></i><b>3.3.1</b> Exercise. Using the Logarithmic Transformation to Create a New Distribution</a></li>
+<li class="chapter" data-level="3.3.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-creating-a-mixture-distribution"><i class="fa fa-check"></i><b>3.3.2</b> Exercise. Creating a Mixture Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#coverage-modifications"><i class="fa fa-check"></i><b>3.4</b> Coverage Modifications</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-calculate-moments-of-the-lognormal-distribution"><i class="fa fa-check"></i><b>3.4.1</b> Exercise. Calculate Moments of the Lognormal Distribution</a></li>
+<li class="chapter" data-level="3.4.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-calculate-limited-expected-value-of-the-lognormal-distribution"><i class="fa fa-check"></i><b>3.4.2</b> Exercise. Calculate Limited Expected Value of the Lognormal Distribution</a></li>
+<li class="chapter" data-level="3.4.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-expected-claims-subject-to-a-deductible"><i class="fa fa-check"></i><b>3.4.3</b> Exercise. Expected Claims Subject to a Deductible</a></li>
+<li class="chapter" data-level="3.4.4" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-expected-claims-subject-to-a-deductible-and-coinsurance"><i class="fa fa-check"></i><b>3.4.4</b> Exercise. Expected Claims Subject to a Deductible and Coinsurance</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>3.5</b> Maximum Likelihood Estimation</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#Ex:MLEPareto"><i class="fa fa-check"></i><b>3.5.1</b> Exercise. Maximum Likelihood Estimation for a Pareto Distribution</a></li>
+<li class="chapter" data-level="3.5.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-finding-standard-errors-for-maximum-likelihood-estimates"><i class="fa fa-check"></i><b>3.5.2</b> Exercise. Finding Standard Errors for Maximum Likelihood Estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#contributors-3"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html"><i class="fa fa-check"></i><b>4</b> Model Selection and Estimation</a><ul>
+<li class="chapter" data-level="4.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#Sec:NonInf"><i class="fa fa-check"></i><b>4.1</b> Nonparametric Inference</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-empirical-distribution-function-and-quartiles-percentiles-and-quantiles"><i class="fa fa-check"></i><b>4.1.1</b> Exercise. Empirical Distribution Function and Quartiles, Percentiles and Quantiles</a></li>
+<li class="chapter" data-level="4.1.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-density-estimators"><i class="fa fa-check"></i><b>4.1.2</b> Exercise. Density Estimators</a></li>
+<li class="chapter" data-level="4.1.3" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-claim-frequency-1"><i class="fa fa-check"></i><b>4.1.3</b> Exercise. Claim Frequency</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#tools-for-model-selection"><i class="fa fa-check"></i><b>4.2</b> Tools for Model Selection</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-probability-probability-pp-plot"><i class="fa fa-check"></i><b>4.2.1</b> Exercise. Probability-Probability (<span class="math inline">\(pp\)</span>) plot</a></li>
+<li class="chapter" data-level="4.2.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-quantile-quantile-qq-plot"><i class="fa fa-check"></i><b>4.2.2</b> Exercise. Quantile-Quantile (<span class="math inline">\(qq\)</span>) plot</a></li>
+<li class="chapter" data-level="4.2.3" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-kolmogorov-smirnov-test"><i class="fa fa-check"></i><b>4.2.3</b> Exercise. Kolmogorov-Smirnov test</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#model-selection-likelihood-ratio-tests-and-goodness-of-fit"><i class="fa fa-check"></i><b>4.3</b> Model Selection: Likelihood Ratio Tests and Goodness of Fit</a></li>
+<li class="chapter" data-level="4.4" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#estimation-using-modified-data-nonparametric-approach"><i class="fa fa-check"></i><b>4.4</b> Estimation using Modified Data: Nonparametric Approach</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-nonparametric-estimation-using-modified-data"><i class="fa fa-check"></i><b>4.4.1</b> Exercise. Nonparametric Estimation using Modified Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-nonparametric-estimation-using-modified-data-ii"><i class="fa fa-check"></i><b>4.4.2</b> Exercise. Nonparametric Estimation using Modified Data II</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#estimation-using-modified-data-parametric-approach"><i class="fa fa-check"></i><b>4.5</b> Estimation using Modified Data: Parametric Approach</a></li>
+<li class="chapter" data-level="4.6" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#bayesian-inference"><i class="fa fa-check"></i><b>4.6</b> Bayesian Inference</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#visualizing-bayesian-methods"><i class="fa fa-check"></i><b>4.6.1</b> Visualizing Bayesian Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#contributors-4"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html"><i class="fa fa-check"></i><b>5</b> Aggregate Loss Models</a><ul>
+<li class="chapter" data-level="5.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#introduction"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#individual-risk-model"><i class="fa fa-check"></i><b>5.2</b> Individual Risk Model</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#Ex:IRM1"><i class="fa fa-check"></i><b>5.2.1</b> Exercise. Individual Risk Model I</a></li>
+<li class="chapter" data-level="5.2.2" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-individual-risk-model-ii"><i class="fa fa-check"></i><b>5.2.2</b> Exercise. Individual Risk Model II</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#collective-risk-model---part-i"><i class="fa fa-check"></i><b>5.3</b> Collective Risk Model - Part I</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-collective-risk-model-i"><i class="fa fa-check"></i><b>5.3.1</b> Exercise. Collective Risk Model I</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#collective-risk-model---part-ii"><i class="fa fa-check"></i><b>5.4</b> Collective Risk Model - Part II</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-collective-risk-model-ii"><i class="fa fa-check"></i><b>5.4.1</b> Exercise. Collective Risk Model II</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#tweedie-distribution"><i class="fa fa-check"></i><b>5.5</b> Tweedie Distribution</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-tweedie-distribution"><i class="fa fa-check"></i><b>5.5.1</b> Exercise. Tweedie Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#effects-of-coverage-modifications"><i class="fa fa-check"></i><b>5.6</b> Effects of Coverage Modifications</a></li>
+<li class="chapter" data-level="" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#contributors-5"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/OpenActTextDev/LDACourse1/" target="blank">LDA Short Course on GitHub</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Loss Data Analytics: Short Course</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Loss Data Analytics: Short Course</h1>
+<p class="author"><em>A short course authored by the Actuarial Community</em></p>
+</div>
+<div id="preface" class="section level1 unnumbered">
+<h1>Preface</h1>
+<p style="text-align:right;">
+<em>Date: 17 August 2021</em>
+</p>
+<div id="why-loss-data-analytics" class="section level2 unnumbered">
+<h2>Why Loss Data Analytics?</h2>
+<p>The intent is that this type of short course will eventually permeate throughout the actuarial curriculum. Given the dramatic changes in the way that actuaries treat data, analysis of loss data seems like a natural place to start. The idea behind the name <strong>loss data analytics</strong> is to integrate classical loss data models from applied probability with modern analytic tools. In particular, we recognize that big data (including social media and usage based insurance) are here to stay and that high speed computation is readily available.</p>
+</div>
+<div id="resources" class="section level2 unnumbered">
+<h2>Resources</h2>
+<ul>
+<li>This tutorial is based on the first five chapters of the <strong>open and freely available book</strong> <a href="https://openacttexts.github.io/">Loss Data Analytics</a>.
+<ul>
+<li><a href="https://openacttexts.github.io/LDARcode/">Sample code</a> is available for the book, although not needed for this tutorial.</li>
+</ul></li>
+<li>As described in how to navigate this tutorial below, you will not need to download any data for this course. However, if you want to have the data to follow up, we generally make it available through buttons such as:
+<ul>
+<li><button download>
+<a href="https://raw.githubusercontent.com/OpenActTextDev/LDAShortCourse1/main/Data/PropertyFundInsample.csv">View the Property Fund Data as a .csv file.</a>
+</button>
+Then, do a “Save Page as” if you wish to download.</li>
+<li>Alternatively, go directly to the <a href="https://github.com/OpenActTextDev/LDAShortCourse1/tree/main/Data">Github page</a> to access the data.</li>
+</ul></li>
+<li>For advanced data applications in insurance, you may be interested in the series, <a href="http://www.cambridge.org/us/academic/subjects/statistics-probability/statistics-econometrics-finance-and-insurance/predictive-modeling-applications-actuarial-science-volume-1">Predictive Modeling Applications in Actuarial Science</a>.</li>
+</ul>
+</div>
+<div id="how-to-navigate-this-tutorial" class="section level2 unnumbered">
+<h2>How to Navigate this Tutorial</h2>
+<ul>
+<li>This online tutorial is designed to guide you through the foundations of modeling loss data.</li>
+<li>The anticipated completion time is approximately ten hours.</li>
+<li>The tutorial assumes that you are familiar with the foundations in the statistical software <code>R</code>, such as Datacamp’s <a href="https://www.datacamp.com/courses/free-introduction-to-r%20">Introduction to R</a> or Codecademy’s <a href="https://www.codecademy.com/learn/learn-r">Learn R</a>.</li>
+</ul>
+<p><strong>Role of Video Introductions.</strong> There are five chapters in this tutorial that summarize the foundations. Each chapter is subdivided into several sections. At the beginning of each section is a short video, typically 5-10 minutes, that summarizes the section key learning outcomes. Following the video, you can see more details about the underlying <code>R</code> code for the analysis presented in the video.</p>
+<p><strong>Role of Exercises.</strong> Following each video introduction, there are one or two exercises that allow you to practice skills to make sure that you fully grasp the learning outcomes. The exercises are implemented using an online learning platform provided by <a href="https://www.datacamp.com/">Datacamp</a> so that you need not install <code>R</code>. Feedback is programmed into the exercises so that you will learn a lot by making mistakes! You will be pacing yourself, so always feel free to reveal the answers by hitting the <code>Solution</code> tab. Remember, going through quickly is not equivalent to learning deeply. Use this tool to enhance your understanding of one of the foundations of data science.</p>
+<div id="video-overview-of-tutorial-navigation" class="section level4 unnumbered">
+<h4>Video: Overview of Tutorial Navigation</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_ouy8g8ib&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_a9yksglu" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+<p><br></p>
+<p><strong>A Few More Tips</strong></p>
+<ul>
+<li>For the videos, with this player you hit the <strong>CC</strong> button and then <em>English</em> to see closed captions. You can also experiment with the speed of the video (the <em>1x</em> symbol) and other standard video player features.</li>
+<li>When completing the tutorial exercises, replace the question marks <strong>??</strong> by the appropriate code (in earlier versions, we used underscores).</li>
+<li>The graphical displays upon completion of the tutorial exercises appear only in the narrow window of the code and do not look good. This is a limitation of the <em>Datacamp</em> platform. For a more professional looking graph, in many cases you can simply copy the code and paste it into your own version of <code>R</code> to enhance its appearance. However, be careful with this approach. Sometimes, as part of the background, we pre-load data and libraries that you don’t see unless you dig down. (How to do this? Go to our <a href="https://github.com/OpenActTextDev/LDACourse1/">Github site</a>!)</li>
+<li>When a tutorial exercise finishes with a graph, the (green) success message is obscured. To see it, after completing the exercise, hit the “R-Console” button at the top. Then re-size the html page and immediately revert back to the full page mode. This procedure allows you to view the message.</li>
+<li><strong>Devices and Browsers</strong>. We tested the course on popular devices and browers. Our videos and tutorial exercises seemed to behave well on all the devices we looked at, including cell phones, Ipads, Apple and PC laptop/desktops. Most problematic is the .pdf overheads. These don’t seem to work well at all on cell phones and Ipads. For Apple and PC laptop/desktops:
+<ul>
+<li>When you view the .pdf output for the overheads with the browser FireFox, the default is for the table of contents to appear. The fix for this is to click the icon in the upper left-hand corner.</li>
+<li>For other browsers we tested (Edge and Chrome), the page of the .pdf that you select on appears the first time. You can either refresh every time you select a new page or, an easier route, scroll down to the appropriate page to see the desired output.</li>
+</ul></li>
+<li>Let us know about other bugs you encounter. We may not be able to address them but at least we can add notes here to warn other users.<br />
+</li>
+<li>Some of the exercises are more challenging and you may wish to skip them on your first pass through the course. These are indicated with this symbol:
+<img src = "ContributorPics/hurdler.png" width = "65" height = "65" style = "float:right; margin-left: 10px; margin-top: 7px" /></li>
+</ul>
+</div>
+</div>
+<div id="a-word-from-our-sponsor-astin-education-astin-academy" class="section level2 unnumbered">
+<h2>A Word from our Sponsor: <br> Astin + Education = Astin Academy</h2>
+<hr />
+<p>In this video, you learn about:</p>
+<ul>
+<li>the role of the <a href="https://www.actuaries.org/iaa/IAA/Sections/ASTIN_NEW/IAA/Sections/ASTIN_NEW/ASTIN_HOME.aspx">ASTIN section</a>, the non-life section of the International Actuarial Association</li>
+<li>their recent interest in education</li>
+<li>their development of the recently formed <em>Astin Academy</em>.</li>
+</ul>
+<blockquote>
+<p>“<em>The mission of the ASTIN Academy is to provide high quality free educational materials in non-life insurance to actuarial students across the world. The Academy is committed to open course development under Creative Commons licence and seeks innovation in teaching methodologies and application of technology. Let’s build the future of actuarial education together.</em>”</p>
+</blockquote>
+<hr />
+<div id="video-overview-of-the-astin-academy" class="section level4 unnumbered">
+<h4>Video: Overview of the Astin Academy</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_56ho6ss4&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_0dcwagec" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+<hr />
+</div>
+</div>
+<div id="contributors" class="section level2 unnumbered">
+<h2>Contributors</h2>
+<p>The project goal is to have the actuarial community author our learning resources in a collaborative fashion. The following contributors have taken a leadership role in developing this short course for <span class="math inline">\(Loss\)</span> <span class="math inline">\(Data\)</span> <span class="math inline">\(Analytics\)</span>.</p>
+<p><img src = "ContributorPics/YvoneChueh.jpg" width = "150" height = "160" style = "float:right; margin-left: 10px; margin-top: 7px; margin-bottom: 15px" /></p>
+<ul>
+<li><strong>Yvonne Chueh</strong> is a professor at Central Washington University. She received PhD from the University of Connecticut, bachelor degree in pure math from National Taiwan University. She has taught actuarial courses at UCONN and UW-Eau Claire. She is an associate (since 1994) and council member/chair (2013-2017/2017) of the Society of Actuaries (SOA) Education &amp; Research Section. Her research works were published by the American Academy of Actuaries, the Actuarial Foundation, SOA <em>North American Actuarial Journal</em>, <em>Electrical Engineering Series</em> of Springer, <em>International Joint Conference on Neural Networks</em>, <em>IEEE Symposium Series on Computational Intelligence (SSCI)</em>, and <em>International Journal of Computers, Communications &amp; Control</em>.</li>
+</ul>
+<p><img src = "ContributorPics/MiukiEbisaki.jpg" width = "150" height = "180" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
+<ul>
+<li><strong>Miyuki Ebisaki</strong> is a Manager at Deloitte Touche Tohmatsu LLC in Japan. Her research work is in the area of insurance, health care, social economy and new technologies. She has been working in domestic and foreign insurers in Japan and in the UK. She has various experiences both in non-life and life insurance; including product development, chief actuary, M&amp;A and risk management. In May 2020, she was elected as a member of the ASTIN board.</li>
+</ul>
+<p><br></p>
+<p><img src = "ContributorPics/RobErhardt.jpg" width = "150" height = "180" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
+<ul>
+<li><strong>Rob Erhardt</strong> is an Associate Professor of Statistics at Wake Forest University in Winston-Salem, NC. He holds a Ph.D. in Statistics and Operations Research from the University of North Carolina at Chapel Hill, an M.S. in Statistics from the University of Wisconsin-Madison, and a B.A. in Physics from SUNY Geneseo. He is also a credentialed actuary and Society of Actuaries Hickman Scholar. His research areas include environmental statistics, computational statistics, and actuarial science, with a particular interest in work at the intersection of insurance and climate risk. Originally from rural New York State, he is an avid runner and backpacker, and a poor jazz pianist.</li>
+</ul>
+<p><br></p>
+<p><img src = "ContributorPics/Frees_Jed2018_150x188.jpg" width = "150" height = "180" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
+<ul>
+<li><strong>Edward W. (Jed) Frees</strong> is an emeritus professor, formerly the Hickman-Larson Chair of Actuarial Science at the University of Wisconsin-Madison and currently affiliated with Australian National University. He is a Fellow of both the Society of Actuaries and the American Statistical Association. He has published extensively (a four-time winner of the Halmstad Prize for best paper published in the actuarial literature) and has written three books. He also is a co-editor of the two-volume series <em>Predictive Modeling Applications in Actuarial Science</em> published by Cambridge University Press.</li>
+</ul>
+<p><img src = "ContributorPics/BrianHartmanPortrait.jpg" width = "150" height = "200" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
+<ul>
+<li><p><strong>Brian Hartman</strong> is an associate professor of statistics and actuarial program coordinator at Brigham Young University. His current research interests include Bayesian methods and their applications in actuarial science and risk. He has worked in various capacities with companies in property-casualty, health, and long-term care insurance. He holds a Bachelor’s degree in Actuarial Science from Brigham Young University and a PhD in Statistics from Texas A&amp;M University. He is also an associate of the Society of Actuaries. Before BYU, he was a post-doctoral fellow at the University of Waterloo (2010-11) and an assistant professor at the University of Connecticut (2011-15).</p></li>
+<li><p><strong>Tim Higgins</strong> is an associate professor of actuarial studies and deputy director of the school of finance, actuarial studies and statistics at the Australian National University (ANU). Prior to academia he had positions in the Australian Commonwealth Treasury and the Australian Prudential Regulation Authority. He is a Fellow of the Institute of Actuaries of Australia. His main research interest is in income contingent loan theory, modelling and applications, and his other research interests include microsimulation modelling, financial literacy and behaviour, and superannuation and retirement policy. He has taught actuarial and statistics students at ANU since 2002, and received the ANU Vice Chancellor’s Award for Teaching Excellence in 2005.</p></li>
+</ul>
+<p><img src = "ContributorPics/FeiHuang.jpg" width = "150" height = "200" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
+<ul>
+<li><strong>Fei Huang</strong> is a Senior Lecturer in the School of Risk and Actuarial Studies, University of New South Wales (UNSW) Sydney. Before joining UNSW, she worked at the Australian National University (ANU) as Senior Lecturer (2019-2020) and Lecturer (2015-2018). Fei’s main research interest lies in predictive modelling and data analytics for insurance applications. She is an active researcher and publishes papers frequently in top-tier actuarial journals. Fei is also a dedicated educator. Her educational excellence has been recognized by winning the ANU Vice Chancellor’s Award for Teaching Excellence in the Early Career Category (2018) and ANU College of Business and Economics Award for Teaching Excellence in the Early Career Category (2017).</li>
+</ul>
+<p><img src = "ContributorPics/HimchanJeong.jpg" width = "150" height = "160" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
+<ul>
+<li><strong>Himchan Jeong</strong> is currently an Assistant Professor at Simon Fraser University. He is a Fellow of the Society of Actuaries (SOA) and holds a Ph.D. from the University of Connecticut. He has been actively involved in teaching and conducting research in actuarial science for several years. In recognition for his academic achievements and excellence, he has been awarded the James C. Hickman Scholarship from SOA recently in 2018-2020. His current research interest is predictive modeling for ratemaking and reserving of property and casualty insurance.</li>
+</ul>
+<p><img src = "ContributorPics/PJ.jpg" width = "150" height = "170" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
+<ul>
+<li><strong>Paul H. Johnson, Jr.</strong> is a lecturer in the Risk and Insurance Department of the Wisconsin School of Business at the University of Wisconsin-Madison. He has an MS in Actuarial Science and a PhD in Business (Actuarial Science), both from UW-Madison. Paul teaches undergraduate courses in life contingencies, loss models, regression, and analytics. Prior to teaching at UW-Madison, Paul received various honors and awards for teaching excellence in the Department of Mathematics at the University of Illinois at Urbana-Champaign; most notably, the N. Tenney Peck Teaching Award in Mathematics. He also has published articles in the <em>North American Actuarial Journal</em> and the <em>Risk Management and Insurance Review</em>.</li>
+</ul>
+<p><img src = "ContributorPics/Okine_A.jpg" width = "150" height = "170" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
+<ul>
+<li><strong>Nii-Armah Okine</strong> is an assistant professor at the Mathematical Sciences Department at Appalachian State University. He holds a Ph.D. in Business (Actuarial Science) from the University of Wisconsin - Madison and obtained his master’s degree in Actuarial science from Illinois State University. His research interest includes micro-level reserving, joint longitudinal-survival modeling, dependence modeling, micro-insurance, and machine learning.</li>
+</ul>
+<p><br></p>
+<p><img src = "ContributorPics\RajSahasrabuddhe.jpg" width = "150" height = "180" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
+<ul>
+<li><strong>Rajesh (Raj) Sahasrabuddhe</strong> is a Partner and Philadelphia Office Leader with Oliver Wyman Actuarial Consulting. Raj is a Fellow of the Casualty Actuarial Society (CAS), an Associate of the Canadian Institute of Actuaries, and a Member of the American Academy of Actuaries. Raj has been an active volunteer with CAS Admissions committees throughout his career, including a term as Chairperson of the Syllabus Committee from 2010 to 2013. He currently serves on the MAS-II Examination Committee. He has authored or co-authored papers that have appeared on syllabi for both the CAS and Society of Actuaries.</li>
+</ul>
+<p><img src = "ContributorPics/Shi_Peng_150x188.jpg" width = "150" height = "180" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
+<ul>
+<li><strong>Peng Shi</strong> is an associate professor in the Risk and Insurance Department at the Wisconsin School of Business. He is also the Charles &amp; Laura Albright Professor in Business and Finance. Professor Shi is an Associate of the Casualty Actuarial Society (ACAS) and a Fellow of the Society of Actuaries (FSA). He received a Ph.D. in actuarial science from the University of Wisconsin-Madison. His research interests are problems at the intersection of insurance and statistics. He has won several research awards, including the Charles A. Hachemeister Prize, the Ronald Bornhuetter Loss Reserve Prize, and the American Risk and Insurance Association Prize.</li>
+</ul>
+<p><img src = "ContributorPics/Shyamal.jpg" width = "150" height = "180" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
+<ul>
+<li><strong>Nariankadu D. Shyamalkumar (Shyamal)</strong> is an associate professor in the Department of Statistics and Actuarial Science at The University of Iowa. He is an Associate of the Society of Actuaries, and has volunteered in various elected and non-elected roles within the SoA. Having a broad theoretical interest as well as interest in computing, he has published in prominent actuarial, computer science, probability theory, and statistical journals. Moreover, he has worked in the financial industry, and since then served as an independent consultant to the insurance industry. He has experience educating actuaries in both Mexico and the US, serving in the roles of directing an undergraduate program, and as a graduate adviser for both masters and doctoral students.</li>
+</ul>
+<p><img src = "ContributorPics/FrankQuan.jpg" width = "150" height = "180" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
+<ul>
+<li><strong>Zhiyu (Frank) Quan</strong> is an Assistant Professor at the Department of Mathematics of the University of Illinois at Urbana-Champaign. He holds a Ph.D. in Actuarial Science from the University of Connecticut. Before joining Illinois, he worked for a cutting-edge Insurtech company as a R &amp; D data scientist developing data-driven solutions for major insurance companies. He has a broad spectrum of research interests in data science applications in insurance such as tree-based models, natural language processing, deep learning, and applies his actuarial expertise to build predictive models for claim research, rate making, etc. His research projects are driven by real-life data and are inspired from collaborations with Insurtech and insurance companies. Besides, he is a faculty advisor for the Illinois Risk Lab, which facilitates research activities that integrate academic training with practical problem-solving in real business settings. He recently has received the Arnold O. Beckman Research Award.</li>
+</ul>
+<p><img src = "ContributorPics/19-Michelle_Xia-0820-WD-01.jpg" width = "150" height = "180" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
+<ul>
+<li><strong>Michelle Xia</strong> is an Associate Professor in in the Department of Statistics and Actuarial Science at Northern Illinois University. Michelle earned her Ph.D. in statistics from the University of British Columbia. Besides research, teaching and consulting at NIU, Michelle has over seven years of professional experience as an actuary, a predictive modeler and a statistician in the insurance and medical areas. Michelle’s research is motivated by real-life problems, with current interests including predictive analytics, misrepresentation modeling, dependence modeling, insurance ratemaking and loss reserving.</li>
+</ul>
+<p><br></p>
+<p><strong>Reviewers</strong></p>
+<p>Our goal is to have the actuarial community author our textbooks and short courses in a collaborative fashion. Part of the process involves reviewers who generously donated their time to help make this course better. They are:</p>
+<ul>
+<li>Motoharu Dei</li>
+<li>Yumo Dong, Australian National University</li>
+<li>Motoya Kosaki</li>
+<li>Sahadeb Upretee, Central Washington University</li>
+</ul>
+<!-- **Miscellaneous** -->
+<!-- We retrieved the Challenge icon from [Nice png](https://www.nicepng.com/) under a Creative Commons license. -->
+
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="introduction-to-loss-data-analytics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

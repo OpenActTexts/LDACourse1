@@ -1,0 +1,60 @@
+﻿Welcome back to the tutorial on an Introduction to Loss Data Analytics. 
+
+Hello, my name is xx. In this video, I am going to introduce the Wisconsin Property Fund, an example that we will be using throughout this course. 
+
+OVERHEAD 1 - Wisconsin Property Fund
+
+In the US State of Wisconsin, the insurance regulator, known as the Office of the Insurance Commissioner, administers an insurance pool for state and local government agencies. The pool is called the Local Government Property Insurance Fund, sometimes known through the acronym LGPIF, and that we will call the Wisconsin Property Fund.
+
+This fund has offered since 1911 and provides insurance on property such as government buildings, schools, libraries, and motor vehicles.
+
+The policyholders in the fund consist of over a thousand local government entities that include counties, cities, towns, villages, school districts, and library boards.
+
+OVERHEAD 2 - LGPIF Policyholder A
+
+These policyholders are not people but rather government agencies. So, this is fund is closer to commercial insurance, or insurance for businesses, rather than personal insurance which is insurance for people. 
+
+Just to get a feel for what we are insuring, here is the first of two examples. This is a picture of an elementary school building which is part of a school district.
+
+Specifically, it is part of the Madison Metropolitan School District that has 98 buildings, 18 major pieces of equipment, and 630 properties in the open. The open properties include benches, playsets, goals, and so forth. The insured value of the property is $640 millions of USD.
+
+
+OVERHEAD 3 - LGPIF Policyholder B
+
+But, the Madison Metropolitan School District is not the largest of the approximately one thousand insureds. That honor goes to the city of Green Bay that has insured value of approximately $2.4 billions of USD. Of its 118 sites, here is a picture of Lambeau Field. This is the stadium in which a professional American football team, the Green Bay Packers, plays. 
+
+Interestingly, because of its world-wide reknown, the fund has a separate terrorism reinsurance coverage for this property.
+
+OVERHEAD 4 - Property Fund
+
+To give you a feel for the size, the fund receives approximately $25 million in premiums each year and provides insurance coverage for about $75 billion.
+
+The fund offers three major groups of insurance coverage: building and contents, construction equipment, and motor vehicles.
+
+For building and contents, the fund covers all property losses except those resulting from flood, earthquake, wear and tear, extremes in temperature, mold, war, nuclear reactions, and embezzlement or theft by an employee.
+
+OVERHEAD 5 - Claims Frequency - R Code
+
+Now that we have described a meaningful business context, let's move directly to the analytics. We want to show how statistical code can be used to provide some useful results for understanding the business of insurance. 
+
+Here are 4 lines of code. 
+In the first, we read in the the data, externally stored in a "csv", for "comma-separated-value" format, into an internal data frame, in this case called "Insample".
+Next, we restrict attention to a subset of year 2010 experience. It is common to examine insurance data on a yearly basis to separate the investigation of trends.
+In the last two lines, we summarize the data. Instead of showing the direct result from these commands, in the next overhead we present the output in a format one might use to make business decisions.
+
+OVERHEAD 6 - Claims Frequency (2010)
+
+From the frequency table, we learn several things. For example, the table shows 1,110 policyholders who have 1,377 claims. Of these claims, almost two-thirds of the policyholders did not have any claims, 18.8% had one claim and remaining 17.5%  had more than one claim.
+
+From the summary statistics, we learn that one policyholder with the highest number recorded 239 claims. Further digging shows that this was the Madison Metropolitan School district. Many of these claims were from minor damage such as broken windows caused by misbehaving children. Further, the average number of claims for this sample was 1.24.
+
+
+REVIEW
+
+This provide just a brief glimpse of the data. But, let's pause for a moment to give you time to practice the tools introduce so far.
+
+I hope that you found this overview of Wisconsin Property Fund to be useful. 
+
+In this video, we examined the frequency of claims for the fund. In the next video, you will learn how to analyze claim amounts, also known as the severity of claims.
+
+Thanks for watching!

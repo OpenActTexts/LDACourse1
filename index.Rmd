@@ -1,0 +1,202 @@
+--- 
+title: "Loss Data Analytics: Short Course"
+author: "A short course authored by the Actuarial Community"
+site: bookdown::bookdown_site
+output:
+  bookdown::gitbook
+documentclass: book
+bibliography: ["References/LDAReference2020A.bib"]
+biblio-style: econPeriod
+link-citations: yes
+references:
+- type: article-journal
+github-repo: https://github.com/OpenActTextDev/LDAShortCourse1
+description: "This is an interactive, online, freely available short course. It will contain many interactive objects (quizzes, computer demonstrations, interactive graphs, video, and the like) to promote deeper learning."
+---
+
+
+```{r include = FALSE}
+knitr::opts_chunk$set(results = "hold")
+#library(tutorial)
+tutorial::go_interactive(greedy = FALSE)
+QUIZ <- FALSE
+```
+
+
+# Preface {-}
+
+<p style="text-align:right;">
+*Date: `r format(Sys.Date(), "%d %B %Y")`*</p>
+
+
+## Why Loss Data Analytics? {-}
+
+The intent is that this type of short course will eventually permeate throughout the actuarial curriculum. Given the dramatic changes in the way that actuaries treat data, analysis of loss data seems like a natural place to start. The idea behind the name **loss data analytics** is to integrate classical loss data models from applied probability with modern analytic tools. In particular, we recognize that big data (including social media and usage based insurance) are here to stay and that high speed computation is readily available.
+
+## Resources {-}
+
+- This tutorial is based on the first five chapters of the **open and freely available book** [Loss Data Analytics](https://openacttexts.github.io/).
+    -  [Sample code](https://openacttexts.github.io/LDARcode/) is available for the book, although not needed for this tutorial.
+- As described in how to navigate this tutorial below, you will not need to download any data for this course. However, if you want to have the data to follow up, we generally make it available through buttons such as:
+    *  <button download><a href="https://raw.githubusercontent.com/OpenActTextDev/LDAShortCourse1/main/Data/PropertyFundInsample.csv">View the Property Fund Data as a .csv file.</a></button> Then, do a "Save Page as" if you wish to download.
+    *  Alternatively, go directly to the [Github page](https://github.com/OpenActTextDev/LDAShortCourse1/tree/main/Data) to access the data.
+- For advanced data applications in insurance, you may be interested in the series, [Predictive Modeling Applications in Actuarial Science](http://www.cambridge.org/us/academic/subjects/statistics-probability/statistics-econometrics-finance-and-insurance/predictive-modeling-applications-actuarial-science-volume-1). 
+
+
+## How to Navigate this Tutorial {-}
+
+-  This online tutorial is designed to guide you through the foundations of modeling loss data. 
+-  The anticipated completion time is approximately ten hours.
+-  The tutorial assumes that you are familiar with the foundations in the statistical software `R`, such as Datacamp's [Introduction to R](https://www.datacamp.com/courses/free-introduction-to-r%20) or Codecademy's [Learn R](https://www.codecademy.com/learn/learn-r).
+
+**Role of Video Introductions.** There are five chapters in this tutorial that summarize the foundations. Each chapter is subdivided into several sections. At the beginning of each section is a short video, typically 5-10 minutes, that summarizes the section key learning outcomes. Following the video, you can see more details about the underlying `R` code for the analysis presented in the video. 
+
+**Role of Exercises.** Following each video introduction, there are one or two exercises that allow you to practice skills to make sure that you fully grasp the learning outcomes. The exercises are implemented using an online learning platform provided by [Datacamp](https://www.datacamp.com/) so that you need not install `R`. Feedback is programmed into the exercises so that you will learn a lot by making mistakes! You will be pacing yourself, so always feel free to reveal the answers by hitting the `Solution` tab. Remember, going through quickly is not equivalent to learning deeply. Use this tool to enhance your understanding of one of the foundations of data science.
+
+
+#### Video: Overview of Tutorial Navigation {-}
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_ouy8g8ib&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_a9yksglu" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+<br>
+
+**A Few More Tips**
+
+-  For the videos, with this player you hit the **CC** button and then *English* to see closed captions. You can also experiment with the speed of the video (the *1x* symbol) and other standard video player features.
+-  When completing the tutorial exercises, replace the question marks **??** by the appropriate code (in earlier versions, we used underscores).
+-  The graphical displays upon completion of the tutorial exercises appear only in the narrow window of the code and do not look good. This is a limitation of the *Datacamp* platform. For a more professional looking graph, in many cases you can simply copy the code and paste it into your own version of `R` to enhance its appearance. However, be careful with this approach. Sometimes, as part of the background, we pre-load data and libraries that you don't see unless you dig down. (How to do this? Go to our [Github site](https://github.com/OpenActTextDev/LDACourse1/)!)
+-  When a tutorial exercise finishes with a graph, the (green) success message is obscured. To see it, after completing the exercise, hit the “R-Console” button at the top. Then re-size the html page and immediately revert back to the full page mode. This procedure allows you to view the message.
+-  **Devices and Browsers**. We tested the course on popular devices and browers. Our videos and tutorial exercises seemed to behave well on all the devices we looked at, including cell phones, Ipads, Apple and PC laptop/desktops. Most problematic is the .pdf overheads. These don't seem to work well at all on cell phones and Ipads. For Apple and PC laptop/desktops:
+    -  When you view the .pdf output for the overheads with the browser FireFox, the default is for the table of contents to appear. The fix for this is to click the icon in the upper left-hand corner. 
+    -  For other browsers we tested (Edge and Chrome), the page of the .pdf that you select on appears the first time. You can either refresh every time you select a new page or, an easier route, scroll down to the appropriate page to see the desired output.
+-  Let us know about other bugs you encounter. We may not be able to address them but at least we can add notes here to warn other users.    
+-  Some of the exercises are more challenging and you may wish to skip them on your first pass through the course. These are indicated with this symbol:
+<img src = "ContributorPics\hurdler.png" width = "65" height = "65" style = "float:right; margin-left: 10px; margin-top: 7px" />
+
+
+## A Word from our Sponsor: <br> Astin + Education = Astin Academy {-}
+
+***
+
+In this video, you learn about:
+
+-  the role of the [ASTIN section](https://www.actuaries.org/iaa/IAA/Sections/ASTIN_NEW/IAA/Sections/ASTIN_NEW/ASTIN_HOME.aspx), the non-life section of the International Actuarial Association
+-  their recent interest in education
+-  their development of the recently formed *Astin Academy*.
+
+>"*The mission of the ASTIN Academy is to provide high quality free educational materials in non-life insurance to actuarial students across the world. The Academy is committed to open course development under Creative Commons licence and seeks innovation in teaching methodologies and application of technology. Let’s build the future of actuarial education together.*"
+
+***
+
+#### Video: Overview of the Astin Academy {-}
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_56ho6ss4&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_0dcwagec" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+***
+
+## Contributors {-}
+
+The project goal is to have the actuarial community author our learning resources in a collaborative fashion. The following contributors have taken a leadership role in developing this short course for $Loss$ $Data$ $Analytics$.
+
+<img src = "ContributorPics\YvoneChueh.jpg" width = "150" height = "160" style = "float:right; margin-left: 10px; margin-top: 7px; margin-bottom: 15px" />
+
+- **Yvonne Chueh** is a professor at Central Washington University. She received PhD from the University of Connecticut, bachelor degree in pure math from National Taiwan University. She has taught actuarial courses at UCONN and UW-Eau Claire. She is an associate (since 1994) and council member/chair (2013-2017/2017) of the Society of Actuaries (SOA) Education \& Research Section. Her research works were published by the American Academy of Actuaries, the Actuarial Foundation, SOA *North American Actuarial Journal*, *Electrical Engineering Series* of Springer, *International Joint Conference on Neural Networks*, *IEEE Symposium Series on Computational Intelligence (SSCI)*, and *International Journal of Computers, Communications & Control*.
+
+
+<img src = "ContributorPics\MiukiEbisaki.jpg" width = "150" height = "180" style = "float:right; margin-left: 10px; margin-top: 7px" />
+
+
+-  **Miyuki Ebisaki** is a Manager at Deloitte Touche Tohmatsu LLC in Japan. Her research work is in the area of insurance, health care, social economy and new technologies. She has been working in domestic and foreign insurers in Japan and in the UK. She has various experiences both in non-life and life insurance; including product development, chief actuary, M&A and risk management. In May 2020, she was elected as a member of the ASTIN board. 
+
+<br>
+
+<img src = "ContributorPics\RobErhardt.jpg" width = "150" height = "180" style = "float:right; margin-left: 10px; margin-top: 7px" />
+
+-  **Rob Erhardt** is an Associate Professor of Statistics at Wake Forest University in Winston-Salem, NC.  He holds a Ph.D. in Statistics and Operations Research from the University of North Carolina at Chapel Hill, an M.S. in Statistics from the University of Wisconsin-Madison, and a B.A. in Physics from SUNY Geneseo.  He is also a credentialed actuary and Society of Actuaries Hickman Scholar.  His research areas include environmental statistics, computational statistics, and actuarial science, with a particular interest in work at the intersection of insurance and climate risk.  Originally from rural New York State, he is an avid runner and backpacker, and a poor jazz pianist.  
+
+<br>
+
+<img src = "ContributorPics\Frees_Jed2018_150x188.jpg" width = "150" height = "180" style = "float:right; margin-left: 10px; margin-top: 7px" />
+
+- **Edward W. (Jed) Frees** is an emeritus professor, formerly the Hickman-Larson Chair of Actuarial Science at the University of Wisconsin-Madison and currently affiliated with Australian National University. He is a Fellow of both the Society of Actuaries and the American Statistical Association. He has published extensively (a four-time winner of the Halmstad Prize for best paper published in the actuarial literature) and has written three books. He also is a co-editor of the two-volume series *Predictive Modeling Applications in Actuarial Science* published by Cambridge University Press.
+
+<img src = "ContributorPics\BrianHartmanPortrait.jpg" width = "150" height = "200" style = "float:right; margin-left: 10px; margin-top: 7px" />
+
+-  **Brian Hartman** is an associate professor of statistics and actuarial program coordinator at Brigham Young University. His current research interests include Bayesian methods and their applications in actuarial science and risk. He has worked in various capacities with companies in property-casualty, health, and long-term care insurance. He holds a Bachelor's degree in Actuarial Science from Brigham Young University and a PhD in Statistics from Texas A&M University. He is also an associate of the Society of Actuaries. Before BYU, he was a post-doctoral fellow at the University of Waterloo (2010-11) and an assistant professor at the University of Connecticut (2011-15).
+
+-  **Tim Higgins** is an associate professor of actuarial studies and deputy director of the school of finance, actuarial studies and statistics at the Australian National University (ANU). Prior to academia he had positions in the Australian Commonwealth Treasury and the Australian Prudential Regulation Authority. He is a Fellow of the Institute of Actuaries of Australia. His main research interest is in income contingent loan theory, modelling and applications, and his other research interests include microsimulation modelling, financial literacy and behaviour, and superannuation and retirement policy. He has taught actuarial and statistics students at ANU since 2002, and received the ANU Vice Chancellor’s Award for Teaching Excellence in 2005.  
+
+
+<img src = "ContributorPics\FeiHuang.jpg" width = "150" height = "200" style = "float:right; margin-left: 10px; margin-top: 7px" />
+
+-  **Fei Huang** is a Senior Lecturer in the School of Risk and Actuarial Studies, University of New South Wales (UNSW) Sydney. Before joining UNSW, she worked at the Australian National University (ANU) as Senior Lecturer (2019-2020) and Lecturer (2015-2018). Fei's main research interest lies in predictive modelling and data analytics for insurance applications. She is an active researcher and publishes papers frequently in top-tier actuarial journals. Fei is also a dedicated educator.  Her educational excellence has been recognized by winning the ANU Vice Chancellor’s Award for Teaching Excellence in the Early Career Category (2018) and ANU College of Business and Economics Award for Teaching Excellence in the Early Career Category (2017).  
+
+
+<img src = "ContributorPics\HimchanJeong.jpg" width = "150" height = "160" style = "float:right; margin-left: 10px; margin-top: 7px" />
+
+-  **Himchan Jeong** is currently an Assistant Professor at Simon Fraser University. He is a Fellow of the Society of Actuaries (SOA) and holds a Ph.D. from the University of Connecticut. He has been actively involved in teaching and conducting research in actuarial science for several years. In recognition for his academic achievements and excellence, he has been awarded the James C. Hickman Scholarship from SOA recently in 2018-2020. His current research interest is predictive modeling for ratemaking and reserving of property and casualty insurance.
+
+
+<img src = "ContributorPics\PJ.jpg" width = "150" height = "170" style = "float:right; margin-left: 10px; margin-top: 7px" />
+
+- **Paul H. Johnson, Jr.** is a lecturer in the Risk and Insurance Department of the Wisconsin School of Business at the University of Wisconsin-Madison.  He has an MS in Actuarial Science and a PhD in Business (Actuarial Science), both from UW-Madison.  Paul teaches undergraduate courses in life contingencies, loss models, regression, and analytics.  Prior to teaching at UW-Madison, Paul received various honors and awards for teaching excellence in the Department of Mathematics at the University of Illinois at Urbana-Champaign; most notably, the N. Tenney Peck Teaching Award in Mathematics. He also has published articles in the *North American Actuarial Journal* and the *Risk Management and Insurance Review*.
+
+
+<img src = "ContributorPics\Okine_A.jpg" width = "150" height = "170" style = "float:right; margin-left: 10px; margin-top: 7px" />
+
+-  **Nii-Armah Okine** is an assistant professor at the Mathematical Sciences Department at Appalachian State University. He holds a Ph.D. in Business (Actuarial Science) from the University of Wisconsin - Madison and obtained his master’s degree in Actuarial science from Illinois State University. His research interest includes micro-level reserving, joint longitudinal-survival modeling, dependence modeling, micro-insurance, and machine learning.
+
+<br>
+
+<img src = "ContributorPics\RajSahasrabuddhe.jpg" width = "150" height = "180" style = "float:right; margin-left: 10px; margin-top: 7px" />
+
+
+-  **Rajesh (Raj) Sahasrabuddhe** is a Partner and Philadelphia Office Leader with Oliver Wyman Actuarial Consulting. Raj is a Fellow of the Casualty Actuarial Society (CAS), an Associate of the Canadian Institute of Actuaries, and a Member of the American Academy of Actuaries. Raj has been an active volunteer with CAS Admissions committees throughout his career, including a term as Chairperson of the Syllabus Committee from 2010 to 2013. He currently serves on the MAS-II Examination Committee. He has authored or co-authored papers that have appeared on syllabi for both the CAS and Society of Actuaries.
+
+
+<img src = "ContributorPics\Shi_Peng_150x188.jpg" width = "150" height = "180" style = "float:right; margin-left: 10px; margin-top: 7px" />
+
+- **Peng Shi** is an associate professor in the Risk and Insurance Department at the Wisconsin School of Business. He is also the Charles & Laura Albright Professor in Business and Finance. Professor Shi is an Associate of the Casualty Actuarial Society (ACAS) and a Fellow of the Society of Actuaries (FSA). He received a Ph.D. in actuarial science from the University of Wisconsin-Madison. His research interests are problems at the intersection of insurance and statistics. He has won several research awards, including the Charles A. Hachemeister Prize, the Ronald Bornhuetter Loss Reserve Prize, and the American Risk and Insurance Association Prize.
+
+
+
+<img src = "ContributorPics\Shyamal.jpg" width = "150" height = "180" style = "float:right; margin-left: 10px; margin-top: 7px" />
+
+- **Nariankadu D. Shyamalkumar (Shyamal)** is an associate professor in the Department of Statistics and Actuarial Science at The University of Iowa. He is an Associate of the Society of Actuaries, and has volunteered in various elected and non-elected roles within the SoA. Having a broad theoretical interest as well as interest in computing, he has published in prominent actuarial, computer science, probability theory, and statistical journals. Moreover, he has worked in the financial industry, and since then served as an independent consultant to the insurance industry. He has experience educating actuaries in both Mexico and the US, serving in the roles of directing an undergraduate program, and as a graduate  adviser for both masters and doctoral students. 
+
+<img src = "ContributorPics\FrankQuan.jpg" width = "150" height = "180" style = "float:right; margin-left: 10px; margin-top: 7px" />
+
+-  **Zhiyu (Frank) Quan** is an Assistant Professor at the Department of Mathematics of the University of Illinois at Urbana-Champaign. He holds a Ph.D. in Actuarial Science from the University of Connecticut. Before joining Illinois, he worked for a cutting-edge Insurtech company as a R \& D data scientist developing data-driven solutions for major insurance companies. He has a broad spectrum of research interests in data science applications in insurance such as tree-based models, natural language processing, deep learning, and applies his actuarial expertise to build predictive models for claim research, rate making, etc. His research projects are driven by real-life data and are inspired from collaborations with Insurtech and insurance companies. Besides, he is a faculty advisor for the Illinois Risk Lab, which facilitates research activities that integrate academic training with practical problem-solving in real business settings. He recently has received the Arnold O. Beckman Research Award.
+
+<img src = "ContributorPics\19-Michelle_Xia-0820-WD-01.jpg" width = "150" height = "180" style = "float:right; margin-left: 10px; margin-top: 7px" />
+
+-  **Michelle Xia** is an Associate Professor in in the Department of Statistics and Actuarial Science at Northern Illinois University. Michelle earned her Ph.D. in statistics from the University of British Columbia. Besides research, teaching and consulting at NIU, Michelle has over seven years of professional experience as an actuary, a predictive modeler and a statistician in the insurance and medical areas. Michelle's research is motivated by real-life problems, with current interests including predictive analytics, misrepresentation modeling, dependence modeling, insurance ratemaking and loss reserving.
+
+<br>
+
+
+**Reviewers**
+
+Our goal is to have the actuarial community author our textbooks and short courses in a collaborative fashion. Part of the process involves reviewers who generously donated their time to help make this course better. They are:
+
+*  Motoharu Dei 
+*  Yumo Dong, Australian National University
+*  Motoya Kosaki
+*  Sahadeb Upretee, Central Washington University
+
+
+
+<!-- **Miscellaneous** -->
+
+<!-- We retrieved the Challenge icon from [Nice png](https://www.nicepng.com/) under a Creative Commons license. -->
+
+
+

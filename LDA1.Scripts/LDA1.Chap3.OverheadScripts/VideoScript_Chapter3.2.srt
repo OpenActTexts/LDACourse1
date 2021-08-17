@@ -1,0 +1,394 @@
+1
+00:00:01,760 --> 00:00:06,320
+Hello, my name is Fei Huang, a senior 
+lecturer at the UNSW Sydney.
+ 
+
+2
+00:00:07,600 --> 00:00:11,200
+In this video, we will review Section 3.2  
+
+3
+00:00:11,200 --> 00:00:14,400
+Continuous Distributions for 
+modelling Loss Severity. 
+ 
+
+4
+00:00:15,360 --> 00:00:20,960
+In particular, we learn how to define and 
+apply four fundamental severity distributions:  
+
+5
+00:00:20,960 --> 00:00:25,520
+gamma, Pareto, Weibull, and generalized 
+beta distribution of the second kind. 
+ 
+
+6
+00:00:26,400 --> 00:00:32,320
+The first distribution is the gamma distribution. 
+The probability density of a gamma distribution  
+
+7
+00:00:32,320 --> 00:00:38,720
+with shape parameter \alpha and scale parameter 
+\theta is defined by this formula in this slide.  
+
+8
+00:00:39,600 --> 00:00:47,680
+When \alpha=1, the gamma reduces to an exponential 
+distribution. When \alpha=n/2 and \theta=2,  
+
+9
+00:00:48,960 --> 00:00:55,280
+the gamma reduces to a chi-square distribution 
+with n degrees of freedom. As we will see in  
+
+10
+00:00:55,280 --> 00:01:01,680
+Section 15.4, the chi-square distribution is used 
+extensively in statistical hypothesis testing.
+ 
+
+11
+00:01:03,760 --> 00:01:09,920
+In this slide, we use the two plots to demonstrate 
+the effect of the scale and shape parameters on  
+
+12
+00:01:09,920 --> 00:01:16,160
+the gamma density function. In the left-hand 
+panel, we see the gamma density plots with  
+
+13
+00:01:16,160 --> 00:01:23,520
+shape=2 and varying scale parameter. While in the 
+right-hand panel, we see the Pareto Density plots  
+
+14
+00:01:23,520 --> 00:01:30,880
+with scale=100 and varying shape parameter. 
+The distribution function of a gamma model is the  
+
+15
+00:01:30,880 --> 00:01:35,120
+incomplete gamma function and defined 
+in the formula in this slide. 
+ 
+
+16
+00:01:38,720 --> 00:01:44,080
+We can also define the k-th raw moment, mean, 
+and variance of the gamma distributed random  
+
+17
+00:01:44,080 --> 00:01:51,120
+variable for any positive k. For example, the 
+mean is \alpha times \theta and the variance is  
+
+18
+00:01:51,120 --> 00:01:57,920
+\alpha times \theta^2. Since all moments exist 
+for any positive k, the gamma distribution is  
+
+19
+00:01:57,920 --> 00:02:03,680
+considered a light tailed distribution, which 
+may not be suitable for modelling risky assets  
+
+20
+00:02:03,680 --> 00:02:08,400
+as it will not provide a realistic assessment 
+of the likelihood of severe losses.  
+
+21
+00:02:09,840 --> 00:02:13,360
+Another important feature of 
+the gamma distribution is that  
+
+22
+00:02:13,360 --> 00:02:18,800
+it belongs to the exponential family of 
+distributions. This means that it is easy  
+
+23
+00:02:18,800 --> 00:02:24,480
+to incorporate explanatory variables into the 
+distribution via generalized linear modelling. 
+ 
+
+24
+00:02:26,960 --> 00:02:33,840
+Next, we introduce the Pareto distribution. It is 
+a positively skewed and heavy-tailed distribution  
+
+25
+00:02:33,840 --> 00:02:40,240
+which makes it suitable for modelling income, 
+high-risk insurance claims and severity of large  
+
+26
+00:02:40,240 --> 00:02:47,520
+casualty losses. For extreme insurance claims, the 
+tail of the severity distribution can be modelled  
+
+27
+00:02:47,520 --> 00:02:54,160
+using a generalized Pareto distribution. For 
+example, in my own research of modelling advanced  
+
+28
+00:02:54,160 --> 00:03:00,000
+age mortality, I used the generalized Pareto 
+distribution to model mortality over a specific  
+
+29
+00:03:00,000 --> 00:03:06,400
+age threshold. The probability density 
+function of a two parameter Pareto distribution  
+
+30
+00:03:06,400 --> 00:03:11,440
+with shape parameter \alpha and scale 
+parameter \theta is given in this slide. 
+ 
+
+31
+00:03:15,360 --> 00:03:20,320
+In this slide, we use the two plots 
+to demonstrate the effect of the scale  
+
+32
+00:03:20,320 --> 00:03:25,760
+and shape parameters on the Pareto density 
+function. In the left-hand panel, we see the  
+
+33
+00:03:25,760 --> 00:03:33,200
+Pareto Density plots with scale 2000 and varying 
+shape parameter. While in the right-hand panel,  
+
+34
+00:03:33,200 --> 00:03:38,000
+we see the Pareto Density plots with 
+shape 3 and varying scale parameter. 
+ 
+
+35
+00:03:41,760 --> 00:03:47,360
+In this slide, we show the distribution function 
+of the Pareto distribution, the k-th raw moment,  
+
+36
+00:03:47,360 --> 00:03:51,280
+the mean and variance of the Pareto 
+distributed random variable. 
+ 
+
+37
+00:03:54,640 --> 00:03:58,400
+The third distribution we introduce 
+here is called the Weibull distribution.  
+
+38
+00:03:59,120 --> 00:04:04,960
+The probability density function of the Weibull 
+distribution is given by this formula with shape  
+
+39
+00:04:04,960 --> 00:04:11,840
+parameter \alpha and scale parameter \theta. We 
+can also calculate the hazard function of the  
+
+40
+00:04:11,840 --> 00:04:16,640
+Weibull distribution, which is the probability 
+density function over the survival function.  
+
+41
+00:04:17,520 --> 00:04:24,880
+The hazard function is a decreasing function when 
+\alpha<1, indicating heavy tailed distribution.  
+
+42
+00:04:25,600 --> 00:04:33,680
+It is constant when \alpha=1 and increasing when 
+\alpha >1, indicating light tailed distribution. 
+ 
+
+43
+00:04:34,480 --> 00:04:37,920
+We also show the distribution 
+function of the Weibull distribution  
+
+44
+00:04:37,920 --> 00:04:44,960
+given at the bottom of the slide. 
+In this slide, we derive the k-th raw moment,  
+
+45
+00:04:44,960 --> 00:04:48,720
+the mean and variance of the Weibull 
+distributed random variable. 
+ 
+
+46
+00:04:52,080 --> 00:04:57,120
+The fourth distribution we introduce is the 
+generalized Beta distribution of the second  
+
+47
+00:04:57,120 --> 00:05:04,800
+kind, denoted by GB2 distribution. It is a 
+four-parameter, very flexible distribution  
+
+48
+00:05:04,800 --> 00:05:11,200
+that can model positively as well as negatively 
+skewed distributions. We show the probability  
+
+49
+00:05:11,200 --> 00:05:16,160
+density function of the GB2 distribution and 
+the beta function via the formulas there. 
+ 
+
+50
+00:05:19,200 --> 00:05:25,200
+The GB2 distribution can provide a model 
+for heavy as well as light tailed data. It  
+
+51
+00:05:25,200 --> 00:05:31,200
+includes many distributions as special cases, 
+such as exponential, gamma, Weibull, etc.  
+
+52
+00:05:32,400 --> 00:05:40,400
+For example, suppose we have 2 independent Gamma 
+distributed random variables G1 and G2. Then  
+
+53
+00:05:40,400 --> 00:05:50,240
+the random variable \theta times (G1/G2)^\sigma 
+has a GB2 distribution. When the moment exists,  
+
+54
+00:05:50,240 --> 00:05:54,640
+we can also compute the k-th raw moment 
+using the bottom formula in this slide. 
+ 
+
+55
+00:05:57,840 --> 00:06:03,440
+In Exercise 3.2.1, we will be working 
+with the Wisconsin Property Fund data.  
+
+56
+00:06:04,160 --> 00:06:09,040
+We have read the data and created a vector 
+of the log of non-zero claim values.  
+
+57
+00:06:09,680 --> 00:06:15,840
+You will be asked to plot a histogram of the 
+data using the hist function in R and use the  
+
+58
+00:06:15,840 --> 00:06:21,760
+`str` function to review the elements of the 
+list returned by the histogram function.  
+ 
+
+59
+00:06:29,120 --> 00:06:36,080
+In Exercise 3.2.2, we will focus on the 
+gamma distribution from Section 3.2.1  
+
+60
+00:06:36,080 --> 00:06:41,120
+to help you develop an intuition as 
+to how the distribution responds to  
+
+61
+00:06:41,120 --> 00:06:47,360
+changes in its shape and scale parameter. 
+From Figure 3.1, you should recognize that  
+
+62
+00:06:47,360 --> 00:06:52,800
+the support for the gamma distribution is 
+positive real numbers. You ll also note that  
+
+63
+00:06:52,800 --> 00:06:58,400
+the distribution allows for varying levels 
+of right-skewness. You can use the `hist`  
+
+64
+00:06:58,400 --> 00:07:04,960
+function to plot a histogram of the data, use 
+the `dgamma` function to return density values,  
+
+65
+00:07:04,960 --> 00:07:09,840
+and use the curve` function to plot the 
+gamma distribution over the histogram data.  
+
+66
+00:07:10,880 --> 00:07:17,200
+Please be careful in setting the arguments of 
+each function. In this exercise, you will also  
+
+67
+00:07:17,200 --> 00:07:22,240
+have the chance to calculate shape and scale 
+parameters using the method of moments.
+ 
+
+68
+00:07:24,640 --> 00:07:28,880
+Packages in R exist for most 
+continuous distributions,  
+
+69
+00:07:29,680 --> 00:07:33,840
+however, it is useful to be able to 
+know how to write your own functions.  
+
+70
+00:07:35,840 --> 00:07:41,760
+In R, a function is an object so the R interpreter 
+is able to pass control to the function,  
+
+71
+00:07:41,760 --> 00:07:47,840
+along with arguments that may be necessary for 
+the function to accomplish the actions. Functions  
+
+72
+00:07:47,840 --> 00:07:54,560
+allow you to automate common tasks in a more 
+powerful and general way than copy-and-pasting.  
+
+73
+00:07:55,760 --> 00:08:04,080
+In Exercise 3.2.3, we will write an R function to 
+find the density (the pdf) of a random variable  
+
+74
+00:08:04,080 --> 00:08:10,400
+that follows a Pareto distribution. 
+In summary, in this section,  
+
+75
+00:08:10,400 --> 00:08:15,280
+we learnt how to define and apply four 
+fundamental severity distributions,  
+
+76
+00:08:15,840 --> 00:08:25,840
+including gamma, Pareto, Weibull, and generalized 
+beta distribution of the second kind. 
+

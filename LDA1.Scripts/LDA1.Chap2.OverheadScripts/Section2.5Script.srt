@@ -1,0 +1,383 @@
+1
+00:00:00,780 --> 00:00:02,033
+Hello everyone!
+
+2
+00:00:02,033 --> 00:00:03,034
+My name is Michelle Xia,
+
+3
+00:00:03,034 --> 00:00:06,734
+and I am an associate professor at Northern Illinois University.
+
+4
+00:00:06,734 --> 00:00:11,034
+In this lecture, I am going to introduce mixture distributions that are useful
+
+5
+00:00:11,034 --> 00:00:16,034
+for modeling frequency data from populations with multiple subgroups.
+
+6
+00:00:16,200 --> 00:00:22,034
+The first type of mixture distributions we introduce are discrete or finite mixtures.
+
+7
+00:00:22,180 --> 00:00:27,667
+For discrete mixtures, we suppose the population consists of several subgroups,
+
+8
+00:00:27,667 --> 00:00:32,580
+each having their own distribution referred to as the component distribution.
+
+9
+00:00:32,580 --> 00:00:35,834
+When we randomly draw an observation from the population
+
+10
+00:00:35,834 --> 00:00:37,767
+without knowing group membership,
+
+11
+00:00:37,767 --> 00:00:41,434
+the observation will follow a discrete mixture distribution.
+
+12
+00:00:41,434 --> 00:00:48,434
+We use auto insurance frequency data to illustrate the concept of discrete mixtures.
+
+13
+00:00:48,434 --> 00:00:51,900
+Suppose N1 represents the number of claims from good drivers (GD)
+
+14
+00:00:51,900 --> 00:00:55,900
+and N2 represents that from bad drivers (BD).
+
+15
+00:00:55,900 --> 00:00:58,040
+If N denotes the number of claims
+
+16
+00:00:58,040 --> 00:01:01,834
+of a randomly selected driver from the population,
+
+17
+00:01:01,839 --> 00:01:04,900
+N will follow a discrete mixture distribution.
+
+18
+00:01:04,900 --> 00:01:08,100
+Let alpha denote the percentage of good drivers.
+
+19
+00:01:08,120 --> 00:01:13,034
+Then there is a probability alpha that N will have the distribution of N1,
+
+20
+00:01:13,034 --> 00:01:18,100
+and a probability (1-alpha) that N will have the distribution of N2. 
+
+21
+00:01:18,100 --> 00:01:23,940
+Here, alpha and (1-alpha) are called mixing proportions .
+
+22
+00:01:23,940 --> 00:01:28,034
+Here, we have a mixture of two subgroups.
+
+23
+00:01:28,034 --> 00:01:33,567
+But the mixture concept is applicable to cases with more than two groups.
+
+24
+00:01:34,579 --> 00:01:41,329
+Next, we will derive mixture probabilities for a 2-component mixture distribution.
+
+25
+00:01:41,329 --> 00:01:46,034
+The probability mass function (pmf) of a discrete mixture can be obtained
+
+26
+00:01:46,034 --> 00:01:50,667
+using the law of total probability from Probability Theory.
+
+27
+00:01:50,667 --> 00:01:55,667
+For the auto claims example, the probability that N takes any value k,
+
+28
+00:01:55,667 --> 00:02:01,667
+equals the joint probability that N equals k and the driver is a good driver
+
+29
+00:02:01,667 --> 00:02:06,367
+plus the joint probability that N equals k and the driver is a bad one.
+
+30
+00:02:06,367 --> 00:02:14,367
+Since the joint probability equals the product of the mixing proportion and the associated pmf,
+
+31
+00:02:14,367 --> 00:02:18,467
+the mixture pmf can be expressed as the weighted average of pmfs
+
+32
+00:02:18,467 --> 00:02:22,100
+with the weights alpha and (1-alpha). 
+
+33
+00:02:22,100 --> 00:02:28,100
+Based on similar arguments, the cumulative distribution function (cdf) 
+
+34
+00:02:28,100 --> 00:02:32,034
+of a discrete mixture can also be obtained as the weighted average
+
+35
+00:02:32,034 --> 00:02:34,034
+of the cdfs for the subgroups.
+
+36
+00:02:34,100 --> 00:02:37,700
+For populations with more than two subgroups,
+
+37
+00:02:37,700 --> 00:02:42,134
+similar expressions can be obtained for the mixture pmf and cdf.
+
+38
+00:02:43,134 --> 00:02:47,634
+We use an actuarial exam question to illustrate the calculation
+
+39
+00:02:47,634 --> 00:02:50,367
+for a 3-component mixture.
+
+40
+00:02:50,367 --> 00:02:53,600
+Assume that, in a certain town, the number of common colds
+
+41
+00:02:53,600 --> 00:02:57,067
+an individual will get in a year follows a Poisson distribution
+
+42
+00:02:57,067 --> 00:03:01,134
+depending on the individual's age and smoking status.
+
+43
+00:03:01,134 --> 00:03:06,534
+The table lists the three subgroups according to age and smoking status,
+
+44
+00:03:06,534 --> 00:03:08,534
+the population proportions,
+
+45
+00:03:08,534 --> 00:03:11,067
+and the mean numbers of colds for the Poisson components.
+
+46
+00:03:11,067 --> 00:03:14,834
+The question asks about the probability
+
+47
+00:03:14,834 --> 00:03:18,834
+that a randomly drawn person will have 3 common colds,
+
+48
+00:03:18,834 --> 00:03:27,034
+the pmf of the discrete mixture that can be expressed as the weighted average of Poisson component pmfs.
+
+49
+00:03:27,034 --> 00:03:37,734
+In addition, the question asks for the conditional probability that a person with exactly 3 common colds in a year is an adult smoker,
+
+50
+00:03:37,734 --> 00:03:42,534
+which can be obtained using the Bayes' rule from Probability.
+
+51
+00:03:43,534 --> 00:03:52,534
+Based on the definition, the moments of a discrete mixture can be expressed as a weighted average of its component moments.
+
+52
+00:03:52,534 --> 00:03:59,667
+We can first derive the mixture mean as a weighted average of the means of the subgroups
+
+53
+00:03:59,667 --> 00:04:05,200
+using the law of iterated expectations from Probability.
+
+54
+00:04:05,867 --> 00:04:09,340
+To extend the results to the second moment,
+
+55
+00:04:09,340 --> 00:04:17,067
+the expectation of N-squared, we simply write N-squared, N1-squared and N2-squared as random variables. 
+
+56
+00:04:17,067 --> 00:04:22,300
+From the definition, N-squared will also have a discrete mixture distribution.
+
+57
+00:04:22,300 --> 00:04:28,734
+The same argument holds for any moment, defined as the expectation of N of power m.
+
+58
+00:04:29,734 --> 00:04:36,700
+The discrete mixtures we introduced are based on populations containing a finite number of subgroups.
+
+59
+00:04:36,700 --> 00:04:44,734
+We can extend the mixture idea to an infinite number of subgroups to obtain what we call continuous mixtures.
+
+60
+00:04:44,734 --> 00:04:51,667
+Consider we are interested in the distribution on the number of claims, N, among a population of drivers. 
+
+61
+00:04:51,667 --> 00:04:56,660
+Assume the ith person from the population has their own Poisson distribution
+
+62
+00:04:56,660 --> 00:05:00,100
+with the expected number of claims, lambda i.
+
+63
+00:05:00,100 --> 00:05:06,250
+For some better drivers, lambda is small; for others, worse drivers, it is high.
+
+64
+00:05:06,250 --> 00:05:09,699
+We can assume that there is a distribution
+for lambda, the Poisson mean.
+
+65
+00:05:09,699 --> 00:05:16,080
+In order to derive a closed-form for the continuous
+mixture, a convenient distribution for lambda
+
+66
+00:05:16,080 --> 00:05:20,260
+is a gamma distribution with parameters alpha and theta.
+
+67
+00:05:20,260 --> 00:05:26,500
+One can check that if the number of claims, N, for the driver population follows a Poisson distribution
+
+68
+00:05:26,500 --> 00:05:32,830
+given its mean Lambda, and if the mean Lambda follows a gamma distribution
+
+69
+00:05:32,830 --> 00:05:38,867
+with parameters alpha and theta, then the marginal distribution of N is a negative binomial distribution
+
+70
+00:05:38,867 --> 00:05:43,830
+with parameters r equals alpha and beta equals theta.
+
+71
+00:05:43,830 --> 00:05:50,460
+Similar to discrete mixtures, we can derive the pmf and moments of continuous mixtures
+
+72
+00:05:50,460 --> 00:05:55,070
+when we know the pmfs and moments of the component distributions.
+
+73
+00:05:55,070 --> 00:06:01,767
+For the derivation, we consider a general framework with a random variable N from a continuous mixture, 
+
+74
+00:06:01,800 --> 00:06:06,949
+and treat the population parameter Lambda as a random variable.
+
+75
+00:06:06,949 --> 00:06:14,759
+The first part gives the conditional pmf of N given Lambda = lambda.
+
+76
+00:06:14,759 --> 00:06:23,470
+Second, assume Lambda have a continuous pdf, or probability density function, f(lambda).
+
+77
+00:06:23,470 --> 00:06:29,650
+For a random draw N, we can obtain the marginal pmf pk using the following formula.
+
+78
+00:06:29,650 --> 00:06:38,700
+In the above derivation, we first determine the claim count pmf given a specific value lambda,
+
+79
+00:06:38,700 --> 00:06:45,500
+and then take the expectation over all possible values of lambda to get the claim count pmf for the random draw.
+
+80
+00:06:45,500 --> 00:06:52,734
+For obtaining the moments, we can use the law of iterated expectations to obtain raw moments, 
+
+81
+00:06:52,734 --> 00:06:56,334
+and use the law of total variance to obtain the variance of N. 
+
+82
+00:06:56,334 --> 00:07:02,667
+Technical details regarding the law of iterated expectations and the law of total variance 
+
+83
+00:07:02,667 --> 00:07:09,800
+can be found in Section 16.1 of the Loss Data Analytics open text this lecture is based on.
+
+84
+00:07:09,800 --> 00:07:16,710
+Using the above framework, we can obtain the pmf and moments of the negative binomial distribution,
+
+85
+00:07:16,710 --> 00:07:20,834
+based on the Poisson-gamma mixture structure given in the previous slide.
+
+86
+00:07:21,840 --> 00:07:26,080
+In this section, you learned how to first define a mixture distribution 
+
+87
+00:07:26,080 --> 00:07:31,210
+when the mixing component is based on a finite number
+of subgroups;
+
+88
+00:07:31,210 --> 00:07:37,300
+then, compute mixture distribution probabilities from mixing proportions
+
+89
+00:07:37,300 --> 00:07:39,700
+and knowledge of the component distributions;
+
+90
+00:07:39,700 --> 00:07:44,934
+and last, define a mixture distribution when the mixing random variable is continuous.
+
+91
+00:07:44,934 --> 00:07:53,867
+From the definitions and examples, we note that any random draw from a population will have a mixture distribution, 
+
+92
+00:07:53,867 --> 00:07:57,800
+when the population contains subgroups having different distributions.
+
+93
+00:07:57,800 --> 00:08:04,819
+Therefore, mixture distributions can be useful for insurance applications including frequency modeling.
+
+94
+00:08:04,819 --> 00:08:08,767
+If you are interested in more technical details regarding mixture distributions, 
+
+95
+00:08:08,767 --> 00:08:15,033
+you may refer to Section 2.6 of the Loss Data Analytics open text.
+

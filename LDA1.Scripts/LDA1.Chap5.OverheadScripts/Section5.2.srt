@@ -1,0 +1,296 @@
+1
+00:00:00,960 --> 00:00:07,680
+Welcome back to the tutorial on aggregate loss 
+models. My name is Peng Shi, a professor in  
+
+2
+00:00:07,680 --> 00:00:13,280
+actuarial science at the University 
+of Wisconsin-Madison. In this video,  
+
+3
+00:00:13,280 --> 00:00:19,760
+I introduce the individual risk model and discuss 
+its application in short-term insurance.
+ 
+
+4
+00:00:22,080 --> 00:00:29,120
+In the introduction, we have learned that 
+conceptually an individual risk model examines  
+
+5
+00:00:29,120 --> 00:00:36,160
+the losses at policy level, and calculates the 
+total losses from all individual policies.
+ 
+
+6
+00:00:38,080 --> 00:00:44,880
+In this section, we formally represent 
+the model using random variables. Here S  
+
+7
+00:00:44,880 --> 00:00:55,360
+denotes the total losses of a portfolio of n 
+contracts, and Xi, for i=1,…,n, is the loss  
+
+8
+00:00:55,360 --> 00:01:03,600
+for the ith contract. To emphasize, note that 
+the number of contracts is fixed and known.
+ 
+
+9
+00:01:05,440 --> 00:01:12,320
+In this model, we typically assume losses from 
+different contracts are independent with each  
+
+10
+00:01:12,320 --> 00:01:18,720
+other, but not necessarily identically 
+distributed. This could be due to the  
+
+11
+00:01:18,720 --> 00:01:26,160
+different exposures across the contracts. 
+Taking homeowner insurance as an example,  
+
+12
+00:01:26,160 --> 00:01:31,200
+one could think that the loss distribution 
+depends on the value of the property.
+ 
+
+13
+00:01:33,120 --> 00:01:36,320
+One also notes the distribution of Xi  
+
+14
+00:01:36,880 --> 00:01:45,040
+is often featured with a probability mass 
+at zero, that is, for a given policyholder,  
+
+15
+00:01:45,040 --> 00:01:52,240
+there is a chance that he or she won’t have 
+any claims during the policy year. We could  
+
+16
+00:01:52,240 --> 00:01:58,640
+easily relate to personal lines of business 
+such as automobile or homeowner insurance.
+ 
+
+17
+00:02:02,000 --> 00:02:06,400
+Let’s examine some applications 
+of the individual risk model.  
+
+18
+00:02:07,200 --> 00:02:14,160
+The model was originally developed for life 
+insurance portfolio. Consider term-life  
+
+19
+00:02:14,160 --> 00:02:21,840
+insurance that pays a fixed amount of insurance 
+to the beneficiary upon the death of the insured.  
+
+20
+00:02:23,040 --> 00:02:31,040
+For the ith individual in the portfolio, let 
+qi be the probability of death within a year,  
+
+21
+00:02:31,840 --> 00:02:41,040
+and bi be the payable amount from the insurer 
+upon death. Then the loss for the ith contract  
+
+22
+00:02:41,040 --> 00:02:49,840
+is described by random variable Xi which 
+has a probability mass at zero and bi.
+ 
+
+23
+00:02:50,960 --> 00:02:57,680
+In property casualty insurance, it is 
+more complicated. For a single contract,  
+
+24
+00:02:58,400 --> 00:03:05,600
+one can still think that the policyholder incurs 
+loss events within a year with probability qi.  
+
+25
+00:03:06,800 --> 00:03:16,480
+However, given occurrence, the amount of loss 
+is not fixed, instead, it is a random quantity.  
+
+26
+00:03:17,680 --> 00:03:25,120
+In this case, the loss for the ith contract 
+in the portfolio, denoted by Xi, can be  
+
+27
+00:03:25,120 --> 00:03:35,840
+represented using a two-part framework, where I 
+indicates the occurrence of loss events, and B  
+
+28
+00:03:36,800 --> 00:03:43,760
+is the amount of losses given occurrence. 
+Both I and B are random variables,  
+
+29
+00:03:44,320 --> 00:03:50,560
+and B reduces to a fixed amount in 
+the above life insurance example.
+ 
+
+30
+00:03:54,800 --> 00:04:01,040
+Consider the Wisconsin Property Fund 
+data that we introduced in Chapter one.  
+
+31
+00:04:02,320 --> 00:04:07,600
+We use data in year 2010 to 
+illustrate the two-part model.  
+
+32
+00:04:08,960 --> 00:04:18,400
+Variable I is defined as an indicator, with 1 
+indicating occurrence of claims, and 0 otherwise.  
+
+33
+00:04:19,920 --> 00:04:26,640
+Variable B corresponds to the amount of 
+losses for the subset of policyholders  
+
+34
+00:04:26,640 --> 00:04:35,040
+with at least one claims. If we take a look at 
+the length of the two variables, we note that  
+
+35
+00:04:35,040 --> 00:04:43,600
+I is defined for all policyholders, but B is 
+only defined for a subset of policyholders.
+ 
+
+36
+00:04:47,440 --> 00:04:55,840
+One could also examine the empirical distribution 
+of variables I and B. As an illustration,  
+
+37
+00:04:56,800 --> 00:05:04,640
+table is used to create the frequency 
+table for claim frequency. We observe  
+
+38
+00:05:04,640 --> 00:05:12,800
+that the probability of having loss events for 
+a randomly selected policyholder is about 36%.  
+
+39
+00:05:15,040 --> 00:05:21,920
+summary is used to calculate the 
+descriptive statistics for claim severity.  
+
+40
+00:05:23,120 --> 00:05:32,160
+We observe that the amount of losses is skewed 
+and heavy tailed. The above analysis assumes  
+
+41
+00:05:32,160 --> 00:05:39,200
+that the distributions of claim frequency and 
+severity are i.i.d. across all policyholders.
+ 
+
+42
+00:05:42,960 --> 00:05:51,440
+Last, we discuss computing the distribution for 
+the aggregate loss. Recall that the aggregates  
+
+43
+00:05:51,440 --> 00:06:01,600
+loss S is defined as the sum of n random 
+variables. In general, its cdf is difficult to  
+
+44
+00:06:01,600 --> 00:06:09,760
+evaluate due to the multivariate integration 
+involved in the computation. When Xi are i.i.d.,  
+
+45
+00:06:11,520 --> 00:06:20,640
+it is known as the n-fold convolution of the cdf 
+of X. We present a couple of examples in R.
+ 
+
+46
+00:06:24,560 --> 00:06:34,560
+In R, function convpow from the distr package 
+calculates the distribution of the sum of  
+
+47
+00:06:34,560 --> 00:06:42,240
+independent random variables using discrete 
+Fourier transformation. In the first example,  
+
+48
+00:06:43,360 --> 00:06:52,080
+we determine the distribution of the sum of an 
+exponential variable and a log-normal variable.  
+
+49
+00:06:53,920 --> 00:07:04,000
+In function convpow, one specifies the sum in the 
+first argument and 1-fold in the second argument.  
+
+50
+00:07:05,120 --> 00:07:08,960
+Function d returns the 
+density of the distribution.  
+
+51
+00:07:09,920 --> 00:07:15,840
+The plot visualizes the density of 
+the sum of the two variables.
+ 
+
+52
+00:07:19,280 --> 00:07:27,280
+In the second example, we examine the 10-fold 
+convolution of an exponential distribution.  
+
+53
+00:07:28,320 --> 00:07:37,920
+In function convpow, one specifies the exponential 
+distribution in the first argument and 10-fold  
+
+54
+00:07:37,920 --> 00:07:44,880
+convolution in the second argument. The 
+plot shows the resulting gamma density.
+ 
+
+55
+00:07:48,000 --> 00:07:55,920
+To summarize, in this section, we have learned 
+how to build an individual risk model for a  
+
+56
+00:07:55,920 --> 00:08:04,880
+portfolio of insurance contracts, apply individual 
+risk model in life and nonlife insurance, and  
+
+57
+00:08:04,880 --> 00:08:13,760
+compute the distribution of aggregate losses from 
+an individual risk model. Thanks for watching.
+

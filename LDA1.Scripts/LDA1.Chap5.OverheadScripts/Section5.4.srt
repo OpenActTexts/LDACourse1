@@ -1,0 +1,238 @@
+1
+00:00:01,040 --> 00:00:07,120
+Welcome back to the tutorial on aggregate 
+loss models. My name is Peng Shi,  
+
+2
+00:00:07,120 --> 00:00:14,400
+a professor in the Risk and Insurance department 
+at the University of Wisconsin-Madison. In this  
+
+3
+00:00:14,400 --> 00:00:20,640
+video, I am going to introduce a particular 
+compound distribution known as Tweedie.
+ 
+
+4
+00:00:22,960 --> 00:00:30,160
+The Tweedie distribution is the basis for what 
+is known by insurers as the pure premium model.  
+
+5
+00:00:31,120 --> 00:00:39,040
+It provides an alternative framework for pricing 
+insurance coverage, and as we will show, it does  
+
+6
+00:00:39,040 --> 00:00:45,920
+not require decomposing the aggregate losses 
+into the frequency and severity components.
+ 
+
+7
+00:00:48,960 --> 00:00:54,960
+The Tweedie distribution is defined as 
+a Poisson sum of gamma random variables.  
+
+8
+00:00:55,840 --> 00:01:04,080
+Specifically, consider the collective 
+risk model, S is equal to the sum of Y1  
+
+9
+00:01:04,080 --> 00:01:14,000
+to YN. Recall that we interpret S as the total 
+losses for an insurance system in one period,  
+
+10
+00:01:15,040 --> 00:01:23,040
+where N indicates the number of claims, and 
+Y indicates the size of the individual claim.  
+
+11
+00:01:24,640 --> 00:01:35,040
+When N is a Poisson with mean λ, and Y is a Gamma 
+with shape parameter α and scale parameter θ,  
+
+12
+00:01:35,840 --> 00:01:47,200
+the distribution of S is known as Tweedie.
+One can further extend the model to incorporate  
+
+13
+00:01:47,200 --> 00:01:53,840
+exposure, and express the aggregate 
+losses on a per-exposure basis.  
+
+14
+00:01:55,040 --> 00:02:03,840
+Let ω be the exposure. By dividing by ω, 
+we interpret S as the aggregate losses  
+
+15
+00:02:04,480 --> 00:02:16,240
+per unit of exposure. In this case, the frequency 
+becomes a Poisson with mean ω times λ, where we  
+
+16
+00:02:16,240 --> 00:02:24,880
+assume that the number of claims is proportional 
+to the exposure. The severity remains the same.
+ 
+
+17
+00:02:27,920 --> 00:02:33,200
+The distribution function can be derived 
+using the law of total probabilities,  
+
+18
+00:02:34,160 --> 00:02:41,920
+thinking of frequency N as a partition 
+of sample space. In the calculation,  
+
+19
+00:02:41,920 --> 00:02:49,840
+we use the fact that given frequency N, 
+aggregate loss S is a gamma distribution.  
+
+20
+00:02:50,720 --> 00:02:56,480
+It should be noted that the Tweedie 
+distribution has a probability mass at zero,  
+
+21
+00:02:57,520 --> 00:03:06,000
+that is, S=0 when N=0, and an 
+otherwise continuous component.
+ 
+
+22
+00:03:09,520 --> 00:03:15,920
+If we reparameterize the Tweedie 
+distribution using μ, p, and ϕ,  
+
+23
+00:03:17,280 --> 00:03:24,000
+we could show that for p between 1 and 2, 
+the Tweedie distribution belongs to the  
+
+24
+00:03:24,000 --> 00:03:33,360
+exponential family. In particular, the mean of 
+the distribution is equal to μ, and the variance  
+
+25
+00:03:33,360 --> 00:03:41,120
+of the distribution is a power function 
+of the mean. This result suggests that  
+
+26
+00:03:41,120 --> 00:03:45,840
+techniques for fitting generalized 
+linear models are ready to apply.
+ 
+
+27
+00:03:49,120 --> 00:03:53,280
+Let’s use a toy example to 
+demonstrate model fitting.  
+
+28
+00:03:54,640 --> 00:04:04,080
+Consider annual medical expenses from a randomly 
+selected 5,000 individuals. The histogram  
+
+29
+00:04:04,080 --> 00:04:11,600
+shows that a significant portion of subjects 
+did not incur any expenses over the year.  
+
+30
+00:04:12,880 --> 00:04:19,280
+For those with positive expenses, the 
+distribution is right skewed and heavy tailed.
+ 
+
+31
+00:04:23,360 --> 00:04:32,400
+To fit a Tweedie distribution in R, we use the 
+glm function in the package statmod. In the  
+
+32
+00:04:32,400 --> 00:04:42,240
+estimation, we need to assume power parameter p
+is known. For instance, we set it to be 1.2.  
+
+33
+00:04:43,760 --> 00:04:50,800
+In the glm function, var.power specifies 
+the power of the variance function,  
+
+34
+00:04:51,840 --> 00:05:00,080
+and link.power specifies the link function 
+for the mean, with zero indicating a log link.  
+
+35
+00:05:02,240 --> 00:05:10,560
+We could further extract the estimates for mean μ 
+and dispersion ϕ using the summary() function.
+ 
+
+36
+00:05:15,040 --> 00:05:21,920
+We can examine the goodness-of-fit of 
+the model using qq plot. The package  
+
+37
+00:05:21,920 --> 00:05:28,560
+tweedie provides functions that allow 
+us to calculate probability, quantiles,  
+
+38
+00:05:29,280 --> 00:05:33,680
+and also simulate random realizations 
+for the Tweedie distribution.  
+
+39
+00:05:35,200 --> 00:05:44,640
+To generate the qq plot, we use function qtweedie 
+to obtain the theoretical quantiles of the fitted  
+
+40
+00:05:44,640 --> 00:05:52,880
+Tweedie distribution, and function quantile to 
+obtain the empirical quantiles of the data.
+ 
+
+41
+00:05:56,640 --> 00:06:02,800
+The qq plot shows a linear relation between 
+the theoretical quantiles of the fitted  
+
+42
+00:06:02,800 --> 00:06:08,080
+Tweedie distribution and empirical 
+quantiles of the data. Hence the  
+
+43
+00:06:08,080 --> 00:06:10,800
+Tweedie distribution fits the data pretty well.
+ 
+
+44
+00:06:13,680 --> 00:06:21,120
+To summarize, in this section, we have learned 
+how to construct the Tweedie distribution from  
+
+45
+00:06:21,120 --> 00:06:28,720
+a collective risk model, establish the Tweedie 
+distribution as a member of the exponential family  
+
+46
+00:06:28,720 --> 00:06:38,400
+of distributions, and fit Tweedie distribution as 
+a generalized linear model. Thanks for watching.
+

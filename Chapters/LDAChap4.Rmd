@@ -1,0 +1,1322 @@
+
+# Model Selection and Estimation
+
+**Chapter Description**
+
+
+Chapters 2 and 3 have described how to fit parametric models to frequency and severity data, respectively. This chapter begins with the selection of models. To compare alternative parametric models, it is helpful to summarize data without reference to a specific parametric distribution. Section 4.1 describes nonparametric estimation, how we can use it for model comparisons and how it can be used to provide starting values for parametric procedures. The process of model selection is then summarized in Sections 4.2 and 4.3. Although our focus is on data from continuous distributions, the same process can be used for discrete versions or data that come from a hybrid combination of discrete and continuous distributions. 
+
+Model selection and estimation are fundamental aspects of statistical modeling. To provide a flavor as to how they can be adapted to alternative sampling schemes, Sections 4.4 and 4.5 describes estimation for grouped, censored and truncated data. To see how they can be adapted to alternative models, the chapter closes with Section 4.6 on Bayesian inference, an alternative procedure where the (typically unknown) parameters are treated as random variables.
+
+
+:::: {.blackbox }
+
+-  Although not needed to go through the tutorials, some users may wish to download the overheads that the videos are based on. <button download><a href="https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/LDA1.Overheads/LDA1.Chap4.pdf">Download Chapter Four overheads as a .pdf file.</a></button>
+-  By watching the videos and working through the tutorial exercises, you will get an appreciation for model selection and estimation. For a deeper dive, see the corresponding chapter in the textbook, [Chapter Four of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-ModelSelection.html).
+:::: 
+
+
+## Nonparametric Inference {#Sec:NonInf}
+
+***
+
+In this section, you learn how to:
+
+- Estimate moments, quantiles, and distributions without reference to a parametric distribution.
+
+***
+
+####  Video: Nonparametric Estimation Tools  {-}
+
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/34298521/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_su91og1z&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_bfq6m2gp" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+#### Overheads: Nonparametric Estimation Tools (Click Tab to View) {-}
+
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Sect41A')">A. Nonparametric Estimation</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect41B')">B. Moment Estimators</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect41C')">C. Empirical Cumulative Distribution Function</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect41D')">D. Empirical Example</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect41E')">E. Empirical Cumulative Distribution Function of a Toy Example</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect41F')">F. Smoothed Empirical Percentiles I</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect41G')">G. Smoothed Empirical Percentiles II</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect41H')">H. Density Estimators</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect41I')">I. Uniform Kernel Density Estimator</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect41J')">J. Kernel Density Estimator</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect41K')">K. Kernel Density Estimator of a Distribution Function</button>  
+  <button class="tablinks" onclick="openTab(event, 'Sect41L')">L. Grouped Data I</button>  
+  <button class="tablinks" onclick="openTab(event, 'Sect41M')">M. Grouped Data II</button>  
+  </div>
+
+<div id="Sect41A" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=3" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect41B" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=4" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect41C" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=5" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect41D" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=6" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect41E" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=7" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect41F" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=8" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect41G" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=9" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect41H" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=10" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect41I" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=11" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect41J" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=12" width="100%" height="400"> </iframe>
+  </div>  
+<div id="Sect41K" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=13" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect41L" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=14" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect41M" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=15" width="100%" height="400"> </iframe>
+  </div>  
+  
+
+
+
+### Exercise. Empirical Distribution Function and Quartiles, Percentiles and Quantiles
+
+
+**Assignment Text**
+
+In this tutorial, you will find empirical (cumulative) distribution and quantiles for the loss. The Wisconsin Property Fund data has already been read into a data frame called `Insample`. These data consist of claim experience for fund members over the years 2006-2010, inclusive. It includes the claim year `Year` and claim loss `y`.
+
+
+
+:::: {.blackbox }
+**Instructions**
+
+-  Use the function [ecdf()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/ecdf) to create the empirical (cumulative) distribution for loss amount `y` and plot it.
+-  Use the function [quantile()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/quantile) to produce sample quantiles corresponding to the given percentiles for each year. Which year has the largest 90th percentile? 
+::::
+
+<br>
+
+
+```{r ex="LDA1.4.1.1_23", type="hint", tut=TRUE}
+
+group_by() takes an existing data and converts it into a grouped data where operations are performed by group.
+summarise() outputs a single row summarising all observations in the input. It will contain one column for each grouping variable and one column for each of the summary statistics that you have specified.
+Which `type` should we use for quantile()?
+
+```
+
+
+```{r ex="LDA1.4.1.1_23", type="pre-exercise-code", tut=TRUE}
+Insample <- read.csv("https://urldefense.com/v3/__https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv__;!!DZ3fjg!rawhS1aVIBSc6WSrxFUqxR7FSBuybP1qk3oTO61Xb9WOM39NSMgYzniENO39cfZYcg$ ", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+```
+
+
+```{r ex="LDA1.4.1.1_23", type="sample-code", tut=TRUE}
+
+# Create empirical distribution
+empirical <- ??
+# Plot empirical distribution
+plot(??)
+
+library(dplyr)
+# Group data by year and summarise data using quantile
+Insample %>% 
+  group_by(??) %>% 
+  summarise(??)
+
+```
+
+
+```{r ex="LDA1.4.1.1_23", type="solution", tut=TRUE}
+
+# Create empirical distribution
+empirical <- ecdf(Insample$y)
+# Plot empirical distribution
+plot(empirical, main="", xlab="loss",
+     verticals=TRUE, col.points="blue",
+     col.hor="red", col.vert="bisque")
+
+library(dplyr)
+# Group data by year and summarise data using quantile
+Insample %>% 
+  group_by(Year) %>% 
+  summarise(quantile_each_year=quantile(y, probs=c(0.9), type=6))
+
+```
+
+
+```{r ex="LDA1.4.1.1_23", type="sct", tut=TRUE}
+success_msg("Excellent start! Year 2007 has the largest 90th percentiles.")
+```
+
+
+### Exercise. Density Estimators
+
+**Assignment Text**
+
+Nonparametric density estimators, such as the kernel estimator, are regularly used in practice. In this tutorial, We will use the Wisconsin Property Fund data, which already has been read into a data frame called `Insample`, to plot a histogram and overlay density curves with various density estimators. 
+
+:::: {.blackbox }
+**Instructions**
+
+-  Plot a histogram of logarithmic loss amount `y`.
+-  Use the function [density()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/density) to compute kernel density estimates.
+-  Overlay density curves on top of the histogram: 
+    - using a blue thick curve to represent a Gaussian kernel density where the bandwidth was selected automatically using an ad hoc rule based on the sample size and volatility of these data, 
+    - using a green thick curve to represent a Gaussian kernel density with a bandwidth equal to 1,
+    - using a red thick curve to represent a triangular kernel density with a bandwidth of 0.1.
+:::: 
+
+<br>
+
+
+```{r ex="LDA1.4.1.1_4", type="hint", tut=TRUE}
+
+The syntax log(data$x) produces log of x.
+
+```
+
+
+```{r ex="LDA1.4.1.1_4", type="pre-exercise-code", tut=TRUE}
+Insample <- read.csv("https://urldefense.com/v3/__https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv__;!!DZ3fjg!rawhS1aVIBSc6WSrxFUqxR7FSBuybP1qk3oTO61Xb9WOM39NSMgYzniENO39cfZYcg$ ", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+```
+
+
+```{r ex="LDA1.4.1.1_4", type="sample-code", tut=TRUE}
+
+# Plot histogram
+hist(??, freq=FALSE)
+# Gaussian kernel density - blue curve
+lines(density(??, col="blue", lwd=2)
+# Gaussian kernel density with a bandwidth equal to 1 - green curve
+lines(density(??, bw=??), col="green", lwd=2)
+# Triangular kernel density with a bandwidth equal to 0.1 - red curve
+lines(density(??, kernel=??, bw=??), col="red", lwd=2)
+
+```
+
+
+```{r ex="LDA1.4.1.1_4", type="solution", tut=TRUE}
+
+# Plot histogram
+hist(log(Insample$y), freq=FALSE)
+# Gaussian kernel density - blue curve
+lines(density(log(Insample$y)), col="blue", lwd=2)
+# Gaussian kernel density a bandwidth equal to 1 - green curve
+lines(density(log(Insample$y), bw=1), col="green", lwd=2)
+# Triangular kernel density a bandwidth equal to 0.1 - red curve
+lines(density(log(Insample$y), kernel="triangular", bw=0.1), col="red", lwd=2)
+
+```
+
+
+```{r ex="LDA1.4.1.1_4", type="sct", tut=TRUE}
+success_msg("Excellent! This is a very beautiful graphic with colors! We observed different density curves.")
+```
+
+
+### Exercise. Claim Frequency
+
+**Assignment Text**
+
+In this tutorial, you will model claim count data and decide whether a Poisson$(\lambda)$ or a negative binomial$(r=3,p)$ better fits the data.  The raw data are the number of claims filed by $n=100$ policyholders.  Recall that claim count data are discrete and take values $0, 1, 2, \dots$. So, we consider two discrete probability models. You will apply tools learned in Section \@ref(Sec:NonInf) to make a decision on which model fits these data better.
+
+
+We also start with exploratory data analysis, making graphical and numeric summaries of data before fitting a model.
+
+:::: {.blackbox }
+**Instructions** 
+
+- Make a [table](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/table) of the claims counts.
+- Make a [barplot](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/barplot) to graphically display the claims counts.
+- Compute the [mean](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/mean) and [variance](http://www.r-tutor.com/elementary-statistics/numerical-measures/variance) of the claims count distribution.  Based on these, do you think a Poisson or a negative binomial model might be better?
+:::: 
+
+<br>
+
+
+```{r ex="LDA4.2.1.1", type="hint", tut=TRUE}
+The output from the `table()` function can be used as an argument in the `barplot()` function
+```
+
+
+```{r ex="LDA4.2.1.1", type="pre-exercise-code", tut=TRUE}
+set.seed(4)
+claims = rnbinom(n = 100, size = 3, prob = 0.5)
+#Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T,
+#                      na.strings=c("."), stringsAsFactors=FALSE)
+```
+
+
+```{r ex="LDA4.2.1.1", type="sample-code", tut=TRUE}
+table(claims)
+barplot(??, xlab="# Claims")
+
+mean(claims)
+??(claims)
+
+```
+
+
+```{r ex="LDA4.2.1.1", type="solution", tut=TRUE}
+table(claims)
+barplot(table(claims), xlab="# Claims")
+mean(claims)
+var(claims)
+```
+
+```{r ex="LDA4.2.1.1", type="sct", tut=TRUE}
+success_msg("And you're off!  PS - did you label your axes?")
+```
+
+
+
+
+
+Observe that the distribution is heavily right-skewed, and the sample variance is much larger than the sample mean.  You may recall that if $X \sim$ Poisson$(\lambda)$,
+$$
+\mathrm{E}(X) = \mathrm{Var}(X) = \lambda.
+$$
+We would expect the sample mean and sample variance to be roughly equal if the claims data came from the Poisson... our first clue this distribution may not be best!
+
+:::: {.blackbox }
+**Instructions** 
+
+- Fit the Poisson distribution by estimating $\lambda$ using maximum likelihood estimation.
+- Make a $qq$ plot comparing the observed data to the fitted Poisson.  
+
+Fitting the distribution involves estimating the parameter $\lambda$.  Do you recall the maximum likelihood estimator for a Poisson?  If not, this is shown in the companion video for this tutorial.
+:::: 
+
+<br>
+
+```{r ex="LDA4.2.1.2", type="pre-exercise-code", tut=TRUE}
+set.seed(4)
+claims = rnbinom(n = 100, size = 3, prob = 0.5)
+#Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T,
+#                      na.strings=c("."), stringsAsFactors=FALSE)
+```
+
+```{r ex="LDA4.2.1.2", type="hint", tut=TRUE}
+Remember the MLE for a Poisson is just the sample mean!
+  
+Should you brush up on the  [quantile](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/quantile) function?
+```
+
+```{r ex="LDA4.2.1.2", type="sample-code", tut=TRUE}
+lambda = ??
+lambda
+
+## make the quantiles
+p=seq(0.01,0.99, by=0.01)
+qp = qpois(p, lambda=3)
+
+## compute the quantiles
+qclaims = quantile(??, p)
+
+## Make a plot (and label axes!)
+plot(??, ??, ylim=c(0,12),xlim=c(0,12), xlab="Model Quantiles", ylab="Empirical Quantiles")
+abline(0,1)
+
+```
+
+
+```{r ex="LDA4.2.1.2", type="solution", tut=TRUE}
+lambda = mean(claims)
+lambda
+
+## make the quantiles
+pr=seq(0.01,0.99, by=0.01)
+qp = qpois(pr, lambda=3)
+
+## compute the quantiles
+qclaims = quantile(claims, pr)
+
+## Make a plot (and label axes!)
+plot(qp, qclaims, ylim=c(0,12),xlim=c(0,12), xlab="Model Quantiles", ylab="Empirical Quantiles")
+abline(0,1)
+```
+
+```{r ex="LDA4.2.1.2", type="sct", tut=TRUE}
+success_msg("Nice!  But it's not a *great* fit, is it?")
+```
+
+Do you notice how the empirical quantiles do not match the model for some of the larger values in the right tail?  This plot says the empirical quantiles are too large, that's why they are above the diagonal line $y=x$.  Our claims data are too right-skewed, and that's why the $qq$ plot seems off for larger quantiles.  Might the negative binomial might be more promising?
+
+:::: {.blackbox }
+**Instructions** 
+
+- Fit the negative binomial by using the method of moments estimator to estimate $p$.
+- Make a $qq$ plot comparing the observed data to the fitted negative binomial.
+::::
+
+To fit the Negative Binomial($r=3, \beta$), we need to estimate the parameter $\beta$ using the method of moments.  Recall that the probability mass function for a negative binomial ([Sec 2.2.3.3 of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-Frequency-Modeling.html#S:important-frequency-distributions)) is
+\[
+\Pr(X = k) = \frac{(k+r-1)!}{k!(r-1)!}\left(\frac{1}{1+\beta}\right)^r \left(\frac{\beta}{1+\beta} \right)^k, \hspace{5mm} k=0, 1, ...
+\]
+with parameters $r$ and $\beta$.  Also recall that in the method of moments we equate the $t^{th}$ sample moment and $t^{th}$ model moment, 
+$$ 
+\mathrm{E}(X^t) = \frac{1}{n}\sum_{i=1}^{n}x_{i}^t,
+$$
+where $t=1, 2, ...$.  If we use $t=1$ to equate the first moments, we get the expression
+$$  
+\mathrm{E}(X) = r\beta = 3\beta = \overline{x} = 3
+$$
+Solving the above for $\beta$, we see $\hat{\beta} = 1$.  Therefore the Negative Binomial($r=3, \beta=1$) is the fitted model.  
+
+Next, we use `R` to fit this and make a $qq$ plot.  It is important to understand that distributions are not uniquely parameterized, and there can be different conventions across fields, textbooks, and software.  Indeed, in `R` the function \texttt{qnbinom} defines the negative binomial as
+\[
+\Pr(X = k) = \frac{(k+n-1)!}{(n-1)!k!}p^n(1-p)^k, \hspace{5mm} k=0, 1, ...
+\]
+
+This matches the definition in the textbook by equating probability $p = \frac{1}{1+\beta}$, and size $r=n$.  It is very important to carefully consider the parameterization of any distribution you use in `R`.
+
+
+```{r ex="LDA4.2.1.3", type="pre-exercise-code", tut=TRUE}
+set.seed(4)
+claims = rnbinom(n = 100, size = 3, prob = 0.5)
+#Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T,
+#                      na.strings=c("."), stringsAsFactors=FALSE)
+```
+
+
+
+```{r ex="LDA4.2.1.3", type="hint", tut=TRUE}
+Should you brush up on the  [qnbinom](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/qnbinom) function?  It can be easy to enter the wrong parameters for a distribution, especially if the names or definitions of the parameters are not universally agreed upon.  Always check!
+```
+
+```{r ex="LDA4.2.1.3", type="sample-code", tut=TRUE}
+pr=seq(0.01,0.99, by=0.01)
+qb = qnbinom(pr, size=??, prob = ??)
+
+## compute the quantiles
+qclaims = quantile(claims, pr)
+
+plot(qb, qclaims, ylim=c(0,12), xlim=c(0,12), ylab="Empirical Quantiles", xlab="Model Quantiles")
+abline(0,1)
+
+```
+
+
+```{r ex="LDA4.2.1.3", type="solution", tut=TRUE}
+p = 0.5
+pr=seq(0.01,0.99, by=0.01)
+qb = qnbinom(pr, size=3, prob = p)
+
+## compute the quantiles
+qclaims = quantile(claims, pr)
+
+plot(qb, qclaims, ylim=c(0,12), xlim=c(0,12), ylab="Empirical Quantiles", xlab="Model Quantiles")
+abline(0,1)
+```
+
+```{r ex="LDA4.2.1.3", type="sct", tut=TRUE}
+success_msg("This seems to be a better fit than Poisson.")
+```
+
+
+
+
+
+<!-- ```{r child = './Quizzes/Quiz41.html', eval = QUIZ} -->
+<!-- ``` -->
+
+
+## Tools for Model Selection
+
+***
+
+In this section, you learn how to:
+
+-  Summarize the data graphically without reference to a parametric distribution.
+-  Determine measures that summarize deviations of a parametric from a nonparametric fit.
+-  Use nonparametric estimators to approximate parameters that can be used to start a parametric estimation procedure.
+
+***
+
+####  Video: Tools  for Model Selection {-}
+
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/34298521/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_tcqdwc0i&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_jrvuguzf" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+#### Overheads: Tools  for Model Selection (Click Tab to View) {-}
+
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Sect421A')">A. Comparing Distribution and Density Functions</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect421B')">B. PP Plot</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect421C')">C. QQ Plot</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect421D')">D. Goodness-of-Fit Test</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect421E')">E. Kolmogorov-Smirnov Test</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect421F')">F. Chi-Square (χ2) Test</button>
+  </div>
+
+<div id="Sect421A" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=18" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect421B" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=19" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect421C" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=20" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect421D" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=21" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect421E" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=22" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect421F" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=23" width="100%" height="400"> </iframe>
+  </div>
+  
+### Exercise. Probability-Probability ($pp$) plot
+<img src = "ContributorPics\hurdler.png" width = "65" height = "65" style = "float:right; margin-left: 10px; margin-top: 7px" />
+
+**Assignment Text**
+
+Probability-probability ($pp$) plots can be used to corroborate the selection of parametric models. The Wisconsin Property Fund data has already been read into a data frame called `Insample` and we created subset data which contains the positive loss data called `positive_loss`. In this tutorial, you will generate $pp$ plots with Gaussian and gamma distribution.
+
+:::: {.blackbox }
+**Instructions**
+
+-  Generate $pp$ plots for the positive loss amount `y` using Gaussian and gamma. Based on the $pp$ plots, which parametric fitted model is closer to the empirical distribution?
+-  Use the function [glm(response~1,data=,family=Gamma(link=log))](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/glm) to fit generalized linear model (*glm*) with gamma family.
+-  Find the shape and rate parameters from the fitted gamma *glm*. (No action required on your part.)
+-  Use the function [glm(response~1,data=,family=gaussian(link=log))](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/glm) to fit generalized linear model (*glm*) with Gaussian distribution.
+-  Find the mean and standard deviation from the fitted Gaussian *glm*. (No action required on your part.)
+-  Use the function [ecdf()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/ecdf) to create the empirical distribution for positive loss.
+-  Use the function [pgamma()](https://www.rdocumentation.org/packages/Rlab/versions/2.15.1/topics/Gamma) to create distribution function for the gamma distribution.
+-  Use the function [pnorm()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Normal) to create distribution function for the Gaussian distribution.
+:::: 
+
+<br>
+
+```{r ex="LDA1.4.1.2_1", type="hint", tut=TRUE}
+
+We show the code that uses *glm* to find parameters.
+
+```
+
+
+```{r ex="LDA1.4.1.2_1", type="pre-exercise-code", tut=TRUE}
+Insample <- read.csv("https://urldefense.com/v3/__https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv__;!!DZ3fjg!rawhS1aVIBSc6WSrxFUqxR7FSBuybP1qk3oTO61Xb9WOM39NSMgYzniENO39cfZYcg$ ", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+library(MASS)
+positive_loss <- subset(Insample, y>0)
+```
+
+
+```{r ex="LDA1.4.1.2_1", type="sample-code", tut=TRUE}
+# Fit gamma
+fit_gamma <- glm(formula=??, data=??, family=Gamma(link=log))
+theta <- exp(coef(fit_gamma))*gamma.dispersion(fit_gamma) 
+alpha <- 1/gamma.dispersion(fit_gamma)
+# Fit Gaussian
+fit_gaussian <- glm(formula=??, data=??, family=gaussian(link=log))
+mu <- exp(coef(fit_gaussian))  
+sigma <- sqrt(summary(fit_gaussian)$dispersion) 
+# Create empirical distribution
+empirical <- ??
+# gamma pp plot
+gamma <- pgamma(??, shape=alpha, scale=theta)
+plot(??, gamma, xlab="Empirical DF", ylab="Gamma DF", cex=1)
+abline(0,1)
+# gaussian pp plot
+gaussian <- pnorm(??, mean=mu, sd=sigma)
+plot(??, gaussian, xlab="Empirical DF", ylab="Gaussian DF", cex=1)
+abline(0,1)
+
+```
+
+
+```{r ex="LDA1.4.1.2_1", type="solution", tut=TRUE}
+# Fit gamma
+fit_gamma <- glm(positive_loss$y~1, 
+                 data=positive_loss, 
+                 family=Gamma(link=log))
+theta <- exp(coef(fit_gamma))*gamma.dispersion(fit_gamma) #mu=theta/alpha
+alpha <- 1/gamma.dispersion(fit_gamma)
+
+# Fit gaussian
+fit_gaussian <- glm(positive_loss$y~1, 
+                 data=positive_loss, 
+                 family=gaussian(link=log))
+mu <- exp(coef(fit_gaussian)) # or mean(positive_loss$y)
+sigma <- sqrt(summary(fit_gaussian)$dispersion) # or sd(positive_loss$y) slightly different
+
+# Creat empirical distribution
+empirical <- ecdf(positive_loss$y)
+
+# gamma pp plot
+gamma <- pgamma(positive_loss$y, shape=alpha, scale=theta)
+plot(empirical(positive_loss$y), gamma,  # empirical() returns the percentiles for positive_loss$y
+     xlab="Empirical DF", ylab="Gamma DF", cex=1)
+abline(0,1)
+
+# gaussian pp plot
+gaussian <- pnorm(positive_loss$y, mean=mu, sd=sigma)
+plot(empirical(positive_loss$y), gaussian, 
+     xlab="Empirical DF", ylab="Gaussian DF", cex=1)
+abline(0,1)
+
+
+```
+
+
+```{r ex="LDA1.4.1.2_1", type="sct", tut=TRUE}
+success_msg("Good job! The *pp* plot is able to compare cumulative probabilities under two models. The gamma distribution is closer to the empirical distribution and so provides a better representation of the data.")
+```
+
+**Editorial Note**. This exercise uses the [glm()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/glm) function to produce maximum likelihood estimates of certain classes of distributions including the gamma and Gaussian (normal). [Section 3.5 of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-Severity.html#S:MaxLikeEstimation) employs a comparable function, [vlgm()](https://www.rdocumentation.org/packages/VGAM/versions/1.1-5/topics/vglm). These functions are even more useful when employed in regression modeling contexts. Although regression modeling is outside the scope of this course, the exercise provides an initial exposure to these functions that are very useful in actuarial practice.
+
+
+### Exercise. Quantile-Quantile ($qq$) plot
+  
+**Assignment Text**
+
+The $pp$ plot shows cumulative distribution functions, which can sometimes be difficult to detect where a fitted parametric distribution is deficient. As an alternative, it is common to use a quantile-quantile ($qq$) plot. The Wisconsin Property Fund data has already been read into a data frame called `Insample` and we also created a subset data which includes only positive loss data called `positive_loss`. In this tutorial, you will generate $qq$ plots with Gaussian and gamma distribution.
+
+:::: {.blackbox }
+**Instructions**
+
+-  Generate $qq$ plots for the positive loss amount `y` using Gaussian and gamma. Based on the $qq$ plot, which parametric fitted model is closer to the empirical distribution?
+-  Find sample size, mean, variance, and standard deviation for the positive loss. `p_value` is a list of probabilities that is given here.  
+-  Use the function [qnorm()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Normal) to create quantile function for the Gaussian distribution.
+-  Use the function [qgamma()](https://www.rdocumentation.org/packages/Rlab/versions/2.15.1/topics/Gamma) to create quantile function for the gamma distribution.
+::::
+
+<br>
+
+```{r ex="LDA1.4.1.2_2", type="hint", tut=TRUE}
+
+We directly used the sample mean and variance to find parameters. i.e. Gaussian quantiles is calculated based on mean and standard deviation from positive loss.
+
+```
+
+
+```{r ex="LDA1.4.1.2_2", type="pre-exercise-code", tut=TRUE}
+Insample <- read.csv("https://urldefense.com/v3/__https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv__;!!DZ3fjg!rawhS1aVIBSc6WSrxFUqxR7FSBuybP1qk3oTO61Xb9WOM39NSMgYzniENO39cfZYcg$ ", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+
+positive_loss <- subset(Insample, y>0)
+
+```
+
+
+```{r ex="LDA1.4.1.2_2", type="sample-code", tut=TRUE}
+# Sample size
+n <- ??
+# Positive loss mean
+mean <- ??
+# Positive loss variance
+variance <- ??
+# Positive loss standard variance
+sd <- ??
+# Probabilities
+p_values <- seq(1/(n+1), n/(n+1), by=1/(n+1))
+normal_quantiles <- qnorm(??)
+# Gaussian QQ Plot
+plot(??, ??, xlab = 'Theoretical Quantiles from Gaussian Distribution', ylab = 'Sample Quantiles of Positive Loss', main = 'Gaussian QQ Plot of Positive Loss')
+abline(0,1)
+gamma_quantiles <- qgamma(??)
+# Gamma QQ Plot
+plot(??, ??, xlab = 'Theoretical Quantiles from Gamma Distribution', ylab = 'Sample Quantiles of Positive Loss', main = 'Gamma QQ Plot of Positive Loss')
+abline(0,1)
+
+```
+
+
+```{r ex="LDA1.4.1.2_2", type="solution", tut=TRUE}
+# Sample size
+n <- length(positive_loss$y)
+# Positive loss mean
+mean <- mean(positive_loss$y)
+# Positive loss variance
+variance <- var(positive_loss$y)
+# Positive loss standard variance
+sd <- sd(positive_loss$y)
+
+# Probabilities
+p_values <- seq(1/(n+1), n/(n+1), by=1/(n+1))
+
+# Calculate Gaussian quantiles using mean and standard deviation from positive loss
+normal_quantiles <- qnorm(p_values, mean, sd)
+
+# Gaussian QQ Plot
+plot(sort(normal_quantiles), 
+     sort(positive_loss$y), 
+     xlab = 'Theoretical Quantiles from Gaussian Distribution', 
+     ylab = 'Sample Quantiles of Positive Loss', 
+     main = 'Gaussian QQ Plot of Positive Loss')
+abline(0,1)
+
+# Calculate Gamma quantiles using mean and standard deviation from positive loss to calculate shape and scale parameters
+gamma_quantiles <- qgamma(p_values, 
+                          shape = mean^2/variance, 
+                          scale = variance/mean)
+
+# Gamma QQ Plot
+plot(sort(gamma_quantiles), 
+     sort(positive_loss$y), 
+     xlab = 'Theoretical Quantiles from Gamma Distribution', 
+     ylab = 'Sample Quantiles of Positive Loss', 
+     main = 'Gamma QQ Plot of Positive Loss')
+abline(0,1)
+
+```
+
+
+```{r ex="LDA1.4.1.2_2", type="sct", tut=TRUE}
+success_msg("Good job! The *qq* plot compares two fitted models through their quantiles. Again, the gamma is better fit.")
+```
+
+***
+
+
+### Exercise.  Kolmogorov-Smirnov test
+
+**Assignment Text**
+
+For reporting results, it can be effective to supplement the graphical displays with selected statistics that summarize model goodness of fit. The Wisconsin Property Fund data has already been read into a data frame called `Insample`. Previously, we also created a subset, `positive_loss`, which included only positive losses. Perform Kolmogorov-Smirnov tests.
+
+
+:::: {.blackbox }
+**Instructions**
+
+-  Compare the empirical positive loss amount `y` distribution to gamma distribution by performing the Kolmogorov-Smirnov test.
+-  Use the function [ks.test](https://www.rdocumentation.org/packages/dgof/versions/1.2/topics/ks.test) to perform Kolmogorov-Smirnov test.
+:::: 
+
+<br>
+
+```{r ex="LDA1.4.1.2_3", type="hint", tut=TRUE}
+
+Take some time to explore the online `R` documentation. `theta`, `alpha`, and `gamma` can be found in the previous question. 
+
+```
+
+```{r ex="LDA1.4.1.2_3", type="pre-exercise-code", tut=TRUE}
+
+library(MASS)
+library(stats)
+
+Insample <- read.csv("https://urldefense.com/v3/__https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv__;!!DZ3fjg!rawhS1aVIBSc6WSrxFUqxR7FSBuybP1qk3oTO61Xb9WOM39NSMgYzniENO39cfZYcg$ ", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+
+# Subset for positive loss
+positive_loss <- subset(Insample, y>0)
+
+# Fit gamma
+fit_gamma <- glm(positive_loss$y~1, 
+                 data=positive_loss, 
+                 family=Gamma(link=log))
+theta <- exp(coef(fit_gamma))*gamma.dispersion(fit_gamma) #mu=theta/alpha
+alpha <- 1/gamma.dispersion(fit_gamma)
+
+gamma <- pgamma(positive_loss$y, shape=alpha, scale=theta)
+
+```
+
+```{r ex="LDA1.4.1.2_3", type="sample-code", tut=TRUE}
+
+# Performs Kolmogorov-Smirnov tests
+ks.test(??, "pgamma", ??, ??)
+
+# Performs Kolmogorov-Smirnov tests
+ks.test(??, ??)
+
+```
+
+
+```{r ex="LDA1.4.1.2_3", type="solution", tut=TRUE}
+
+# Performs Kolmogorov-Smirnov tests
+ks.test(positive_loss$y, "pgamma", theta, alpha)
+
+# Performs Kolmogorov-Smirnov tests
+ks.test(positive_loss$y, gamma)
+
+```
+
+
+```{r ex="LDA1.4.1.2_3", type="sct", tut=TRUE}
+success_msg("According to the Kolmogorov-Smirnov test, the two distribution functions are not equal. We have seen some deviations from the *qq* graph and *pp* graph. We need to find a better parametric model.")
+```
+
+***
+
+
+  
+  
+  
+
+## Model Selection: Likelihood Ratio Tests and Goodness of Fit
+
+
+####  Video: Likelihood Ratio Tests and Goodness of Fit {-}
+
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/34298521/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_sepee6wr&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ud4hj85k" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+#### Overheads: Likelihood Ratio Tests and Goodness of Fit (Click Tab to View) {-}
+
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Sect422A')">A. Likelihood Ratio Test</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect422B')">B. Likelihood Ratio Test Process</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect422C')">C. Information Criteria: Exam STAM Version</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect422D')">D. Information Criteria: Alternative Version</button>
+  </div>
+
+<div id="Sect422A" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=26" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect422B" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=27" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect422C" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=28" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect422D" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=29" width="100%" height="400"> </iframe>
+  </div>
+  
+  
+
+***
+
+
+  
+
+<!-- ```{r child = './Quizzes/Quiz42.html', eval = QUIZ} -->
+<!-- ``` -->
+
+## Estimation using Modified Data: Nonparametric Approach
+
+***
+
+In this section, you learn how to:
+
+-  Describe grouped and censored truncated data.
+-  Estimate distributions nonparametrically based on grouped and censored data.
+
+***
+
+####  Video: Nonparametric Estimation using Modified Data {-}
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/34298521/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_2pposnie&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_156eapyx" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+#### Overheads: Nonparametric Estimation using Modified Data (Click Tab to View) {-}
+
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Sect431A')">A. Grouped Data</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect431B')">B. Censored Data</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect431C')">C. Kaplan-Meier Product Limit Estimator</button>
+  </div>
+
+<div id="Sect431A" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=31" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect431B" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=32" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect431C" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=33" width="100%" height="400"> </iframe>
+  </div>
+  
+### Exercise. Nonparametric Estimation using Modified Data
+
+**Assignment Text**
+
+Placing insurance deductibles generate truncated data (from the left), while policy limits produce censored data (from the right). The Wisconsin Property Fund data has already been read into a data frame called `Insample`. These data consist of claim experience for fund members over the years 2006-2010, inclusive. In addition, we created a subset data which included only positive loss data called `positive_loss`. Under hypothetical policy limit, 100000 USD, and deductible information, `Deduct`, in dataset, please find Kaplan-Meier Product Limit Estimator and the Nelson-Äalen estimator of the positive loss distribution function. Plot the survival function accordingly.
+
+:::: {.blackbox }
+**Instructions**
+
+-  Create the hypothetical policy limit, 100000 USD, and attach it to `positive_loss` data.
+-  Add actual payment column using [dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) data wrangling package. 
+-  Add UnCensored column using the traditional method.
+::::
+
+<br>
+
+```{r ex="LDA1.4.3.2_1", type="hint", tut=TRUE}
+
+We will use `dplyr` and traditional methods to perform data wrangling.
+
+```
+
+
+```{r ex="LDA1.4.3.2_1", type="pre-exercise-code", tut=TRUE}
+
+library(MASS)
+library(dplyr)
+
+Insample <- read.csv("https://urldefense.com/v3/__https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv__;!!DZ3fjg!rawhS1aVIBSc6WSrxFUqxR7FSBuybP1qk3oTO61Xb9WOM39NSMgYzniENO39cfZYcg$ ", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+
+# Subset for positive loss
+positive_loss <- subset(Insample, y>0)
+
+```
+
+
+```{r ex="LDA1.4.3.2_1", type="sample-code", tut=TRUE}
+
+library(dplyr)
+# Add policy limit for positive loss data
+positive_loss$PolicyLimit <- ??
+
+# Add actual payment column: using dplyr 
+positive_loss_limit <- positive_loss %>% rowwise() %>% mutate(AmountPaid=??)
+
+# Add UnCensored column: traditional method
+positive_loss_limit$UnCensored <- ??
+
+# Print the beginning of the dataset
+head(??)
+
+```
+
+
+```{r ex="LDA1.4.3.2_1", type="solution", tut=TRUE}
+
+library(dplyr)
+
+# Add policy limit for positive loss data
+positive_loss$PolicyLimit <- 100000
+
+# Add actual payment column: using dplyr 
+positive_loss_limit <- positive_loss %>% rowwise() %>% mutate(AmountPaid=min(y, PolicyLimit))
+
+# Add UnCensored column: traditional method
+positive_loss_limit$UnCensored <- 1*(positive_loss_limit$AmountPaid < positive_loss_limit$PolicyLimit)
+
+# Print the beginning of the dataset
+head(positive_loss_limit)
+```
+
+
+```{r ex="LDA1.4.3.2_1", type="sct", tut=TRUE}
+success_msg("Getting started is always the hardest thing to do. Excellent start! There are many ways to do data manipulation")
+```
+
+### Exercise. Nonparametric Estimation using Modified Data II
+
+:::: {.blackbox }
+**Instructions**
+
+-  Under hypothetical policy limit, 100000 USD, use the Kaplan-Meier product limit [survfit()](https://www.rdocumentation.org/packages/survival/versions/2.11-4/topics/survfit) to estimate the survival function for the right-censored empirical distribution for the positive loss amount `y`.
+-  Under hypothetical policy limit, use the Nelson-Aalen estimate of the cumulative hazard function to obtain an estimate of the survival function for the right-censored empirical distribution for the positive loss amount `y`. 
+-  Under hypothetical policy limit and deductible information, use the Nelson-Aalen estimate of the cumulative hazard function to obtain an estimate of the survival function for the left-truncated and right-censored empirical distribution function for the positive loss amount `y`.
+:::: 
+
+<br>
+
+```{r ex="LDA1.4.3.2_2", type="hint", tut=TRUE}
+
+Take some time to explore the online `R` documentation.
+
+Use the function Surv() to create the empirical distribution.
+
+```
+
+
+```{r ex="LDA1.4.3.2_2", type="pre-exercise-code", tut=TRUE}
+
+library(MASS)
+library(dplyr)
+library(survival) 
+
+Insample <- read.csv("https://urldefense.com/v3/__https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv__;!!DZ3fjg!rawhS1aVIBSc6WSrxFUqxR7FSBuybP1qk3oTO61Xb9WOM39NSMgYzniENO39cfZYcg$ ", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+
+# Subset for positive loss
+positive_loss <- subset(Insample, y>0)
+
+# Add policy limit for positive loss data
+positive_loss$PolicyLimit <- 100000
+
+# Add actual payment column: using dplyr 
+positive_loss_limit <- positive_loss %>% rowwise() %>% mutate(AmountPaid=min(y, PolicyLimit))
+
+# Add UnCensored column: traditional method
+positive_loss_limit$UnCensored <- 1*(positive_loss_limit$AmountPaid < positive_loss_limit$PolicyLimit)
+
+```
+
+
+```{r ex="LDA1.4.3.2_2", type="sample-code", tut=TRUE}
+
+# KM estimate
+KM0 <- survfit(??, type="kaplan-meier", data=??)
+# Plot function survival function
+plot(??, conf.int=FALSE, xlab="x", ylab="Kaplan Meier Survival")
+# Nelson-Aalen estimate
+NA0 <- survfit(??, type=??, data=??)
+plot(??, conf.int=FALSE, xlab="x", ylab="Nelson-Aalen Survival")
+# Nelson-Aalen estimate with deductible
+NA1 <- survfit(??)
+plot(??, conf.int=FALSE, xlab="x", ylab="Nelson-Aalen Survival")
+
+```
+
+
+```{r ex="LDA1.4.3.2_2", type="solution", tut=TRUE}
+
+# KM estimate
+KM0 <- survfit(Surv(AmountPaid, UnCensored) ~ 1, type="kaplan-meier", data=positive_loss_limit)
+
+# plot function survival function
+plot(KM0, conf.int=FALSE, xlab="x", ylab="Kaplan Meier Survival")
+
+# Nelson-Aalen estimate
+NA0 <- survfit(Surv(AmountPaid, UnCensored) ~ 1, type="fleming-harrington", data=positive_loss_limit)
+
+# plot function survival function
+plot(NA0, conf.int=FALSE, xlab="x", ylab="Nelson-Aalen Survival")
+
+# Nelson-Aalen estimate with deductible
+NA1 <- survfit(Surv(Deduct, AmountPaid, UnCensored) ~ 1, type="fleming-harrington", data=positive_loss_limit)
+
+# plot function survival function
+plot(NA1, conf.int=FALSE, xlab="x", ylab="Nelson-Aalen Survival")
+
+```
+
+
+```{r ex="LDA1.4.3.2_2", type="sct", tut=TRUE}
+success_msg("Excellent!  Now we can see how the policy limit and deductible information changed survival curve.")
+```
+  
+
+## Estimation using Modified Data: Parametric Approach
+
+***
+
+In this section, you learn how to:
+
+-  Describe grouped and censored truncated data.
+-  Estimate parametric distributions based on grouped, censored,and truncated data.
+
+***
+
+####  Video: Parametric Estimation using Modified Data {-}
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/34298521/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_sfh9ihwy&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_90krq256" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+#### Overheads: Parametric Estimation using Modified Data (Click Tab to View) {-}
+
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Sect432A')">A. Truncated Data</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect432B')">B. Maximum Likelihood Estimation with Grouped Data</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect432C')">C. Censored Data Likelihood I</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect432D')">D. Censored Data Likelihood II</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect432E')">E. Maximum Likelihood Estimation Using Censored and Truncated Data I</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect432F')">F. Maximum Likelihood Estimation Using Censored and Truncated Data II</button>
+  </div>
+
+<div id="Sect432A" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=36" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect432B" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=37" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect432C" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=38" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect432D" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=39" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect432E" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=40" width="100%" height="400"> </iframe>
+  </div>  
+<div id="Sect432F" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=41" width="100%" height="400"> </iframe>
+  </div>  
+
+
+<!-- ```{r child = './Quizzes/Quiz43.html', eval = QUIZ} -->
+<!-- ``` -->
+
+## Bayesian Inference
+
+***
+
+In this section, you learn how to:
+
+-  Describe the Bayesian model as an alternative to the frequentist approach and summarize the five components of this modeling approach.
+-  Summarize posterior distributions of parameters and use these posterior distributions to predict new outcomes.
+-  Use conjugate distributions to determine posterior distributions of parameters.
+
+***
+
+####  Video: Bayesian Inference {-}
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/34298521/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_ko3jc8el&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_vo11odg9" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+#### Overheads: Bayesian Inference (Click Tab to View) {-}
+
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Sect44A')">A. Bayesian Inference</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect44B')">B. Bayesian Inference Strengths</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect44C')">C. Bayesian Model I</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect44D')">D. Bayesian Model II</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect44E')">E. Posterior Computation</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect44F')">F. Poisson–Gamma Conjugate Family</button>
+  </div>
+
+<div id="Sect44A" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=44" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect44B" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=45" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect44C" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=46" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect44D" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=47" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect44E" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=48" width="100%" height="400"> </iframe>
+  </div>  
+<div id="Sect44F" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap4.pdf#page=49" width="100%" height="400"> </iframe>
+  </div>
+  
+
+### Visualizing Bayesian Methods
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/34298531/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_yv1ioaxl&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_8j9zvdbn" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+**Assignment Text**
+
+In this tutorial, we will visually explore the prior and posterior distributions from Example 4.4.1, and explore what would happen if we observed one more observation as well.  Recall that for this problem, the prior distribution was 
+\[
+\pi(q) = q^3/0.07, \hspace{5mm} 0.6 \leq q \leq 0.8.
+\]
+
+two observations from a Bernoulli(q) were $X_1 = 1, X_2 = 0$, and the posterior was found (Example 4.4.1) to be
+\[
+\pi(q \mid 1,0) = \frac{q^4 - q^5}{0.014069}.
+\]
+
+:::: {.blackbox }
+**Instructions** 
+
+- Make a [plot](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot) of the prior distribution.
+- Think about how you expect the observed data to reshape it to the posterior.
+- Add the posterior and a legend to your plot, to confirm the influence of the observed data.  This requires advanced commands such as [lines](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/lines) and [legend](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/legend).
+::::
+
+<br>
+
+```{r ex="LDA4.4.1.1", type="sample-code", tut=TRUE}
+q = seq(0.6, 0.8, by = .01)
+prior = ??
+plot(?? , ??, col="red", type="l", ylab="")
+```
+
+```{r ex="LDA4.4.1.1", type="hint", tut=TRUE}
+Recall the mathematical definition of the prior density function.  Plot this against the sequence of parameter values. 
+```
+
+```{r ex="LDA4.4.1.1", type="solution", tut=TRUE}
+q = seq(0.6, 0.8, by = .01)
+prior = q^3/0.07
+plot(q, prior, col="red", type="l", ylab="")
+```
+
+```{r ex="LDA4.4.1.1", type="sct", tut=TRUE}
+success_msg("Excellent!")
+```
+
+Notice that the prior distribution sets the support for $q$, which is bounded between 0.6 and 0.8.  The posterior will necessarily have this same support.  Notice also that the prior distribution places more mass for larger values of $q$.  This is saying that prior to observing data, we think larger parameters values near 0.8 are more likely than smaller values near 0.6
+
+The observed data has a claim in year 1 ($X_1 = 1$) and no claim in year 2 ($X_2 = 0$).  So, we have two independent samples drawn from a Bernoulli(q), and $\overline{X} = 0.5$.  If we were only using the likelihood and a method such as maximum likelihood estimation, we would estimate $\widehat{q} = \overline{X} = 0.5$.  So these data are telling us that values near $q=0.5$ are consistent.  But, Bayesian methods blend information from the data with information from the prior to produce a posterior.  So, expect that our posterior distribution will place more mass towards smaller values of $q$, and less towards larger values.  Let's see if that is true.
+
+
+```{r ex="LDA4.4.1.2", type="hint", tut=TRUE}
+Make sure you understand which is the prior density and which is the posterior.  Also, make sure you are in the habit of keeping colors and line types consistent in your work.
+```
+
+```{r ex="LDA4.4.1.2", type="sample-code", tut=TRUE}
+q = seq(0.6, 0.8, by = .01)
+?? = q^3/0.07
+posterior = ??
+
+plot(q, prior, col="red", type="l", ylab="")
+lines(q, ??, col="blue", type="l", lty=2)
+legend("topleft",legend=c("Prior","Posterior"), col=??, lty=c(1,2))
+```
+
+
+```{r ex="LDA4.4.1.2", type="solution", tut=TRUE}
+q = seq(0.6, 0.8, by = .01)
+prior = q^3/0.07
+posterior = (q^4 - q^5)/0.014069
+
+plot(q, prior, col="red", type="l", ylab="")
+lines(q, posterior, col="blue", type="l", lty=2)
+legend("topleft",legend=c("Prior","Posterior"), col=c("red","blue"), lty=c(1,2))
+```
+
+```{r ex="LDA4.4.1.2", type="sct", tut=TRUE}
+success_msg("Excellent!  Now we can see how the observed data shifted our understanding of this unknown paramter.")
+```
+
+Indeed, the posterior has shifted the mass towards lower values, balancing what the data tell us and what the prior tells us.  Since this is only two data points, the shift is not especially dramatic. 
+
+**Assignment Extension**
+
+Let's continue with the prior example, but now imagine we next observe the third year, and there was again no claim, $X_3 = 0$.  We will compute the new posterior distribution, and compare it to the posterior in the previous problem.
+
+:::: {.blackbox }
+**Instructions** 
+
+- Make a plot showing the original prior, posterior from example 4.1.1, and posterior for the new case.
+::::
+
+<br>
+
+The posterior distribution after observing three data points is:
+
+$$
+\pi(q \mid 1,0,0) \propto f(1\mid q)f(0\mid q)f(0\mid q)\pi(q) = q(1-q)(1-q)q^3 = q^4 - 2q^5 + q^6
+$$
+
+Recall the posterior is proportional to $q^4 - 2q^5 + q^6$, so that means
+\[
+\pi(q \mid 1,0,0) = c \left(q^4 - 2q^5 + q^6 \right).
+\]
+
+In order to find the normalizing constant $c$, we would need to integrate this and make sure the integral is 1:
+
+\[
+\begin{array}{ll}
+1 &= \int_{q=0.6}^{0.8} c \left(q^4 - 2q^5 + q^6\right)dq\\
+ &= c \left(\frac{1}{5}q^5 - \frac{2}{6} q^6 +\frac{1}{7} q^7 \right) \rvert_{q=0.6}^{q=0.8}\\
+ &= c \left( 0.0081 - 0.00400 \right)\\
+ &= c \left(0.0041 \right)\\ 
+ \end{array}
+\]
+
+Thus, we see the normalizing constant is $c = \frac{1}{.0041}$.  We can now revisit the code and add the new posterior line:
+
+```{r ex="LDA4.4.1.3", type="sample-code", tut=TRUE}
+q = seq(0.6, 0.8, by = .01)
+prior = q^3/0.07
+posterior_old = (q^4 - q^5)/0.014069
+posterior_new = ??
+
+plot(q, prior, col="red", type="l", ylab="")
+lines(q, posterior_old, col="blue", type="l", lty=2)
+lines(q, posterior_new, col="green", type="l", lty=3)
+legend("topleft",legend=c("Prior","Old Posterior","New Posterior"), col=c("red","blue",??), lty=c(1,2,3))
+```
+
+```{r ex="LDA4.4.1.3", type="solution", tut=TRUE}
+q = seq(0.6, 0.8, by = .01)
+prior = q^3/0.07
+posterior_old = (q^4 - q^5)/0.014069
+posterior_new = (q^4 - 2*q^5+q^6)/0.0041
+
+plot(q, prior, col="red", type="l", ylab="")
+lines(q, posterior_old, col="blue", type="l", lty=2)
+lines(q, posterior_new, col="green", type="l", lty=3)
+legend("topleft",legend=c("Prior","Old Posterior","New Posterior"), col=c("red","blue","green"), lty=c(1,2,3))
+```
+As expected, the new posterior has shifted even more mass towards lower parameter values in the posterior, since $\overline{X} = \frac{1}{3}$ and the data are more consistent with low parameter values for $q$.
+
+
+```{r ex="LDA4.4.1.3", type="sct", tut=TRUE}
+success_msg("Nice!")
+```
+  
+
+## Contributors {-}
+
+-  **Authors**. **Rob Erhardt**, Wake Forest University, **Brian Hartman**, Brigham Young University, and **Zhiyu (Frank) Quan**, University of Illinois at Urbana-Champaign, are the principal authors of the initial version of this chapter.
+-  **Chapter Maintainers**. Please contact ??? and/or Jed at <jfrees@bus.wisc.edu> for chapter comments and suggested improvements.
+

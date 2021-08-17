@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Modeling Loss Severity | Loss Data Analytics: Short Course</title>
+  <meta name="description" content="This is an interactive, online, freely available short course. It will contain many interactive objects (quizzes, computer demonstrations, interactive graphs, video, and the like) to promote deeper learning." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Modeling Loss Severity | Loss Data Analytics: Short Course" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is an interactive, online, freely available short course. It will contain many interactive objects (quizzes, computer demonstrations, interactive graphs, video, and the like) to promote deeper learning." />
+  <meta name="github-repo" content="https://github.com/OpenActTextDev/LDAShortCourse1" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Modeling Loss Severity | Loss Data Analytics: Short Course" />
+  
+  <meta name="twitter:description" content="This is an interactive, online, freely available short course. It will contain many interactive objects (quizzes, computer demonstrations, interactive graphs, video, and the like) to promote deeper learning." />
+  
+
+<meta name="author" content="A short course authored by the Actuarial Community" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="frequency-modeling.html"/>
+<link rel="next" href="model-selection-and-estimation.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<!-- Various toggle functions used throughout --> 
+<script language="javascript">
+function toggle(id1,id2) {
+	var ele = document.getElementById(id1); var text = document.getElementById(id2);
+	if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Solution";}
+		else {ele.style.display = "block"; text.innerHTML = "Hide Solution";}}
+function togglecode(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show R Code";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide R Code";}}
+function toggleEX(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Example";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide Example";}}
+function toggleTheory(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Theory";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide Theory";}}
+function toggleQuiz(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Quiz Solution";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide Quiz Solution";}}      
+</script>
+
+<!-- A few functions for revealing definitions -->
+<script language="javascript">
+<!--   $( function() {
+    $("#tabs").tabs();
+  } ); -->
+
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
+});
+</script>
+<script language="javascript">
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+
+<script language="javascript">
+function toggle(id1,id2) {
+	var ele = document.getElementById(id1); var text = document.getElementById(id2);
+	if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Solution";}
+		else {ele.style.display = "block"; text.innerHTML = "Hide Solution";}}
+</script>
+
+<script language="javascript">
+function togglecode(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show R Code";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide R Code";}}
+</script>
+<script language="javascript">
+function toggleEX(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Example";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide Example";}}
+</script>
+<script language="javascript">
+function toggleTheory(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Theory";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide Theory";}}
+</script>
+
+<script language="javascript">
+function toggleDet(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Details";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide  Details";}}
+</script>
+
+<script language="javascript">
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
+});
+</script>
+
+
+<script src=https://cdn.datacamp.com/datacamp-light-latest.min.js></script>
+
+
+<style>
+/* Rearrange console label */
+.datacamp-exercise ol li, .datacamp-exercise ul li {
+  margin-bottom: 0em !important;
+}
+
+/* Remove bullet marker */
+.datacamp-exercise ol li::before, .datacamp-exercise ul li::before {
+  content: '' !important;
+}
+</style>
+
+
+<script language="javascript">
+var submitAnswer = function() {
+
+  var radios = document.getElementsByName('choice');
+  var val= "";
+  for (var i = 0, length = radios.length; i < length; i++) {
+      if (radios[i].checked) {
+         val = radios[i].value; 
+         break;
+       }
+  }
+  
+  if (val == "" ) {
+    alert('please select choice answer');
+  } else if ( val == "Correct" ) {
+    alert('Answer is correct !');
+  } else {
+    alert('Answer is wrong');
+  }
+};
+</script>
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-125587869-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-125587869-1');
+</script>
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Loss Data Analytics: Short Course</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-loss-data-analytics"><i class="fa fa-check"></i>Why Loss Data Analytics?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i>Resources</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#how-to-navigate-this-tutorial"><i class="fa fa-check"></i>How to Navigate this Tutorial</a></li>
+<li><a href="index.html#a-word-from-our-sponsor-astin-education-astin-academy">A Word from our Sponsor: <br> Astin + Education = Astin Academy</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html"><i class="fa fa-check"></i><b>1</b> Introduction to Loss Data Analytics</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:Intro"><i class="fa fa-check"></i><b>1.1</b> Relevance of Analytics to Insurance Activities</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:PredModApps"><i class="fa fa-check"></i><b>1.2</b> Insurance Company Operations</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:LGPIF"><i class="fa fa-check"></i><b>1.3</b> Case Study: Property Fund Introduction</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-claim-frequency"><i class="fa fa-check"></i><b>1.3.1</b> Exercise. Claim Frequency</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:PropertyFundSeverity"><i class="fa fa-check"></i><b>1.4</b> Property Fund Claim Severity</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-exploring-claim-severities"><i class="fa fa-check"></i><b>1.4.1</b> Exercise. Exploring Claim Severities</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-skewness-of-the-claim-severity-distribution"><i class="fa fa-check"></i><b>1.4.2</b> Exercise. Skewness of the Claim Severity Distribution</a></li>
+<li class="chapter" data-level="1.4.3" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-claim-severity-by-year"><i class="fa fa-check"></i><b>1.4.3</b> Exercise. Claim Severity by Year</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:LGPIFRatingVariaables"><i class="fa fa-check"></i><b>1.5</b> Property Fund Rating Variables</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Ex:ClaimByType"><i class="fa fa-check"></i><b>1.5.1</b> Exercise. Claim by Entity Type, Fire Class, and No Claim Credit</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#contributors-1"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="frequency-modeling.html"><a href="frequency-modeling.html"><i class="fa fa-check"></i><b>2</b> Frequency Modeling</a><ul>
+<li class="chapter" data-level="2.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#basic-frequency-distributions"><i class="fa fa-check"></i><b>2.1</b> Basic Frequency Distributions</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-representing-the-number-of-cyber-events-with-a-binomial-distribution"><i class="fa fa-check"></i><b>2.1.1</b> Exercise. Representing the Number of Cyber Events with a Binomial Distribution</a></li>
+<li class="chapter" data-level="2.1.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-representing-the-number-of-cyber-events-with-a-poisson-distribution"><i class="fa fa-check"></i><b>2.1.2</b> Exercise. Representing the Number of Cyber Events with a Poisson Distribution</a></li>
+<li class="chapter" data-level="2.1.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-comparing-basic-count-distributions"><i class="fa fa-check"></i><b>2.1.3</b> Exercise. Comparing Basic Count Distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#the-ab0-class"><i class="fa fa-check"></i><b>2.2</b> The (a,b,0) Class</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-determining-probabilities-recursively"><i class="fa fa-check"></i><b>2.2.1</b> Exercise. Determining Probabilities Recursively</a></li>
+<li class="chapter" data-level="2.2.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-reverse-engineering-and-recursive-r-functions"><i class="fa fa-check"></i><b>2.2.2</b> Exercise. Reverse Engineering and Recursive <code>R</code> Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#estimating-frequency-distributions"><i class="fa fa-check"></i><b>2.3</b> Estimating Frequency Distributions</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#Ex:CountDataCompression"><i class="fa fa-check"></i><b>2.3.1</b> Exercise. Count Data Compression - 1</a></li>
+<li class="chapter" data-level="2.3.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-count-data-compression---2"><i class="fa fa-check"></i><b>2.3.2</b> Exercise. Count Data Compression - 2</a></li>
+<li class="chapter" data-level="2.3.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-graphing-likelihoods"><i class="fa fa-check"></i><b>2.3.3</b> Exercise. Graphing Likelihoods</a></li>
+<li class="chapter" data-level="2.3.4" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-fitting-a-binomial-distribution"><i class="fa fa-check"></i><b>2.3.4</b> Exercise. Fitting a Binomial Distribution</a></li>
+<li class="chapter" data-level="2.3.5" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-fitting-a-negative-binomial-distribution"><i class="fa fa-check"></i><b>2.3.5</b> Exercise. Fitting a Negative Binomial Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="frequency-modeling.html"><a href="frequency-modeling.html#other-frequency-distributions"><i class="fa fa-check"></i><b>2.4</b> Other Frequency Distributions</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-the-ab1-distribution-and-its-moments"><i class="fa fa-check"></i><b>2.4.1</b> Exercise. The (<em>a,b</em>,1) Distribution and its Moments</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="frequency-modeling.html"><a href="frequency-modeling.html#mixture-distributions"><i class="fa fa-check"></i><b>2.5</b> Mixture Distributions</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-mixtures-of-workers-compensation-claims"><i class="fa fa-check"></i><b>2.5.1</b> Exercise. Mixtures of Workers’ Compensation Claims</a></li>
+<li class="chapter" data-level="2.5.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-finite-number-of-mixture-distributions"><i class="fa fa-check"></i><b>2.5.2</b> Exercise. Finite Number of Mixture Distributions</a></li>
+<li class="chapter" data-level="2.5.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-gamma-mixture-of-poissons"><i class="fa fa-check"></i><b>2.5.3</b> Exercise. Gamma Mixture of Poissons</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="frequency-modeling.html"><a href="frequency-modeling.html#goodness-of-fit"><i class="fa fa-check"></i><b>2.6</b> Goodness of Fit</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-goodness-of-fit-zero-modified-poisson"><i class="fa fa-check"></i><b>2.6.1</b> Exercise. Goodness of Fit: Zero-Modified Poisson</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="frequency-modeling.html"><a href="frequency-modeling.html#contributors-2"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html"><i class="fa fa-check"></i><b>3</b> Modeling Loss Severity</a><ul>
+<li class="chapter" data-level="3.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#basic-distributional-quantities"><i class="fa fa-check"></i><b>3.1</b> Basic Distributional Quantities</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-moments-can-be-misleading"><i class="fa fa-check"></i><b>3.1.1</b> Exercise. Moments Can Be Misleading</a></li>
+<li class="chapter" data-level="3.1.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-determining-boxplots-and-quantiles"><i class="fa fa-check"></i><b>3.1.2</b> Exercise. Determining Boxplots and Quantiles</a></li>
+<li class="chapter" data-level="3.1.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-gamma-moment-generating-function"><i class="fa fa-check"></i><b>3.1.3</b> Exercise. Gamma Moment Generating Function</a></li>
+<li class="chapter" data-level="3.1.4" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-visualizing-moment-generating-functions"><i class="fa fa-check"></i><b>3.1.4</b> Exercise. Visualizing Moment Generating Functions</a></li>
+<li class="chapter" data-level="3.1.5" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-determining-moments-using-moment-generating-functions"><i class="fa fa-check"></i><b>3.1.5</b> Exercise. Determining Moments using Moment Generating Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#continuous-distributions"><i class="fa fa-check"></i><b>3.2</b> Continuous Distributions</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise."><i class="fa fa-check"></i><b>3.2.1</b> Exercise.</a></li>
+<li class="chapter" data-level="3.2.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-visualizing-the-gamma-distribution"><i class="fa fa-check"></i><b>3.2.2</b> Exercise. Visualizing the Gamma Distribution</a></li>
+<li class="chapter" data-level="3.2.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#Ex:CreateParetoDensityFct"><i class="fa fa-check"></i><b>3.2.3</b> Exercise. Creating a Pareto Density Function</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#methods-of-creating-new-distributions"><i class="fa fa-check"></i><b>3.3</b> Methods of Creating New Distributions</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-using-the-logarithmic-transformation-to-create-a-new-distribution"><i class="fa fa-check"></i><b>3.3.1</b> Exercise. Using the Logarithmic Transformation to Create a New Distribution</a></li>
+<li class="chapter" data-level="3.3.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-creating-a-mixture-distribution"><i class="fa fa-check"></i><b>3.3.2</b> Exercise. Creating a Mixture Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#coverage-modifications"><i class="fa fa-check"></i><b>3.4</b> Coverage Modifications</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-calculate-moments-of-the-lognormal-distribution"><i class="fa fa-check"></i><b>3.4.1</b> Exercise. Calculate Moments of the Lognormal Distribution</a></li>
+<li class="chapter" data-level="3.4.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-calculate-limited-expected-value-of-the-lognormal-distribution"><i class="fa fa-check"></i><b>3.4.2</b> Exercise. Calculate Limited Expected Value of the Lognormal Distribution</a></li>
+<li class="chapter" data-level="3.4.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-expected-claims-subject-to-a-deductible"><i class="fa fa-check"></i><b>3.4.3</b> Exercise. Expected Claims Subject to a Deductible</a></li>
+<li class="chapter" data-level="3.4.4" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-expected-claims-subject-to-a-deductible-and-coinsurance"><i class="fa fa-check"></i><b>3.4.4</b> Exercise. Expected Claims Subject to a Deductible and Coinsurance</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>3.5</b> Maximum Likelihood Estimation</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#Ex:MLEPareto"><i class="fa fa-check"></i><b>3.5.1</b> Exercise. Maximum Likelihood Estimation for a Pareto Distribution</a></li>
+<li class="chapter" data-level="3.5.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-finding-standard-errors-for-maximum-likelihood-estimates"><i class="fa fa-check"></i><b>3.5.2</b> Exercise. Finding Standard Errors for Maximum Likelihood Estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#contributors-3"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html"><i class="fa fa-check"></i><b>4</b> Model Selection and Estimation</a><ul>
+<li class="chapter" data-level="4.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#Sec:NonInf"><i class="fa fa-check"></i><b>4.1</b> Nonparametric Inference</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-empirical-distribution-function-and-quartiles-percentiles-and-quantiles"><i class="fa fa-check"></i><b>4.1.1</b> Exercise. Empirical Distribution Function and Quartiles, Percentiles and Quantiles</a></li>
+<li class="chapter" data-level="4.1.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-density-estimators"><i class="fa fa-check"></i><b>4.1.2</b> Exercise. Density Estimators</a></li>
+<li class="chapter" data-level="4.1.3" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-claim-frequency-1"><i class="fa fa-check"></i><b>4.1.3</b> Exercise. Claim Frequency</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#tools-for-model-selection"><i class="fa fa-check"></i><b>4.2</b> Tools for Model Selection</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-probability-probability-pp-plot"><i class="fa fa-check"></i><b>4.2.1</b> Exercise. Probability-Probability (<span class="math inline">\(pp\)</span>) plot</a></li>
+<li class="chapter" data-level="4.2.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-quantile-quantile-qq-plot"><i class="fa fa-check"></i><b>4.2.2</b> Exercise. Quantile-Quantile (<span class="math inline">\(qq\)</span>) plot</a></li>
+<li class="chapter" data-level="4.2.3" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-kolmogorov-smirnov-test"><i class="fa fa-check"></i><b>4.2.3</b> Exercise. Kolmogorov-Smirnov test</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#model-selection-likelihood-ratio-tests-and-goodness-of-fit"><i class="fa fa-check"></i><b>4.3</b> Model Selection: Likelihood Ratio Tests and Goodness of Fit</a></li>
+<li class="chapter" data-level="4.4" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#estimation-using-modified-data-nonparametric-approach"><i class="fa fa-check"></i><b>4.4</b> Estimation using Modified Data: Nonparametric Approach</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-nonparametric-estimation-using-modified-data"><i class="fa fa-check"></i><b>4.4.1</b> Exercise. Nonparametric Estimation using Modified Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-nonparametric-estimation-using-modified-data-ii"><i class="fa fa-check"></i><b>4.4.2</b> Exercise. Nonparametric Estimation using Modified Data II</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#estimation-using-modified-data-parametric-approach"><i class="fa fa-check"></i><b>4.5</b> Estimation using Modified Data: Parametric Approach</a></li>
+<li class="chapter" data-level="4.6" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#bayesian-inference"><i class="fa fa-check"></i><b>4.6</b> Bayesian Inference</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#visualizing-bayesian-methods"><i class="fa fa-check"></i><b>4.6.1</b> Visualizing Bayesian Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#contributors-4"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html"><i class="fa fa-check"></i><b>5</b> Aggregate Loss Models</a><ul>
+<li class="chapter" data-level="5.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#introduction"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#individual-risk-model"><i class="fa fa-check"></i><b>5.2</b> Individual Risk Model</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#Ex:IRM1"><i class="fa fa-check"></i><b>5.2.1</b> Exercise. Individual Risk Model I</a></li>
+<li class="chapter" data-level="5.2.2" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-individual-risk-model-ii"><i class="fa fa-check"></i><b>5.2.2</b> Exercise. Individual Risk Model II</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#collective-risk-model---part-i"><i class="fa fa-check"></i><b>5.3</b> Collective Risk Model - Part I</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-collective-risk-model-i"><i class="fa fa-check"></i><b>5.3.1</b> Exercise. Collective Risk Model I</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#collective-risk-model---part-ii"><i class="fa fa-check"></i><b>5.4</b> Collective Risk Model - Part II</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-collective-risk-model-ii"><i class="fa fa-check"></i><b>5.4.1</b> Exercise. Collective Risk Model II</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#tweedie-distribution"><i class="fa fa-check"></i><b>5.5</b> Tweedie Distribution</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-tweedie-distribution"><i class="fa fa-check"></i><b>5.5.1</b> Exercise. Tweedie Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#effects-of-coverage-modifications"><i class="fa fa-check"></i><b>5.6</b> Effects of Coverage Modifications</a></li>
+<li class="chapter" data-level="" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#contributors-5"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/OpenActTextDev/LDACourse1/" target="blank">LDA Short Course on GitHub</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Loss Data Analytics: Short Course</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="modeling-loss-severity" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Modeling Loss Severity</h1>
+<p><strong>Chapter Description</strong></p>
+<p>The traditional loss distribution approach to modeling aggregate losses starts by separately fitting a frequency distribution to the number of losses and a severity distribution to the size of losses. The estimated aggregate loss distribution combines the loss frequency distribution and the loss severity distribution by convolution. Discrete distributions often referred to as counting or frequency distributions were used in Chapter 2 to describe the number of events such as number of accidents to the driver or number of claims to the insurer. Lifetimes, asset values, losses and claim sizes are usually modeled as continuous random variables and as such are modeled using continuous distributions, often referred to as loss or severity distributions. A mixture distribution is a weighted combination of simpler distributions that is used to model phenomenon investigated in a heterogeneous population, such as modeling more than one type of claims in liability insurance (small frequent claims and large relatively rare claims). In this chapter we explore the use of continuous as well as mixture distributions to model the random size of loss.</p>
+<div class="blackbox">
+<ul>
+<li>Although not needed to go through the tutorials, some users may wish to download the overheads that the videos are based on. <button download><a href="https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/LDA1.Overheads/LDA1.Chap3.pdf">Download Chapter Three overheads as a .pdf file.</a></button></li>
+<li>By watching the videos and working through the tutorial exercises, you will get an appreciation for distributions used to model the severity of losses. For a deeper dive, see the corresponding chapter in the textbook, <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-Severity.html">Chapter Three of <em>Loss Data Analytics</em></a>.</li>
+</ul>
+</div>
+<div id="basic-distributional-quantities" class="section level2">
+<h2><span class="header-section-number">3.1</span> Basic Distributional Quantities</h2>
+<hr />
+<p>In this section, you learn how to work with some basic distributional quantities:</p>
+<ul>
+<li>moments,</li>
+<li>percentiles, and</li>
+<li>generating functions.</li>
+</ul>
+<hr />
+<div id="video-basic-distributional-quantities" class="section level4 unnumbered">
+<h4>Video: Basic Distributional Quantities</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_8ia95fd4&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_xp7qdo73" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+</div>
+<div id="overheads-basic-distributional-quantities-click-tab-to-view" class="section level4 unnumbered">
+<h4>Overheads: Basic Distributional Quantities (Click Tab to View)</h4>
+<div class="tab">
+<button class="tablinks" onclick="openTab(event, 'Sect31A')">A. Overview</button>
+<button class="tablinks" onclick="openTab(event, 'Sect31B')">B. Moments – Raw Moments</button>
+<button class="tablinks" onclick="openTab(event, 'Sect31C')">C. Moments – Central Moments</button>
+<button class="tablinks" onclick="openTab(event, 'Sect31D')">D. Moments – Skewness and Kurtosis</button>
+<button class="tablinks" onclick="openTab(event, 'Sect31E')">E. Quantiles</button>
+<button class="tablinks" onclick="openTab(event, 'Sect31F')">F. Skewness, Mean, and Median</button>
+<button class="tablinks" onclick="openTab(event, 'Sect31G')">G. Moment Generating Function</button>
+<button class="tablinks" onclick="openTab(event, 'Sect31H')">H. Probability Generating Function</button>
+<button class="tablinks" onclick="openTab(event, 'Sect31I')">I. Exercise for 3.1.1</button>
+<button class="tablinks" onclick="openTab(event, 'Sect31J')">J. Exercise for 3.1.2</button>
+<button class="tablinks" onclick="openTab(event, 'Sect31K')">K. Boxplot</button>
+<button class="tablinks" onclick="openTab(event, 'Sect31L')">L. Exercise for 3.1.3</button>
+<button class="tablinks" onclick="openTab(event, 'Sect31M')">M. Review</button>
+</div>
+<div id="Sect31A" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=3" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect31B" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=4" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect31C" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=5" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect31D" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=6" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect31E" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=7" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect31F" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=8" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect31G" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=9" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect31H" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=10" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect31I" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=11" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect31J" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=12" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect31K" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=13" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect31L" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=14" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect31M" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=15" width="100%" height="400"> </iframe>
+</div>
+</div>
+<div id="exercise.-moments-can-be-misleading" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> Exercise. Moments Can Be Misleading</h3>
+<p><strong>Assignment Text</strong></p>
+<p>Anscombe’s quartet is comprised of four datasets with interesting properties related to their moments. You can access the data via <code>data(anscombe)</code>. The four data sets are in the variables <code>y1</code>, <code>y2</code>, <code>y3</code> and <code>y4</code>. There are also associated <code>x</code> values that create interesting properties for regression models fit to the data. We’ll ignore the <code>x</code> values in this section but will use them to develop the plots below.</p>
+<p><img src="LDAShortCourse_files/figure-html/anscombe%20plot-1.png" width="672" /></p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Extract the values <code>y1</code>, <code>y2</code>, <code>y3</code> and <code>y4</code> from the <code>anscombe</code> data frame. You will want to extract these as vectors not as single-column data frames.<br />
+</li>
+<li>Use <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/summary">summary()</a> to understand the basic distributional properties of <code>y1</code>, <code>y2</code>, <code>y3</code> and <code>y4</code>.</li>
+<li>Use <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/mean">mean()</a> to calculate the first raw moment of <code>y1</code>, <code>y2</code>, <code>y3</code> and <code>y4</code>. Assign the values to <code>y_means</code>.</li>
+<li>Use <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/cor">var()</a> to calculate the second raw moment of <code>y1</code>, <code>y2</code>, <code>y3</code> and <code>y4</code>. You should note that the var() function uses <span class="math inline">\(n-1\)</span> in the denominator to return an estimate of the population variance from the sample. Do you notice anything interesting about the results?</li>
+<li>Use <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/sd">sd()</a> to calculate the standard deviation of <code>y1</code>, <code>y2</code>, <code>y3</code> and <code>y4</code>. As with the var() function, sd() also uses <span class="math inline">\(n-1\)</span> in the denominator.</li>
+<li>There is no <code>base-R</code> function to calculate the coefficient of skewness. There are several approaches to calculate skewness if you explore the <a href="https://www.rdocumentation.org/packages/e1071/versions/1.7-4/topics/skewness">help()</a> for the <code>type</code> argument of the <code>skewness</code> function from the <a href="https://www.rdocumentation.org/packages/e1071/versions/1.7-7">e1071</a> package. We will not use this package, but instead we will we calculate the equivalent of <code>type = 3</code> skewness using <code>var</code> in the denominator.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImRhdGEoXCJhbnNjb21iZVwiKSIsInNhbXBsZSI6IiNTdW1tYXJ5IG9mIERhdGFcbnN1bW1hcnkoYW5zY29tYmUkeTEpICNFeGFtcGxlIGZvciB0aGUgZmlyc3QgZGF0YSBzZXQgaW4gIEFuc2NvbWJlJ3MgcXVhcnRldFxuc3VtbWFyeShhbnNjb21iZSQ/PylcbnN1bW1hcnkoYW5zY29tYmUkPz8pXG5zdW1tYXJ5KGFuc2NvbWJlJD8/KVxuXG4jVmVjdG9yIG9mIG1lYW5zXG5jKG1lYW4oYW5zY29tYmUkeTEpLCBtZWFuKD8/KSwgbWVhbig/PyksIG1lYW4oPz8pKVxuXG4jVmVjdG9yIG9mIHZhcmlhbmNlc1xuYyh2YXIoYW5zY29tYmUkeTEpLCB2YXIoPz8pLCB2YXIoPz8pLCB2YXIoPz8pKVxuXG4jU2tld2Jlc3MgaWYgeTFcbnkxX3NrZXcgPC0gbWVhbigoPz8gLSBtZWFuKD8/KSlePz8pIC8gc2QoPz8pIF4gPz8iLCJzb2x1dGlvbiI6IiNTdW1tYXJ5IG9mIERhdGFcbnN1bW1hcnkoYW5zY29tYmUkeTEpICNFeGFtcGxlIGZvciB0aGUgZmlyc3QgZGF0YSBzZXQgaW4gIEFuc2NvbWJlJ3MgcXVhcnRldFxuc3VtbWFyeShhbnNjb21iZSR5MilcbnN1bW1hcnkoYW5zY29tYmUkeTMpXG5zdW1tYXJ5KGFuc2NvbWJlJHk0KVxuXG4jVmVjdG9yIG9mIG1lYW5zXG5jKG1lYW4oYW5zY29tYmUkeTEpLCBtZWFuKGFuc2NvbWJlJHkyKSwgbWVhbihhbnNjb21iZSR5MyksXG4gIG1lYW4oYW5zY29tYmUkeTQpKVxuXG4jVmVjdG9yIG9mIHZhcmlhbmNlc1xuYyh2YXIoYW5zY29tYmUkeTEpLCB2YXIoYW5zY29tYmUkeTIpLCB2YXIoYW5zY29tYmUkeTMpLFxuICB2YXIoYW5zY29tYmUkeTQpKVxueTFfc2tldyA8LSBtZWFuKChhbnNjb21iZSR5MSAtIG1lYW4oYW5zY29tYmUkeTEpKV4zKSAvIHNkKGFuc2NvbWJlJHkxKSBeIDMiLCJzY3QiOiJzdWNjZXNzX21zZyhcIldlbGwgZG9uZSFcIikiLCJoaW50IjoiPGEgaHJlZj1cImh0dHBzOi8vb3BlbmFjdHRleHRzLmdpdGh1Yi5pby9Mb3NzLURhdGEtQW5hbHl0aWNzL0MtU2V2ZXJpdHkuaHRtbCNTOkJhc2ljUXVhbnRpdGllc1wiPlNlY3Rpb24gMy4xLjEgb2YgPGVtPkxvc3MgRGF0YSBBbmFseXRpY3M8L2VtPjwvYT4gaW50cm9kdWNlcyBtb21lbnRzLiJ9
+</div>
+</div>
+<div id="exercise.-determining-boxplots-and-quantiles" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> Exercise. Determining Boxplots and Quantiles</h3>
+<p><strong>Assignment Text</strong></p>
+<p>The <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/boxplot">boxplot()</a> function produces box-and-whisker plots of grouped values. The boxplot() function returns certain statistics and produces a plot as a side effect. Explore the documentation to understand the values returned. In particular review the information returned by the <code>stats</code> attribute of this object.</p>
+<p>The Wisconsin Property Fund data has already been read into a data frame called <code>Insample</code>. These data consist of claim experience for fund members over the years 2006-2010, inclusive. It includes claim values <code>y</code> as well as the claim year <code>Year</code>. For this exercise we will work with the natural logarithm of the claim values which are in the <code>lny</code> variable. We have filtered the data to exclude zero claims and saved the resulting data frame as <code>Insample_nz</code>.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<p>We provide the code to generate the boxplot. Note that the <code>R</code> creates the boxplot as a side effect while returning information about the data. (<code>R</code> does not print the information to the console by default. You will have to assign the return of the boxplot function to an object to access.)</p>
+<ul>
+<li>What is the class of the of the object returned by the boxplot function?<br />
+</li>
+<li>Access the <code>stats</code> attribute of the object returned.<br />
+</li>
+<li>Use the <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/quantile">quantile()</a> function and replicate the “hinge” values for 2008 box. We will ignore the values returned for the whiskers as they are not a function of the quantiles of the distribution.<br />
+</li>
+<li>We selected the 2008 year because it has an odd number of observations. Use the quantile() function on a vector with an even number such as <code>1:100</code> and access the 25th percentile. Are you surprised by the result? Review the details for the <code>type</code> argument to the quantile() to understand the various approached to determining quantiles.<br />
+</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0RGV2L0xEQUNvdXJzZTEvbWFpbi9EYXRhL0luc2FtcGxlLmNzdlwiLCBoZWFkZXI9VCwgbmEuc3RyaW5ncz1jKFwiLlwiKSwgc3RyaW5nc0FzRmFjdG9ycyA9IEZBTFNFKVxuSW5zYW1wbGVfbnogPC0gSW5zYW1wbGVbSW5zYW1wbGUkeSA+IDAsXSIsInNhbXBsZSI6Im15X2JveHBsb3QgPC0gYm94cGxvdChmb3JtdWxhID0gPz8sIGRhdGEgPSBJbnNhbXBsZV9ueilcbmNsYXNzKD8/KVxubXlfYm94cGxvdCQ/P1xubXlfYm94cGxvdCRzdGF0c1ssX10gIzIwMDhcblxubG55XzIwMDggPC0gSW5zYW1wbGVfbnokbG55W0luc2FtcGxlX256JFllYXIgPT0gMjAwOF1cblxucXVhbnRpbGUobG55XzIwMDgsID8/KSAjIGxvd2VyIGhpbmdlXG4/PyhsbnlfMjAwOCkgIyBtZWRpYW4gdGhyb3VnaCBhIGRlZGljYXRlZCBmdW5jdGlvblxucXVhbnRpbGUobG55XzIwMDgsID8/KSAjIG1lZGlhblxucXVhbnRpbGUobG55XzIwMDgsID8/KSAjIHVwcGVyIGhpbmdlIiwic29sdXRpb24iOiJteV9ib3hwbG90IDwtIGJveHBsb3QoZm9ybXVsYSA9IGxueSB+IFllYXIsIGRhdGEgPSBJbnNhbXBsZV9ueilcbmNsYXNzKG15X2JveHBsb3QpXG5teV9ib3hwbG90JHN0YXRzXG5teV9ib3hwbG90JHN0YXRzWywzXSAjMjAxMFxubG55XzIwMDggPC0gSW5zYW1wbGVfbnokbG55W0luc2FtcGxlX256JFllYXIgPT0gMjAwOF1cblxucXVhbnRpbGUobG55XzIwMDgsIDEvNCkgIyBsb3dlciBoaW5nZVxubWVkaWFuKGxueV8yMDA4KSAjIG1lZGlhblxucXVhbnRpbGUobG55XzIwMDgsIDMvNCkgIyB1cHBlciBoaW5nZSIsInNjdCI6InN1Y2Nlc3NfbXNnKFwiV2VsbCBkb25lIVwiKSIsImhpbnQiOiI8YSBocmVmPVwiaHR0cHM6Ly9vcGVuYWN0dGV4dHMuZ2l0aHViLmlvL0xvc3MtRGF0YS1BbmFseXRpY3MvQy1TZXZlcml0eS5odG1sI1M6TFM6UXVhbnRpbGVzXCI+U2VjdGlvbiAzLjEuMiBvZiA8ZW0+TG9zcyBEYXRhIEFuYWx5dGljczwvZW0+PC9hPiBnaXZlcyBhbiBvdmVydmlldyBvZiBxdWFudGlsZXMuIn0=
+</div>
+</div>
+<div id="exercise.-gamma-moment-generating-function" class="section level3">
+<h3><span class="header-section-number">3.1.3</span> Exercise. Gamma Moment Generating Function</h3>
+<p><strong>Assignment Text</strong></p>
+<p>In <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-Severity.html#moment-generating-function">Example 3.1.4 of <em>Loss Data Analytics</em></a> you will find a discussion of the moment generating function for a gamma distribution,</p>
+<p><span class="math display">\[
+M_X(t) = (1 - \theta t)^{-\alpha} .
+\]</span></p>
+<p>We will work with this distribution in this exercise. The parameters that we will use in our exercise are <span class="math inline">\(\alpha=2\)</span> (the shape parameter) and <span class="math inline">\(\theta = 10\)</span> (the scale parameter). Keep in mind that the mean for this distribution is <span class="math inline">\(\alpha\theta=20\)</span> and the variance is <span class="math inline">\(\alpha\theta^2 = 200\)</span>. We will revisit these results at the end of the exercise.</p>
+<p>There are several <code>R</code> functions that you will find useful:</p>
+<ul>
+<li>The <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/parse">parse()</a> function converts a character vector to an <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/expression">expression()</a>. Then, you can use the <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/eval">eval()</a> to evaluate the expression.</li>
+<li>You can use the <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/deriv">D()</a> to compute derivatives.</li>
+</ul>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Use the parse() function to create an expression and for the moment generating function. Specify the expression using <code>alpha</code>, <code>theta</code> and <code>t</code>. Name the object <code>mgf</code>.</li>
+<li>Note the <code>class</code> of <code>mgf</code>.</li>
+<li>Evaluate <code>mgf</code> at <code>t = 0</code> when <code>alpha = 2</code> and <code>theta = 10</code>. (Note that you do not need to specify the values of <code>alpha</code> and <code>theta</code> and <code>t</code> in the <code>eval</code> call. That is because we did not specify the <code>envir</code> argument to <code>eval</code> and the default is <code>parent.frame()</code>. Environments are a more advanced <code>R</code> topic that you can learn about <a href="https://adv-r.hadley.nz/environments.html">here</a>.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJtZ2YgPC0gcGFyc2UodGV4dCA9IFwiPz9cIilcblxuY2xhc3MoeCA9ID8/KVxuXG50IDwtID8/XG5hbHBoYSA8LSA/P1xudGhldGEgPC0gPz9cblxuZXZhbChleHByID0gPz8pIiwic29sdXRpb24iOiJtZ2YgPC0gcGFyc2UodGV4dCA9IFwiKDEtIHRoZXRhICogdCkgXiAtYWxwaGFcIilcblxuY2xhc3MoeCA9IG1nZilcblxuYWxwaGEgPC0gMlxudGhldGEgPC0gMTBcbnQgPC0gMFxuXG5ldmFsKGV4cHIgPSBtZ2YpIiwic2N0Ijoic3VjY2Vzc19tc2coXCJXZWxsIGRvbmUhXCIpIiwiaGludCI6IlRha2Ugc29tZSB0aW1lIHRvIGV4cGxvcmUgdGhlIG9ubGluZSA8Y29kZT5SPC9jb2RlPiBkb2N1bWVudGF0aW9uLiBJbiBwYXJ0aWN1bGFyLCB0YWtlIHRpbWUgdG8gdW5kZXJzdGFuZCB0aGUgcmVxdWlyZWQgY2xhc3Mgb2YgZWFjaCBhcmd1bWVudC4ifQ==
+</div>
+</div>
+<div id="exercise.-visualizing-moment-generating-functions" class="section level3">
+<h3><span class="header-section-number">3.1.4</span> Exercise. Visualizing Moment Generating Functions</h3>
+<p><strong>Assignment Text</strong></p>
+<p>We plot <em>mgf</em> to help visualize the function. The left-hand panel shows the function with the argument <span class="math inline">\(t\)</span> is between -0.2 and 0.2. For <span class="math inline">\(\theta = 10\)</span> and <span class="math inline">\(\alpha &gt; 0\)</span>, note that <em>mgf</em> goes to <code>+inf</code> when <span class="math inline">\(t = \frac{1}{\theta} = 0.1\)</span>. The right-hand panel shows the function between -0.01 and 0.01. This provides a better view of the curvature at zero.</p>
+<p><img src="LDAShortCourse_files/figure-html/unnamed-chunk-117-1.png" width="80%" /></p>
+<div class="blackbox">
+<p><strong>Instruction</strong></p>
+<ul>
+<li>Use the <a href="https://www.rdocumentation.org/packages/mosaic/versions/0.14.4/topics/D">D()</a> function to return an expression for the first and second derivatives with respect to <span class="math inline">\(t\)</span>. Assign the results of <code>dMxtdt</code> and <code>d2Mxtdt2</code>, respectively.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJkTXh0ZHQgPC0gRChleHByID0gcGFyc2UodGV4dCA9IFwiPz9cIiksIG5hbWUgPSAnPz8nKVxuXG5kMk14dGR0MiA8LSBEKFxuICBEKGV4cHIgPSBwYXJzZSh0ZXh0ID0gXCI/P1wiKSwgbmFtZSA9ICc/PycpLFxuICBcInRcIikiLCJzb2x1dGlvbiI6Ik14dGR0IDwtIEQoZXhwciA9IHBhcnNlKHRleHQgPSBcIigxLSB0aGV0YSAqIHQpIF4gLWFscGhhXCIpLCBuYW1lID0gJ3QnKVxuXG5NeHRkdFxuXG5NMnh0ZHQgPC0gRChcbiAgRChleHByID0gcGFyc2UodGV4dCA9IFwiKDEtIHRoZXRhICogdCkgXiAtYWxwaGFcIiksIG5hbWUgPSAndCcpLFxuICBuYW1lID0gJ3QnKVxuXG5NMnh0ZHQiLCJzY3QiOiJzdWNjZXNzX21zZyhcIldlbGwgZG9uZSFcIikiLCJoaW50IjoiVGFrZSBzb21lIHRpbWUgdG8gZXhwbG9yZSB0aGUgb25saW5lIDxjb2RlPlI8L2NvZGU+IGRvY3VtZW50YXRpb24uIEluIHBhcnRpY3VsYXIsIHRha2UgdGltZSB0byB1bmRlcnN0YW5kIHRoZSByZXF1aXJlZCBjbGFzcyBvZiBlYWNoIGFyZ3VtZW50LiJ9
+</div>
+</div>
+<div id="exercise.-determining-moments-using-moment-generating-functions" class="section level3">
+<h3><span class="header-section-number">3.1.5</span> Exercise. Determining Moments using Moment Generating Functions</h3>
+<p><strong>Assignment Text</strong></p>
+<p>Recall that you can determine the <span class="math inline">\(n^{th}\)</span> moment of of <span class="math inline">\(X\)</span> as the <span class="math inline">\(n^{th}\)</span> derivative of the moment generating function evaluated at <span class="math inline">\(t = 0\)</span>.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Calculate the mean (first moment) of the gamma distribution.</li>
+<li>Calculate the second raw moment of the gamma distribution.</li>
+<li>Calculate the variance (second central moment) of the gamma distribution.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ik14dGR0IDwtIEQoZXhwciA9IHBhcnNlKHRleHQgPSBcIigxLSB0aGV0YSAqIHQpIF4gLWFscGhhXCIpLCBuYW1lID0gJ3QnKVxuTTJ4dGR0IDwtIEQoXG4gIEQoZXhwciA9IHBhcnNlKHRleHQgPSBcIigxLSB0aGV0YSAqIHQpIF4gLWFscGhhXCIpLCBuYW1lID0gJ3QnKSxcbiAgbmFtZSA9ICd0JylcbmFscGhhIDwtIDJcbnRoZXRhIDwtIDEwXG50IDwtIDAiLCJzYW1wbGUiOiIjIG1lYW4gXG5FWCA8LSBldmFsKD8/KVxuXG4jIHNlY29uZCByYXcgbW9tZW50XG5FWDIgPC0gZXZhbCg/PylcblxuIyB2YXJpYW5jZVxuXG4/PyAtID8/IF4gMiIsInNvbHV0aW9uIjoiIyBtZWFuIFxuRVggPC0gZXZhbChNeHRkdClcblxuIyBzZWNvbmQgcmF3IG1vbWVudFxuRVgyIDwtIGV2YWwoTTJ4dGR0KVxuXG4jIHZhcmlhbmNlXG5FWDIgLSBFWCBeIDIiLCJzY3QiOiJzdWNjZXNzX21zZyhcIldlbGwgZG9uZSFcIikiLCJoaW50IjoiVGFrZSBzb21lIHRpbWUgdG8gZXhwbG9yZSB0aGUgb25saW5lIDxjb2RlPlI8L2NvZGU+IGRvY3VtZW50YXRpb24uIEluIHBhcnRpY3VsYXIsIHRha2UgdGltZSB0byB1bmRlcnN0YW5kIHRoZSByZXF1aXJlZCBjbGFzcyBvZiBlYWNoIGFyZ3VtZW50LiJ9
+</div>
+</div>
+</div>
+<div id="continuous-distributions" class="section level2">
+<h2><span class="header-section-number">3.2</span> Continuous Distributions</h2>
+<hr />
+<p>In this section, you learn how to define and apply four fundamental severity distributions:</p>
+<ul>
+<li>gamma,</li>
+<li>Pareto,</li>
+<li>Weibull, and</li>
+<li>generalized beta distribution of the second kind.</li>
+</ul>
+<p><code>R</code> provides a “family” of functions associated with statistical distributions. The naming convention is to precede the distribution name with <code>d</code> for the density function, <code>p</code> for the cumulative distribution function, <code>q</code> for quantiles (percentiles), and <code>r</code> for random number generation. (We will set aside the <code>r</code> functions for <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-Simulation.html">Chapter 6 in <em>Loss Data Analytics</em></a> and focus on <code>d</code>, <code>p</code>, and <code>q</code> functions.)</p>
+<p>The <code>stats</code> packages which is provided with base-<code>R</code> includes the distributions listed <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Distributions">here</a>. Many other distributions are available in other <code>R</code> packages.</p>
+<p>For the exercises in the section, we will focus on the gamma distribution from <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-Severity.html#S:Loss:Gamma">Section 3.2.1 of <em>Loss Data Analytics</em></a> to help you develop an intuition as to how the distribution responds to changes in its shape and scale parameter. From Figure 3.1, you should recognize that the support for the gamma distribution is positive real numbers. You’ll also note that the distribution allows for varying levels of “right-skewness.”</p>
+<hr />
+<div id="video-continuous-distributions" class="section level4 unnumbered">
+<h4>Video: Continuous Distributions</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_20i1hho7&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_nby6r2sl" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+</div>
+<div id="overheads-continuous-distributions-click-tab-to-view" class="section level4 unnumbered">
+<h4>Overheads: Continuous Distributions (Click Tab to View)</h4>
+<div class="tab">
+<button class="tablinks" onclick="openTab(event, 'Sect32A')">A. Overview</button>
+<button class="tablinks" onclick="openTab(event, 'Sect32B')">B. Gamma Distribution</button>
+<button class="tablinks" onclick="openTab(event, 'Sect32C')">C. Pareto Distribution</button>
+<button class="tablinks" onclick="openTab(event, 'Sect32D')">D. Weibull Distribution</button>
+<button class="tablinks" onclick="openTab(event, 'Sect32E')">E. The Generalized Beta Distribution of the Second Kind</button>
+<button class="tablinks" onclick="openTab(event, 'Sect32F')">F. Exercise 3.2.1</button>
+<button class="tablinks" onclick="openTab(event, 'Sect32G')">G. Exercise 3.2.2</button>
+<button class="tablinks" onclick="openTab(event, 'Sect32H')">H. Exercise 3.2.3</button>
+<button class="tablinks" onclick="openTab(event, 'Sect32I')">I. Review</button>
+</div>
+<div id="Sect32A" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=18" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect32B" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=19" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect32C" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=23" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect32D" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=26" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect32E" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=28" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect32F" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=30" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect32G" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=31" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect32H" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=32" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect32I" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=33" width="100%" height="400"> </iframe>
+</div>
+</div>
+<div id="exercise." class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Exercise.</h3>
+<p><strong>Assignment Text</strong></p>
+<p>We will be working with the Wisconsin Property Fund data. We have read the data and created a vector of the <code>log</code> of non-zero claim values. The name of that vector is <code>wisc_prop.</code></p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Use the <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/hist">hist()</a> function to plot a histogram of <code>wisc_prop</code>.</li>
+<li>Review the help for hist() and note that the histogram is drawn as a “side-effect.” We can access the information generated with the histogram by assigning the result to an object. For this exercise, you should assign that information to <code>hist_data</code>. Note the class of <code>hist_data</code>.</li>
+<li>Use the <a href="https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/str">str()</a> function to review the structure of elements of the list returned by the histogram function hist().</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Indpc2NfcHJvcCA8LSByZWFkLmNzdihcImh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9PcGVuQWN0VGV4dERldi9MREFDb3Vyc2UxL21haW4vRGF0YS9JbnNhbXBsZS5jc3ZcIiwgaGVhZGVyPVQsIG5hLnN0cmluZ3M9YyhcIi5cIiksIHN0cmluZ3NBc0ZhY3RvcnMgPSBGQUxTRSlcbndpc2NfcHJvcCA8LSBsb2cod2lzY19wcm9wJHlbd2lzY19wcm9wJHkgPiAwXSkiLCJzYW1wbGUiOiJoaXN0X2RhdGEgPC0gaGlzdCh4ID0gXCI/P1wiKVxuXG5jbGFzcyh4ID0gPz8pXG5cbnN0cihvYmplY3QgPSA/PykiLCJzb2x1dGlvbiI6Imhpc3RfZGF0YSA8LSBoaXN0KHdpc2NfcHJvcClcbmNsYXNzKGhpc3RfZGF0YSlcbnN0cihoaXN0X2RhdGEpIiwic2N0Ijoic3VjY2Vzc19tc2coXCJXZWxsIGRvbmUhXCIpIiwiaGludCI6IlRha2Ugc29tZSB0aW1lIHRvIGV4cGxvcmUgdGhlIG9ubGluZSA8Y29kZT5SPC9jb2RlPiBkb2N1bWVudGF0aW9uLiBJbiBwYXJ0aWN1bGFyLCB0YWtlIHRpbWUgdG8gdW5kZXJzdGFuZCB0aGUgcmVxdWlyZWQgY2xhc3Mgb2YgZWFjaCBhcmd1bWVudC4ifQ==
+</div>
+</div>
+<div id="exercise.-visualizing-the-gamma-distribution" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Exercise. Visualizing the Gamma Distribution</h3>
+<p><strong>Assignment Text</strong></p>
+<p>From the histogram, we will develop an intuition as to whether a gamma distribution is likely to fit this data reasonably well. Consider whether the data is uni-modal and whether it is right-skewed. It appears to be which would support the modeling of log-claim sizes using the gamma distribution.</p>
+<p>You’ll note that the <span class="math inline">\(y\)</span>-axis of the histogram displays counts. In contrast, the <code>dgamma</code> function returns density values. So we can’t add a gamma distribution to the histogram and compare to the data. Instead we first need to plot the density values of the data. To plot probability densities, we will use set the <code>probability</code> argument to hist to <code>TRUE</code>. You should note the following from the documentation of <code>hist</code>:</p>
+<ul>
+<li>The relationship between the that the <code>probability</code> and <code>freq</code> arguments to <code>hist</code>.</li>
+<li>There is a <code>density</code> argument to <code>hist</code>. As first, you may think this refers to the (probability) density function, but that argument specifies a plotting feature.</li>
+</ul>
+<p>You can use the <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/curve">curve()</a> function to plot the gamma distribution over the histogram data. To do this, you need to set the <code>add</code> argument to <code>TRUE</code>.</p>
+<p>In later sections, we’ll review approaches to parameter estimation. In this section, we will vary the <code>shape</code> and <code>scale</code> parameters to understand the flexibility of the gamma distribution. The data will serve as a reference for this exercise. You may recall from the exercises from Section 3.1.3 that the mean of the gamma function is the product of the <code>shape</code> and <code>scale</code> parameters and the variance is the product of the <code>shape</code> and square of the <code>scale</code> parameters. You can use this information to develop parameter estimates using the method of moments.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Again plot the histogram. This time specify the probability argument so as to plot probability densities.</li>
+<li>Calculate <code>shape</code> and <code>scale</code> parameters using the method of moments</li>
+<li>Calculate the density values for <span class="math inline">\(x\)</span> values displayed within the limits of the plot.</li>
+<li>Add <code>3</code> to the <code>shape</code> parameter and note how the distribution changes.</li>
+<li>Subtract <code>0.05</code> from the <code>scale</code> parameter and note how the distribution changes.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Indpc2NfcHJvcCA8LSByZWFkLmNzdihcImh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9PcGVuQWN0VGV4dERldi9MREFDb3Vyc2UxL21haW4vRGF0YS9JbnNhbXBsZS5jc3ZcIiwgaGVhZGVyPVQsIG5hLnN0cmluZ3M9YyhcIi5cIiksIHN0cmluZ3NBc0ZhY3RvcnMgPSBGQUxTRSlcbndpc2NfcHJvcCA8LSBsb2cod2lzY19wcm9wJHlbd2lzY19wcm9wJHkgPiAwXSkiLCJzYW1wbGUiOiJoaXN0X2RhdGEgPC0gaGlzdCh4ID0gPz8sIHByb2JhYmlsaXR5ID0gPz8pXG5nYW1tYV9zY2FsZSA8LSB2YXIoPz8pIC8gbWVhbig/PylcbmdhbW1hX3NoYXBlIDwtIG1lYW4oPz8pIC8gZ2FtbWFfc2NhbGVcbmN1cnZlKGRnYW1tYSh4LCBzaGFwZSA9ID8/LCBzY2FsZSA9ID8/KSwgYWRkID0gVFJVRSwgY29sID0gJ3JlZCcgKVxuZ2FtbWFfc2NhbGVcbmdhbW1hX3NoYXBlXG5jdXJ2ZShkZ2FtbWEoeCwgc2hhcGUgPSA/PyArID8/LCBzY2FsZSA9ID8/KSwgYWRkID0gVFJVRSwgY29sID0gJ2JsdWUnKVxuY3VydmUoZGdhbW1hKHgsIHNoYXBlID0gPz8sIHNjYWxlID0gPz8gLSAgPz8pLCBhZGQgPSBUUlVFLCBjb2wgPSAnZ3JlZW4nKSIsInNvbHV0aW9uIjoiaGlzdF9kYXRhIDwtIGhpc3QoeCA9IHdpc2NfcHJvcCwgcHJvYmFiaWxpdHkgPSBUUlVFKVxuZ2FtbWFfc2NhbGUgPC0gdmFyKHdpc2NfcHJvcCkgLyBtZWFuKHdpc2NfcHJvcClcbmdhbW1hX3NoYXBlIDwtIG1lYW4od2lzY19wcm9wKSAvIGdhbW1hX3NjYWxlXG5jdXJ2ZShkZ2FtbWEoeCwgc2hhcGUgPSBnYW1tYV9zaGFwZSwgc2NhbGUgPSBnYW1tYV9zY2FsZSksIGFkZCA9IFRSVUUsIGNvbCA9ICdyZWQnIClcbmdhbW1hX3NjYWxlXG5nYW1tYV9zaGFwZVxuY3VydmUoZGdhbW1hKHgsIHNoYXBlID0gZ2FtbWFfc2hhcGUgKyAzLCBzY2FsZSA9IGdhbW1hX3NjYWxlICsgIDApLCBhZGQgPSBUUlVFLCBjb2wgPSAnYmx1ZScpXG5jdXJ2ZShkZ2FtbWEoeCwgc2hhcGUgPSBnYW1tYV9zaGFwZSArIDAsIHNjYWxlID0gZ2FtbWFfc2NhbGUgLSAgMC4wNSksIGFkZCA9IFRSVUUsIGNvbCA9ICdncmVlbicpIiwic2N0Ijoic3VjY2Vzc19tc2coXCJXZWxsIGRvbmUhXCIpIn0=
+</div>
+</div>
+<div id="Ex:CreateParetoDensityFct" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> Exercise. Creating a Pareto Density Function</h3>
+<p><strong>Assignment Text</strong></p>
+<p>Packages in <code>R</code> exist for most continuous distributions, however, it is useful to be able to know how to write your own functions.</p>
+<p>For this exercise we will write a <code>R</code> function to find the density (the pdf) of a random variable that follows a Pareto distribution. We will subsequently use this function in Exercise <a href="modeling-loss-severity.html#Ex:MLEPareto">3.5.1</a>.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Write a function to find the density of a Pareto distribution.</li>
+<li>For this exercise you should refer to the Pareto distribution from <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-Severity.html#S:Loss:Pareto">Section 3.2.2 of <em>Loss Data Analytics</em></a>.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIFdyaXRlIGEgZnVuY3Rpb24gdG8gZmluZCB0aGUgZGVuc2l0eSBvZiB0aGUgUGFyZXRvIGRpc3RyaWJ1dGlvblxuZHBhcmV0byA8LSBmdW5jdGlvbih4LHNoYXBlLHNjYWxlKXtcbiAgPz9cbn0iLCJzb2x1dGlvbiI6IiMgV3JpdGUgYSBmdW5jdGlvbiB0byBmaW5kIHRoZSBkZW5zaXR5IG9mIHRoZSBQYXJldG8gZGlzdHJpYnV0aW9uXG5kcGFyZXRvIDwtIGZ1bmN0aW9uKHgsc2hhcGUsc2NhbGUpe1xuICBzaGFwZSooc2NhbGVec2hhcGUpLygoc2NhbGUreCleKHNoYXBlKzEpKVxufSIsInNjdCI6InN1Y2Nlc3NfbXNnKFwiV2VsbCBkb25lIVwiKSJ9
+</div>
+</div>
+</div>
+<div id="methods-of-creating-new-distributions" class="section level2">
+<h2><span class="header-section-number">3.3</span> Methods of Creating New Distributions</h2>
+<hr />
+<p>In this section, you learn how to:</p>
+<ul>
+<li>Understand connections among the distributions.</li>
+<li>Give insights into when a distribution is preferred when compared to alternatives.</li>
+<li>Provide foundations for creating new distributions.</li>
+</ul>
+<hr />
+<div id="video-creating-distributions-i" class="section level4 unnumbered">
+<h4>Video: Creating Distributions I</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_3ossuexn&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_x80k8dtk" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</div>
+<div id="overheads-creating-distributions-i-click-tab-to-view" class="section level4 unnumbered">
+<h4>Overheads: Creating Distributions I (Click Tab to View)</h4>
+</center>
+<div class="tab">
+<button class="tablinks" onclick="openTab(event, 'Sect331A')">A. Creating Severity Distributions</button>
+<button class="tablinks" onclick="openTab(event, 'Sect331B')">B. Multiplication by a Constant</button>
+<button class="tablinks" onclick="openTab(event, 'Sect331C')">C. Scale Distributions</button>
+<button class="tablinks" onclick="openTab(event, 'Sect331D')">D. Raising to a Power</button>
+<button class="tablinks" onclick="openTab(event, 'Sect331E')">E. Exponential to get an Inverse Exponential</button>
+<button class="tablinks" onclick="openTab(event, 'Sect331F')">F. Exponential to get a Weibull</button>
+<button class="tablinks" onclick="openTab(event, 'Sect331G')">G. Exponentiation/ Natural Log</button>
+<button class="tablinks" onclick="openTab(event, 'Sect331H')">H. Log Transformation: R code</button>
+<button class="tablinks" onclick="openTab(event, 'Sect331I')">I. Review</button>
+</div>
+<div id="Sect331A" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=36" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect331B" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=37" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect331C" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=38" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect331D" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=39" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect331E" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=40" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect331F" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=41" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect331G" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=42" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect331H" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=44" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect331I" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=45" width="100%" height="400"> </iframe>
+</div>
+</div>
+<div id="video-creating-distributions-ii" class="section level4 unnumbered">
+<h4>Video: Creating Distributions II</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_5023lgkw&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_m33sbiz0" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+</div>
+<div id="overheads-creating-distributions-ii-click-tab-to-view" class="section level4 unnumbered">
+<h4>Overheads: Creating Distributions II (Click Tab to View)</h4>
+<div class="tab">
+<button class="tablinks" onclick="openTab(event, 'Sect332A')">A. Creating Severity Distributions</button>
+<button class="tablinks" onclick="openTab(event, 'Sect332B')">B. Discrete Mixture Severity Distributions</button>
+<button class="tablinks" onclick="openTab(event, 'Sect332C')">C. Example: Actuarial Exam Question</button>
+<button class="tablinks" onclick="openTab(event, 'Sect332D')">D. R Code to Produce a Mixture Distribution</button>
+<button class="tablinks" onclick="openTab(event, 'Sect332E')">E. Continuous Mixtures for Severity</button>
+<button class="tablinks" onclick="openTab(event, 'Sect332F')">F. Special Case: Gamma Mixtures of Exponentials</button>
+<button class="tablinks" onclick="openTab(event, 'Sect332G')">G. Mixture Expectations</button>
+<button class="tablinks" onclick="openTab(event, 'Sect332H')">H. Splicing</button>
+<button class="tablinks" onclick="openTab(event, 'Sect332I')">I. Review</button>
+</div>
+<div id="Sect332A" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=48" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect332B" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=49" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect332C" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=50" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect332D" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=52" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect332E" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=53" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect332F" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=54" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect332G" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=55" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect332H" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=56" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect332I" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=57" width="100%" height="400"> </iframe>
+</div>
+</div>
+<div id="exercise.-using-the-logarithmic-transformation-to-create-a-new-distribution" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Exercise. Using the Logarithmic Transformation to Create a New Distribution</h3>
+<p><strong>Assignment Text</strong></p>
+<p>For this exercise we will be modeling claim severity data with a gamma distribution, and we will then apply a log transformation to the distribution. (Recall that we use the natural logarithmic transform throughout, unless specified otherwise.)</p>
+<p>In this exercise we generate the probability density function (<em>pdf</em>) of the gamma distribution that corresponds with these parameters, and we then plot the <em>pdf</em> of the <em>log</em> of the claim severities, by transforming the gamma pdf. We will assume that the claim severities follow a gamma distribution with a known shape parameter <span class="math inline">\(\alpha=0.63\)</span> and scale parameter <span class="math inline">\(\theta=16897\)</span>.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Use <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/GammaDist">dgamma()</a> to generate a <em>pdf</em> of the claim severities. You are given the shape parameter <span class="math inline">\(\alpha= 0.63\)</span> and scale parameter <span class="math inline">\(\theta=16897\)</span> for the gamma distribution fit.<br />
+</li>
+<li>Write the <code>R</code> code for the <em>pdf</em> of the claim severity, assuming that claim severity follows a gamma distribution with the above parameters.</li>
+<li>Write the <code>R</code> code for the <em>pdf</em> of the log claim severity, by transforming the gamma pdf. Hint: If <span class="math inline">\(X\)</span> is claim severity and <span class="math inline">\(Y=\log(X)\)</span> then you need to find the <em>pdf</em> of <span class="math inline">\(Y\)</span>.</li>
+<li>Plot the fitted <em>pdf</em> curve of the log claim severity for this subpopulation.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0RGV2L0xEQUNvdXJzZTEvbWFpbi9EYXRhL0luc2FtcGxlLmNzdlwiLCBoZWFkZXI9VCwgbmEuc3RyaW5ncz1jKFwiLlwiKSwgc3RyaW5nc0FzRmFjdG9ycz1GQUxTRSkiLCJzYW1wbGUiOiIjR2VuZXJhdGUgYSBwZGYgb2YgdGhlIGNsYWltIHNldmVyaXRpZXMuIEZpcnN0LCBlbnRlciB0aGUgcGFyYW1ldGVyIHZhbHVlcyB0aGF0IHdlcmUgZ2l2ZW4gaW4gdGhlIHF1ZXN0aW9uXG5hbHBoYTwtPz9cbnRoZXRhPC0/P1xuXG4jTmV4dCwgd3JpdGUgdGhlIFIgY29kZSBmb3IgdGhlIHBkZiBvZiB0aGUgY2xhaW0gc2V2ZXJpdHlcbng8LXNlcSgxMCw0MDAwMDApXG5meDwtZGdhbW1hKD8/KVxuXG4jV3JpdGUgdGhlIFIgY29kZSBmb3IgdGhlIHBkZiBvZiB0aGUgbG9nIGNsYWltIHNldmVyaXR5LCBieSB0cmFuc2Zvcm1pbmcgdGhlIGdhbW1hIHBkZlxueDwtc2VxKDEwLDQwMDAwMClcbnk8LWxvZyh4KVxuZnk8LT8/XG5cbiNQbG90IHRoZSBsb2cgY2xhaW0gc2V2ZXJpdGllc1xucGxvdCg/Pyw/Pyx0eXBlPVwibFwiLGx0eT0xLHhsYWI9XCJsb2cgY2xhaW0gc2V2ZXJpdHlcIiwgeWxhYj1cImRlbnNpdHlcIix5bGltPWMoMCwwLjMpKSIsInNvbHV0aW9uIjoiI0dlbmVyYXRlIGEgcGRmIG9mIHRoZSBjbGFpbSBzZXZlcml0aWVzLiBGaXJzdCwgZW50ZXIgdGhlIHBhcmFtZXRlciB2YWx1ZXMgdGhhdCB3ZXJlIGdpdmVuIGluIHRoZSBxdWVzdGlvblxuYWxwaGE8LTAuNjNcbnRoZXRhPC0xNjg5N1xuXG4jTmV4dCwgd3JpdGUgdGhlIFIgY29kZSBmb3IgdGhlIHBkZiBvZiB0aGUgY2xhaW0gc2V2ZXJpdHlcbng8LXNlcSgxMCw0MDAwMDApXG5meDwtZGdhbW1hKHgsc2hhcGU9YWxwaGEsc2NhbGU9dGhldGEpXG5cbiNXcml0ZSB0aGUgUiBjb2RlIGZvciB0aGUgcGRmIG9mIHRoZSBsb2cgY2xhaW0gc2V2ZXJpdHksIGJ5IHRyYW5zZm9ybWluZyB0aGUgZ2FtbWEgcGRmXG54PC1zZXEoMTAsNDAwMDAwKVxueTwtbG9nKHgpXG5meTwtZngqeFxuXG4jUGxvdCB0aGUgbG9nIGNsYWltIHNldmVyaXRpZXNcbnBsb3QoeSxmeSx0eXBlPVwibFwiLGx0eT0xLHhsYWI9XCJsb2cgY2xhaW0gc2V2ZXJpdHlcIiwgeWxhYj1cImRlbnNpdHlcIix5bGltPWMoMCwwLjMpKSIsInNjdCI6InN1Y2Nlc3NfbXNnKFwiV2VsbCBkb25lIVwiKSJ9
+</div>
+</div>
+<div id="exercise.-creating-a-mixture-distribution" class="section level3">
+<h3><span class="header-section-number">3.3.2</span> Exercise. Creating a Mixture Distribution</h3>
+<p><img src = "ContributorPics/hurdler.png" width = "65" height = "65" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
+<p><strong>Assignment Text</strong></p>
+<p>Insurance portfolios often consist of subpopulations which might have different claim severity distributions. In this exercise, we will use the Wisconsin Property Fund data to generate a mixture distribution, where it is assumed that different entities (village, city, country, miscellaneous, school and town) have different claim severity distributions.</p>
+<p>We use the following assumptions:</p>
+<ul>
+<li>We will use the number of claims for each entity from the data as weights for the mixture distribution.</li>
+<li>For each entity, the claim severities are assumed to be gamma distributed with different shape parameters <span class="math inline">\(\alpha\)</span> and different scale parameters <span class="math inline">\(\theta\)</span>.</li>
+</ul>
+<p>You can modify the code used in Exercise <a href="introduction-to-loss-data-analytics.html#Ex:ClaimByType">1.5.1</a> to extract the claim numbers from the Property Fund data. After combining the gamma probability density functions together to produce a mixture distribution, we plot the <em>pdf</em>s for the <em>log</em> of the claim severities for each subpopulation and the mixture distribution.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Extract the number of claims from the Property Fund data.</li>
+<li>Combine the gamma density functions for the claim severity for each subpopulation together to generate the <em>pdf</em> of a mixture distribution. When generating the mixture distribution, use the number of claims for each entity as weights.</li>
+<li>Use <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/GammaDist">dgamma()</a> to generate the <em>pdf</em> of the claim severities for each subpopulation. The parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\theta\)</span> for each subpopulation are given below.<br />
+</li>
+<li>Plot each of the <em>pdf</em> curves of the log claim severities in the same figure. Exercise 3.3.1 shows how to find the <em>pdf</em> for log claim severities.</li>
+<li>Superimpose the <em>pdf</em> of mixture distribution of the log claims on to the plot of the <em>pdf</em> curves of the log claim severities.</li>
+</ul>
+<p>The values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\theta\)</span> for the fitted gamma distribution for each entity type are:
+<span class="math display">\[{\small \begin{matrix}
+\begin{array}{l | r | r}
+\hline
+\text{Entity Type} &amp; \alpha~~~ &amp; \theta~~~ \\
+\hline
+\text{Village} &amp;  0.630 &amp; 16897\\
+\text{City}    &amp;  0.511 &amp; 33119\\
+\text{County}  &amp;  0.637 &amp; 24259\\
+\text{Misc}    &amp;  0.347 &amp; 124023\\
+\text{School}  &amp;  0.324 &amp; 198599\\
+\text{Town }   &amp;  0.361 &amp; 54933\\
+\hline
+\end{array}
+\end{matrix}}\]</span></p>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0RGV2L0xEQUNvdXJzZTEvbWFpbi9EYXRhL0luc2FtcGxlLmNzdlwiLCBoZWFkZXI9VCwgbmEuc3RyaW5ncz1jKFwiLlwiKSwgc3RyaW5nc0FzRmFjdG9ycz1GQUxTRSkiLCJzYW1wbGUiOiIjICBFeHRyYWN0IHRoZSBudW1iZXIgb2YgY2xhaW1zIGZvciBlYWNoIGVudGl0eSB0eXBlXG5CeVZhclN1bW0gPC0gZnVuY3Rpb24oZGF0YXN1Yil7XG4gIEExIDwtIHN1bShkYXRhc3ViJEZyZXEpICAgICAgIyBudW1iZXIgb2YgY2xhaW1zIFxuICByZXR1cm4oIEExKVxufVxudDEgPC0gQnlWYXJTdW1tKHN1YnNldChJbnNhbXBsZSwgVHlwZVZpbGxhZ2UgPT0gMSkpXG50MiA8LSBCeVZhclN1bW0oc3Vic2V0KEluc2FtcGxlLCBUeXBlQ2l0eSA9PSAxKSlcbnQzIDwtIEJ5VmFyU3VtbShzdWJzZXQoSW5zYW1wbGUsIFR5cGVDb3VudHkgPT0gMSkpXG50NCA8LSBCeVZhclN1bW0oc3Vic2V0KEluc2FtcGxlLCBUeXBlTWlzYyA9PSAxKSlcbnQ1IDwtIEJ5VmFyU3VtbShzdWJzZXQoSW5zYW1wbGUsIFR5cGVTY2hvb2wgPT0gMSkpXG50NiA8LSBCeVZhclN1bW0oc3Vic2V0KEluc2FtcGxlLCBUeXBlVG93biA9PSAxKSlcblxuVGFibGVhIDwtIHJvdW5kKHJiaW5kKHQxLHQyLHQzLHQ0LHQ1LHQ2KSxkaWdpdHM9MylcbmNvbG5hbWVzKFRhYmxlYSkgPC0gYyhcIkNsYWltIG51bWJlclwiKVxucm93bmFtZXMoVGFibGVhKSA8LSBjKFwiVmlsbGFnZVwiLFwiQ2l0eVwiLFwiQ291bnR5XCIsXCJNaXNjXCIsXCJTY2hvb2xcIixcIlRvd25cIilcblRhYmxlYVxuXG4jRW50ZXIgdGhlIHBhcmFtZXRlciBpbmZvcm1hdGlvbiBmb3IgdGhlIHBkZiBvZiB0aGUgY2xhaW0gc2V2ZXJpdGllcyBmb3IgZWFjaCBzdWJwb3B1bGF0aW9uXG5hbHBoYTwtYyg/PylcbnRoZXRhPC1jKD8/KVxuXG4jR2VuZXJhdGUgYSBtaXh0dXJlIG9mIHRoZSBnYW1tYSBwZGZzLiBGaXJzdCwgY3JlYXRlIGEgdmVjdG9yIG9mIHdlaWdodHMgdG8gdXNlIGZvciB0aGUgbWl4dHVyZVxud2VpZ2h0PC0gVGFibGVhWywxXS9zdW0oPz8pXG5cbiNOZXh0LCBjcmVhdGUgYW4gb2JqZWN0IGNhbGxlZCBwZGZtaXggZm9yIHRoZSBtaXh0dXJlIHBkZiwgd2hpY2ggaXMgdGhlIHdlaWdodGVkIHN1bSBvZiB0aGUgaW5kaXZpZHVhbCBzdWJwb3B1bGF0aW9uIHBkZnMuIFxueDwtc2VxKDEwLDQwMDAwMClcbnBkZm1peDwtMFxuZm9yKGkgaW4gMTo2KXtcbiAgcGRmbWl4PC1kZ2FtbWEoeCxzaGFwZT0/PyxzY2FsZT0/PykqPz8rcGRmbWl4XG59XG5cbiNQbG90IGVhY2ggb2YgdGhlIHBkZiBjdXJ2ZXMgb2YgdGhlIGxvZyBjbGFpbSBzZXZlcml0aWVzIGluIHRoZSBzYW1lIGZpZ3VyZVxucGxvdChsb2coeCksPz8sdHlwZT1cImxcIix4bGFiPVwibG9nIGNsYWltIHNldmVyaXR5XCIseWxhYj1cImRlbnNpdHlcIix5bGltPWMoMCwwLjMpKVxuZm9yKGkgaW4gMjo2KXtcbiAgbGluZXMobG9nKHgpLD8/KVxufVxuXG4jU3VwZXJpbXBvc2UgdGhlIHBkZiBvZiBtaXh0dXJlIGRpc3RyaWJ1dGlvbiBvZiB0aGUgbG9nIGNsYWltc1xubGluZXMobG9nKHgpLD8/LGNvbD1cInJlZFwiLGx3ZD0yKSIsInNvbHV0aW9uIjoiIyAgRXh0cmFjdCB0aGUgbnVtYmVyIG9mIGNsYWltcyBmb3IgZWFjaCBlbnRpdHkgdHlwZVxuQnlWYXJTdW1tIDwtIGZ1bmN0aW9uKGRhdGFzdWIpe1xuICBBMSA8LSBzdW0oZGF0YXN1YiRGcmVxKSAgICAgICMgbnVtYmVyIG9mIGNsYWltcyBcbiAgcmV0dXJuKEExKVxufVxudDEgPC0gQnlWYXJTdW1tKHN1YnNldChJbnNhbXBsZSwgVHlwZVZpbGxhZ2UgPT0gMSkpXG50MiA8LSBCeVZhclN1bW0oc3Vic2V0KEluc2FtcGxlLCBUeXBlQ2l0eSA9PSAxKSlcbnQzIDwtIEJ5VmFyU3VtbShzdWJzZXQoSW5zYW1wbGUsIFR5cGVDb3VudHkgPT0gMSkpXG50NCA8LSBCeVZhclN1bW0oc3Vic2V0KEluc2FtcGxlLCBUeXBlTWlzYyA9PSAxKSlcbnQ1IDwtIEJ5VmFyU3VtbShzdWJzZXQoSW5zYW1wbGUsIFR5cGVTY2hvb2wgPT0gMSkpXG50NiA8LSBCeVZhclN1bW0oc3Vic2V0KEluc2FtcGxlLCBUeXBlVG93biA9PSAxKSlcblxuVGFibGVhIDwtIHJvdW5kKHJiaW5kKHQxLHQyLHQzLHQ0LHQ1LHQ2KSxkaWdpdHM9MylcbmNvbG5hbWVzKFRhYmxlYSkgPC0gYyhcIkNsYWltIG51bWJlclwiKVxucm93bmFtZXMoVGFibGVhKSA8LSBjKFwiVmlsbGFnZVwiLFwiQ2l0eVwiLFwiQ291bnR5XCIsXCJNaXNjXCIsXCJTY2hvb2xcIixcIlRvd25cIilcblRhYmxlYVxuXG4jRW50ZXIgdGhlIHBhcmFtZXRlciBpbmZvcm1hdGlvbiBmb3IgdGhlIHBkZiBvZiB0aGUgY2xhaW0gc2V2ZXJpdGllcyBmb3IgZWFjaCBzdWJwb3B1bGF0aW9uXG5hbHBoYTwtYygwLjYzLDAuNTExLDAuNjM3LDAuMzQ3LDAuMzI0LDAuMzYxKVxudGhldGE8LWMoMTY4OTcsMzMxMTksMjQyNTksMTI0MDIzLDE5ODU5OSw1NDkzMylcblxuI0dlbmVyYXRlIGEgbWl4dHVyZSBvZiB0aGUgZ2FtbWEgcGRmcy4gRmlyc3QsIGNyZWF0ZSBhIHZlY3RvciBvZiB3ZWlnaHRzIHRvIHVzZSBmb3IgdGhlIG1peHR1cmVcbndlaWdodDwtIFRhYmxlYVssMV0vc3VtKFRhYmxlYVssMV0pXG5cbiNOZXh0LCBjcmVhdGUgYW4gb2JqZWN0IGNhbGxlZCBwZGZtaXggZm9yIHRoZSBtaXh0dXJlIHBkZiwgd2hpY2ggaXMgdGhlIHdlaWdodGVkIHN1bSBvZiB0aGUgaW5kaXZpZHVhbCBzdWJwb3B1bGF0aW9uIHBkZnMuIFxueDwtc2VxKDEwLDQwMDAwMClcbnBkZm1peDwtMFxuZm9yKGkgaW4gMTo2KXtcbiAgcGRmbWl4PC1kZ2FtbWEoeCxzaGFwZT1hbHBoYVtpXSxyYXRlPTEvdGhldGFbaV0pKndlaWdodFtpXStwZGZtaXhcbn1cblxuI1Bsb3QgZWFjaCBvZiB0aGUgcGRmIGN1cnZlcyBvZiB0aGUgbG9nIGNsYWltIHNldmVyaXRpZXMgaW4gdGhlIHNhbWUgZmlndXJlXG5wbG90KGxvZyh4KSxkZ2FtbWEoeCxzaGFwZT1hbHBoYVsxXSxzY2FsZT10aGV0YVsxXSkqeCx0eXBlPVwibFwiLHhsYWI9XCJsb2cgY2xhaW0gc2V2ZXJpdHlcIix5bGFiPVwiZGVuc2l0eVwiLHlsaW09YygwLDAuMykpXG5mb3IoaSBpbiAyOjYpe1xuICBsaW5lcyhsb2coeCksIGRnYW1tYSh4LHNoYXBlPWFscGhhW2ldLHNjYWxlPXRoZXRhW2ldKSp4KVxufVxuXG4jU3VwZXJpbXBvc2UgdGhlIHBkZiBvZiBtaXh0dXJlIGRpc3RyaWJ1dGlvbiBvZiB0aGUgbG9nIGNsYWltc1xubGluZXMobG9nKHgpLCBwZGZtaXgqeCxjb2w9XCJyZWRcIixsd2Q9MikiLCJzY3QiOiJzdWNjZXNzX21zZyhcIldlbGwgZG9uZSFcIikiLCJoaW50IjoiTWl4dHVyZSBkaXN0cmlidXRpb25zIGFyZSBpbnRyb2R1Y2VkIGluIDxhIGhyZWY9XCJodHRwczovL29wZW5hY3R0ZXh0cy5naXRodWIuaW8vTG9zcy1EYXRhLUFuYWx5dGljcy9DLUZyZXF1ZW5jeS1Nb2RlbGluZy5odG1sI1M6bWl4dHVyZS1kaXN0cmlidXRpb25zXCI+U2VjdGlvbiAyLjYgb2YgIDxlbT5Mb3NzIERhdGEgQW5hbHl0aWNzPC9lbT48L2E+IGFuZCBkZXZlbG9wZWQgZnVydGhlciBpbiBcbjxhIGhyZWY9XCJodHRwczovL29wZW5hY3R0ZXh0cy5naXRodWIuaW8vTG9zcy1EYXRhLUFuYWx5dGljcy9DLVNldmVyaXR5Lmh0bWwjZmluaXRlLW1peHR1cmVzXCI+U2VjdGlvbjIgMy4zLjUgYW5kIDMuMy42PC9hPi4gQ2hlY2sgb3V0IHRoaXMgZGV2ZWxvcG1lbnQuIn0=
+</div>
+</div>
+</div>
+<div id="coverage-modifications" class="section level2">
+<h2><span class="header-section-number">3.4</span> Coverage Modifications</h2>
+<hr />
+<p>In this section we evaluate the impacts of coverage modifications:</p>
+<ul>
+<li>deductibles,</li>
+<li>policy limit,</li>
+<li>coinsurance, and</li>
+<li>reinsurance on insurer’s costs.</li>
+</ul>
+<hr />
+<div id="video-policy-deductibles" class="section level4 unnumbered">
+<h4>Video: Policy Deductibles</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_v4oyj7ne&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_mnc9h2ja" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+</div>
+<div id="overheads-policy-deductibles-click-tab-to-view" class="section level4 unnumbered">
+<h4>Overheads: Policy Deductibles (Click Tab to View)</h4>
+<div class="tab">
+<button class="tablinks" onclick="openTab(event, 'Sect341A')">A. Risk Retention Framework</button>
+<button class="tablinks" onclick="openTab(event, 'Sect341B')">B. Ordinary Deductible</button>
+<button class="tablinks" onclick="openTab(event, 'Sect341C')">C. Distribution of Payment Per Loss Variable <span class="math inline">\(Y^L\)</span></button>
+<button class="tablinks" onclick="openTab(event, 'Sect341D')">D. Distribution of Payment Per Payment Variable <span class="math inline">\(Y^P\)</span></button>
+<button class="tablinks" onclick="openTab(event, 'Sect341E')">E. Raw Moments of <span class="math inline">\(Y^L\)</span> and <span class="math inline">\(Y^P\)</span></button>
+<button class="tablinks" onclick="openTab(event, 'Sect341F')">F. Example: Actuarial Exam Question</button>
+<button class="tablinks" onclick="openTab(event, 'Sect341G')">G. Loss Elimination Ratio (LER)</button>
+<button class="tablinks" onclick="openTab(event, 'Sect341H')">H. Franchise Deductible</button>
+<button class="tablinks" onclick="openTab(event, 'Sect341I')">I. Review</button>
+</div>
+<div id="Sect341A" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=60" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect341B" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=61" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect341C" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=62" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect341D" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=63" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect341E" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=64" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect341F" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=65" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect341G" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=66" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect341H" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=67" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect341I" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=68" width="100%" height="400"> </iframe>
+</div>
+</div>
+<div id="video-policy-limits" class="section level4 unnumbered">
+<h4>Video: Policy Limits</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_7u0jx487&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_gol12ato" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+</div>
+<div id="overheads-policy-limits-click-tab-to-view" class="section level4 unnumbered">
+<h4>Overheads: Policy Limits (Click Tab to View)</h4>
+<div class="tab">
+<button class="tablinks" onclick="openTab(event, 'Sect342A')">A. Policy Limit</button>
+<button class="tablinks" onclick="openTab(event, 'Sect342B')">B. Distribution of the Limited Loss Variable</button>
+<button class="tablinks" onclick="openTab(event, 'Sect342C')">C. Raw Moments of Limited Loss Variable</button>
+<button class="tablinks" onclick="openTab(event, 'Sect342D')">D. Limited Expected Value: Pareto Policy Limit</button>
+<button class="tablinks" onclick="openTab(event, 'Sect342E')">E. Expected Payments Under Deductible Revisited</button>
+<button class="tablinks" onclick="openTab(event, 'Sect342F')">F. Loss Elimination Ratio (LER) Revisited</button>
+<button class="tablinks" onclick="openTab(event, 'Sect342G')">G. Example: Actuarial Exam Question</button>
+<button class="tablinks" onclick="openTab(event, 'Sect342H')">H. R Code to Calculate Limited Expected Value</button>
+<button class="tablinks" onclick="openTab(event, 'Sect342I')">I. Review</button>
+</div>
+<div id="Sect342A" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=71" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect342B" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=72" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect342C" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=73" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect342D" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=74" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect342E" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=75" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect342F" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=76" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect342G" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=77" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect342H" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=78" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect342I" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=79" width="100%" height="400"> </iframe>
+</div>
+</div>
+<div id="exercise.-calculate-moments-of-the-lognormal-distribution" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> Exercise. Calculate Moments of the Lognormal Distribution</h3>
+<p><strong>Assignment Text</strong></p>
+<p>The support of the lognormal distribution is positive real numbers and the distribution is right-skewed. Given these properties, claim values for many coverages follow a lognormal distribution. <code>R</code> provides many several functions related to the <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Lognormal">lognormal()</a> distribution.</p>
+<p>Particularly useful for calculations related to the effect of coverage modifications, the <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Lognormal">plnorm()</a> function returns the distribution function for a lognormal. Specifically, the limited expected value function is useful for calculating limited claim values, that is, claims amounts subject to policy limits. See the summary in <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-SummaryDistributions.html#S:ContinuousDistributions">Section 18.2.5 of <em>Loss Data Analytics</em></a>.</p>
+<p>The limited expected value of <span class="math inline">\(X\)</span> at limit, <span class="math inline">\(L\)</span>, can be calculated as follows:</p>
+<p><span class="math display">\[
+LEV[x;L] = \int_0^L x f_X(x) ~dx ~+ L \times [1 - F_X(L)] .
+\]</span></p>
+<p>The first term on the right-hand side is the contribution to the expected value for claims that are less than <span class="math inline">\(L\)</span> and the second term is the expected value of all claims greater than or equal to <span class="math inline">\(L\)</span>.</p>
+<p>For the exercises in this section, we provide the <a href="https://rdrr.io/cran/actuar/man/LognormalMoments.html">mlnorm()</a> and <a href="https://rdrr.io/cran/actuar/man/LognormalMoments.html">levlnorm()</a> functions to calculate unlimited mean and limited expected values, respectively with arguments <code>meanlog</code> and <code>sdlog</code> corresponding to the same arguments in the plnorm() function. The levlnorm() function requires an additional <code>limit</code> argument.</p>
+<p>We also provide the vector <code>claims</code> which are observed claims values from lognormal distribution with <code>meanlog</code> = 12 and <code>sdlog</code> = 1.5. The values of <code>meanlog</code> and <code>sdlog</code> are saved in the <code>mu</code> and <code>sigma</code> objects.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Calculate the expected value of the lognormal function and compare to the <code>mean</code> of <code>claims</code>.</li>
+<li>Calculate the expected value of the claims retained by the insured using the levlnorm() function and the compare to the mean of <code>claims</code>.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNldC5zZWVkKDEyMzQ1KVxubXUgPC0gMTJcbnNpZ21hIDwtIDEuNVxuY2xhaW1zIDwtIHJsbm9ybShuID0gMTAwMDAwLCBtZWFubG9nID0gbXUsIHNkbG9nID0gc2lnbWEpXG5tbG5vcm0gPC0gZnVuY3Rpb24obWVhbmxvZywgc2Rsb2cpIGV4cChtZWFubG9nICsgc2Rsb2cgXiAyIC8yKVxuXG5sZXZsbm9ybSA8LSBmdW5jdGlvbihsaW1pdCwgbWVhbmxvZywgc2Rsb2cpe1xuICB0MSA8LSBtbG5vcm0obWVhbmxvZyA9IG1lYW5sb2csIHNkbG9nID0gc2Rsb2cpICogXG4gICAgcG5vcm0ocSA9IChsb2cobGltaXQpIC0gbWVhbmxvZyAtIHNkbG9nIF4gMikgLyBzZGxvZylcbiAgdDIgPC0gbGltaXQgKiAoIDEtIHBub3JtKChsb2cobGltaXQpIC0gbWVhbmxvZykgLyBzZGxvZykpXG4gIHJldHVybih0MSArIHQyKVxuICB9Iiwic2FtcGxlIjoiIyBVbmxpbWl0ZWRcbiNleHBlY3RlZCB2YWx1ZSBvZiB0aGUgbG9nbm9ybWFsIGZ1bmN0aW9uXG5tbG5vcm0obWVhbmxvZyA9ID8/LCBzZGxvZyA9ID8/KVxuIyBtZWFuIG9mIGNsYWltc1xubWVhbig/PykiLCJzb2x1dGlvbiI6IiMgVW5saW1pdGVkXG4jZXhwZWN0ZWQgdmFsdWUgb2YgdGhlIGxvZ25vcm1hbCBmdW5jdGlvblxubWxub3JtKG1lYW5sb2cgPSBtdSwgc2Rsb2cgPSBzaWdtYSlcbiMgbWVhbiBvZiBjbGFpbXNcbm1lYW4oY2xhaW1zKSIsInNjdCI6InN1Y2Nlc3NfbXNnKFwiV2VsbCBkb25lIVwiKSIsImhpbnQiOiJOb3RlIHRoYXQgd2UgaGF2ZSBjcmVhdGVkIHRoZSA8Y29kZT5SPC9jb2RlPiBvYmplY3RzIDxjb2RlPm11PC9jb2RlPiBhbmQgPGNvZGU+c2lnbWE8L2NvZGU+LCBjb25zaWRlciBob3cgdG8gdXNlIHRoZW0gaW4geW91ciBhbnN3ZXIuXG5Tb21lIGNvZGVycyBmaW5kIGl0IGVhc2llciB0byBjb2RlIHRob3VzYW5kcyBhbmQgbWlsbGlvbnMgdXNpbmcgc2NpZW50aWZpYyBub3RhdGlvbi4gRm9yIGV4YW1wbGUsIGl0IG1heSBiZSBlYXNpZXIgdG8gdHlwZSA1ZTYgdGhhbiB0byBjb3VudCB0aGUgbnVtYmVyIG9mIHplcm9zIG9uIGluIDUwMDAwMDAgb24geW91ciBzY3JlZW4uIn0=
+</div>
+</div>
+<div id="exercise.-calculate-limited-expected-value-of-the-lognormal-distribution" class="section level3">
+<h3><span class="header-section-number">3.4.2</span> Exercise. Calculate Limited Expected Value of the Lognormal Distribution</h3>
+<p><strong>Assignment Text</strong></p>
+<p>Now, assume that an insurer provides coverage for the first $ 5 million of claims.</p>
+<div class="blackbox">
+<p><strong>Instruction</strong></p>
+<ul>
+<li>Calculate the expected value of the claims insured with a $ 5 million policy limit using the levlnorm() function and then compare to the amounts insured from <code>claims</code>.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNldC5zZWVkKDEyMzQ1KVxubXUgPC0gMTJcbnNpZ21hIDwtIDEuNVxuY2xhaW1zIDwtIHJsbm9ybShuID0gMTAwMDAwLCBtZWFubG9nID0gbXUsIHNkbG9nID0gc2lnbWEpXG5tbG5vcm0gPC0gZnVuY3Rpb24obWVhbmxvZywgc2Rsb2cpIGV4cChtZWFubG9nICsgc2Rsb2cgXiAyIC8yKVxuXG5sZXZsbm9ybSA8LSBmdW5jdGlvbihsaW1pdCwgbWVhbmxvZywgc2Rsb2cpe1xuICB0MSA8LSBtbG5vcm0obWVhbmxvZyA9IG1lYW5sb2csIHNkbG9nID0gc2Rsb2cpICogXG4gICAgcG5vcm0ocSA9IChsb2cobGltaXQpIC0gbWVhbmxvZyAtIHNkbG9nIF4gMikgLyBzZGxvZylcbiAgdDIgPC0gbGltaXQgKiAoIDEtIHBub3JtKChsb2cobGltaXQpIC0gbWVhbmxvZykgLyBzZGxvZykpXG4gIHJldHVybih0MSArIHQyKVxuICB9Iiwic2FtcGxlIjoiIyMjIENsYWltIGFtb3VudHMgaW5zdXJlZCB1bmRlciBhIDUgbWlsbGlvbiBsaW1pdCAgICBcblxuIyBGcm9tIHRoZSBsaW1pdGVkIGV4cGVjdGVkIHZhbHVlIGZ1bmN0aW9uXG5sZXZsbm9ybShsaW1pdCA9ID8/LCBtZWFubG9nID0gPz8sIHNkbG9nID0gPz8pXG5cbiMgRnJvbSB0aGUgY2xhaW1zIGRhdGFcbm1lYW4ocG1pbig/PywgPz8pKSIsInNvbHV0aW9uIjoiIyMjIENsYWltIGFtb3VudHMgaW5zdXJlZCB1bmRlciBhIDUgbWlsbGlvbiBsaW1pdCAgICBcblxuIyBGcm9tIHRoZSBsaW1pdGVkIGV4cGVjdGVkIHZhbHVlIGZ1bmN0aW9uXG5sZXZsbm9ybShsaW1pdCA9IDVlNiwgbWVhbmxvZyA9IDEyLCBzZGxvZyA9IDEuNSlcblxuXG4jIEZyb20gdGhlIGNsYWltcyBkYXRhXG5tZWFuKHBtaW4oNWU2LCBjbGFpbXMpKSIsInNjdCI6InN1Y2Nlc3NfbXNnKFwiV2VsbCBkb25lIVwiKSJ9
+</div>
+</div>
+<div id="exercise.-expected-claims-subject-to-a-deductible" class="section level3">
+<h3><span class="header-section-number">3.4.3</span> Exercise. Expected Claims Subject to a Deductible</h3>
+<p><strong>Assignment Text</strong></p>
+<p>When an insurer provides coverage with a deductible, only a portion of claims result in reimbursement. The claims that do produce reimbursement have a greater average value than the average value for all claims.</p>
+<p>For this exercise, assume that an insurer provides coverage for the first <span class="math inline">\({\$}\)</span> 5 million of claims in excess of a <span class="math inline">\({\$}\)</span> 1 million deductible. Note that this coverage is sometimes stated as <span class="math inline">\({\$}\)</span> 4 million excess of <span class="math inline">\({\$}\)</span> 1 million (or shorthand notation such as ${$}$4 mln xs ${$}$1 mln).</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Determine the number of <code>claims</code> resulting in reimbursement. Compare to the expected value of the number of claims requiring reimbursement calculated using the <code>plnorm</code> function.</li>
+<li>Calculate the amounts insured. Do this in two steps. First, subset <code>claims</code> to only include amounts in excess of ${$}$1 million. Second, calculate the average value of those claims.</li>
+<li>Calculate the expected value of the claims insured subject to a ${$}$1 million deductible and a ${$}$5 million policy limit using the <code>levlnorm</code> and <code>plnorm</code> function and the compare to the amounts you calculated in the prior step. Note that these are the ‘ground-up’ values meaning that they include the amounts within the deductible.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNldC5zZWVkKDEyMzQ1KVxubXUgPC0gMTJcbnNpZ21hIDwtIDEuNVxuY2xhaW1zIDwtIHJsbm9ybShuID0gMTAwMDAwLCBtZWFubG9nID0gbXUsIHNkbG9nID0gc2lnbWEpXG5tbG5vcm0gPC0gZnVuY3Rpb24obWVhbmxvZywgc2Rsb2cpIGV4cChtZWFubG9nICsgc2Rsb2cgXiAyIC8yKVxuXG5sZXZsbm9ybSA8LSBmdW5jdGlvbihsaW1pdCwgbWVhbmxvZywgc2Rsb2cpe1xuICB0MSA8LSBtbG5vcm0obWVhbmxvZyA9IG1lYW5sb2csIHNkbG9nID0gc2Rsb2cpICogXG4gICAgcG5vcm0ocSA9IChsb2cobGltaXQpIC0gbWVhbmxvZyAtIHNkbG9nIF4gMikgLyBzZGxvZylcbiAgdDIgPC0gbGltaXQgKiAoIDEtIHBub3JtKChsb2cobGltaXQpIC0gbWVhbmxvZykgLyBzZGxvZykpXG4gIHJldHVybih0MSArIHQyKVxuICB9Iiwic2FtcGxlIjoiIyMjIENsYWltIGNvdW50cyBhbW91bnRzIGluc3VyZWQgdW5kZXIgYSAxIG1pbGxpb24gZGVkdWN0aWJsZSBhcHBsaWVkIHRvIHRoZSBmaXJzdCA1IG1pbGxpb24gb2YgY2xhaW1zXG4jIE51bWJlciBvZiBjbGFpbXMgaW4gdGhlIGRhdGFcbnN1bShjbGFpbXMgPiA/PykgXG4jIEV4cGVjdGVkXG4oMSAtIHBsbm9ybShxID0gPz8sIG1lYW5sb2cgPSA/Pywgc2Rsb2cgPSA/PykpICogbGVuZ3RoKD8/KVxuXG4jIEF2ZXJhZ2UgVmFsdWUgZnJvbSBjbGFpbXNcbmluc3VyZWQgPC0gY2xhaW1zW2NsYWltcyA+ID8/XVxubWVhbihwbWluKD8/LCA/PykpXG5cbiNFeHBlY3RlZFxuPz8gKyAobGV2bG5vcm0obGltaXQgPSA/PywgbWVhbmxvZyA9ID8/LCBzZGxvZyA9ID8/KSAtIFxuICBsZXZsbm9ybShsaW1pdCA9ID8/LCBtZWFubG9nID0gPz8sIHNkbG9nID0gPz8pKSAvIFxuICAoMSAtIHBsbm9ybShxID0gPz8sIG1lYW5sb2cgPSA/Pywgc2Rsb2cgPSA/PykpIiwic29sdXRpb24iOiIjIyMgQ2xhaW0gY291bnRzIGFtb3VudHMgaW5zdXJlZCB1bmRlciBhIDEgbWlsbGlvbiBkZWR1Y3RpYmxlIGFwcGxpZWQgdG8gdGhlIGZpcnN0IDUgbWlsbGlvbiBvZiBjbGFpbXNcbiMgTnVtYmVyIG9mIGNsYWltcyBpbiB0aGUgZGF0YVxuc3VtKGNsYWltcyA+IDFlNikgXG4jIEV4cGVjdGVkXG4oMSAtIHBsbm9ybShxID0gMWU2LCBtZWFubG9nID0gbXUsIHNkbG9nID0gc2lnbWEpKSAqIGxlbmd0aChjbGFpbXMpXG5cbiMgQXZlcmFnZSBWYWx1ZSBmcm9tIGNsYWltc1xuaW5zdXJlZCA8LSBjbGFpbXNbY2xhaW1zID4gMWU2XVxubWVhbihwbWluKDVlNiwgaW5zdXJlZCkpXG5cbiNFeHBlY3RlZFxuMWU2ICsgKGxldmxub3JtKGxpbWl0ID0gNWU2LCBtZWFubG9nID0gbXUsIHNkbG9nID0gc2lnbWEpIC0gXG4gIGxldmxub3JtKGxpbWl0ID0gMWU2LCBtZWFubG9nID0gbXUsIHNkbG9nID0gc2lnbWEpKSAvIFxuICAoMSAtIHBsbm9ybShxID0gMWU2LCBtZWFubG9nID0gbXUsIHNkbG9nID0gc2lnbWEpKSIsInNjdCI6InN1Y2Nlc3NfbXNnKFwiV2VsbCBkb25lIVwiKSJ9
+</div>
+<div id="video-policy-coinsurance-and-reinsurance" class="section level4 unnumbered">
+<h4>Video: Policy Coinsurance and Reinsurance</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_4f9j72l3&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_5vv01as5" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+</div>
+<div id="overheads-policy-coinsurance-and-reinsurance-click-tab-to-view" class="section level4 unnumbered">
+<h4>Overheads: Policy Coinsurance and Reinsurance (Click Tab to View)</h4>
+<div class="tab">
+<p><button class="tablinks" onclick="openTab(event, 'Sect343A')">A. Coinsurance</button>
+<button class="tablinks" onclick="openTab(event, 'Sect343B')">B. Raw Moments of <span class="math inline">\(Y^L\)</span></button>
+<button class="tablinks" onclick="openTab(event, 'Sect343C')">C. Inflation </button>
+<button class="tablinks" onclick="openTab(event, 'Sect343D')">D. Example: Actuarial Exam Question </button>
+<button class="tablinks" onclick="openTab(event, 'Sect343E')">E. R Code to Calculate Expected Values </button>
+<button class="tablinks" onclick="openTab(event, 'Sect343F')">F. Reinsurance </button>
+<button class="tablinks" onclick="openTab(event, 'Sect343G')">G. Review </button></p>
+</div>
+<div id="Sect343A" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=93" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect343B" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=94" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect343C" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=95" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect343D" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=96" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect343E" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=98" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect343F" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=99" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect343G" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=100" width="100%" height="400"> </iframe>
+</div>
+</div>
+</div>
+<div id="exercise.-expected-claims-subject-to-a-deductible-and-coinsurance" class="section level3">
+<h3><span class="header-section-number">3.4.4</span> Exercise. Expected Claims Subject to a Deductible and Coinsurance</h3>
+<p><strong>Assignment Text</strong></p>
+<p>For this exercise, assume that an insurer provides coverage for the first ${$}$5 million of claims in excess of a ${$}$1 million deductible. Note that this coverage is sometimes states as ${$}$4 million excess of ${$}$1 million (or shorthand notation such as ${$}$4mln xs ${$}$1 mln). (This is the same as the prior exercise.) However, now you should assume that there is a 20% coinsurance provision. The number of claims will not differ from the prior exercise, so will focus on the average value.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Calculate the expected insured value of the claims subject to a ${$}$1 million deductible and 20% coinsurance and a ${$}$5 million policy limit using the <code>levlnorm</code> and <code>plnorm</code> function and the compare to the amounts insured from <code>claims</code>. In contrast to the prior exercise, calculate the insured value of the claim rather than the ground-up value.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNldC5zZWVkKDEyMzQ1KVxubXUgPC0gMTJcbnNpZ21hIDwtIDEuNVxuY2xhaW1zIDwtIHJsbm9ybShuID0gMTAwMDAwLCBtZWFubG9nID0gbXUsIHNkbG9nID0gc2lnbWEpXG5tbG5vcm0gPC0gZnVuY3Rpb24obWVhbmxvZywgc2Rsb2cpIGV4cChtZWFubG9nICsgc2Rsb2cgXiAyIC8yKVxuXG5sZXZsbm9ybSA8LSBmdW5jdGlvbihsaW1pdCwgbWVhbmxvZywgc2Rsb2cpe1xuICB0MSA8LSBtbG5vcm0obWVhbmxvZyA9IG1lYW5sb2csIHNkbG9nID0gc2Rsb2cpICogXG4gICAgcG5vcm0ocSA9IChsb2cobGltaXQpIC0gbWVhbmxvZyAtIHNkbG9nIF4gMikgLyBzZGxvZylcbiAgdDIgPC0gbGltaXQgKiAoIDEtIHBub3JtKChsb2cobGltaXQpIC0gbWVhbmxvZykgLyBzZGxvZykpXG4gIHJldHVybih0MSArIHQyKVxuICB9Iiwic2FtcGxlIjoiIyMjIENsYWltIGFtb3VudHMgaW5zdXJlZCB1bmRlciBhICQxIG1pbGxpb24gZGVkdWN0aWJsZSB3aXRoIGEgJDUgbWlsbGlvbiBwb2xpY3kgbGltaXRcbiMjIyB3aXRoIDIwJSBjb2luc3VyYW5jZVxuXG4jQXZlcmFnZSBWYWx1ZVxuaW5zdXJlZCA8LSBjbGFpbXNbY2xhaW1zID4gPz9dXG5tZWFuKHBtaW4oPz8sID8/KSAtID8/KSAqICgxIC0gPz8pXG5cbiNBdmVyYWdlIFZhbHVlXG4obGV2bG5vcm0obGltaXQgPSA/PywgbWVhbmxvZyA9ID8/LCBzZGxvZyA9ID8/KSAtIFxuICBsZXZsbm9ybShsaW1pdCA9ID8/LCBtZWFubG9nID0gPz8sIHNkbG9nID0gPz8pKSAvIFxuICAoMSAtIHBsbm9ybShxID0gPz8sIG1lYW5sb2cgPSA/Pywgc2Rsb2cgPSA/PykpICogXG4gICAgKDEgLSA/PykiLCJzb2x1dGlvbiI6IiMjIyBDbGFpbSBhbW91bnRzIGluc3VyZWQgdW5kZXIgYSAkMSBtaWxsaW9uIGRlZHVjdGlibGUgd2l0aCBhICQ1IG1pbGxpb24gcG9saWN5IGxpbWl0ICAgXG4jIyMgd2l0aCAyMCUgY29pbnN1cmFuY2VcblxuI0F2ZXJhZ2UgVmFsdWVcbmluc3VyZWQgPC0gY2xhaW1zW2NsYWltcyA+IDFlNl1cbm1lYW4ocG1pbig1ZTYsIGluc3VyZWQpIC0gMWU2KSAqICgxIC0gMC4yKVxuXG4jQXZlcmFnZSBWYWx1ZVxuXG4obGV2bG5vcm0obGltaXQgPSA1ZTYsIG1lYW5sb2cgPSBtdSwgc2Rsb2cgPSBzaWdtYSkgLSBcbiAgbGV2bG5vcm0obGltaXQgPSAxZTYsIG1lYW5sb2cgPSBtdSwgc2Rsb2cgPSBzaWdtYSkpIC8gXG4gICgxIC0gcGxub3JtKHEgPSAxZTYsIG1lYW5sb2cgPSBtdSwgc2Rsb2cgPSBzaWdtYSkpICogKDEgLSAwLjIpIiwic2N0Ijoic3VjY2Vzc19tc2coXCJXZWxsIGRvbmUhXCIpIn0=
+</div>
+</div>
+</div>
+<div id="maximum-likelihood-estimation" class="section level2">
+<h2><span class="header-section-number">3.5</span> Maximum Likelihood Estimation</h2>
+<hr />
+<p>In this section, you learn how to:</p>
+<ul>
+<li>Define a likelihood for a sample of observations from a continuous distribution.</li>
+<li>Define the maximum likelihood estimator for a random sample of observations from a continuous distribution.</li>
+<li>Estimate parametric distributions based on grouped, censored, and truncated data.</li>
+</ul>
+<hr />
+<div id="video-maximum-likelihood-estimation" class="section level4 unnumbered">
+<h4>Video: Maximum Likelihood Estimation</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_qaxiabmf&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_dgu7549s" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+</div>
+<div id="overheads-maximum-likelihood-estimation-click-tab-to-view" class="section level4 unnumbered">
+<h4>Overheads: Maximum Likelihood Estimation (Click Tab to View)</h4>
+<div class="tab">
+<button class="tablinks" onclick="openTab(event, 'Sect351A')">A. Overview</button>
+<button class="tablinks" onclick="openTab(event, 'Sect351B')">B. Maximum Likelihood Estimators (MLEs) for Complete Data</button>
+<button class="tablinks" onclick="openTab(event, 'Sect351C')">C. MLEs using Modified Data</button>
+<button class="tablinks" onclick="openTab(event, 'Sect351D')">D. MLEs for Grouped Data</button>
+<button class="tablinks" onclick="openTab(event, 'Sect351E')">E. MLEs for Censored Data</button>
+<button class="tablinks" onclick="openTab(event, 'Sect351F')">F. MLEs for Truncated Data</button>
+<button class="tablinks" onclick="openTab(event, 'Sect351G')">G. Exercise 3.5.1</button>
+<button class="tablinks" onclick="openTab(event, 'Sect351H')">H. Exercise 3.5.2</button>
+<button class="tablinks" onclick="openTab(event, 'Sect351I')">I. Review</button>
+</div>
+<div id="Sect351A" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=82" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect351B" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=83" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect351C" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=84" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect351D" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=85" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect351E" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=86" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect351F" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=87" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect351G" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=88" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect351H" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=89" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect351I" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap3.pdf#page=90" width="100%" height="400"> </iframe>
+</div>
+</div>
+<div id="Ex:MLEPareto" class="section level3">
+<h3><span class="header-section-number">3.5.1</span> Exercise. Maximum Likelihood Estimation for a Pareto Distribution</h3>
+<p><strong>Assignment Text</strong></p>
+<p>For this exercise we will undertake maximum likelihood estimation to fit a Pareto distribution to claim severity data.</p>
+<p>Because we have two parameters in a Pareto distribution, undertaking maximum likelihood involves finding the estimates that maximize the likelihood surface. Visualizing the likelihood surface may help to gain an appreciation of how maximum likelihood works. After finding the parameter estimates, we plot out a contour plot of the likelihood and mark the maximum likelihood estimates on the plot.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Extract claim severity data from the Property Fund data.</li>
+<li>Write a function to calculate the negative log-likelihood for the claim severity data, assuming that claim severity is Pareto distributed. The <em>pdf</em> function for a Pareto distribution [dpareto()], which was created in Exercise <a href="modeling-loss-severity.html#Ex:CreateParetoDensityFct">3.2.3</a>, can be used when finding the negative log-likelihood.</li>
+<li>Find the maximum likelihood estimates by using <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/optim">optim()</a> to minimize the negative log-likelihood.</li>
+<li>Plot a contour plot of the likelihood using <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/contour">contour()</a>, and use <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/points">points()</a> to mark the maximum likelihood estimates on the plot.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0RGV2L0xEQUNvdXJzZTEvbWFpbi9EYXRhL0luc2FtcGxlLmNzdlwiLCBoZWFkZXI9VCwgbmEuc3RyaW5ncz1jKFwiLlwiKSwgc3RyaW5nc0FzRmFjdG9ycz1GQUxTRSlcblxuZHBhcmV0byA8LSBmdW5jdGlvbih4LHNoYXBlLHNjYWxlKXtcbiAgc2hhcGUqKHNjYWxlXnNoYXBlKS8oKHNjYWxlK3gpXihzaGFwZSsxKSlcbn0iLCJzYW1wbGUiOiIjIEV4dHJhY3QgdGhlIGNsYWltIHNldmVyaXR5IGZyb20gdGhlIGRhdGFcbmNsYWltczwtc3Vic2V0KEluc2FtcGxlLHlBdmc+MCkkeUF2Z1xuXG4jIFdyaXRlIGEgZnVuY3Rpb24gdG8gY2FsY3VsYXRlIHRoZSBOZWdhdGl2ZSBsb2cgbGlrZWxpaG9vZCBvZiB0aGUgUGFyZXRvIFxubmxvZ2xpa2UgPC0gZnVuY3Rpb24ocGFyYW1zKSB7XG4gIGxpa2U8LSBkcGFyZXRvKGNsYWltcywgc2hhcGU9cGFyYW1zWzFdLHNjYWxlPXBhcmFtc1syXSlcbiAgcmV0dXJuKC1zdW0obG9nKD8/KSkpXG59XG5cbiMgRmluZCB0aGUgbWF4aW11bSBsaWtlbGlob29kIGVzdGltYXRlcyBieSBmaW5kaW5nIHRoZSBtaW5pbXVtIG9mIHRoZSBuZWdhdGl2ZSBsb2cgbGlrZWxpaG9vZCBcbmxpa19yZXN1bHQgPC0gb3B0aW0ocGFyPWMoMiwxMDAwKSwgZm49Pz8sIG1ldGhvZCA9IGMoXCJMLUJGR1MtQlwiKSwgbG93ZXI9YyguNSwxMDApLCBoZXNzaWFuID0gVFJVRSlcbmxpa19yZXN1bHQkcGFyXG5cbiMgRHJhdyBhIGNvbnRvdXIgcGxvdCBvZiB0aGUgbmVnYXRpdmUgbG9nLWxpa2VsaWhvb2QuXG5hbHBoYTwtc2VxKDEsMixieT0wLjA1KVxudGhldGEgPC1zZXEoNjAwMCwxMjAwMCxieT0xMDApXG5kYXRhbGlrZTwtZXhwYW5kLmdyaWQoYWxwaGEsdGhldGEpXG5sbkxzZXE8LU5VTExcbmZvcihpIGluIDE6bnJvdyhkYXRhbGlrZSkpe1xuICBsbkxzZXFbaV08LS1zdW0obG9nKGRwYXJldG8oY2xhaW1zLCBzaGFwZT1kYXRhbGlrZVtpLDFdLHNjYWxlPWRhdGFsaWtlW2ksMl0pKSlcbn1cbmxuTHNlcTwtbWF0cml4KGxuTHNlcSxsZW5ndGgoYWxwaGEpLGxlbmd0aCh0aGV0YSkpXG5jb250b3VyKGFscGhhLHRoZXRhLGxuTHNlcSxubGV2ZWxzPTE1MCx4bGFiPVwiYWxwaGFcIix5bGFiPVwidGhldGFcIilcblxuIyBNYXJrIHRoZSBNTEUgZXN0aW1hdGVzIG9uIGNvbnRvdXIgcGxvdC5cbnBvaW50cyhsaWtfcmVzdWx0JHBhclsxXSxsaWtfcmVzdWx0JHBhclsyXSxwY2g9XCJYXCIsY29sPVwicmVkXCIpIiwic29sdXRpb24iOiIjIEV4dHJhY3QgdGhlIGNsYWltIHNldmVyaXR5IGZyb20gdGhlIGRhdGFcbmNsYWltczwtc3Vic2V0KEluc2FtcGxlLHlBdmc+MCkkeUF2Z1xuXG4jIFdyaXRlIGEgZnVuY3Rpb24gdG8gY2FsY3VsYXRlIHRoZSBOZWdhdGl2ZSBsb2cgbGlrZWxpaG9vZCBvZiB0aGUgUGFyZXRvIFxubmxvZ2xpa2UgPC0gZnVuY3Rpb24ocGFyYW1zKSB7XG4gIGxpa2U8LSBkcGFyZXRvKGNsYWltcywgc2hhcGU9cGFyYW1zWzFdLHNjYWxlPXBhcmFtc1syXSlcbiAgcmV0dXJuKC1zdW0obG9nKGxpa2UpKSlcbn1cblxuIyBGaW5kIHRoZSBtYXhpbXVtIGxpa2VsaWhvb2QgZXN0aW1hdGVzIGJ5IGZpbmRpbmcgdGhlIG1pbmltdW0gb2YgdGhlIG5lZ2F0aXZlIGxvZyBsaWtlbGlob29kIFxubGlrX3Jlc3VsdCA8LSBvcHRpbShwYXI9YygyLDEwMDApLCBmbj1ubG9nbGlrZSwgbWV0aG9kID0gYyhcIkwtQkZHUy1CXCIpLCBsb3dlcj1jKC41LDEwMCksIGhlc3NpYW4gPSBUUlVFKVxubGlrX3Jlc3VsdCRwYXJcblxuIyBEcmF3IGEgY29udG91ciBwbG90IG9mIHRoZSBuZWdhdGl2ZSBsb2ctbGlrZWxpaG9vZC5cbmFscGhhPC1zZXEoMSwyLGJ5PTAuMDUpXG50aGV0YSA8LXNlcSg2MDAwLDEyMDAwLGJ5PTEwMClcbmRhdGFsaWtlPC1leHBhbmQuZ3JpZChhbHBoYSx0aGV0YSlcbmxuTHNlcTwtTlVMTFxuZm9yKGkgaW4gMTpucm93KGRhdGFsaWtlKSl7XG4gIGxuTHNlcVtpXTwtLXN1bShsb2coZHBhcmV0byhjbGFpbXMsIHNoYXBlPWRhdGFsaWtlW2ksMV0sc2NhbGU9ZGF0YWxpa2VbaSwyXSkpKVxufVxubG5Mc2VxPC1tYXRyaXgobG5Mc2VxLGxlbmd0aChhbHBoYSksbGVuZ3RoKHRoZXRhKSlcbmNvbnRvdXIoYWxwaGEsdGhldGEsbG5Mc2VxLG5sZXZlbHM9MTUwLHhsYWI9XCJhbHBoYVwiLHlsYWI9XCJ0aGV0YVwiKVxuXG4jIE1hcmsgdGhlIE1MRSBlc3RpbWF0ZXMgb24gY29udG91ciBwbG90LlxucG9pbnRzKGxpa19yZXN1bHQkcGFyWzFdLGxpa19yZXN1bHQkcGFyWzJdLHBjaD1cIlhcIixjb2w9XCJyZWRcIikiLCJzY3QiOiJzdWNjZXNzX21zZyhcIldlbGwgZG9uZSFcIikiLCJoaW50IjoiWW91IGNhbiBnZXQgcmVtaW5kZXJzIG9mIHRoZSBmb3VuZGF0aW9ucyBvZiBtYXhpbXVtIGxpa2VsaWhvb2QgZXN0aW1hdGlvbiBpbiA8YSBocmVmPVwiaHR0cHM6Ly9vcGVuYWN0dGV4dHMuZ2l0aHViLmlvL0xvc3MtRGF0YS1BbmFseXRpY3MvQy1BcHBBLmh0bWxcIj5DaGFwdGVyIDE1IG9mICA8ZW0+TG9zcyBEYXRhIEFuYWx5dGljczwvZW0+PC9hPiJ9
+</div>
+</div>
+<div id="exercise.-finding-standard-errors-for-maximum-likelihood-estimates" class="section level3">
+<h3><span class="header-section-number">3.5.2</span> Exercise. Finding Standard Errors for Maximum Likelihood Estimates</h3>
+<p><img src = "ContributorPics/hurdler.png" width = "65" height = "65" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
+<p><strong>Assignment Text</strong></p>
+<p>For this exercise we calculate 95% confidence intervals for the parameters based on estimates that we found in Exercise <a href="modeling-loss-severity.html#Ex:MLEPareto">3.5.1</a>. The theory underpinning <em>mle</em> confidence intervals is described in <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-AppA.html#S:AppA:IE">Section 15.3 of <em>Loss Data Analytics</em></a>.</p>
+<p>The parameters that we have estimated depend on the data, and since the data can be considered as a random sample from a larger unknown population, maximum likelihood estimators are random variables. A property of maximum likelihood is that the estimators converge in distribution to a normal distribution, as <span class="math inline">\(n\)</span> gets larger.</p>
+<p>If we minimize the negative log-likelihood, we can use the Hessian matrix (which is a matrix of the second-order partial derivatives) to find the variance of the estimators. Specifically, the standard errors of the estimators are equal to the square root of the diagonal elements of the inverse of the Hessian matrix.</p>
+<p>Some useful <code>R</code> functions for this exercise are:</p>
+<ul>
+<li>The <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/solve">solve()</a> function can be used to find the inverse of a square matrix.</li>
+<li>The <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/diag">diag()</a> function extracts the diagonal of a matrix.</li>
+<li>The <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Normal">qnorm()</a> function which finds quantiles of a normal distribution.</li>
+</ul>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Use <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/solve">solve()</a> to calculate the inverse of the Hessian matrix. The Hessian is one of the outputs from the <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/optim">optim()</a> function, and can be extracted from <code>lik_result</code> which was found in the previous exercise.</li>
+<li>Use <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/diag">diag()</a> to extract the diagonals of the inverse of the Hessian.</li>
+<li>Calculate the standard errors of the parameter estimates by taking the square root of the diagonal elements of the inverse of the Hessian matrix.</li>
+<li>Use the standard errors to calculate 95% confidence intervals.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0RGV2L0xEQUNvdXJzZTEvbWFpbi9EYXRhL0luc2FtcGxlLmNzdlwiLCBoZWFkZXI9VCwgbmEuc3RyaW5ncz1jKFwiLlwiKSwgc3RyaW5nc0FzRmFjdG9ycz1GQUxTRSlcbmNsYWltczwtc3Vic2V0KEluc2FtcGxlLHlBdmc+MCkkeUF2Z1xuZHBhcmV0byA8LSBmdW5jdGlvbih4LHNoYXBlLHNjYWxlKXtcbiAgc2hhcGUqKHNjYWxlXnNoYXBlKS8oKHNjYWxlK3gpXihzaGFwZSsxKSlcbn1cbm5sb2dsaWtlIDwtIGZ1bmN0aW9uKHBhcmFtcykge1xuICBsaWtlPC0gZHBhcmV0byhjbGFpbXMsIHNoYXBlPXBhcmFtc1sxXSxzY2FsZT1wYXJhbXNbMl0pXG4gIHJldHVybigtc3VtKGxvZyhsaWtlKSkpXG59XG5saWtfcmVzdWx0IDwtIG9wdGltKHBhcj1jKDIsMTAwMCksIGZuPW5sb2dsaWtlLCBtZXRob2QgPSBjKFwiTC1CRkdTLUJcIiksIGxvd2VyPWMoLjUsMTAwKSwgaGVzc2lhbiA9IFRSVUUpIiwic2FtcGxlIjoiIyBFeHRyYWN0IHRoZSBIZXNzaWFuIGFuZCB0YWtlIHRoZSBpbnZlcnNlXG5JbnZIZXNzPC0/Pyg/PyRoZXNzaWFuKVxuXG4jIEZpbmQgdGhlIGRpYWdvbmFsIGVsZW1lbnRzIG9mIEludkhlc3MuIFRoZXNlIGFyZSB0aGUgdmFyaWFuY2VzIG9mIHRoZSBlc3RpbWF0b3JzXG52UGFyPC0/Pyg/PylcblxuIyBGaW5kIHRoZSBzdGFuZGFyZCBlcnJvciBvZiB0aGUgcGFyYW1ldGVyIGVzdGltYXRlc1xuc2U8LT8/KD8/KVxuXG4jIENhbGN1bGF0ZSA5NSUgY29uZmlkZW5jZSBpbnRlcnZhbHMgZm9yIHRoZSBwYXJhbWV0ZXIgZXN0aW1hdGVzXG5saWtfcmVzdWx0JD8/ICsgYygtMSwxKSpxbm9ybSg/Pykqc2VbMV1cbmxpa19yZXN1bHQkcGFyWzJdICsgYygtMSwxKSpxbm9ybSg/Pykqc2VbMl0iLCJzb2x1dGlvbiI6IiMgRXh0cmFjdCB0aGUgSGVzc2lhbiBhbmQgdGFrZSB0aGUgaW52ZXJzZVxuSW52SGVzczwtc29sdmUobGlrX3Jlc3VsdCRoZXNzaWFuKVxuXG4jIEZpbmQgdGhlIGRpYWdvbmFsIGVsZW1lbnRzIG9mIEludkhlc3MuIFRoZXNlIGFyZSB0aGUgdmFyaWFuY2VzIG9mIHRoZSBlc3RpbWF0b3JzXG52UGFyPC1kaWFnKEludkhlc3MpXG5cbiMgRmluZCB0aGUgc3RhbmRhcmQgZXJyb3Igb2YgdGhlIHBhcmFtZXRlciBlc3RpbWF0ZXNcbnNlPC1zcXJ0KHZQYXIpXG5cbiMgQ2FsY3VsYXRlIDk1JSBjb25maWRlbmNlIGludGVydmFscyBmb3IgdGhlIHBhcmFtZXRlciBlc3RpbWF0ZXNcbmxpa19yZXN1bHQkcGFyWzFdICsgYygtMSwxKSpxbm9ybSgwLjk3NSkqc2VbMV1cbmxpa19yZXN1bHQkcGFyWzJdICsgYygtMSwxKSpxbm9ybSgwLjk3NSkqc2VbMl0iLCJzY3QiOiJzdWNjZXNzX21zZyhcIldlbGwgZG9uZSFcIikiLCJoaW50IjoiWW91IGNhbiBnZXQgcmVtaW5kZXJzIG9mIHRoZSB0aGVvcmV0aWNhbCBiYWNrZ3JvdW5kIG9mIG1heGltdW0gbGlrZWxpaG9vZCBlc3RpbWF0aW9uIGluIDxhIGhyZWY9XCJodHRwczovL29wZW5hY3R0ZXh0cy5naXRodWIuaW8vTG9zcy1EYXRhLUFuYWx5dGljcy9DLUFwcEMuaHRtbFwiPkNoYXB0ZXIgMTcgb2YgIDxlbT5Mb3NzIERhdGEgQW5hbHl0aWNzPC9lbT48L2E+In0=
+</div>
+</div>
+</div>
+<div id="contributors-3" class="section level2 unnumbered">
+<h2>Contributors</h2>
+<ul>
+<li><strong>Authors</strong>. <strong>Tim Higgins</strong> , Australian National University, <strong>Fei Huang</strong>, University of New South Wales (UNSW) Sydney, <strong>Nii-Armah Okine</strong>, Appalachian State University, and <strong>Rajesh (Raj) Sahasrabuddhe</strong>, Oliver Wyman Actuarial Consulting, are the principal authors of the initial version of this chapter.</li>
+<li><strong>Chapter Maintainers</strong>. Please contact ??? and/or Jed at <a href="mailto:jfrees@bus.wisc.edu" class="email">jfrees@bus.wisc.edu</a> for chapter comments and suggested improvements.</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="frequency-modeling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="model-selection-and-estimation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

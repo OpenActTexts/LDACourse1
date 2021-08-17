@@ -1,0 +1,285 @@
+1
+00:00:01,560 --> 00:00:05,540
+Hi, I'm Brian Hartman from Brigham Young University.
+Today, we are going to be talking about tools
+
+2
+00:00:05,540 --> 00:00:12,430
+for model selection. In order to discuss this,
+we're gonna use an example where we have some
+
+3
+00:00:12,430 --> 00:00:17,540
+data and we think, well, this data might come
+from a gamma distribution, or it might come
+
+4
+00:00:17,540 --> 00:00:25,109
+from pareto distribution. How can we tell
+which one it probably came from?
+
+5
+00:00:25,109 --> 00:00:31,380
+One way to start is to look at just the CDFs
+and the PDFs and plot them on the same plot.
+
+6
+00:00:31,380 --> 00:00:41,400
+And so we see here on the left, the CDFs of
+both the gamma and the pareto distribution
+
+7
+00:00:41,400 --> 00:00:47,840
+in addition to the data, which are the dots.
+And you can see just by looking at it that
+
+8
+00:00:47,840 --> 00:00:53,110
+the gamma distribution that's this line right
+here, doesn't seem to fit the data really
+
+9
+00:00:53,110 --> 00:00:58,800
+well. Whereas the pareto distribution, this
+purple line right here, it seems to fit it
+
+10
+00:00:58,800 --> 00:01:04,330
+really well. You could also look at the density
+functions or the PDFs. And again, we see that
+
+11
+00:01:04,330 --> 00:01:09,579
+the gamma PDF is not that close to the kernel
+density estimate of the data, which is this
+
+12
+00:01:09,579 --> 00:01:14,560
+black line. Whereas the purple line, which
+is the, the fitted Pareto is much closer.
+
+13
+00:01:14,560 --> 00:01:17,990
+So it seems pretty likely that the pareto
+makes more sense.
+
+14
+00:01:17,990 --> 00:01:25,469
+One other way you can do this is something
+called the P P plot. And this gives that empirical
+
+15
+00:01:25,469 --> 00:01:33,220
+CDF at each observation on the horizontal
+axis. And so when you see that it seems to
+
+16
+00:01:33,220 --> 00:01:38,249
+fit really well like it does in the plot on
+the right then most of these points are going
+
+17
+00:01:38,249 --> 00:01:47,909
+to be near the X equals Y line. As we see
+with the gamma, we have this shape that obviously
+
+18
+00:01:47,909 --> 00:01:51,749
+doesn't fit that X equals Y line. So again,
+this is more evidence that the Pareto was
+
+19
+00:01:51,749 --> 00:01:57,619
+probably a better fit to this data than the
+gamma distribution.
+
+20
+00:01:57,619 --> 00:02:04,380
+We'd also look at a QQ plot, which does quantiles
+instead of the probabilities. This also gives
+
+21
+00:02:04,380 --> 00:02:08,890
+us a little more information. So we see again,
+looking at both the gamma quantile and the
+
+22
+00:02:08,890 --> 00:02:15,189
+log gamma quantile, that both of those are
+pretty poor fits, but as we look at the Pareto
+
+23
+00:02:15,189 --> 00:02:20,980
+quantile, we see that on this log scale it
+has a little bit of a hard time with these
+
+24
+00:02:20,980 --> 00:02:29,319
+smaller observations. It does much better
+with the bigger observations.
+
+25
+00:02:29,319 --> 00:02:33,860
+We might want to add a little more structure
+around this. While it's nice to look at pictures
+
+26
+00:02:33,860 --> 00:02:38,510
+and say, this picture seems to fit better
+than the other. We might want to have some
+
+27
+00:02:38,510 --> 00:02:43,560
+kind of structure and an actual hypothesis
+test. These are called goodness of fit tests.
+
+28
+00:02:43,560 --> 00:02:53,030
+The idea behind these tests is that we first
+assume 
+
+29
+00:02:53,030 --> 00:02:59,959
+that the distribution generated the data and
+then we go looking for evidence that it didn't.
+
+30
+00:02:59,959 --> 00:03:04,989
+Our null hypothesis is the data did come from
+that population. And our alternative is that
+
+31
+00:03:04,989 --> 00:03:10,750
+the data did not. And so if we get enough
+evidence against that null hypothesis we're
+
+32
+00:03:10,750 --> 00:03:15,439
+gonna reject the hypothesis. And we say that
+this model, or this distribution, is not a
+
+33
+00:03:15,439 --> 00:03:22,489
+good fit for this data.
+One such goodness of fit test is called the
+
+34
+00:03:22,489 --> 00:03:28,989
+Kolmogorov-Smirnov test, the KS test. What
+it does is it measures the max distance between
+
+35
+00:03:28,989 --> 00:03:37,310
+the empirical CDF and the CDF of the fitted
+distribution. We can go back to our plots
+
+36
+00:03:37,310 --> 00:03:43,920
+here, and I can give you an example. So in
+this case, if we were to do a test for the
+
+37
+00:03:43,920 --> 00:03:50,040
+gamma distribution, looking over here at the
+CDFs, we would find the maximum distance between
+
+38
+00:03:50,040 --> 00:03:57,049
+the gamma CDF and the empirical CDF. And it
+would be probably right here. And so that's
+
+39
+00:03:57,049 --> 00:04:02,590
+a pretty big difference. And maybe that would
+mean that we reject that null hypothesis because
+
+40
+00:04:02,590 --> 00:04:08,080
+the difference was so big. Alternatively,
+if we look at the Pareto fitted distribution,
+
+41
+00:04:08,080 --> 00:04:13,060
+we see that the maximum distance is probably
+right here, but it's really, really small.
+
+42
+00:04:13,060 --> 00:04:16,530
+Maybe that's not enough evidence to reject
+the null hypothesis. Maybe that would say
+
+43
+00:04:16,530 --> 00:04:27,730
+the Pareto is decent. That's why the KS test
+looked at the maximum of these differences.
+
+44
+00:04:27,730 --> 00:04:36,199
+Here are some possible critical values that
+you can look at. You can estimate any of these
+
+45
+00:04:36,199 --> 00:04:42,330
+probabilities or P values from any software
+package.
+
+46
+00:04:42,330 --> 00:04:47,060
+Another one, if you have grouped data is the
+Chi square test and the idea behind the Chi
+
+47
+00:04:47,060 --> 00:04:53,120
+square tests with group data, as we say, under
+the model, we would expect to have X observations
+
+48
+00:04:53,120 --> 00:05:01,500
+in this group and Y observations in this group,
+we actually have this and this, how close
+
+49
+00:05:01,500 --> 00:05:06,080
+are those expected observations to the actual
+observations? So that's what this is right
+
+50
+00:05:06,080 --> 00:05:14,180
+here. Here is the number of observations in
+category J minus the expected observations
+
+51
+00:05:14,180 --> 00:05:20,069
+in category J squared over the expected observations
+in category J. Then you sum those all up for
+
+52
+00:05:20,069 --> 00:05:26,349
+all the categories. And you get a test statistic,
+which is actually Chi squared distributed
+
+53
+00:05:26,349 --> 00:05:34,979
+with degrees of freedom equal to the number
+of groups minus one minus R, which is the
+
+54
+00:05:34,979 --> 00:05:41,580
+number of groups or estimated parameters.
+So that's another way that you can test whether
+
+55
+00:05:41,580 --> 00:05:49,180
+that distribution seems to fit well or not.
+So we learned how to summarize data graphically.
+
+56
+00:05:49,180 --> 00:05:57,830
+We learned how to summarize through goodness
+of fit tests. And we look forward to the next
+
+57
+00:05:57,830 --> 00:06:02,490
+section, which is likelihood ratio tests and
+goodness of fit tests.
+

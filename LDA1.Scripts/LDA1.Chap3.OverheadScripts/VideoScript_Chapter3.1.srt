@@ -1,0 +1,326 @@
+1
+00:00:02,080 --> 00:00:06,800
+Hello, my name is Fei Huang, a senior 
+lecturer at the UNSW Sydney. 
+ 
+
+2
+00:00:07,520 --> 00:00:13,520
+In this video we will review Section 
+3.1 Basic Distributional Quantities. 
+ 
+
+3
+00:00:14,800 --> 00:00:19,600
+In particular, we learn how to define 
+some basic distributional quantities,  
+
+4
+00:00:19,600 --> 00:00:23,040
+including moments, percentiles, 
+and generating functions. 
+ 
+
+5
+00:00:25,200 --> 00:00:31,760
+We first define raw moments. Let X be a continuous 
+random variable with probability density function  
+
+6
+00:00:31,760 --> 00:00:41,280
+f_x(x) and distribution function F_x(x). The 
+k-th raw moment of X, denoted by \mu_k , is the  
+
+7
+00:00:41,280 --> 00:00:47,920
+expected value of the k-th power of X, provided 
+it exists. We can see that the formula for the  
+
+8
+00:00:47,920 --> 00:00:53,680
+k-th raw moment is presented at the bottom of the 
+slide. A special case is the first raw moment,  
+
+9
+00:00:53,680 --> 00:01:01,120
+which is the mean of X, denoted by \mu.
+Next, we define the central moment of X, denoted  
+
+10
+00:01:01,120 --> 00:01:08,320
+by \mu_k, which is the expected value of the k-th 
+power of the deviation of X from its mean \mu. The  
+
+11
+00:01:08,320 --> 00:01:14,640
+formula for \mu_k is given on this slide. We can 
+see that compared with the raw moment formula, the  
+
+12
+00:01:14,640 --> 00:01:21,280
+central moment focuses on the deviation of X from 
+its mean \mu, while the raw moment focuses on X.  
+
+13
+00:01:22,400 --> 00:01:27,840
+A special case is the second central moment, 
+which is the variance of X denoted by \sigma^2.  
+
+14
+00:01:28,800 --> 00:01:32,400
+The square root of the variance is 
+the standard deviation \sigma. 
+ 
+
+15
+00:01:34,640 --> 00:01:39,840
+Now we consider two additional special cases 
+based on the third and the fourth central moments,  
+
+16
+00:01:40,400 --> 00:01:47,280
+skewness and kurtosis. Skewness is a measure 
+of symmetry of the probability distribution,  
+
+17
+00:01:47,280 --> 00:01:53,160
+defined as the ratio of the third central 
+moment to the cube of the standard deviation. A  
+
+18
+00:01:53,840 --> 00:02:00,240
+positive coefficient of skewness indicates that 
+the distribution is skewed to the right. We also  
+
+19
+00:02:00,240 --> 00:02:06,880
+call it positively skewed. Kurtosis is a measure 
+of the tailedness of the probability distribution,  
+
+20
+00:02:06,880 --> 00:02:12,000
+defined as the ratio of the fourth central moment 
+to the fourth power of the standard deviation.  
+
+21
+00:02:12,720 --> 00:02:19,120
+The normal distribution has a coefficient of 
+kurtosis of 3. Distributions with a coefficient  
+
+22
+00:02:19,120 --> 00:02:25,360
+of kurtosis greater than 3 have heavier 
+tails than the normal, whereas distribution  
+
+23
+00:02:25,360 --> 00:02:30,080
+with a coefficient of kurtosis less than 
+3 have lighter tails and are flatter. 
+ 
+
+24
+00:02:32,640 --> 00:02:39,920
+In Section 3.1.2 we discuss the concept 
+of quantiles. When the distribution of  
+
+25
+00:02:39,920 --> 00:02:43,200
+X is continuous, for a given fraction p,  
+
+26
+00:02:43,840 --> 00:02:51,760
+the corresponding quantile is the solution of the 
+equation in this formula. For example, when p=0.5,  
+
+27
+00:02:52,480 --> 00:03:00,800
+\pi_0.5 is the middle point of the distribution, 
+called the median. You may come across another  
+
+28
+00:03:00,800 --> 00:03:06,320
+similar concept, called the percentile. 
+A percentile is a type of quantile;  
+
+29
+00:03:07,200 --> 00:03:14,080
+a 100p percentile is the number such that 
+100p percent of the data is below it. 
+ 
+
+30
+00:03:17,600 --> 00:03:23,280
+In this slide we can see the relationship 
+between mean and median under different skewness.  
+
+31
+00:03:24,640 --> 00:03:31,120
+For symmetrical distribution, the mean and 
+median are the same. However, for a positively  
+
+32
+00:03:31,120 --> 00:03:37,840
+skewed (or right-skewed) distribution, the mean 
+is bigger than the median. And for a negatively  
+
+33
+00:03:37,840 --> 00:03:42,480
+skewed (or left-skewed) distribution, the 
+mean is smaller than the median. 
+ 
+
+34
+00:03:45,680 --> 00:03:54,480
+In Section 3.1.3, we discuss the moment 
+generating function (mgf), denoted by M_X(t).  
+
+35
+00:03:55,520 --> 00:04:01,520
+Moment generating function uniquely characterizes 
+the distribution of X. As we can see from the  
+
+36
+00:04:01,520 --> 00:04:11,360
+formula given in this slide, the mgf is defined as 
+the expectation of e^{tX}, for all t for which the  
+
+37
+00:04:11,360 --> 00:04:18,560
+expected value exists. We can see that the k-th 
+derivative at zero is equal to the k-th raw moment  
+
+38
+00:04:18,560 --> 00:04:25,600
+of X, as shown by the formula at the bottom. 
+A related concept to moment generating function  
+
+39
+00:04:25,600 --> 00:04:30,720
+is the probability generating function. The 
+probability generating function can be computed  
+
+40
+00:04:30,720 --> 00:04:38,080
+using the moment generating function of log z. The 
+probability mass function of X can be recovered by  
+
+41
+00:04:38,080 --> 00:04:43,440
+taking derivatives of the probability generating 
+function for discrete random variables.
+ 
+
+42
+00:04:47,440 --> 00:04:52,640
+In Exercise 3.1.1, you will 
+be given a dataset called  
+
+43
+00:04:54,000 --> 00:05:02,800
+Anscombe s quartet. In this exercise, you 
+will consider 4 variables, y1, y2, y3 and y4.  
+
+44
+00:05:02,800 --> 00:05:08,960
+And you will be able to summarise the data 
+through summary, mean, var, and sd R functions.  
+
+45
+00:05:09,680 --> 00:05:13,760
+You will also practice the calculation 
+of the coefficient of skewness. 
+ 
+
+46
+00:05:15,760 --> 00:05:24,080
+Exercise 3.1.2 uses the data of the Wisconsin 
+Property Fund. It includes claim values y as  
+
+47
+00:05:24,080 --> 00:05:30,880
+well as the claim year Year. For this exercise you 
+will work with the natural logarithm of the claim  
+
+48
+00:05:30,880 --> 00:05:38,240
+values which are in the lny variable. We have 
+filtered the data to exclude zero claims. This  
+
+49
+00:05:38,240 --> 00:05:44,160
+exercise is to help you understand the shape of a 
+distribution, and changes in the shape as another  
+
+50
+00:05:44,160 --> 00:05:49,920
+variable changes through the boxplot function. 
+You will be able to use the quantile function to  
+
+51
+00:05:49,920 --> 00:05:56,800
+evaluate different "percentile" values. 
+Here we can see an illustration of boxplot.  
+
+52
+00:05:57,920 --> 00:06:05,200
+Boxplots have been a very popular statistical 
+graphic, especially for exploratory data analysis  
+
+53
+00:06:05,200 --> 00:06:11,680
+when you re trying to understand the data. 
+As we can see in this plot, it shows the minimum,  
+
+54
+00:06:11,680 --> 00:06:19,840
+maximum, median, as well as 25th and 
+75th percentiles in a compact way. 
+ 
+
+55
+00:06:21,600 --> 00:06:27,440
+In Exercise 3.1.3, you will be able to 
+apply the moment generating function  
+
+56
+00:06:27,440 --> 00:06:35,120
+using R for a gamma distribution. This exercise 
+references some low-level functions like eval  
+
+57
+00:06:35,120 --> 00:06:41,920
+and parse. It also mentions how environments 
+work. These topics are helpful for developing  
+
+58
+00:06:41,920 --> 00:06:48,720
+an advanced understanding of R. The parse function 
+converts a character vector to an expression.  
+
+59
+00:06:49,360 --> 00:06:54,880
+Then, you can use the eval function to 
+evaluate the expression. You can also use  
+
+60
+00:06:54,880 --> 00:07:01,200
+the D function to compute derivatives. For 
+more information about these R functions,  
+
+61
+00:07:01,200 --> 00:07:07,040
+please check the corresponding R help 
+manual using the help() function. 
+ 
+
+62
+00:07:12,160 --> 00:07:16,560
+In this section, we learned how to define 
+some basic distributional quantities,  
+
+63
+00:07:17,200 --> 00:07:25,920
+including moments, percentiles, and 
+generating functions. 
+ 
+

@@ -1,0 +1,470 @@
+1
+00:00:01,370 --> 00:00:05,360
+Welcome back to the tutorial on an Introduction
+to Loss Data Analytics.
+
+2
+00:00:05,360 --> 00:00:11,670
+Hello, my name is Jed Frees, an emeritus professor
+at the University of Wisconsin and the Australian
+
+3
+00:00:11,670 --> 00:00:17,330
+National University. In this video, I am going
+to demonstrate how different characteristics
+
+4
+00:00:17,330 --> 00:00:22,560
+may affect our assessment of insurance costs
+in the context of the Wisconsin Property Fund.
+
+5
+00:00:22,560 --> 00:00:24,800
+OVERHEAD 1 - Description of Rating Variables
+
+6
+00:00:24,800 --> 00:00:29,770
+Here is a list of available characteristics;
+hopefully, these are variables that you think
+
+7
+00:00:29,770 --> 00:00:32,640
+might naturally be related to claims outcomes.
+
+8
+00:00:32,640 --> 00:00:40,079
+It is common to refer to these as rating variables.
+Conceptually, these variables may affect the
+
+9
+00:00:40,079 --> 00:00:45,579
+distribution of insurance outcomes that we
+have discussed, the frequency and severity.
+
+10
+00:00:45,579 --> 00:00:50,950
+As they affect these claims distributions,
+they affect estimates of insurance costs and
+
+11
+00:00:50,950 --> 00:00:55,210
+so our determination of rates that one pays
+for insurance.
+
+12
+00:00:55,210 --> 00:00:59,730
+The two approximately continuous variables
+are coverage and deductibles.
+
+13
+00:00:59,730 --> 00:01:06,040
+To handle their skewness, we focus on logarithmic
+transformations. Most rating variables employed
+
+14
+00:01:06,040 --> 00:01:11,790
+in the analysis of insurance claims are of
+the categorical type. Here, we have entity
+
+15
+00:01:11,790 --> 00:01:18,400
+type, type of credit for smoke alarm, as well
+as indicators for no claim credit and presence
+
+16
+00:01:18,400 --> 00:01:23,670
+of a fire station. In our analysis, we focus
+on the categorical variables.
+
+17
+00:01:23,670 --> 00:01:26,540
+OVERHEAD 2 - Claims by Entity Type, Fire Class,
+and No Claim Credit
+
+18
+00:01:26,540 --> 00:01:31,620
+Here are some summary statistics by three
+of the four categorical variables, with alarm
+
+19
+00:01:31,620 --> 00:01:36,870
+credit being deferred to later. As before,
+we present simple averages to get a quick
+
+20
+00:01:36,870 --> 00:01:40,430
+idea of differences in the distributions.
+
+21
+00:01:40,430 --> 00:01:44,850
+The first thing to notice from the table is
+that there is substantial variation in the
+
+22
+00:01:44,850 --> 00:01:50,451
+frequency and severity by entity type. This
+is intuitively plausible; for example, we
+
+23
+00:01:50,451 --> 00:01:56,610
+expect more claims for small villages in comparison
+to larger counties. This will imply very different
+
+24
+00:01:56,610 --> 00:02:00,100
+costs of insurance by entity types.
+
+25
+00:02:00,100 --> 00:02:06,390
+As anticipated, we see both lower frequency
+and lower severity when the policyholder had
+
+26
+00:02:06,390 --> 00:02:14,090
+no claims in the past two years, so that NoClaimCredit
+indicator is 1. This is also common in the
+
+27
+00:02:14,090 --> 00:02:19,689
+analysis of insurance claims, past experience
+is often an excellent predictor of current
+
+28
+00:02:19,689 --> 00:02:22,620
+and future behavior.
+
+29
+00:02:22,620 --> 00:02:28,849
+Somewhat surprising is the higher frequency
+and severity for the Fire5 (=1) variable.
+
+30
+00:02:28,849 --> 00:02:34,930
+This is counter-intuitive in that one would
+expect lower claim amounts for those policyholders
+
+31
+00:02:34,930 --> 00:02:40,889
+in areas with better public protection (when
+the protection code is five or less). There
+
+32
+00:02:40,889 --> 00:02:46,110
+are at least two possible explanations for
+this. One is that policyholders who greater
+
+33
+00:02:46,110 --> 00:02:50,480
+public protection nearby become more careless.
+
+34
+00:02:50,480 --> 00:02:55,530
+The second is that there may be a joint effect
+that is being masked by our univariate analysis.
+
+35
+00:02:55,530 --> 00:03:02,370
+For example, it could be that there are many
+more Fire5=1 policyholders that are counties
+
+36
+00:03:02,370 --> 00:03:07,610
+and we have already seen that counties are
+more risky compared to other entities. So,
+
+37
+00:03:07,610 --> 00:03:14,709
+the Fire5=1 variable effect is being distorted
+by another variable. Or, it may be that areas
+
+38
+00:03:14,709 --> 00:03:20,870
+with better public protection are naturally
+higher risk areas; the protection is there
+
+39
+00:03:20,870 --> 00:03:26,069
+because it is thought to be needed and we
+have no other variable that indicates this
+
+40
+00:03:26,069 --> 00:03:27,650
+need.
+
+41
+00:03:27,650 --> 00:03:33,400
+This emphasizes a major drawback of this type
+of presentation. These tables look at the
+
+42
+00:03:33,400 --> 00:03:40,150
+effects of each variable in isolation of the
+others and so are referred to as a "univariate"
+
+43
+00:03:40,150 --> 00:03:45,189
+analyses. As another example, you may have
+seen "simple linear regression" in your other
+
+44
+00:03:45,189 --> 00:03:51,989
+studies. In any case, you will find any type
+of univariate analysis to be very convenient
+
+45
+00:03:51,989 --> 00:03:57,749
+because it is simple to execute and easy to
+explain to others. However, it is limiting
+
+46
+00:03:57,749 --> 00:04:02,319
+in that does not permit an understanding of
+the joint effects of variables.
+
+47
+00:04:02,319 --> 00:04:04,599
+OVERHEAD 3 - Claims by Entity Type, Fire Class,
+and No Claim Credit - R Code
+
+48
+00:04:04,599 --> 00:04:07,260
+Here is the R code for this analysis.
+
+49
+00:04:07,260 --> 00:04:12,169
+As in prior examples, we used the "subset"
+function to split the data set into smaller
+
+50
+00:04:12,169 --> 00:04:15,140
+pieces of interest and then used the "summaryBy"
+function to pull out the relevant summary
+
+51
+00:04:15,140 --> 00:04:16,140
+statistics.
+
+52
+00:04:16,140 --> 00:04:20,289
+Because we were interested in so many statistics,
+a small function was created to automate the
+
+53
+00:04:20,289 --> 00:04:21,289
+tasks.
+
+54
+00:04:21,289 --> 00:04:24,800
+OVERHEAD 4 - Claims by Entity Type and Alarm
+Credit Category
+
+55
+00:04:24,800 --> 00:04:30,000
+Here is an analysis of the fourth categorical
+variable, Alarm Credits.
+
+56
+00:04:30,000 --> 00:04:35,060
+When you take a look at the totals by entity,
+we see the same counter intuitive results
+
+57
+00:04:35,060 --> 00:04:40,800
+as we did for the fire protection code. For
+example, we would expect to see lower frequency
+
+58
+00:04:40,800 --> 00:04:46,960
+and severity for 15% alarm credits compared
+to no alarm credits.
+
+59
+00:04:46,960 --> 00:04:52,960
+In this analysis, we attempted to dig a little
+deeper by showing results by entity type.
+
+60
+00:04:52,960 --> 00:04:59,020
+To illustrate, from this table, we can compare
+villages by different levels of alarm credits.
+
+61
+00:04:59,020 --> 00:05:06,010
+Again, for example, comparing 15% to no alarm
+credits, we again see the same counter-intuitive
+
+62
+00:05:06,010 --> 00:05:13,280
+results. Villages with 15% alarm credits actually
+experience higher frequency and severity compared
+
+63
+00:05:13,280 --> 00:05:16,370
+to villages without alarm credits.
+
+64
+00:05:16,370 --> 00:05:20,420
+As before, the explanation could be that we
+are missing a hidden variable that causes
+
+65
+00:05:20,420 --> 00:05:26,470
+this behavior. Or, it could be that managers
+who purchase expensive alarm systems become
+
+66
+00:05:26,470 --> 00:05:30,449
+careless and suffer more accidents as a result.
+
+67
+00:05:30,449 --> 00:05:33,740
+OVERHEAD 5 -Initiating Insurance
+
+68
+00:05:33,740 --> 00:05:39,599
+These are the types of considerations that
+come into play when trying to estimate the
+
+69
+00:05:39,599 --> 00:05:44,099
+cost of insurance that is needed to set insurance
+rates.
+
+70
+00:05:44,099 --> 00:05:49,470
+As we have already seen, we have to take care
+in choosing the time frame for our data. Based
+
+71
+00:05:49,470 --> 00:05:58,060
+on the 2010 data, we saw that the average
+claim is 33,026. However, if we use 2009 data,
+
+72
+00:05:58,060 --> 00:06:02,330
+we arrive at a very different conclusion,
+9,934.
+
+73
+00:06:02,330 --> 00:06:08,310
+From the analysis in this video, we see that
+the distribution of claim outcomes varies
+
+74
+00:06:08,310 --> 00:06:15,729
+tremendously by entity type. So, knowing whether
+a policyholder is a village, city, or so on
+
+75
+00:06:15,729 --> 00:06:20,780
+is an important determinant of the cost of
+insurance. Although we haven't done the analysis
+
+76
+00:06:20,780 --> 00:06:26,000
+here, you can make a similar case for coverage.
+It makes sense that larger risks should have
+
+77
+00:06:26,000 --> 00:06:28,680
+larger insurance costs.
+
+78
+00:06:28,680 --> 00:06:34,090
+What makes less sense is how to handle alarm
+credits. If we follow the same logic, then
+
+79
+00:06:34,090 --> 00:06:40,090
+we would estimate the cost of insurance to
+be smaller for an insured without an alarm
+
+80
+00:06:40,090 --> 00:06:45,830
+credit compared to one that has one. This
+is really bad - we want to encourage insureds
+
+81
+00:06:45,830 --> 00:06:50,259
+to invest in protection of their risks. They
+should not be discouraged from purchasing
+
+82
+00:06:50,259 --> 00:06:53,650
+alarm systems by paying more for insurance.
+
+83
+00:06:53,650 --> 00:06:58,509
+This is just one of the really interesting
+questions that we will be able to discuss
+
+84
+00:06:58,509 --> 00:07:03,300
+as we develop our understanding of insurance
+analytics.
+
+85
+00:07:03,300 --> 00:07:04,919
+REVIEW
+
+86
+00:07:04,919 --> 00:07:13,300
+I hope that you found this case study on the
+Wisconsin Property Fund to be useful. In this
+
+87
+00:07:13,300 --> 00:07:15,190
+section, we learned how to:
+
+88
+00:07:15,190 --> 00:07:19,489
+☻ Describe how insurance events can produce
+data of interest to analysts.
+
+89
+00:07:19,489 --> 00:07:23,220
+☻ Produce relevant summary statistics for
+each variable.
+
+90
+00:07:23,220 --> 00:07:27,660
+☻ Describe how these summary statistics
+can be used to develop the cost of insurance.
+
+91
+00:07:27,660 --> 00:07:33,490
+For this case study, we raise a number of
+very interesting questions about how to estimate
+
+92
+00:07:33,490 --> 00:07:39,080
+the cost of insurance. Many students will
+be surprised that we did not give answers
+
+93
+00:07:39,080 --> 00:07:44,469
+to these questions. We raised these questions
+in part because they are real issues that
+
+94
+00:07:44,469 --> 00:07:50,840
+insurers deal with regularly and often there
+is no clean answer. However, a solid discussion
+
+95
+00:07:50,840 --> 00:07:55,689
+of these issues rests on a good understanding
+of the analytics of insurance claims. And
+
+96
+00:07:55,689 --> 00:07:58,520
+this is the focus of this course.
+
+97
+00:07:58,520 --> 00:07:59,520
+Thanks for watching!
+
+98
+00:07:59,520 --> 00:07:59,523
+(about 1200 words)
+

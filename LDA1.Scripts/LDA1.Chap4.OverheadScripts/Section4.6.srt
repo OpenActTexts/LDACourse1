@@ -1,0 +1,214 @@
+1
+00:00:01,209 --> 00:00:05,580
+Hello and welcome back. My name is Brian Hartman
+and I am an associate professor at Brigham
+
+2
+00:00:05,580 --> 00:00:09,070
+Young University.
+In the frequentist interpretation, one treats
+
+3
+00:00:09,070 --> 00:00:14,200
+the vector of parameters theta as fixed yet
+unknown, whereas the outcomes X are realizations
+
+4
+00:00:14,200 --> 00:00:19,150
+of random variables. With Bayesian statistical
+models, one views both the model parameters
+
+5
+00:00:19,150 --> 00:00:23,529
+and the data as random variables. Once the
+parameters have a distribution, we can use
+
+6
+00:00:23,529 --> 00:00:28,189
+probability tools to reflect and analyze this
+uncertainty about the parameters theta. For
+
+7
+00:00:28,189 --> 00:00:33,719
+notation, we will think about theta as a random
+vector and let pi of theta denote the distribution
+
+8
+00:00:33,719 --> 00:00:37,989
+of possible outcomes.
+There are several advantages of the Bayesian
+
+9
+00:00:37,989 --> 00:00:42,610
+approach. One can describe the entire distribution
+of parameters conditional on the data. This
+
+10
+00:00:42,610 --> 00:00:47,410
+allows one, for example, to provide probability
+statements regarding the likelihood of parameters.
+
+11
+00:00:47,410 --> 00:00:51,579
+This approach allows analysts to blend information
+known from other sources with the data in
+
+12
+00:00:51,579 --> 00:00:57,630
+a coherent manner. This topic is developed
+in detail in the credibility chapter. The
+
+13
+00:00:57,630 --> 00:01:02,440
+Bayesian approach provides for a unified approach
+for estimating parameters. Some non-Bayesian
+
+14
+00:01:02,440 --> 00:01:06,430
+methods, such as least squares, require an
+approach to estimating variance components.
+
+15
+00:01:06,430 --> 00:01:12,640
+In contrast, in Bayesian methods, all parameters
+can be treated in a similar fashion. It is
+
+16
+00:01:12,640 --> 00:01:17,990
+also convenient for explaining results to
+consumers of the data analysis.
+
+17
+00:01:17,990 --> 00:01:21,890
+There are two main parts to the Bayesian model.
+The prior distribution is your belief about
+
+18
+00:01:21,890 --> 00:01:26,850
+the parameters before any data is collected.
+This is a great place to systematically include
+
+19
+00:01:26,850 --> 00:01:31,369
+expert opinion about the parameters or the
+results from previous studies. The model distribution,
+
+20
+00:01:31,369 --> 00:01:35,460
+or the likelihood, is the contribution of
+the data.
+
+21
+00:01:35,460 --> 00:01:39,310
+The prior and likelihood are combined using
+Bayes’ rule to get the posterior distribution.
+
+22
+00:01:39,310 --> 00:01:44,740
+This is one of the main benefits of the Bayesian
+paradigm, you have a belief, gather some data,
+
+23
+00:01:44,740 --> 00:01:49,820
+update that belief, gather more data. You
+can continue that iterative process as long
+
+24
+00:01:49,820 --> 00:01:55,310
+as you would like. There is a saying that
+today’s posterior is tomorrow’s prior.
+
+25
+00:01:55,310 --> 00:01:58,409
+Once you have the posterior distribution of
+the parameters of interest, you can summarize
+
+26
+00:01:58,409 --> 00:02:02,320
+those parameters using a credible interval.
+It sounds just like a confidence interval,
+
+27
+00:02:02,320 --> 00:02:06,450
+but is so much better because rather than
+having to say “we are 95% confident that
+
+28
+00:02:06,450 --> 00:02:11,250
+the true parameter falls between a and b”
+you can say what you really want to say “there
+
+29
+00:02:11,250 --> 00:02:15,380
+is a 0.95 probability that the parameter is
+between a and b.”
+
+30
+00:02:15,380 --> 00:02:21,110
+How do we calculate the posterior distribution?
+As mentioned on the previous slide, the posterior
+
+31
+00:02:21,110 --> 00:02:25,830
+distribution is equal to the likelihood times
+the prior over the marginal. Notice that the
+
+32
+00:02:25,830 --> 00:02:30,830
+denominator does not depend on theta, the
+parameter of interest. Therefore, the posterior
+
+33
+00:02:30,830 --> 00:02:35,270
+distribution is proportional to the likelihood
+times the prior. That quantity is sometimes
+
+34
+00:02:35,270 --> 00:02:39,390
+called the kernel. If the kernel is proportional
+to a known distribution, then we know the
+
+35
+00:02:39,390 --> 00:02:44,420
+exact posterior distribution. In most realistic
+cases, we won’t know the closed-form of
+
+36
+00:02:44,420 --> 00:02:48,630
+the posterior distribution and will need to
+simulate it using Markov chain Monte Carlo,
+
+37
+00:02:48,630 --> 00:02:53,690
+or MCMC. Additionally, sometimes we can use
+normal approximations to make the MCMC more
+
+38
+00:02:53,690 --> 00:02:57,750
+efficient.
+One conjugate family which allows us to find
+
+39
+00:02:57,750 --> 00:03:03,580
+the closed-form of the posterior is the Poisson-Gamma
+family. If your data is Poisson Lambda distributed,
+
+40
+00:03:03,580 --> 00:03:08,560
+and you assume that lambda has a gamma alpha
+theta prior, then the posterior distribution
+
+41
+00:03:08,560 --> 00:03:13,370
+of lambda is also gamma distributed with alpha
+equal to the alpha from the prior plus the
+
+42
+00:03:13,370 --> 00:03:18,250
+sum of the x’s and theta equal to 1 over
+the sample size plus one over the theta from
+
+43
+00:03:18,250 --> 00:03:20,950
+the prior.
+

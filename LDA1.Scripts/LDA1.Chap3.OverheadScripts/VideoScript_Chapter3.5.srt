@@ -1,0 +1,430 @@
+1
+00:00:01,709 --> 00:00:07,120
+Hello, my name is Fei Huang, a senior lecturer
+at the UNSW Sydney.
+
+2
+00:00:07,120 --> 00:00:11,680
+In this video, we will review the maximum
+likelihood estimation.
+
+3
+00:00:11,680 --> 00:00:20,279
+In particular, we review how to define a likelihood
+for a sample of observations from a continuous
+
+4
+00:00:20,279 --> 00:00:26,769
+distribution, define the maximum likelihood
+estimator for a random sample of observations
+
+5
+00:00:26,769 --> 00:00:33,720
+from a continuous distribution, and estimate
+parametric distributions based on grouped,
+
+6
+00:00:33,720 --> 00:00:37,210
+censored, and truncated data.
+
+7
+00:00:37,210 --> 00:00:42,050
+In previous sections, we have learned various
+parametric distributions that are commonly
+
+8
+00:00:42,050 --> 00:00:49,499
+used in insurance applications. However, to
+be useful in applied work, these distributions
+
+9
+00:00:49,499 --> 00:00:56,120
+must be calibrated based on real data. At
+a foundational level, we assume that an analyst
+
+10
+00:00:56,120 --> 00:01:02,870
+has available a random sample X_1, X_n from
+a distribution with distribution function
+
+11
+00:01:02,870 --> 00:01:10,740
+F_x. We use the vector \theta to denote the
+set of parameters for F_x. We use uppercase
+
+12
+00:01:10,740 --> 00:01:17,369
+roman letter for random variables and lowercase
+ones for realizations. With continuous data,
+
+13
+00:01:17,369 --> 00:01:23,830
+we consider the joint probability density
+function. With the independence assumption,
+
+14
+00:01:23,830 --> 00:01:30,119
+the joint pdf may be written as the product
+of pdfs. Thus, we define the likelihood to
+
+15
+00:01:30,119 --> 00:01:36,240
+be this formular in this slide. Here, note
+that we consider this to be a function of
+
+16
+00:01:36,240 --> 00:01:46,340
+the parameters in \theta, with the data {x_1,
+x_2, , x_n} held fixed. The maximum likelihood
+
+17
+00:01:46,340 --> 00:01:53,079
+estimator is the value of the parameters in
+\theta that maximize L(\theta). In this case,
+
+18
+00:01:53,079 --> 00:01:58,049
+each individual observation is recorded and
+its contribution to the likelihood function
+
+19
+00:01:58,049 --> 00:02:04,659
+is the density at that value. To ease computational
+considerations, it is common to consider the
+
+20
+00:02:04,659 --> 00:02:11,560
+logarithmic likelihood, denoted in the formula
+at the bottom of this slide. We can determine
+
+21
+00:02:11,560 --> 00:02:17,410
+the maximum value of the logarithmic likelihood
+by taking derivatives and setting it equal
+
+22
+00:02:17,410 --> 00:02:25,110
+to zero. We could use statistical routines,
+such as the R function optim to do this job.
+
+23
+00:02:25,110 --> 00:02:31,030
+We could also use the delta method to derive
+the asymptotic variance of maximum likelihood
+
+24
+00:02:31,030 --> 00:02:35,800
+estimators of the model parameters.
+
+25
+00:02:35,800 --> 00:02:41,600
+In many applications, actuaries and other
+analysts wish to estimate model parameters
+
+26
+00:02:41,600 --> 00:02:47,640
+based on individual data that are not limited.
+However, there are also important applications
+
+27
+00:02:47,640 --> 00:02:54,470
+when only limited, or modified, data are available.
+The following section reviews maximum likelihood
+
+28
+00:02:54,470 --> 00:02:59,760
+estimation for grouped, censored, and truncated
+data.
+
+29
+00:02:59,760 --> 00:03:04,280
+In the previous section, we considered the
+maximum likelihood estimation of continuous
+
+30
+00:03:04,280 --> 00:03:10,380
+models from complete data. Each individual
+observation is recorded and its contribution
+
+31
+00:03:10,380 --> 00:03:16,030
+to the likelihood function is the density
+at that value. In this slide we review the
+
+32
+00:03:16,030 --> 00:03:23,570
+problem of obtaining maximum likelihood estimates
+of parameters from grouped data. The observations
+
+33
+00:03:23,570 --> 00:03:29,460
+are only available in grouped form, and the
+contribution of each observation to the likelihood
+
+34
+00:03:29,460 --> 00:03:36,900
+function is the probability of falling in
+a specific group. Let n_j represent the number
+
+35
+00:03:36,900 --> 00:03:44,410
+of observations in the interval (c_j-1, c_j),
+the Grouped data likelihood function is thus
+
+36
+00:03:44,410 --> 00:03:50,660
+given by the formula in this slide, where
+c_0 is the smallest possible observation and
+
+37
+00:03:50,660 --> 00:03:56,900
+c_k is the largest possible observation.
+
+38
+00:03:56,900 --> 00:04:03,570
+Another possible distinguishing feature of
+a data gathering mechanism is censoring. While
+
+39
+00:04:03,570 --> 00:04:09,430
+for some events of interest, the complete
+data may be available, for others only partial
+
+40
+00:04:09,430 --> 00:04:15,460
+information is available all that may be known
+is that the observation exceeds a specific
+
+41
+00:04:15,460 --> 00:04:24,210
+value. An example is the limited policy introduced
+in Section 3.4.2 of the Loss Data Analytics
+
+42
+00:04:24,210 --> 00:04:31,610
+open book, which is an example of right censoring.
+Any loss greater than or equal to the policy
+
+43
+00:04:31,610 --> 00:04:38,060
+limit is recorded at the limit. The contribution
+of the censored observation to the likelihood
+
+44
+00:04:38,060 --> 00:04:43,921
+function is the probability of the random
+variable exceeding this specific limit. Note
+
+45
+00:04:43,921 --> 00:04:50,110
+that contributions of both complete and censored
+data share the survival function for a complete
+
+46
+00:04:50,110 --> 00:04:57,229
+point and this survival function is multiplied
+by the hazard function, but for a censored
+
+47
+00:04:57,229 --> 00:05:04,509
+observation it is not. Hence, the likelihood
+function for censored data is given by the
+
+48
+00:05:04,509 --> 00:05:11,110
+formula in this slide, where r is the number
+of known loss amounts below the limit u and
+
+49
+00:05:11,110 --> 00:05:18,319
+m is the number of loss amounts larger than
+the limit u.
+
+50
+00:05:18,319 --> 00:05:24,330
+In this slide, we review the maximum likelihood
+estimation of incomplete data due to truncation.
+
+51
+00:05:24,330 --> 00:05:31,469
+If the values of X are truncated at d, then
+it should be noted that we would not have
+
+52
+00:05:31,469 --> 00:05:38,620
+been aware of the existence of these values
+had they not exceeded d. The policy deductible
+
+53
+00:05:38,620 --> 00:05:45,680
+introduced in Section 3.4.1 is an example
+of left truncation. Any loss less than or
+
+54
+00:05:45,680 --> 00:05:51,300
+equal to the deductible is not recorded. The
+contribution to the likelihood function of
+
+55
+00:05:51,300 --> 00:05:58,289
+an observation x truncated at d will be a
+conditional probability and the f_x(x) will
+
+56
+00:05:58,289 --> 00:06:06,090
+be replaced by fX(x)/S_x(d). The likelihood
+function for truncated data is given by the
+
+57
+00:06:06,090 --> 00:06:11,699
+formula in this slide, where k is the number
+of loss amounts larger than the deductible
+
+58
+00:06:11,699 --> 00:06:16,759
+d.
+
+59
+00:06:16,759 --> 00:06:22,580
+In this section, you will find 2 exercises.
+The first exercise is about finding the maximum
+
+60
+00:06:22,580 --> 00:06:28,529
+likelihood estimates, while the second exercise
+is about calculating confidence intervals
+
+61
+00:06:28,529 --> 00:06:35,310
+for the parameter estimates we found in the
+first exercise. In particular, in Exercise
+
+62
+00:06:35,310 --> 00:06:43,270
+3.5.1, we extract claim severity data from
+the Wisconsin Property Fund. For this exercise
+
+63
+00:06:43,270 --> 00:06:49,060
+we will undertake maximum likelihood estimation
+to fit a Pareto distribution to claim severity
+
+64
+00:06:49,060 --> 00:06:52,770
+data.
+Because we have two parameters in a Pareto
+
+65
+00:06:52,770 --> 00:06:58,789
+distribution, undertaking maximum likelihood
+involves finding the estimates that maximise
+
+66
+00:06:58,789 --> 00:07:05,120
+the likelihood surface. Visualising the likelihood
+surface may help to gain an appreciation of
+
+67
+00:07:05,120 --> 00:07:11,710
+how maximum likelihood works. After finding
+the parameter estimates, we ask you to plot
+
+68
+00:07:11,710 --> 00:07:17,809
+out a contour plot of the likelihood and mark
+the maximum likelihood estimates on the plot.
+
+69
+00:07:17,809 --> 00:07:25,121
+The pdf function for a Pareto distribution
+[dpareto] was created in exercise 3.2.3. It
+
+70
+00:07:25,121 --> 00:07:32,969
+can be used when finding the negative log-likelihood.
+You can also use `optim` to minimise the negative
+
+71
+00:07:32,969 --> 00:07:39,990
+log-likelihood. R function contour` can be
+used to plot the likelihood and R function
+
+72
+00:07:39,990 --> 00:07:46,900
+`points` can be used to mark the maximum likelihood
+estimates on the plot.
+
+73
+00:07:46,900 --> 00:07:54,009
+In Exercise 3.5.2, you are asked to calculate
+95% confidence intervals for the parameter
+
+74
+00:07:54,009 --> 00:08:01,490
+estimates that we found in Exercise 3.5.1.
+The parameters that we have estimated depend
+
+75
+00:08:01,490 --> 00:08:08,539
+on the data, and since the data can be considered
+as a random sample from a larger unknown population,
+
+76
+00:08:08,539 --> 00:08:16,009
+maximum likelihood estimators are random variables.
+A property of maximum likelihood is that the
+
+77
+00:08:16,009 --> 00:08:22,190
+estimators converge in distribution to a normal
+distribution, as n gets larger. If we minimise
+
+78
+00:08:22,190 --> 00:08:27,780
+the negative log-likelihood, we can use the
+Hessian matrix (which is a matrix of the second-order
+
+79
+00:08:27,780 --> 00:08:33,770
+partial derivatives) to find the variance
+of the estimators. Specifically, the standard
+
+80
+00:08:33,770 --> 00:08:38,380
+errors of the estimators are equal to the
+square root of the diagonal elements of the
+
+81
+00:08:38,380 --> 00:08:45,070
+inverse of the Hessian matrix. In R , we could
+use the solve function to find the inverse
+
+82
+00:08:45,070 --> 00:08:51,430
+of a square matrix, use the diag function
+to extract the diagonal of a matrix, use the
+
+83
+00:08:51,430 --> 00:08:58,080
+`qnorm` function to find quantiles of a normal
+distribution.
+
+84
+00:08:58,080 --> 00:09:04,890
+In summary, in this section, we learned how
+to define a likelihood for a sample of observations
+
+85
+00:09:04,890 --> 00:09:10,580
+from a continuous distribution, define the
+maximum likelihood estimator for a random
+
+86
+00:09:10,580 --> 00:09:17,500
+sample of observations from a continuous distribution,
+estimate parametric distributions based on
+
+87
+00:09:17,500 --> 00:09:22,660
+grouped, censored, and truncated data.
+

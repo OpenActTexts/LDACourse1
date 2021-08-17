@@ -1,0 +1,1767 @@
+# Modeling Loss Severity
+
+**Chapter Description** 
+
+The traditional loss distribution approach to modeling aggregate losses starts by separately fitting a frequency distribution to the number of losses and a severity distribution to the size of losses. The estimated aggregate loss distribution combines the loss frequency distribution and the loss severity distribution by convolution. Discrete distributions often referred to as counting or frequency distributions were used in Chapter 2 to describe the number of events such as number of accidents to the driver or number of claims to the insurer. Lifetimes, asset values, losses and claim sizes are usually modeled as continuous random variables and as such are modeled using continuous distributions, often referred to as loss or severity distributions. A mixture distribution is a weighted combination of simpler distributions that is used to model phenomenon investigated in a heterogeneous population, such as modeling more than one type of claims in liability insurance (small frequent claims and large relatively rare claims). In this chapter we explore the use of continuous as well as mixture distributions to model the random size of loss. 
+
+
+:::: {.blackbox }
+
+-  Although not needed to go through the tutorials, some users may wish to download the overheads that the videos are based on. <button download><a href="https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/LDA1.Overheads/LDA1.Chap3.pdf">Download Chapter Three overheads as a .pdf file.</a></button>
+-  By watching the videos and working through the tutorial exercises, you will get an appreciation for distributions used to model the severity of losses. For a deeper dive, see the corresponding chapter in the textbook, [Chapter Three of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-Severity.html).
+:::: 
+
+## Basic Distributional Quantities
+
+***
+
+In this section, you learn how to work with some basic distributional quantities:
+
+*    moments,
+*    percentiles, and
+*    generating functions.
+
+***
+
+
+####  Video: Basic Distributional Quantities  {-}
+
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_8ia95fd4&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_xp7qdo73" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+#### Overheads: Basic Distributional Quantities (Click Tab to View) {-}
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Sect31A')">A. Overview</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect31B')">B. Moments – Raw Moments</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect31C')">C. Moments – Central Moments</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect31D')">D. Moments – Skewness and Kurtosis</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect31E')">E. Quantiles</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect31F')">F. Skewness, Mean, and Median</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect31G')">G. Moment Generating Function</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect31H')">H. Probability Generating Function</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect31I')">I. Exercise for 3.1.1</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect31J')">J. Exercise for 3.1.2</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect31K')">K. Boxplot</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect31L')">L. Exercise for 3.1.3</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect31M')">M. Review</button>
+  </div>
+
+<div id="Sect31A" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=3" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect31B" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=4" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect31C" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=5" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect31D" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=6" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect31E" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=7" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect31F" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=8" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect31G" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=9" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect31H" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=10" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect31I" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=11" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect31J" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=12" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect31K" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=13" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect31L" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=14" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect31M" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=15" width="100%" height="400"> </iframe>
+  </div>
+
+### Exercise. Moments Can Be Misleading
+
+**Assignment Text**
+
+Anscombe's quartet is comprised of four datasets with interesting properties related to their moments. You can access the data via `data(anscombe)`. The four data sets are in the variables `y1`, `y2`, `y3` and `y4`. There are also associated `x` values that create interesting properties for regression models fit to the data. We'll ignore the `x` values in this section but will use them to develop the plots below.
+
+```{r anscombe plot, echo=FALSE}
+data("anscombe")
+op <- par(mfrow = c(2, 2), mar = 0.1 + c(4,4,1,1), oma =  c(0, 0, 2, 0))
+invisible(lapply(X = 1:4, FUN = function(no){
+  plot(x = anscombe[[paste0('x', no)]], y = anscombe[[paste0('y', no)]],
+    type = 'p', xlab = 'x', ylab = 'y')
+}))
+mtext("Anscombe's 4 Regression data sets", outer = TRUE, cex = 1.5)
+par(op)
+```
+
+:::: {.blackbox }
+**Instructions**
+
+*  Extract the values `y1`, `y2`, `y3` and `y4` from the `anscombe` data frame. You will want to extract these as vectors not as single-column data frames.  
+*  Use [summary()](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/summary) to understand the basic distributional properties of `y1`, `y2`, `y3` and `y4`.
+*  Use [mean()](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/mean) to calculate the first raw moment of `y1`, `y2`, `y3` and `y4`. Assign the values to `y_means`.
+*  Use [var()](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/cor) to calculate the second raw moment of `y1`, `y2`, `y3` and `y4`. You should note that the var() function uses $n-1$ in the denominator to return an estimate of the population variance from the sample. Do you notice anything interesting about the results?
+*  Use [sd()](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/sd) to calculate the standard deviation of `y1`, `y2`, `y3` and `y4`. As with the var() function, sd() also uses $n-1$ in the denominator.
+*  There is no `base-R` function to calculate the coefficient of skewness. There are several approaches to calculate skewness if you explore the [help()](https://www.rdocumentation.org/packages/e1071/versions/1.7-4/topics/skewness) for the `type` argument of the `skewness` function from the [e1071](https://www.rdocumentation.org/packages/e1071/versions/1.7-7) package.  We will not use this package, but instead we will we calculate the equivalent of `type = 3` skewness using `var` in the denominator.
+:::: 
+
+<br>
+
+```{r ex="LDA1.3.1.1", type="hint", tut=TRUE}
+[Section 3.1.1 of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-Severity.html#S:BasicQuantities) introduces moments.
+                                         
+```
+
+```{r ex="LDA1.3.1.1", type="pre-exercise-code", tut=TRUE}
+data("anscombe")
+
+```
+
+```{r ex="LDA1.3.1.1", type="sample-code", tut=TRUE}
+#Summary of Data
+summary(anscombe$y1) #Example for the first data set in  Anscombe's quartet
+summary(anscombe$??)
+summary(anscombe$??)
+summary(anscombe$??)
+
+#Vector of means
+c(mean(anscombe$y1), mean(??), mean(??), mean(??))
+
+#Vector of variances
+c(var(anscombe$y1), var(??), var(??), var(??))
+
+#Skewbess if y1
+y1_skew <- mean((?? - mean(??))^??) / sd(??) ^ ??
+
+```
+
+
+```{r ex="LDA1.3.1.1", type="solution", tut=TRUE}
+#Summary of Data
+summary(anscombe$y1) #Example for the first data set in  Anscombe's quartet
+summary(anscombe$y2)
+summary(anscombe$y3)
+summary(anscombe$y4)
+
+#Vector of means
+c(mean(anscombe$y1), mean(anscombe$y2), mean(anscombe$y3),
+  mean(anscombe$y4))
+
+#Vector of variances
+c(var(anscombe$y1), var(anscombe$y2), var(anscombe$y3),
+  var(anscombe$y4))
+y1_skew <- mean((anscombe$y1 - mean(anscombe$y1))^3) / sd(anscombe$y1) ^ 3
+
+```
+
+
+```{r ex="LDA1.3.1.1", type="sct", tut=TRUE}
+success_msg("Well done!")
+```
+
+### Exercise. Determining Boxplots and Quantiles
+
+**Assignment Text**
+
+The [boxplot()](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/boxplot) function produces box-and-whisker plots of grouped values. The boxplot() function returns certain statistics and produces a plot as a side effect. Explore the documentation  to understand the values returned. In particular review the information returned by the `stats` attribute of this object.
+
+The Wisconsin Property Fund data has already been read into a data frame called `Insample`. These data consist of claim experience for fund members over the years 2006-2010, inclusive. It includes claim values `y` as well as the claim year `Year`. For this exercise we will work with the natural logarithm of the claim values which are in the `lny` variable. We have filtered the data to exclude zero claims and saved the resulting data frame as `Insample_nz`.
+
+:::: {.blackbox }
+**Instructions**
+
+We provide the code to generate the boxplot. Note that the `R` creates the boxplot as a side effect while returning information about the data. (`R` does not print the information to the console by default. You will have to assign the return of the boxplot function to an object to access.)
+
+* What is the class of the of the object returned by the boxplot function?    
+* Access the `stats` attribute of the object returned.    
+* Use the [quantile()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/quantile) function and replicate the "hinge" values for 2008 box. We will ignore the values returned for the whiskers as they are not a function of the quantiles of the distribution.    
+*  We selected the 2008 year because it has an odd number of observations. Use the quantile() function on a vector with an even number such as `1:100` and access the 25th percentile. Are you surprised by the result? Review the details for the `type` argument to the quantile() to understand the various approached to determining quantiles.  
+:::: 
+
+<br>
+
+```{r ex="LDA1.3.1.2", type="hint", tut=TRUE}
+[Section 3.1.2 of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-Severity.html#S:LS:Quantiles) gives an overview of quantiles.
+                                         
+```
+
+
+```{r ex="LDA1.3.1.2", type="pre-exercise-code", tut=TRUE}
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors = FALSE)
+Insample_nz <- Insample[Insample$y > 0,]
+```
+
+```{r ex="LDA1.3.1.2", type="sample-code", tut=TRUE}
+my_boxplot <- boxplot(formula = ??, data = Insample_nz)
+class(??)
+my_boxplot$??
+my_boxplot$stats[,_] #2008
+
+lny_2008 <- Insample_nz$lny[Insample_nz$Year == 2008]
+
+quantile(lny_2008, ??) # lower hinge
+??(lny_2008) # median through a dedicated function
+quantile(lny_2008, ??) # median
+quantile(lny_2008, ??) # upper hinge
+
+```
+
+
+```{r ex="LDA1.3.1.2", type="solution", tut=TRUE}
+my_boxplot <- boxplot(formula = lny ~ Year, data = Insample_nz)
+class(my_boxplot)
+my_boxplot$stats
+my_boxplot$stats[,3] #2010
+lny_2008 <- Insample_nz$lny[Insample_nz$Year == 2008]
+
+quantile(lny_2008, 1/4) # lower hinge
+median(lny_2008) # median
+quantile(lny_2008, 3/4) # upper hinge
+
+```
+
+
+```{r ex="LDA1.3.1.2", type="sct", tut=TRUE}
+success_msg("Well done!")
+```
+
+### Exercise. Gamma Moment Generating Function
+
+**Assignment Text**
+
+In [Example 3.1.4 of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-Severity.html#moment-generating-function) you will find a discussion of the moment generating function for a gamma distribution,
+
+$$
+M_X(t) = (1 - \theta t)^{-\alpha} .
+$$
+
+We will work with this distribution in this exercise. The parameters that we will use in our exercise are $\alpha=2$ (the shape parameter) and $\theta = 10$ (the scale parameter). Keep in mind that the mean for this distribution is $\alpha\theta=20$ and the variance is $\alpha\theta^2 = 200$. We will revisit these results at the end of the exercise.
+
+There are several `R` functions that you will find useful:
+
+-   The [parse()](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/parse) function converts a character vector to an [expression()](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/expression). Then, you can use the [eval()](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/eval) to evaluate the expression.
+-   You can use the [D()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/deriv) to compute derivatives.
+
+:::: {.blackbox }
+**Instructions**
+
+-   Use the parse() function to create an expression and for the moment generating function. Specify the expression using `alpha`, `theta` and `t`. Name the object `mgf`.
+-   Note the `class` of `mgf`.
+-   Evaluate `mgf` at `t = 0` when `alpha = 2` and `theta = 10`. (Note that you do not need to specify the values of `alpha` and `theta` and `t` in the `eval` call. That is because we did not specify the `envir` argument to `eval` and the default is `parent.frame()`. Environments are a more advanced `R` topic that you can learn about [here](https://adv-r.hadley.nz/environments.html).
+:::: 
+
+<br>
+
+
+```{r ex="LDA1.3.1.3.1", type="hint", tut=TRUE}
+Take some time to explore the online `R` documentation. In particular, take time to understand the required class of each argument.
+```
+
+```{r ex="LDA1.3.1.3.1", type="pre-exercise-code", tut=TRUE}
+
+```
+
+```{r ex="LDA1.3.1.3.1", type="sample-code", tut=TRUE}
+
+mgf <- parse(text = "??")
+
+class(x = ??)
+
+t <- ??
+alpha <- ??
+theta <- ??
+
+eval(expr = ??)
+
+```
+
+```{r ex="LDA1.3.1.3.1", type="solution", tut=TRUE}
+mgf <- parse(text = "(1- theta * t) ^ -alpha")
+
+class(x = mgf)
+
+alpha <- 2
+theta <- 10
+t <- 0
+
+eval(expr = mgf)
+```
+
+```{r ex="LDA1.3.1.3.1", type="sct", tut=TRUE}
+success_msg("Well done!")
+```
+
+### Exercise. Visualizing Moment Generating Functions
+
+**Assignment Text**
+
+We plot *mgf* to help visualize the function. The left-hand panel shows the function with the argument $t$ is between -0.2 and 0.2. For $\theta = 10$ and $\alpha > 0$, note that *mgf* goes to `+inf` when $t = \frac{1}{\theta} = 0.1$. The right-hand panel shows the function between -0.01 and 0.01. This provides a better view of the curvature at zero.
+
+```{r echo=FALSE, out.width='80%', fig.asp=.60}
+mgf_fn <- function(x, alpha = 2, theta = 10) (1 - theta * x) ^ (-alpha)
+par(mfrow=c(1,2))
+curve(mgf_fn, ylab= 'mgf(t)', xlab = 't', from=-.2, to=.2, ylim = c(0,100))
+abline(v=0.1, col = "green", lty = 3)
+curve(mgf_fn, ylab = 'mgf(t)', xlab = 't', from=-0.01, to=0.01)
+abline(v=0, col = "blue", lty = 3)
+```
+
+
+```{r eval = FALSE, echo=FALSE, out.width='80%', fig.asp=.80}
+tbase <- seq( from=0, to=2, length.out =1000)
+mgf_fn <- function(x, alpha = 2, theta = 10) (1 - theta * x) ^ (-alpha)
+fun.val <- mgf_fn(tbase)
+plot(tbase, fun.val, ylim = c(0,120), type = "l")
+
+```
+
+:::: {.blackbox }
+**Instruction**
+
+-   Use the [D()](https://www.rdocumentation.org/packages/mosaic/versions/0.14.4/topics/D) function to return an expression for the first and second derivatives with respect to $t$. Assign the results of `dMxtdt` and `d2Mxtdt2`, respectively.
+::::
+
+<br>
+
+```{r ex="LDA1.3.1.3.2", type="hint", tut=TRUE}
+Take some time to explore the online `R` documentation. In particular, take time to understand the required class of each argument.
+```
+
+
+```{r ex="LDA1.3.1.3.2", type="sample-code", tut=TRUE}
+
+dMxtdt <- D(expr = parse(text = "??"), name = '??')
+
+d2Mxtdt2 <- D(
+  D(expr = parse(text = "??"), name = '??'),
+  "t")
+
+
+```
+
+```{r ex="LDA1.3.1.3.2", type="solution", tut=TRUE}
+Mxtdt <- D(expr = parse(text = "(1- theta * t) ^ -alpha"), name = 't')
+
+Mxtdt
+
+M2xtdt <- D(
+  D(expr = parse(text = "(1- theta * t) ^ -alpha"), name = 't'),
+  name = 't')
+
+M2xtdt
+
+```
+
+```{r ex="LDA1.3.1.3.2", type="sct", tut=TRUE}
+success_msg("Well done!")
+```
+
+### Exercise. Determining Moments using Moment Generating Functions
+
+**Assignment Text**
+
+Recall that you can determine the $n^{th}$ moment of of $X$ as the $n^{th}$ derivative of the moment generating function evaluated at $t = 0$.
+
+:::: {.blackbox }
+**Instructions**
+
+-   Calculate the mean (first moment) of the gamma distribution.
+-   Calculate the second raw moment of the gamma distribution.
+-   Calculate the variance (second central moment) of the gamma distribution.
+::::
+
+<br>
+
+```{r ex="LDA1.3.1.3.3", type="hint", tut=TRUE}
+Take some time to explore the online `R` documentation. In particular, take time to understand the required class of each argument.
+```
+
+
+```{r ex="LDA1.3.1.3.3", type="pre-exercise-code", tut=TRUE}
+Mxtdt <- D(expr = parse(text = "(1- theta * t) ^ -alpha"), name = 't')
+M2xtdt <- D(
+  D(expr = parse(text = "(1- theta * t) ^ -alpha"), name = 't'),
+  name = 't')
+alpha <- 2
+theta <- 10
+t <- 0
+
+```
+
+
+```{r ex="LDA1.3.1.3.3", type="sample-code", tut=TRUE}
+
+# mean 
+EX <- eval(??)
+
+# second raw moment
+EX2 <- eval(??)
+
+# variance
+
+?? - ?? ^ 2
+
+```
+
+```{r ex="LDA1.3.1.3.3", type="solution", tut=TRUE}
+
+# mean 
+EX <- eval(Mxtdt)
+
+# second raw moment
+EX2 <- eval(M2xtdt)
+
+# variance
+EX2 - EX ^ 2
+
+```
+
+```{r ex="LDA1.3.1.3.3", type="sct", tut=TRUE}
+success_msg("Well done!")
+```
+
+
+## Continuous Distributions
+
+***
+
+In this section, you learn how to define and apply four fundamental severity distributions:
+
+-   gamma,
+-   Pareto,
+-   Weibull, and
+-   generalized beta distribution of the second kind.
+
+`R` provides a "family" of functions associated with statistical distributions. The naming convention is to precede the distribution name with `d` for the density function, `p` for the cumulative distribution function, `q` for quantiles (percentiles), and `r` for random number generation. (We will set aside the `r` functions for [Chapter 6 in *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-Simulation.html) and focus on `d`, `p`, and `q` functions.)
+
+The `stats` packages which is provided with base-`R` includes the distributions listed [here](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Distributions). Many other distributions are available in other `R` packages.
+
+For the exercises in the section, we will focus on the gamma distribution from [Section 3.2.1 of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-Severity.html#S:Loss:Gamma) to help you develop an intuition as to how the distribution responds to changes in its shape and scale parameter. From Figure 3.1, you should recognize that the support for the gamma distribution is positive real numbers. You'll also note that the distribution allows for varying levels of "right-skewness."
+
+***
+
+
+####  Video: Continuous Distributions  {-}
+
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_20i1hho7&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_nby6r2sl" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+#### Overheads: Continuous Distributions (Click Tab to View) {-}
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Sect32A')">A. Overview</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect32B')">B. Gamma Distribution</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect32C')">C. Pareto Distribution</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect32D')">D. Weibull Distribution</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect32E')">E. The Generalized Beta Distribution of the Second Kind</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect32F')">F. Exercise 3.2.1</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect32G')">G. Exercise 3.2.2</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect32H')">H. Exercise 3.2.3</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect32I')">I. Review</button>
+  </div>
+
+<div id="Sect32A" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=18" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect32B" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=19" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect32C" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=23" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect32D" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=26" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect32E" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=28" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect32F" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=30" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect32G" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=31" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect32H" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=32" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect32I" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=33" width="100%" height="400"> </iframe>
+  </div>
+
+
+### Exercise. 
+
+**Assignment Text**
+
+We will be working with the Wisconsin Property Fund data. We have read the data and created a vector of the `log` of non-zero claim values. The name of that vector is `wisc_prop.`
+
+:::: {.blackbox }
+**Instructions**
+
+-   Use the [hist()](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/hist) function to plot a histogram of `wisc_prop`.
+-   Review the help for hist() and note that the histogram is drawn as a "side-effect." We can access the information generated with the histogram by assigning the result to an object. For this exercise, you should assign that information to `hist_data`. Note the class of `hist_data`.
+-   Use the [str()](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/str) function to review the structure of elements of the list returned by the histogram function hist().
+:::: 
+
+<br>
+
+```{r ex="LDA1.3.2.1", type="hint", tut=TRUE}
+Take some time to explore the online `R` documentation. In particular, take time to understand the required class of each argument.
+```
+
+```{r ex="LDA1.3.2.1", type="pre-exercise-code", tut=TRUE}
+wisc_prop <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors = FALSE)
+wisc_prop <- log(wisc_prop$y[wisc_prop$y > 0])
+
+```
+
+```{r ex="LDA1.3.2.1", type="sample-code", tut=TRUE}
+
+hist_data <- hist(x = "??")
+
+class(x = ??)
+
+str(object = ??)
+```
+
+```{r ex="LDA1.3.2.1", type="solution", tut=TRUE}
+hist_data <- hist(wisc_prop)
+class(hist_data)
+str(hist_data)
+```
+
+```{r ex="LDA1.3.2.1", type="sct", tut=TRUE}
+success_msg("Well done!")
+```
+
+### Exercise. Visualizing the Gamma Distribution
+
+
+**Assignment Text**
+
+From the histogram, we will develop an intuition as to whether a gamma distribution is likely to fit this data reasonably well. Consider whether the data is uni-modal and whether it is right-skewed. It appears to be which would support the modeling of log-claim sizes using the gamma distribution.
+
+You'll note that the $y$-axis of the histogram displays counts. In contrast, the `dgamma` function returns density values. So we can't add a gamma distribution to the histogram and compare to the data. Instead we first need to plot the density values of the data. To plot probability densities, we will use set the `probability` argument to hist to `TRUE`. You should note the following from the documentation of `hist`:
+
+-   The relationship between the that the `probability` and `freq` arguments to `hist`.
+-   There is a `density` argument to `hist`. As first, you may think this refers to the (probability) density function, but that argument specifies a plotting feature.
+
+You can use the [curve()](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/curve) function to plot the gamma distribution over the histogram data. To do this, you need to set the `add` argument to `TRUE`.
+
+In later sections, we'll review approaches to parameter estimation. In this section, we will vary the `shape` and `scale` parameters to understand the flexibility of the gamma distribution. The data will serve as a reference for this exercise. You may recall from the exercises from Section 3.1.3 that the mean of the gamma function is the product of the `shape` and `scale` parameters and the variance is the product of the `shape` and square of the `scale` parameters. You can use this information to develop parameter estimates using the method of moments.
+
+:::: {.blackbox }
+**Instructions**
+
+-   Again plot the histogram. This time specify the probability argument so as to plot probability densities.
+-   Calculate `shape` and `scale` parameters using the method of moments
+-   Calculate the density values for $x$ values displayed within the limits of the plot.
+-   Add `3` to the `shape` parameter and note how the distribution changes.
+-   Subtract `0.05` from the `scale` parameter and note how the distribution changes.
+::::  
+
+<br>
+
+```{r ex="LDA1.3.2.2", type="pre-exercise-code", tut=TRUE}
+wisc_prop <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors = FALSE)
+wisc_prop <- log(wisc_prop$y[wisc_prop$y > 0])
+```
+
+```{r ex="LDA1.3.2.2", type="sample-code", tut=TRUE}
+
+hist_data <- hist(x = ??, probability = ??)
+gamma_scale <- var(??) / mean(??)
+gamma_shape <- mean(??) / gamma_scale
+curve(dgamma(x, shape = ??, scale = ??), add = TRUE, col = 'red' )
+gamma_scale
+gamma_shape
+curve(dgamma(x, shape = ?? + ??, scale = ??), add = TRUE, col = 'blue')
+curve(dgamma(x, shape = ??, scale = ?? -  ??), add = TRUE, col = 'green')
+```
+
+
+```{r ex="LDA1.3.2.2", type="solution", tut=TRUE}
+hist_data <- hist(x = wisc_prop, probability = TRUE)
+gamma_scale <- var(wisc_prop) / mean(wisc_prop)
+gamma_shape <- mean(wisc_prop) / gamma_scale
+curve(dgamma(x, shape = gamma_shape, scale = gamma_scale), add = TRUE, col = 'red' )
+gamma_scale
+gamma_shape
+curve(dgamma(x, shape = gamma_shape + 3, scale = gamma_scale +  0), add = TRUE, col = 'blue')
+curve(dgamma(x, shape = gamma_shape + 0, scale = gamma_scale -  0.05), add = TRUE, col = 'green')
+```
+
+```{r ex="LDA1.3.2.2", type="sct", tut=TRUE}
+success_msg("Well done!")
+```
+
+### Exercise. Creating a Pareto Density Function {#Ex:CreateParetoDensityFct}
+
+**Assignment Text**
+
+Packages in `R` exist for most continuous distributions, however, it is useful to be able to know how to write your own functions. 
+
+For this exercise we will write a `R` function to find the density (the pdf) of a random variable that follows a Pareto distribution. We will subsequently use this function in Exercise \@ref(Ex:MLEPareto).
+
+:::: {.blackbox }
+**Instructions** 
+  
+  -  Write a function to find the density of a Pareto distribution. 
+  -  For this exercise you should refer to the Pareto distribution from [Section 3.2.2 of  *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-Severity.html#S:Loss:Pareto). 
+:::: 
+
+<br>
+
+```{r ex="LDA1.3.2.3", type="pre-exercise-code", tut=TRUE}
+
+```
+
+```{r ex="LDA1.3.2.3", type="hint", tut=TRUE}
+
+```
+
+```{r ex="LDA1.3.2.3", type="sample-code", tut=TRUE}
+
+# Write a function to find the density of the Pareto distribution
+dpareto <- function(x,shape,scale){
+  ??
+}
+
+```
+
+```{r ex="LDA1.3.2.3", type="solution", tut=TRUE}
+
+# Write a function to find the density of the Pareto distribution
+dpareto <- function(x,shape,scale){
+  shape*(scale^shape)/((scale+x)^(shape+1))
+}
+
+```
+
+```{r ex="LDA1.3.2.3", type="sct", tut=TRUE}
+success_msg("Well done!")
+```
+
+## Methods of Creating New Distributions
+
+***
+
+In this section, you learn how to:
+
+-  Understand connections among the distributions.
+-  Give insights into when a distribution is preferred when compared to alternatives.
+-  Provide foundations for creating new distributions.
+
+***
+
+
+####  Video: Creating Distributions I {-}
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_3ossuexn&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_x80k8dtk" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+
+#### Overheads: Creating Distributions I (Click Tab to View) {-}
+
+</center>
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Sect331A')">A. Creating Severity Distributions</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect331B')">B. Multiplication by a Constant</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect331C')">C. Scale Distributions</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect331D')">D. Raising to a Power</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect331E')">E. Exponential to get an Inverse Exponential</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect331F')">F. Exponential to get a Weibull</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect331G')">G. Exponentiation/ Natural Log</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect331H')">H. Log Transformation: R code</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect331I')">I. Review</button>
+  </div>
+
+<div id="Sect331A" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=36" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect331B" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=37" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect331C" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=38" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect331D" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=39" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect331E" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=40" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect331F" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=41" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect331G" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=42" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect331H" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=44" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect331I" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=45" width="100%" height="400"> </iframe>
+  </div>
+
+
+####  Video: Creating Distributions II {-}
+
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_5023lgkw&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_m33sbiz0" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+#### Overheads: Creating Distributions II (Click Tab to View) {-}
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Sect332A')">A. Creating Severity Distributions</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect332B')">B. Discrete Mixture Severity Distributions</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect332C')">C. Example: Actuarial Exam Question</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect332D')">D. R Code to Produce a Mixture Distribution</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect332E')">E. Continuous Mixtures for Severity</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect332F')">F. Special Case: Gamma Mixtures of Exponentials</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect332G')">G. Mixture Expectations</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect332H')">H. Splicing</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect332I')">I. Review</button>
+  </div>
+
+<div id="Sect332A" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=48" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect332B" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=49" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect332C" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=50" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect332D" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=52" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect332E" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=53" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect332F" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=54" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect332G" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=55" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect332H" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=56" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect332I" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=57" width="100%" height="400"> </iframe>
+  </div>
+
+
+
+### Exercise. Using the Logarithmic Transformation to Create a New Distribution
+
+**Assignment Text**
+
+For this exercise we will be modeling claim severity data with a gamma distribution, and we will then apply a log transformation to the distribution. (Recall that we use the natural logarithmic transform throughout, unless specified otherwise.)
+
+In this exercise we generate the probability density function (*pdf*) of the gamma distribution that corresponds with these parameters, and we then plot the *pdf* of the *log* of the claim severities, by transforming the gamma pdf. We will assume that the claim severities follow a gamma distribution with a known shape parameter $\alpha=0.63$ and scale parameter $\theta=16897$. 
+
+:::: {.blackbox }
+**Instructions** 
+  
+  -  Use [dgamma()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/GammaDist) to generate a *pdf* of the claim severities. You are given the shape parameter $\alpha= 0.63$ and scale parameter $\theta=16897$ for the gamma distribution fit.  
+  -  Write the `R` code for the *pdf* of the claim severity, assuming that claim severity follows a gamma distribution with the above parameters.
+  -  Write the `R` code for the *pdf* of the log claim severity, by transforming the gamma pdf. Hint: If $X$ is claim severity and $Y=\log(X)$ then you need to find the *pdf* of $Y$.
+  -  Plot the fitted *pdf* curve of the log claim severity for this subpopulation. 
+::::  
+
+<br>
+
+```{r ex="LDA1.3.3.1", type="pre-exercise-code", tut=TRUE}
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+```
+
+```{r ex="LDA1.3.3.1", type="hint", tut=TRUE}
+
+```
+
+```{r ex="LDA1.3.3.1", type="sample-code", tut=TRUE}
+
+#Generate a pdf of the claim severities. First, enter the parameter values that were given in the question
+alpha<-??
+theta<-??
+
+#Next, write the R code for the pdf of the claim severity
+x<-seq(10,400000)
+fx<-dgamma(??)
+
+#Write the R code for the pdf of the log claim severity, by transforming the gamma pdf
+x<-seq(10,400000)
+y<-log(x)
+fy<-??
+
+#Plot the log claim severities
+plot(??,??,type="l",lty=1,xlab="log claim severity", ylab="density",ylim=c(0,0.3))
+```
+
+```{r ex="LDA1.3.3.1", type="solution", tut=TRUE}
+#Generate a pdf of the claim severities. First, enter the parameter values that were given in the question
+alpha<-0.63
+theta<-16897
+
+#Next, write the R code for the pdf of the claim severity
+x<-seq(10,400000)
+fx<-dgamma(x,shape=alpha,scale=theta)
+
+#Write the R code for the pdf of the log claim severity, by transforming the gamma pdf
+x<-seq(10,400000)
+y<-log(x)
+fy<-fx*x
+
+#Plot the log claim severities
+plot(y,fy,type="l",lty=1,xlab="log claim severity", ylab="density",ylim=c(0,0.3))
+```
+
+
+```{r ex="LDA1.3.3.1", type="sct", tut=TRUE}
+success_msg("Well done!")
+```
+
+### Exercise. Creating a Mixture Distribution
+<img src = "ContributorPics\hurdler.png" width = "65" height = "65" style = "float:right; margin-left: 10px; margin-top: 7px" />
+
+**Assignment Text**
+
+Insurance portfolios often consist of subpopulations which might have different claim severity distributions. In this exercise, we will use the Wisconsin Property Fund data to generate a mixture distribution, where it is assumed that different entities (village, city, country, miscellaneous, school and town) have different claim severity distributions. 
+
+We use the following assumptions: 
+
+- We will use the number of claims for each entity from the data as weights for the mixture distribution. 
+- For each entity, the claim severities are assumed to be gamma distributed with different shape parameters $\alpha$ and different scale parameters $\theta$. 
+
+You can modify the code used in Exercise \@ref(Ex:ClaimByType) to extract the claim numbers from the Property Fund data. After combining the gamma probability density functions together to produce a mixture distribution, we plot the *pdf*s for the *log* of the claim severities for each subpopulation and the mixture distribution. 
+
+:::: {.blackbox }
+**Instructions** 
+  
+  -  Extract the number of claims from the Property Fund data. 
+  -  Combine the gamma density functions for the claim severity for each subpopulation together to generate the *pdf* of a mixture distribution. When generating the mixture distribution, use the number of claims for each entity as weights.
+  -  Use [dgamma()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/GammaDist) to generate the *pdf* of the claim severities for each subpopulation. The parameters $\alpha$ and $\theta$ for each subpopulation are given below.  
+  -  Plot each of the *pdf* curves of the log claim severities in the same figure. Exercise 3.3.1 shows how to find the *pdf* for log claim severities. 
+  -  Superimpose the *pdf* of mixture distribution of the log claims on to the plot of the *pdf* curves of the log claim severities.
+
+The values of $\alpha$ and $\theta$ for the fitted gamma distribution for each entity type are:
+$${\small \begin{matrix}
+\begin{array}{l | r | r}
+\hline
+\text{Entity Type} & \alpha~~~ & \theta~~~ \\
+\hline
+\text{Village} &  0.630 & 16897\\
+\text{City}    &  0.511 & 33119\\
+\text{County}  &  0.637 & 24259\\
+\text{Misc}    &  0.347 & 124023\\
+\text{School}  &  0.324 & 198599\\
+\text{Town }   &  0.361 & 54933\\
+\hline
+\end{array}
+\end{matrix}}$$
+
+:::: 
+
+<br>
+
+```{r ex="LDA1.3.3.2", type="pre-exercise-code", tut=TRUE}
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+```
+
+```{r ex="LDA1.3.3.2", type="hint", tut=TRUE}
+Mixture distributions are introduced in [Section 2.6 of  *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-Frequency-Modeling.html#S:mixture-distributions) and developed further in 
+[Section2 3.3.5 and 3.3.6](https://openacttexts.github.io/Loss-Data-Analytics/C-Severity.html#finite-mixtures). Check out this development.
+
+```
+
+```{r ex="LDA1.3.3.2", type="sample-code", tut=TRUE}
+#  Extract the number of claims for each entity type
+ByVarSumm <- function(datasub){
+  A1 <- sum(datasub$Freq)      # number of claims 
+  return( A1)
+}
+t1 <- ByVarSumm(subset(Insample, TypeVillage == 1))
+t2 <- ByVarSumm(subset(Insample, TypeCity == 1))
+t3 <- ByVarSumm(subset(Insample, TypeCounty == 1))
+t4 <- ByVarSumm(subset(Insample, TypeMisc == 1))
+t5 <- ByVarSumm(subset(Insample, TypeSchool == 1))
+t6 <- ByVarSumm(subset(Insample, TypeTown == 1))
+
+Tablea <- round(rbind(t1,t2,t3,t4,t5,t6),digits=3)
+colnames(Tablea) <- c("Claim number")
+rownames(Tablea) <- c("Village","City","County","Misc","School","Town")
+Tablea
+
+#Enter the parameter information for the pdf of the claim severities for each subpopulation
+alpha<-c(??)
+theta<-c(??)
+
+#Generate a mixture of the gamma pdfs. First, create a vector of weights to use for the mixture
+weight<- Tablea[,1]/sum(??)
+
+#Next, create an object called pdfmix for the mixture pdf, which is the weighted sum of the individual subpopulation pdfs. 
+x<-seq(10,400000)
+pdfmix<-0
+for(i in 1:6){
+  pdfmix<-dgamma(x,shape=??,scale=??)*??+pdfmix
+}
+
+#Plot each of the pdf curves of the log claim severities in the same figure
+plot(log(x),??,type="l",xlab="log claim severity",ylab="density",ylim=c(0,0.3))
+for(i in 2:6){
+  lines(log(x),??)
+}
+
+#Superimpose the pdf of mixture distribution of the log claims
+lines(log(x),??,col="red",lwd=2)
+```
+
+```{r ex="LDA1.3.3.2", type="solution", tut=TRUE}
+#  Extract the number of claims for each entity type
+ByVarSumm <- function(datasub){
+  A1 <- sum(datasub$Freq)      # number of claims 
+  return(A1)
+}
+t1 <- ByVarSumm(subset(Insample, TypeVillage == 1))
+t2 <- ByVarSumm(subset(Insample, TypeCity == 1))
+t3 <- ByVarSumm(subset(Insample, TypeCounty == 1))
+t4 <- ByVarSumm(subset(Insample, TypeMisc == 1))
+t5 <- ByVarSumm(subset(Insample, TypeSchool == 1))
+t6 <- ByVarSumm(subset(Insample, TypeTown == 1))
+
+Tablea <- round(rbind(t1,t2,t3,t4,t5,t6),digits=3)
+colnames(Tablea) <- c("Claim number")
+rownames(Tablea) <- c("Village","City","County","Misc","School","Town")
+Tablea
+
+#Enter the parameter information for the pdf of the claim severities for each subpopulation
+alpha<-c(0.63,0.511,0.637,0.347,0.324,0.361)
+theta<-c(16897,33119,24259,124023,198599,54933)
+
+#Generate a mixture of the gamma pdfs. First, create a vector of weights to use for the mixture
+weight<- Tablea[,1]/sum(Tablea[,1])
+
+#Next, create an object called pdfmix for the mixture pdf, which is the weighted sum of the individual subpopulation pdfs. 
+x<-seq(10,400000)
+pdfmix<-0
+for(i in 1:6){
+  pdfmix<-dgamma(x,shape=alpha[i],rate=1/theta[i])*weight[i]+pdfmix
+}
+
+#Plot each of the pdf curves of the log claim severities in the same figure
+plot(log(x),dgamma(x,shape=alpha[1],scale=theta[1])*x,type="l",xlab="log claim severity",ylab="density",ylim=c(0,0.3))
+for(i in 2:6){
+  lines(log(x), dgamma(x,shape=alpha[i],scale=theta[i])*x)
+}
+
+#Superimpose the pdf of mixture distribution of the log claims
+lines(log(x), pdfmix*x,col="red",lwd=2)
+```
+
+```{r ex="LDA1.3.3.2", type="sct", tut=TRUE}
+success_msg("Well done!")
+```
+
+
+## Coverage Modifications
+
+***
+
+In this section we evaluate the impacts of coverage modifications: 
+
+-  deductibles, 
+-  policy limit, 
+-  coinsurance, and 
+-  reinsurance on insurer’s costs.
+
+***
+
+####  Video: Policy Deductibles {-}
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_v4oyj7ne&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_mnc9h2ja" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+
+#### Overheads: Policy Deductibles (Click Tab to View) {-}
+
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Sect341A')">A. Risk Retention Framework</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect341B')">B. Ordinary Deductible</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect341C')">C. Distribution of Payment Per Loss Variable $Y^L$</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect341D')">D. Distribution of Payment Per Payment Variable $Y^P$</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect341E')">E. Raw Moments of $Y^L$ and $Y^P$</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect341F')">F. Example: Actuarial Exam Question</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect341G')">G. Loss Elimination Ratio (LER)</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect341H')">H. Franchise Deductible</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect341I')">I. Review</button>
+  </div>
+
+<div id="Sect341A" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=60" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect341B" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=61" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect341C" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=62" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect341D" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=63" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect341E" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=64" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect341F" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=65" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect341G" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=66" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect341H" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=67" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect341I" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=68" width="100%" height="400"> </iframe>
+  </div>
+
+
+####  Video: Policy Limits {-}
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_7u0jx487&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_gol12ato" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+#### Overheads: Policy Limits  (Click Tab to View) {-}
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Sect342A')">A. Policy Limit</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect342B')">B. Distribution of the Limited Loss Variable</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect342C')">C. Raw Moments of Limited Loss Variable</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect342D')">D. Limited Expected Value: Pareto Policy Limit</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect342E')">E. Expected Payments Under Deductible Revisited</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect342F')">F. Loss Elimination Ratio (LER) Revisited</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect342G')">G. Example: Actuarial Exam Question</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect342H')">H. R Code to Calculate Limited Expected Value</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect342I')">I. Review</button>
+  </div>
+
+<div id="Sect342A" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=71" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect342B" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=72" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect342C" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=73" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect342D" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=74" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect342E" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=75" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect342F" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=76" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect342G" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=77" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect342H" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=78" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect342I" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=79" width="100%" height="400"> </iframe>
+  </div>
+
+### Exercise. Calculate Moments of the Lognormal Distribution
+
+**Assignment Text**
+
+The support of the lognormal distribution is positive real numbers and the distribution is right-skewed. Given these properties, claim values for many coverages follow a lognormal distribution. `R` provides many several functions related to the [lognormal()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Lognormal) distribution.
+
+Particularly useful for calculations related to the effect of coverage modifications, the [plnorm()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Lognormal) function returns the distribution function for a lognormal. Specifically, the limited expected value function is useful for calculating limited claim values, that is, claims amounts subject to policy limits. See the summary in [Section 18.2.5 of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-SummaryDistributions.html#S:ContinuousDistributions).
+
+The limited expected value of $X$ at limit, $L$, can be calculated as follows:
+
+$$
+LEV[x;L] = \int_0^L x f_X(x) ~dx ~+ L \times [1 - F_X(L)] .
+$$
+
+The first term on the right-hand side is the contribution to the expected value for claims that are less than $L$ and the second term is the expected value of all claims greater than or equal to $L$. 
+
+For the exercises in this section, we provide the [mlnorm()](https://rdrr.io/cran/actuar/man/LognormalMoments.html) and [levlnorm()](https://rdrr.io/cran/actuar/man/LognormalMoments.html) functions to calculate unlimited mean and limited expected values, respectively with arguments `meanlog` and `sdlog` corresponding to the same arguments in the plnorm() function.  The levlnorm() function requires an additional `limit` argument.
+
+We also provide the vector `claims` which are observed claims values from lognormal distribution with `meanlog` = 12 and `sdlog` = 1.5. The values of `meanlog` and `sdlog` are saved in the `mu` and `sigma` objects.
+
+:::: {.blackbox }
+**Instructions**
+
+* Calculate the expected value of the lognormal function and compare to the `mean` of `claims`.
+* Calculate the expected value of the claims retained by the insured using the levlnorm() function and the compare to the mean of `claims`.
+:::: 
+
+<br>
+
+```{r ex="LDA1.3.4.1", type="hint", tut=TRUE}
+Note that we have created the `R` objects `mu` and `sigma`, consider how to use them in your answer.
+Some coders find it easier to code thousands and millions using scientific notation. For example, it may be easier to type 5e6 than to count the number of zeros on in 5000000 on your screen.
+```
+
+
+```{r ex="LDA1.3.4.1", type="pre-exercise-code", tut=TRUE}
+set.seed(12345)
+mu <- 12
+sigma <- 1.5
+claims <- rlnorm(n = 100000, meanlog = mu, sdlog = sigma)
+mlnorm <- function(meanlog, sdlog) exp(meanlog + sdlog ^ 2 /2)
+
+levlnorm <- function(limit, meanlog, sdlog){
+  t1 <- mlnorm(meanlog = meanlog, sdlog = sdlog) * 
+    pnorm(q = (log(limit) - meanlog - sdlog ^ 2) / sdlog)
+  t2 <- limit * ( 1- pnorm((log(limit) - meanlog) / sdlog))
+  return(t1 + t2)
+  }
+```
+
+```{r ex="LDA1.3.4.1", type="sample-code", tut=TRUE}
+
+# Unlimited
+#expected value of the lognormal function
+mlnorm(meanlog = ??, sdlog = ??)
+# mean of claims
+mean(??)
+
+```
+
+```{r ex="LDA1.3.4.1", type="solution", tut=TRUE}
+
+# Unlimited
+#expected value of the lognormal function
+mlnorm(meanlog = mu, sdlog = sigma)
+# mean of claims
+mean(claims)
+```
+
+```{r ex="LDA1.3.4.1", type="sct", tut=TRUE}
+success_msg("Well done!")
+```
+
+### Exercise.  Calculate Limited Expected Value of the Lognormal Distribution
+
+**Assignment Text**
+
+Now, assume that an insurer provides coverage for the first $ 5 million of claims.
+
+:::: {.blackbox }
+**Instruction**
+
+* Calculate the expected value of the claims insured with a $ 5 million policy limit using the levlnorm() function and then compare to the amounts insured from `claims`.
+:::: 
+
+<br>
+
+```{r ex="LDA1.3.4.2", type="hint", tut=TRUE}
+
+```
+
+
+```{r ex="LDA1.3.4.2", type="pre-exercise-code", tut=TRUE}
+set.seed(12345)
+mu <- 12
+sigma <- 1.5
+claims <- rlnorm(n = 100000, meanlog = mu, sdlog = sigma)
+mlnorm <- function(meanlog, sdlog) exp(meanlog + sdlog ^ 2 /2)
+
+levlnorm <- function(limit, meanlog, sdlog){
+  t1 <- mlnorm(meanlog = meanlog, sdlog = sdlog) * 
+    pnorm(q = (log(limit) - meanlog - sdlog ^ 2) / sdlog)
+  t2 <- limit * ( 1- pnorm((log(limit) - meanlog) / sdlog))
+  return(t1 + t2)
+  }
+```
+
+
+```{r ex="LDA1.3.4.2", type="sample-code", tut=TRUE}
+
+### Claim amounts insured under a 5 million limit    
+
+# From the limited expected value function
+levlnorm(limit = ??, meanlog = ??, sdlog = ??)
+
+# From the claims data
+mean(pmin(??, ??))
+```
+
+```{r ex="LDA1.3.4.2", type="solution", tut=TRUE}
+
+### Claim amounts insured under a 5 million limit    
+
+# From the limited expected value function
+levlnorm(limit = 5e6, meanlog = 12, sdlog = 1.5)
+
+
+# From the claims data
+mean(pmin(5e6, claims))
+```
+
+
+```{r ex="LDA1.3.4.2", type="sct", tut=TRUE}
+success_msg("Well done!")
+```
+
+### Exercise. Expected Claims Subject to a Deductible
+
+**Assignment Text**
+
+When an insurer provides coverage with a deductible, only a portion of claims result in reimbursement. The claims that do produce reimbursement have a greater average value than the average value for all claims. 
+
+For this exercise, assume that an insurer provides coverage for the first ${\$}$ 5 million of claims in excess of a ${\$}$ 1 million deductible.  Note that this coverage is sometimes stated as  ${\$}$ 4 million excess of ${\$}$ 1 million (or shorthand notation such as ${\$}$4 mln xs ${\$}$1 mln).
+
+:::: {.blackbox }
+**Instructions**
+
+*  Determine the number of `claims` resulting in reimbursement. Compare to the expected value of the number of claims requiring reimbursement calculated using the `plnorm` function.
+*  Calculate the amounts insured. Do this in two steps. First, subset `claims` to only include amounts in excess of ${\$}$1 million. Second, calculate the average value of those claims.
+*  Calculate the expected value of the claims insured subject to a ${\$}$1 million deductible and a ${\$}$5 million policy limit using the `levlnorm` and `plnorm` function and the compare to the amounts you calculated in the prior step. Note that these are the 'ground-up' values meaning that they include the amounts within the deductible.
+:::: 
+
+<br>
+
+
+```{r ex="LDA1.3.4.3", type="hint", tut=TRUE}
+
+```
+
+
+```{r ex="LDA1.3.4.3", type="pre-exercise-code", tut=TRUE}
+set.seed(12345)
+mu <- 12
+sigma <- 1.5
+claims <- rlnorm(n = 100000, meanlog = mu, sdlog = sigma)
+mlnorm <- function(meanlog, sdlog) exp(meanlog + sdlog ^ 2 /2)
+
+levlnorm <- function(limit, meanlog, sdlog){
+  t1 <- mlnorm(meanlog = meanlog, sdlog = sdlog) * 
+    pnorm(q = (log(limit) - meanlog - sdlog ^ 2) / sdlog)
+  t2 <- limit * ( 1- pnorm((log(limit) - meanlog) / sdlog))
+  return(t1 + t2)
+  }
+```
+
+
+```{r ex="LDA1.3.4.3", type="sample-code", tut=TRUE}
+
+### Claim counts amounts insured under a 1 million deductible applied to the first 5 million of claims
+# Number of claims in the data
+sum(claims > ??) 
+# Expected
+(1 - plnorm(q = ??, meanlog = ??, sdlog = ??)) * length(??)
+
+# Average Value from claims
+insured <- claims[claims > ??]
+mean(pmin(??, ??))
+
+#Expected
+?? + (levlnorm(limit = ??, meanlog = ??, sdlog = ??) - 
+  levlnorm(limit = ??, meanlog = ??, sdlog = ??)) / 
+  (1 - plnorm(q = ??, meanlog = ??, sdlog = ??))
+
+```
+
+```{r ex="LDA1.3.4.3", type="solution", tut=TRUE}
+### Claim counts amounts insured under a 1 million deductible applied to the first 5 million of claims
+# Number of claims in the data
+sum(claims > 1e6) 
+# Expected
+(1 - plnorm(q = 1e6, meanlog = mu, sdlog = sigma)) * length(claims)
+
+# Average Value from claims
+insured <- claims[claims > 1e6]
+mean(pmin(5e6, insured))
+
+#Expected
+1e6 + (levlnorm(limit = 5e6, meanlog = mu, sdlog = sigma) - 
+  levlnorm(limit = 1e6, meanlog = mu, sdlog = sigma)) / 
+  (1 - plnorm(q = 1e6, meanlog = mu, sdlog = sigma))
+```
+
+```{r ex="LDA1.3.4.3", type="sct", tut=TRUE}
+success_msg("Well done!")
+```
+
+
+####  Video: Policy Coinsurance and Reinsurance {-}
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_4f9j72l3&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_5vv01as5" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+#### Overheads: Policy Coinsurance and Reinsurance (Click Tab to View) {-}
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Sect343A')">A. Coinsurance</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect343B')">B. Raw Moments of $Y^L$</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect343C')">C. Inflation </button>
+  <button class="tablinks" onclick="openTab(event, 'Sect343D')">D. Example: Actuarial Exam Question </button>
+  <button class="tablinks" onclick="openTab(event, 'Sect343E')">E. R Code to Calculate Expected Values </button>
+  <button class="tablinks" onclick="openTab(event, 'Sect343F')">F. Reinsurance </button>
+  <button class="tablinks" onclick="openTab(event, 'Sect343G')">G. Review </button>
+</div>
+
+<div id="Sect343A" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=93" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect343B" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=94" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect343C" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=95" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect343D" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=96" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect343E" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=98" width="100%" height="400"> </iframe>
+  </div>  
+<div id="Sect343F" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=99" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect343G" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=100" width="100%" height="400"> </iframe>
+  </div>
+
+### Exercise.  Expected Claims Subject to a Deductible and Coinsurance
+
+**Assignment Text**
+
+For this exercise, assume that an insurer provides coverage for the first ${\$}$5 million of claims in excess of a ${\$}$1 million deductible.  Note that this coverage is sometimes states as ${\$}$4 million excess of ${\$}$1 million (or shorthand notation such as ${\$}$4mln xs ${\$}$1 mln). (This is the same as the prior exercise.) However, now you should assume that there is a 20% coinsurance provision. The number of claims will not differ from the prior exercise, so will focus on the average value.
+
+:::: {.blackbox }
+**Instructions**
+
+* Calculate the expected insured value of the claims subject to a ${\$}$1 million deductible and 20% coinsurance and a ${\$}$5 million policy limit using the `levlnorm` and `plnorm` function and the compare to the amounts insured from `claims`. In contrast to the prior exercise, calculate the insured value of the claim rather than the ground-up value.
+:::: 
+
+<br>
+
+
+```{r ex="LDA1.3.4.4", type="hint", tut=TRUE}
+
+```
+
+
+```{r ex="LDA1.3.4.4", type="pre-exercise-code", tut=TRUE}
+set.seed(12345)
+mu <- 12
+sigma <- 1.5
+claims <- rlnorm(n = 100000, meanlog = mu, sdlog = sigma)
+mlnorm <- function(meanlog, sdlog) exp(meanlog + sdlog ^ 2 /2)
+
+levlnorm <- function(limit, meanlog, sdlog){
+  t1 <- mlnorm(meanlog = meanlog, sdlog = sdlog) * 
+    pnorm(q = (log(limit) - meanlog - sdlog ^ 2) / sdlog)
+  t2 <- limit * ( 1- pnorm((log(limit) - meanlog) / sdlog))
+  return(t1 + t2)
+  }
+```
+
+
+```{r ex="LDA1.3.4.4", type="sample-code", tut=TRUE}
+
+### Claim amounts insured under a $1 million deductible with a $5 million policy limit
+### with 20% coinsurance
+
+#Average Value
+insured <- claims[claims > ??]
+mean(pmin(??, ??) - ??) * (1 - ??)
+
+#Average Value
+(levlnorm(limit = ??, meanlog = ??, sdlog = ??) - 
+  levlnorm(limit = ??, meanlog = ??, sdlog = ??)) / 
+  (1 - plnorm(q = ??, meanlog = ??, sdlog = ??)) * 
+    (1 - ??)
+```
+
+
+```{r ex="LDA1.3.4.4", type="solution", tut=TRUE}
+
+### Claim amounts insured under a $1 million deductible with a $5 million policy limit   
+### with 20% coinsurance
+
+#Average Value
+insured <- claims[claims > 1e6]
+mean(pmin(5e6, insured) - 1e6) * (1 - 0.2)
+
+#Average Value
+
+(levlnorm(limit = 5e6, meanlog = mu, sdlog = sigma) - 
+  levlnorm(limit = 1e6, meanlog = mu, sdlog = sigma)) / 
+  (1 - plnorm(q = 1e6, meanlog = mu, sdlog = sigma)) * (1 - 0.2)
+```
+
+
+```{r ex="LDA1.3.4.4", type="sct", tut=TRUE}
+success_msg("Well done!")
+```
+
+
+## Maximum Likelihood Estimation
+
+***
+
+In this section, you learn how to:
+
+*    Define a likelihood for a sample of observations from a continuous distribution.
+*    Define the maximum likelihood estimator for a random sample of observations from a continuous distribution.
+*    Estimate parametric distributions based on grouped, censored, and truncated data.
+
+***
+
+####  Video: Maximum Likelihood Estimation  {-}
+
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_qaxiabmf&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_dgu7549s" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+#### Overheads: Maximum Likelihood Estimation (Click Tab to View) {-}
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Sect351A')">A. Overview</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect351B')">B. Maximum Likelihood Estimators (MLEs) for Complete Data</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect351C')">C. MLEs using Modified Data</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect351D')">D. MLEs for Grouped Data</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect351E')">E. MLEs for Censored Data</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect351F')">F. MLEs for Truncated Data</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect351G')">G. Exercise 3.5.1</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect351H')">H. Exercise 3.5.2</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect351I')">I. Review</button>
+  </div>
+
+<div id="Sect351A" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=82" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect351B" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=83" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect351C" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=84" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect351D" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=85" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect351E" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=86" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect351F" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=87" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect351G" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=88" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect351H" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=89" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect351I" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap3.pdf#page=90" width="100%" height="400"> </iframe>
+  </div>
+
+### Exercise. Maximum Likelihood Estimation for a Pareto Distribution {#Ex:MLEPareto}
+
+**Assignment Text**
+
+For this exercise we will undertake maximum likelihood estimation to fit a Pareto distribution to claim severity data.
+
+Because we have two parameters in a Pareto distribution, undertaking maximum likelihood involves finding the estimates that maximize the likelihood surface. Visualizing the likelihood surface may help to gain an appreciation of how maximum likelihood works. After finding the parameter estimates, we plot out a contour plot of the likelihood and mark the maximum likelihood estimates on the plot. 
+
+:::: {.blackbox }
+**Instructions** 
+  
+  -  Extract claim severity data from the Property Fund data. 
+  -  Write a function to calculate the negative log-likelihood for the claim severity data, assuming that claim severity is Pareto distributed. The *pdf* function for a Pareto distribution [dpareto()], which was created in Exercise \@ref(Ex:CreateParetoDensityFct), can be used when finding the negative log-likelihood.
+  -  Find the maximum likelihood estimates by using [optim()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/optim) to minimize the negative log-likelihood.
+  -  Plot a contour plot of the likelihood using [contour()](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/contour), and use [points()](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/points) to mark the maximum likelihood estimates on the plot. 
+:::: 
+
+<br>
+
+```{r ex="LDA1.3.5.1", type="pre-exercise-code", tut=TRUE}
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+
+dpareto <- function(x,shape,scale){
+  shape*(scale^shape)/((scale+x)^(shape+1))
+}
+```
+
+```{r ex="LDA1.3.5.1", type="hint", tut=TRUE}
+You can get reminders of the foundations of maximum likelihood estimation in [Chapter 15 of  *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-AppA.html) 
+```
+
+```{r ex="LDA1.3.5.1", type="sample-code", tut=TRUE}
+# Extract the claim severity from the data
+claims<-subset(Insample,yAvg>0)$yAvg
+
+# Write a function to calculate the Negative log likelihood of the Pareto 
+nloglike <- function(params) {
+  like<- dpareto(claims, shape=params[1],scale=params[2])
+  return(-sum(log(??)))
+}
+
+# Find the maximum likelihood estimates by finding the minimum of the negative log likelihood 
+lik_result <- optim(par=c(2,1000), fn=??, method = c("L-BFGS-B"), lower=c(.5,100), hessian = TRUE)
+lik_result$par
+
+# Draw a contour plot of the negative log-likelihood.
+alpha<-seq(1,2,by=0.05)
+theta <-seq(6000,12000,by=100)
+datalike<-expand.grid(alpha,theta)
+lnLseq<-NULL
+for(i in 1:nrow(datalike)){
+  lnLseq[i]<--sum(log(dpareto(claims, shape=datalike[i,1],scale=datalike[i,2])))
+}
+lnLseq<-matrix(lnLseq,length(alpha),length(theta))
+contour(alpha,theta,lnLseq,nlevels=150,xlab="alpha",ylab="theta")
+
+# Mark the MLE estimates on contour plot.
+points(lik_result$par[1],lik_result$par[2],pch="X",col="red")
+
+```
+
+
+```{r ex="LDA1.3.5.1", type="solution", tut=TRUE}
+# Extract the claim severity from the data
+claims<-subset(Insample,yAvg>0)$yAvg
+
+# Write a function to calculate the Negative log likelihood of the Pareto 
+nloglike <- function(params) {
+  like<- dpareto(claims, shape=params[1],scale=params[2])
+  return(-sum(log(like)))
+}
+
+# Find the maximum likelihood estimates by finding the minimum of the negative log likelihood 
+lik_result <- optim(par=c(2,1000), fn=nloglike, method = c("L-BFGS-B"), lower=c(.5,100), hessian = TRUE)
+lik_result$par
+
+# Draw a contour plot of the negative log-likelihood.
+alpha<-seq(1,2,by=0.05)
+theta <-seq(6000,12000,by=100)
+datalike<-expand.grid(alpha,theta)
+lnLseq<-NULL
+for(i in 1:nrow(datalike)){
+  lnLseq[i]<--sum(log(dpareto(claims, shape=datalike[i,1],scale=datalike[i,2])))
+}
+lnLseq<-matrix(lnLseq,length(alpha),length(theta))
+contour(alpha,theta,lnLseq,nlevels=150,xlab="alpha",ylab="theta")
+
+# Mark the MLE estimates on contour plot.
+points(lik_result$par[1],lik_result$par[2],pch="X",col="red")
+
+```
+
+```{r ex="LDA1.3.5.1", type="sct", tut=TRUE}
+success_msg("Well done!")
+```
+
+
+### Exercise. Finding Standard Errors for Maximum Likelihood Estimates
+<img src = "ContributorPics\hurdler.png" width = "65" height = "65" style = "float:right; margin-left: 10px; margin-top: 7px" />
+
+**Assignment Text**
+
+For this exercise we calculate 95% confidence intervals for the parameters based on estimates that we found in Exercise \@ref(Ex:MLEPareto). The theory underpinning *mle* confidence intervals is described in [Section 15.3 of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-AppA.html#S:AppA:IE).
+
+The parameters that we have estimated depend on the data, and since the data can be considered as a random sample from a larger unknown population, maximum likelihood estimators are random variables. A property of maximum likelihood is that the estimators converge in distribution to a normal distribution, as $n$ gets larger. 
+
+If we minimize the negative log-likelihood, we can use the Hessian matrix (which is a matrix of the second-order partial derivatives) to find the variance of the estimators. Specifically, the standard errors of the estimators are equal to the square root of the diagonal elements of the inverse of the Hessian matrix.
+
+Some useful `R` functions for this exercise are:
+
+  - The [solve()](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/solve) function can be used to find the inverse of a square matrix.
+  - The [diag()](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/diag) function extracts the diagonal of a matrix.
+  - The [qnorm()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Normal) function which finds quantiles of a normal distribution.
+
+:::: {.blackbox }
+**Instructions** 
+  
+  -  Use [solve()](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/solve) to calculate the inverse of the Hessian matrix. The Hessian is one of the outputs from the [optim()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/optim) function, and can be extracted from `lik_result` which was found in the previous exercise.
+  -  Use [diag()](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/diag) to extract the diagonals of the inverse of the Hessian.
+  -  Calculate the standard errors of the parameter estimates by taking the square root of the diagonal elements of the inverse of the Hessian matrix.
+  -  Use the standard errors to calculate 95% confidence intervals.
+:::: 
+
+<br>
+
+```{r ex="LDA1.3.5.2", type="pre-exercise-code", tut=TRUE}
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+claims<-subset(Insample,yAvg>0)$yAvg
+dpareto <- function(x,shape,scale){
+  shape*(scale^shape)/((scale+x)^(shape+1))
+}
+nloglike <- function(params) {
+  like<- dpareto(claims, shape=params[1],scale=params[2])
+  return(-sum(log(like)))
+}
+lik_result <- optim(par=c(2,1000), fn=nloglike, method = c("L-BFGS-B"), lower=c(.5,100), hessian = TRUE)
+```
+
+```{r ex="LDA1.3.5.2", type="hint", tut=TRUE}
+You can get reminders of the theoretical background of maximum likelihood estimation in [Chapter 17 of  *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-AppC.html) 
+```
+
+```{r ex="LDA1.3.5.2", type="sample-code", tut=TRUE}
+
+# Extract the Hessian and take the inverse
+InvHess<-??(??$hessian)
+
+# Find the diagonal elements of InvHess. These are the variances of the estimators
+vPar<-??(??)
+
+# Find the standard error of the parameter estimates
+se<-??(??)
+
+# Calculate 95% confidence intervals for the parameter estimates
+lik_result$?? + c(-1,1)*qnorm(??)*se[1]
+lik_result$par[2] + c(-1,1)*qnorm(??)*se[2]
+
+```
+
+
+```{r ex="LDA1.3.5.2", type="solution", tut=TRUE}
+
+# Extract the Hessian and take the inverse
+InvHess<-solve(lik_result$hessian)
+
+# Find the diagonal elements of InvHess. These are the variances of the estimators
+vPar<-diag(InvHess)
+
+# Find the standard error of the parameter estimates
+se<-sqrt(vPar)
+
+# Calculate 95% confidence intervals for the parameter estimates
+lik_result$par[1] + c(-1,1)*qnorm(0.975)*se[1]
+lik_result$par[2] + c(-1,1)*qnorm(0.975)*se[2]
+
+```
+
+```{r ex="LDA1.3.5.2", type="sct", tut=TRUE}
+success_msg("Well done!")
+```
+
+
+
+## Contributors {-}
+
+-  **Authors**. **Tim Higgins** , Australian National University, **Fei Huang**, University of New South Wales (UNSW) Sydney, **Nii-Armah Okine**, Appalachian State University, and **Rajesh (Raj) Sahasrabuddhe**, Oliver Wyman Actuarial Consulting, are the principal authors of the initial version of this chapter.
+-  **Chapter Maintainers**. Please contact ??? and/or Jed at <jfrees@bus.wisc.edu> for chapter comments and suggested improvements.
+
+

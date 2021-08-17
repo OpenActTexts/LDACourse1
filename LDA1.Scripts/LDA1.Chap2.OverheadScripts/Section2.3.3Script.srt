@@ -1,0 +1,241 @@
+1
+00:00:01,764 --> 00:00:01,920
+﻿
+
+2
+00:00:01,920 --> 00:00:06,240
+Hello! I am Shyamal Kumar from the Department 
+of Statistics and Actuarial Science  
+
+3
+00:00:06,240 --> 00:00:13,680
+at the University of Iowa. This lecture concerns 
+maximum likelihood estimation for the binomial  
+
+4
+00:00:13,680 --> 00:00:15,920
+and the negative binomial models.
+
+5
+00:00:19,520 --> 00:00:24,960
+Many experiments generate random outcomes 
+that are binomial or near binomial.  
+
+6
+00:00:25,840 --> 00:00:31,200
+For such experiments, the parameter 
+m is self-evident. For this reason,  
+
+7
+00:00:31,200 --> 00:00:36,000
+the binomial model is a single parameter 
+model in introductory statistics courses. 
+
+8
+00:00:37,440 --> 00:00:41,600
+In actuarial frequency modeling, 
+lacking such an underlying experiment,  
+
+9
+00:00:42,160 --> 00:00:47,520
+the binomial as a two-parameter model with 
+the parameter m unknown is more effective.  
+
+10
+00:00:48,960 --> 00:00:56,160
+The log-likelihood shown here is a smooth function 
+of q for a fixed value of m. For a given value of  
+
+11
+00:00:56,160 --> 00:01:02,880
+m, maximizing the log-likelihood with respect 
+to q alone yields that the maximizing value of q  
+
+12
+00:01:03,680 --> 00:01:07,440
+satisfies q times m equals the sample mean. 
+
+13
+00:01:08,400 --> 00:01:15,680
+The MLE for the parameter m is then seen to 
+be the arg max of the reduced log-likelihood  
+
+14
+00:01:16,320 --> 00:01:24,160
+with q set equal to the sample mean over m. 
+This maximization can be restricted to values of  
+
+15
+00:01:24,160 --> 00:01:30,240
+m at least the sample maximum as 
+otherwise, the likelihood equals zero.  
+
+16
+00:01:31,200 --> 00:01:37,040
+Also, since the parameter m is a natural number, 
+brute-force maximization is quite effective. 
+
+17
+00:01:38,240 --> 00:01:43,680
+A cautionary note is that, unlike 
+typical models, the MLE need not  
+
+18
+00:01:43,680 --> 00:01:50,320
+exist. The latter happens precisely when the 
+sample variance is at least the sample mean,  
+
+19
+00:01:51,040 --> 00:01:54,160
+in which case the data is 
+suggestive of the Poisson model.
+
+20
+00:01:55,400 --> 00:01:58,880
+ 
+The sum of n independent geometric random  
+
+21
+00:01:58,880 --> 00:02:05,760
+variables is a negative binomial random variable 
+with the parameter r equal to n, a natural number.  
+
+22
+00:02:06,800 --> 00:02:12,240
+For this reason, in statistical texts, the 
+negative binomial model is often reduced  
+
+23
+00:02:12,800 --> 00:02:19,280
+by restricting r to be a natural number. Since 
+this interpretation of a negative binomial is  
+
+24
+00:02:19,280 --> 00:02:24,800
+not relevant in frequency modeling, r is 
+allowed to take any positive real value. 
+
+25
+00:02:25,440 --> 00:02:28,720
+The log-likelihood shown here 
+is a smooth function of beta  
+
+26
+00:02:29,680 --> 00:02:36,480
+for a fixed value of r. For a given value of r, 
+maximizing the log-likelihood with respect to beta  
+
+27
+00:02:36,480 --> 00:02:43,840
+alone yields that the maximizing value of beta 
+satisfies beta times r equals the sample mean. 
+
+28
+00:02:45,440 --> 00:02:50,000
+The MLE for the parameter r is 
+then seen to be the arg max of the  
+
+29
+00:02:50,000 --> 00:02:54,880
+reduced log-likelihood with beta set 
+equal to the sample mean over r.  
+
+30
+00:02:55,760 --> 00:03:01,920
+Hence, computing the MLE is a problem of 
+optimizing a smooth function of one real variable,  
+
+31
+00:03:02,480 --> 00:03:10,000
+and commonly available numerical routines can be 
+effectively employed. For optimization algorithms  
+
+32
+00:03:10,000 --> 00:03:16,320
+requesting an approximate solution, 
+the moment estimator for r can be used.
+
+33
+00:03:17,520 --> 00:03:21,440
+Again, a cautionary note is 
+that, unlike typical models,  
+
+34
+00:03:21,440 --> 00:03:28,320
+the MLE need not exist. The latter happens when 
+the sample variance is at most the sample mean,  
+
+35
+00:03:29,120 --> 00:03:32,800
+in which case the data is 
+suggestive of the Poisson model.
+
+36
+00:03:36,000 --> 00:03:40,480
+It may have piqued your curiosity 
+about why the MLE does not exist  
+
+37
+00:03:40,480 --> 00:03:46,640
+for some samples when using the binomial 
+and the negative binomial models.    
+
+38
+00:03:46,640 --> 00:03:50,560
+The underlying reason is that 
+any given Poisson distribution  
+
+39
+00:03:51,120 --> 00:03:56,080
+is a limit of a sequence of binomials 
+and a sequence of negative binomials,  
+
+40
+00:03:57,520 --> 00:04:04,960
+while no Poisson is either a binomial or a 
+negative binomial. Poisson limit is attained when  
+
+41
+00:04:04,960 --> 00:04:11,200
+m approaches infinity for binomials, and their 
+common mean equals that of the Poisson limit.  
+
+42
+00:04:12,640 --> 00:04:16,560
+And in the case of the negative 
+binomials, they approach a Poisson  
+
+43
+00:04:16,560 --> 00:04:21,520
+when r grows to infinity, and their common 
+mean equals that of the Poisson limit.
+
+44
+00:04:22,080 --> 00:04:28,240
+The above observation makes the optimization 
+related to the MLE akin to maximizing  
+
+45
+00:04:28,240 --> 00:04:34,240
+a strictly increasing function on an open 
+interval. For example, the function h(x)=x^2  
+
+46
+00:04:36,640 --> 00:04:44,800
+on the open interval (0,1) does not attain a 
+maximum, though it gets arbitrarily close to 1.
+
+47
+00:04:45,920 --> 00:04:51,920
+In the following two exercises, you will solve the 
+optimization problems underlying the MLE method  
+
+48
+00:04:51,920 --> 00:04:56,800
+for the binomial and the negative 
+binomial in the R software environment.
+
+49
+00:04:58,240 --> 00:05:00,400
+Thank you! 
+

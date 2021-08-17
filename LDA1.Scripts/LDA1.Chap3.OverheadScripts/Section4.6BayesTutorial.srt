@@ -1,0 +1,464 @@
+1
+00:00:02,379 --> 00:00:09,860
+11:24:12 Alright, so here we're going to expand
+on one of the videos from the textbook and
+
+2
+00:00:09,860 --> 00:00:17,320
+use it to explore a little bit more What a
+Bayesian prior distribution is, what a posterior
+
+3
+00:00:17,320 --> 00:00:21,529
+distribution is, and what a predictive distribution
+is.
+
+4
+00:00:21,529 --> 00:00:28,590
+11:24:32 So getting right to it.
+11:24:34 We're going to look at example 4.4.5.
+
+5
+00:00:28,590 --> 00:00:35,820
+11:24:39 This is an actuarial exam question.
+And here's what we're given. The probability
+
+6
+00:00:35,820 --> 00:00:42,050
+that an insured has at least one loss in any
+given year is p. So that's our parameter.
+
+7
+00:00:42,050 --> 00:00:50,210
+11:24:52 This is a Bayesian and problem. So
+we're going to focus on the prior distribution
+
+8
+00:00:50,210 --> 00:00:55,470
+for that one parameter, and we're told it's
+uniform between zero and point five.
+
+9
+00:00:55,470 --> 00:01:01,489
+11:25:06 But for one particular customer,
+they've had eight consecutive years of at
+
+10
+00:01:01,489 --> 00:01:06,710
+least one loss.
+11:25:14 And we're asked to calculate the
+
+11
+00:01:06,710 --> 00:01:12,749
+posterior probability that that person will
+again have another loss in year nine.
+
+12
+00:01:12,749 --> 00:01:18,460
+11:25:23 Okay, so just thinking about it it
+seems like this particular customer has a
+
+13
+00:01:18,460 --> 00:01:24,369
+much higher probability of giving losses we've
+seen eight in a row, we might really guess
+
+14
+00:01:24,369 --> 00:01:29,659
+that they're likely to have a ninth one, and
+this is a classic example of the power of
+
+15
+00:01:29,659 --> 00:01:32,460
+11:25:39 Bayesian methods.
+11:25:41 So we'll start with a little bit
+
+16
+00:01:32,460 --> 00:01:43,610
+of notation. I'm going to call X-i equal one
+11:25:49 if the customer had at least one
+
+17
+00:01:43,610 --> 00:01:49,030
+loss
+11:25:58 in year i.
+
+18
+00:01:49,030 --> 00:01:58,569
+11:26:02 And of course this parameter p sitting
+right here is understood as the probability
+
+19
+00:01:58,569 --> 00:02:04,250
+that x-i is equal to one.
+11:26:13 Okay, so that's the setup.
+
+20
+00:02:04,250 --> 00:02:08,780
+11:26:14 What are they asking me for.
+11:26:16 They're asking for the posterior
+
+21
+00:02:08,780 --> 00:02:14,280
+probability that this person will have a loss
+in year nine.
+
+22
+00:02:14,280 --> 00:02:21,270
+11:26:25 The probability that x-nine is equal
+to one, given
+
+23
+00:02:21,270 --> 00:02:26,500
+11:26:33 they've had a loss, every year for
+eight years.
+
+24
+00:02:26,500 --> 00:02:30,720
+11:26:37 Okay.
+11:26:38 Given that they had a loss in year
+
+25
+00:02:30,720 --> 00:02:40,550
+1, 2, 3, 4, 5, 6, 7, all the way through 8.
+11:26:48 This is what I'm being asked to find.
+
+26
+00:02:40,550 --> 00:02:50,060
+11:26:52 And this is the posterior predictive
+distribution.
+
+27
+00:02:50,060 --> 00:02:59,370
+11:27:04 Why is that the posterior predictive
+distribution? Well let's take a look at it.
+
+28
+00:02:59,370 --> 00:03:04,910
+11:27:10 All of this information right here,
+x-one through x-eight.
+
+29
+00:03:04,910 --> 00:03:12,710
+11:27:15 This is past data. Given I have observed
+that.
+
+30
+00:03:12,710 --> 00:03:23,510
+11:27:23 What can I say about future?
+11:27:29 What can I say about another unobserved
+
+31
+00:03:23,510 --> 00:03:27,500
+random variable?
+11:27:35 Okay, so I take what I know about
+
+32
+00:03:27,500 --> 00:03:33,330
+the past and I'm somehow supposed to use that
+to better inform a future prediction.
+
+33
+00:03:33,330 --> 00:03:40,390
+11:27:44 And as the textbook shows the definition
+of this thing of course is the probability
+
+34
+00:03:40,390 --> 00:03:45,701
+X-nine is equal to one, given.
+11:27:54 I know the parameter p
+
+35
+00:03:45,701 --> 00:03:54,420
+11:27:58 times the probability of p given
+I know,
+
+36
+00:03:54,420 --> 00:04:02,640
+11:28:06 eight years of loss data.
+11:28:09 And I integrate over the parameter
+
+37
+00:04:02,640 --> 00:04:12,960
+p.
+11:28:19 This is the definition of the predictive
+
+38
+00:04:12,960 --> 00:04:19,500
+distribution.
+11:28:25 And notice, in particular, we have
+
+39
+00:04:19,500 --> 00:04:28,110
+sitting right here, the posterior distribution.
+11:28:34 This is my updated information about
+
+40
+00:04:28,110 --> 00:04:35,720
+the parameter p, given I have observed eight
+years of data.
+
+41
+00:04:35,720 --> 00:04:41,990
+11:28:46 So let's collect what we know so
+far, we have a prior distribution, which was
+
+42
+00:04:41,990 --> 00:04:48,220
+given to us in the problem --- uniform between
+0 and 0.5
+
+43
+00:04:48,220 --> 00:04:58,460
+11:29:00 prior is pi p, which is uniform between
+0 and 0.5.
+
+44
+00:04:58,460 --> 00:05:08,740
+11:29:09 I'm going to draw the prior over
+here. Here's my parameter p start at zero.
+
+45
+00:05:08,740 --> 00:05:12,930
+11:29:19 This thing is founded at 0.5.
+11:29:21 And of course if it's uniform.
+
+46
+00:05:12,930 --> 00:05:18,750
+11:29:24 What that means, let's see what color
+should I use for the prior prior will henceforth
+
+47
+00:05:18,750 --> 00:05:28,000
+be red.
+11:29:33 It is every value equally likely.
+
+48
+00:05:28,000 --> 00:05:35,730
+11:29:38 That's the prior.
+11:29:43 Well then I have a customer with
+
+49
+00:05:35,730 --> 00:05:43,169
+eight years of consecutive losses. So I need
+to compute the posterior.
+
+50
+00:05:43,169 --> 00:05:54,330
+11:29:55 This is pi of p given x-1 is a loss,
+all the way through x-8 is a loss.
+
+51
+00:05:54,330 --> 00:06:01,360
+11:30:05 Okay, so we use what we know about
+Bayesian methods in general, this posterior
+
+52
+00:06:01,360 --> 00:06:10,470
+of course is going to be proportional to the
+probability year one was a loss, given p times
+
+53
+00:06:10,470 --> 00:06:20,710
+year 2, 3, 4,5,6,7,8 was a loss...
+11:30:27 times the prior.
+
+54
+00:06:20,710 --> 00:06:33,500
+11:30:34 And, of course, this is p times ... times
+p. There are eight of them, times the prior,
+
+55
+00:06:33,500 --> 00:06:41,990
+which is 2... the posterior will be proportional
+to p to the eighth power.
+
+56
+00:06:41,990 --> 00:06:48,790
+11:30:53 And in the textbook, it goes through
+how to find the normalizing constant, because
+
+57
+00:06:48,790 --> 00:06:53,229
+we know that the posterior is a density and
+must integrate to one.
+
+58
+00:06:53,229 --> 00:07:05,100
+11:31:03 So in fact, the posterior
+11:31:09 is equal to nine times 0.5 to the
+
+59
+00:07:05,100 --> 00:07:13,840
+negative ninth power times p to the eighth.
+11:31:22 Alright, let's take a look at that
+
+60
+00:07:13,840 --> 00:07:18,760
+here.
+11:31:25 This by the way, is the posterior.
+
+61
+00:07:18,760 --> 00:07:25,010
+11:31:29 This is what I'm going to plug in
+for the predictive density.
+
+62
+00:07:25,010 --> 00:07:33,710
+11:31:36 And if this is proportional to p
+to the eighth, when p is small, near zero,
+
+63
+00:07:33,710 --> 00:07:37,830
+this is going to be very small.
+11:31:45 And when p is larger, this is going
+
+64
+00:07:37,830 --> 00:07:45,090
+to be larger the posterior looks something
+like this.
+
+65
+00:07:45,090 --> 00:07:55,620
+11:32:00 And that makes sense, because this
+person, after all, has had eight consecutive
+
+66
+00:07:55,620 --> 00:08:02,169
+years of losses.
+11:32:10 So probably for this person they
+
+67
+00:08:02,169 --> 00:08:09,449
+have a much larger probability of experiencing
+a loss, they just seem to be a riskier customer.
+
+68
+00:08:09,449 --> 00:08:16,510
+11:32:20 And so we have finally set the table
+for solving the problem that we need to solve.
+
+69
+00:08:16,510 --> 00:08:21,460
+11:32:26 We want to ask ourselves what is
+the probability that this person, after eight
+
+70
+00:08:21,460 --> 00:08:26,210
+years of losses, will experience at least
+one more loss next year.
+
+71
+00:08:26,210 --> 00:08:33,699
+11:32:37 All we need to do now that we have
+our posterior is integrate the probability
+
+72
+00:08:33,699 --> 00:08:40,780
+of one more loss given p times the posterior
+dp, we need to evaluate this predictive distribution.
+
+73
+00:08:40,780 --> 00:08:47,860
+11:32:52 So doing that, of course, the probability
+next year is at least the loss
+
+74
+00:08:47,860 --> 00:08:56,040
+11:32:59 Given the last eight is the integral.
+11:33:11 0 to 0.5...
+
+75
+00:08:56,040 --> 00:09:04,280
+11:33:08 the probability of one more loss...
+11:33:10 Given p times the posterior
+
+76
+00:09:04,280 --> 00:09:14,990
+11:33:16 dp. The probability of one more loss
+--- that's just p ---
+
+77
+00:09:14,990 --> 00:09:25,080
+11:33:26 The posterior is nine times point
+five to the negative ninth power times p to
+
+78
+00:09:25,080 --> 00:09:28,380
+the eight.
+11:33:36 And I integrate this over p.
+
+79
+00:09:28,380 --> 00:09:37,210
+11:33:40 So we can move some constants out
+front. I get a nine times 0.5 to the negative
+
+80
+00:09:37,210 --> 00:09:41,860
+ninth power.
+11:33:48 I have a p to the nine, and I integrate
+
+81
+00:09:41,860 --> 00:09:47,900
+that, so of course I get one over 10 times
+p to the 10th power.
+
+82
+00:09:47,900 --> 00:09:54,030
+11:33:58 And I evaluate this expression between
+0.5 and 0.
+
+83
+00:09:54,030 --> 00:10:00,279
+11:34:05 So we collect some terms I'll get
+the nine out front. Bring the 10 over.
+
+84
+00:10:00,279 --> 00:10:04,670
+11:34:11 Of course I have point five to the
+negative nine, and that's going to be multiplied
+
+85
+00:10:04,670 --> 00:10:09,000
+by point five to the 10. So only a point five
+remains.
+
+86
+00:10:09,000 --> 00:10:14,390
+11:34:20 Then when I plug in zero, the whole
+expression is equal to zero.
+
+87
+00:10:14,390 --> 00:10:22,630
+11:34:24 So this is point five times nine
+over 10, which is equal to 0.45.
+
+88
+00:10:22,630 --> 00:10:31,100
+11:34:36 And let's think about that number
+in the context of the problem. We've already
+
+89
+00:10:31,100 --> 00:10:36,810
+established this was a very risky customer,
+they've had eight consecutive years of losses.
+
+90
+00:10:36,810 --> 00:10:42,080
+11:34:47 Even though my prior distribution
+thought the probability someone would get
+
+91
+00:10:42,080 --> 00:10:45,820
+a loss was evenly distributed between zero
+and 0.5.
+
+92
+00:10:45,820 --> 00:10:53,370
+11:34:56 For this risky customer after eight
+years of losses. I'm pretty sure their probability
+
+93
+00:10:53,370 --> 00:11:36,800
+of a loss is much higher.
+

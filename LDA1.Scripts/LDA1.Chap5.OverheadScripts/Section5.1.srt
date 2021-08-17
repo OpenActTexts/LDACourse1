@@ -1,0 +1,239 @@
+1
+00:00:00,880 --> 00:00:07,520
+Welcome to the tutorial on aggregate loss 
+models. My name is Peng Shi, a professor in  
+
+2
+00:00:07,520 --> 00:00:12,080
+the Risk and Insurance department at 
+the University of Wisconsin-Madison.  
+
+3
+00:00:12,720 --> 00:00:17,600
+In this video, I am going to give an 
+introduction to aggregate loss models.
+ 
+
+4
+00:00:19,040 --> 00:00:26,480
+A primary focus of insurers is to estimate 
+the cost of insured events under the insurance  
+
+5
+00:00:26,480 --> 00:00:34,960
+contracts. Intuitively, we know that the total 
+losses to an insurer are affected by both the  
+
+6
+00:00:34,960 --> 00:00:43,200
+frequency and the severity of the insured event. 
+This chapter will discuss probability models  
+
+7
+00:00:43,200 --> 00:00:49,040
+for aggregate losses that use frequency 
+and severity as building blocks.
+ 
+
+8
+00:00:51,360 --> 00:00:59,600
+In previous chapters, we have discussed reasons 
+why frequency and severity are often studied  
+
+9
+00:00:59,600 --> 00:01:09,680
+separately, and we have learned basic probability 
+models for frequency and severity. Let’s review  
+
+10
+00:01:09,680 --> 00:01:15,040
+some important terminologies that we 
+continue to use in this section.
+ 
+
+11
+00:01:16,880 --> 00:01:27,280
+Loss, also known as ground-up loss, refers to the 
+amount of financial losses of the insured. Claim  
+
+12
+00:01:27,280 --> 00:01:35,520
+represents the amount of losses covered by the 
+insurer. The distinction between loss and claim  
+
+13
+00:01:35,520 --> 00:01:42,000
+is due to the contractual provisions 
+such as deductible and policy limit.
+ 
+
+14
+00:01:43,840 --> 00:01:49,760
+Frequency measures how often an insured 
+event occurs during the policy year.  
+
+15
+00:01:50,640 --> 00:01:56,320
+Severity describes the amount or 
+size of losses for an insured event.  
+
+16
+00:01:57,840 --> 00:02:05,520
+Aggregate losses or aggregate claims denote 
+the total amount of payment by the insurer  
+
+17
+00:02:06,080 --> 00:02:11,440
+for a single policy or an insurance 
+portfolio in a policy year.
+ 
+
+18
+00:02:15,120 --> 00:02:22,000
+The goal of this section is to build a 
+probability model for the total payments  
+
+19
+00:02:22,000 --> 00:02:31,760
+by an insurance system in a fixed time period. One 
+thinks of an insurance system as a broad concept,  
+
+20
+00:02:32,480 --> 00:02:40,480
+it could be a single insurance contract or a 
+portfolio of insurance policies that are from  
+
+21
+00:02:40,480 --> 00:02:49,040
+either a line of business or an insurer’s entire 
+book of business. We will show that frequency  
+
+22
+00:02:49,040 --> 00:02:55,440
+and severity are the building blocks that one 
+uses to construct the aggregate loss model.
+ 
+
+23
+00:02:59,040 --> 00:03:07,120
+We introduce two approaches for aggregating 
+losses on a defined set of insurance contracts  
+
+24
+00:03:07,120 --> 00:03:14,400
+over a fixed time period, the individual 
+risk model and the collective risk model.  
+
+25
+00:03:15,680 --> 00:03:23,040
+In the individual risk model, one records 
+the losses for each individual claim  
+
+26
+00:03:23,040 --> 00:03:32,960
+and then add them up to obtain the total amount of 
+losses. In contrast, in the collective risk model,  
+
+27
+00:03:33,520 --> 00:03:43,360
+one records the losses at policy level, then the 
+total losses are calculated as the sum of losses  
+
+28
+00:03:43,360 --> 00:03:51,440
+from all individual policies. One should 
+note that the two methods are equivalent  
+
+29
+00:03:51,440 --> 00:04:00,080
+and lead to the same amount of total 
+losses for the insurance portfolio.
+ 
+
+30
+00:04:00,080 --> 00:04:10,080
+To illustrate the concepts, let’s consider a toy 
+example. Assume an insurance portfolio consists  
+
+31
+00:04:10,080 --> 00:04:17,680
+of four contracts. The table summarizes 
+their claim histories during the policy year.  
+
+32
+00:04:19,360 --> 00:04:28,800
+Policy #1 had no claims, and Policy #2, 
+Policy #3, and Policy #4 had one, two, and  
+
+33
+00:04:28,800 --> 00:04:37,840
+three claims respectively. The loss amount 
+for each claim is 10 dollars. To obtain the  
+
+34
+00:04:37,840 --> 00:04:45,280
+total losses for the portfolio, the individual 
+risk model examines losses for each policy,  
+
+35
+00:04:46,480 --> 00:04:57,600
+i.e. 0, 10, 20, 30 dollars for the four policies. 
+In contrast, the collective risk model records  
+
+36
+00:04:58,240 --> 00:05:09,840
+6 claims and a 10-dollar loss for each claim. Both 
+methods calculate a total losses of 60 dollars.
+ 
+
+37
+00:05:12,400 --> 00:05:18,160
+Aggregate loss models can be useful 
+in various actuarial applications.  
+
+38
+00:05:18,880 --> 00:05:26,480
+For instance, in ratemaking, an aggregate loss 
+model can be used to model the total losses  
+
+39
+00:05:26,480 --> 00:05:34,000
+for a single policyholder in the contract 
+year, and insurers are interested in the  
+
+40
+00:05:34,000 --> 00:05:42,640
+expected amount of losses for pricing purposes. 
+In capital management and risk financing,  
+
+41
+00:05:43,200 --> 00:05:52,320
+it is sensible to consider an aggregate loss model 
+for an insurance portfolio. In these applications,  
+
+42
+00:05:52,320 --> 00:05:59,760
+insurers are more concerned with the large losses 
+on the tail of the aggregate loss distribution.
+ 
+
+43
+00:06:02,960 --> 00:06:10,640
+To summarize, in this section, we have learned 
+how to record aggregate losses for an insurance  
+
+44
+00:06:10,640 --> 00:06:19,360
+system. We introduced the basic concepts of two 
+equivalent methods, the individual risk model  
+
+45
+00:06:19,360 --> 00:06:27,840
+and the collective risk model. We also discussed a 
+range of actuarial applications of aggregate loss  
+
+46
+00:06:27,840 --> 00:06:36,960
+models, including ratemaking, capital management, 
+and risk financing. Thanks for watching.
+

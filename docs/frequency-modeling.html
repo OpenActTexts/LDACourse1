@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Frequency Modeling | Loss Data Analytics: Short Course</title>
+  <meta name="description" content="This is an interactive, online, freely available short course. It will contain many interactive objects (quizzes, computer demonstrations, interactive graphs, video, and the like) to promote deeper learning." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Frequency Modeling | Loss Data Analytics: Short Course" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is an interactive, online, freely available short course. It will contain many interactive objects (quizzes, computer demonstrations, interactive graphs, video, and the like) to promote deeper learning." />
+  <meta name="github-repo" content="https://github.com/OpenActTextDev/LDAShortCourse1" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Frequency Modeling | Loss Data Analytics: Short Course" />
+  
+  <meta name="twitter:description" content="This is an interactive, online, freely available short course. It will contain many interactive objects (quizzes, computer demonstrations, interactive graphs, video, and the like) to promote deeper learning." />
+  
+
+<meta name="author" content="A short course authored by the Actuarial Community" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction-to-loss-data-analytics.html"/>
+<link rel="next" href="modeling-loss-severity.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<!-- Various toggle functions used throughout --> 
+<script language="javascript">
+function toggle(id1,id2) {
+	var ele = document.getElementById(id1); var text = document.getElementById(id2);
+	if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Solution";}
+		else {ele.style.display = "block"; text.innerHTML = "Hide Solution";}}
+function togglecode(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show R Code";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide R Code";}}
+function toggleEX(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Example";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide Example";}}
+function toggleTheory(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Theory";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide Theory";}}
+function toggleQuiz(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Quiz Solution";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide Quiz Solution";}}      
+</script>
+
+<!-- A few functions for revealing definitions -->
+<script language="javascript">
+<!--   $( function() {
+    $("#tabs").tabs();
+  } ); -->
+
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
+});
+</script>
+<script language="javascript">
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+
+<script language="javascript">
+function toggle(id1,id2) {
+	var ele = document.getElementById(id1); var text = document.getElementById(id2);
+	if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Solution";}
+		else {ele.style.display = "block"; text.innerHTML = "Hide Solution";}}
+</script>
+
+<script language="javascript">
+function togglecode(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show R Code";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide R Code";}}
+</script>
+<script language="javascript">
+function toggleEX(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Example";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide Example";}}
+</script>
+<script language="javascript">
+function toggleTheory(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Theory";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide Theory";}}
+</script>
+
+<script language="javascript">
+function toggleDet(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Details";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide  Details";}}
+</script>
+
+<script language="javascript">
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
+});
+</script>
+
+
+<script src=https://cdn.datacamp.com/datacamp-light-latest.min.js></script>
+
+
+<style>
+/* Rearrange console label */
+.datacamp-exercise ol li, .datacamp-exercise ul li {
+  margin-bottom: 0em !important;
+}
+
+/* Remove bullet marker */
+.datacamp-exercise ol li::before, .datacamp-exercise ul li::before {
+  content: '' !important;
+}
+</style>
+
+
+<script language="javascript">
+var submitAnswer = function() {
+
+  var radios = document.getElementsByName('choice');
+  var val= "";
+  for (var i = 0, length = radios.length; i < length; i++) {
+      if (radios[i].checked) {
+         val = radios[i].value; 
+         break;
+       }
+  }
+  
+  if (val == "" ) {
+    alert('please select choice answer');
+  } else if ( val == "Correct" ) {
+    alert('Answer is correct !');
+  } else {
+    alert('Answer is wrong');
+  }
+};
+</script>
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-125587869-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-125587869-1');
+</script>
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Loss Data Analytics: Short Course</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-loss-data-analytics"><i class="fa fa-check"></i>Why Loss Data Analytics?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i>Resources</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#how-to-navigate-this-tutorial"><i class="fa fa-check"></i>How to Navigate this Tutorial</a></li>
+<li><a href="index.html#a-word-from-our-sponsor-astin-education-astin-academy">A Word from our Sponsor: <br> Astin + Education = Astin Academy</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html"><i class="fa fa-check"></i><b>1</b> Introduction to Loss Data Analytics</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:Intro"><i class="fa fa-check"></i><b>1.1</b> Relevance of Analytics to Insurance Activities</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:PredModApps"><i class="fa fa-check"></i><b>1.2</b> Insurance Company Operations</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:LGPIF"><i class="fa fa-check"></i><b>1.3</b> Case Study: Property Fund Introduction</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-claim-frequency"><i class="fa fa-check"></i><b>1.3.1</b> Exercise. Claim Frequency</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:PropertyFundSeverity"><i class="fa fa-check"></i><b>1.4</b> Property Fund Claim Severity</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-exploring-claim-severities"><i class="fa fa-check"></i><b>1.4.1</b> Exercise. Exploring Claim Severities</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-skewness-of-the-claim-severity-distribution"><i class="fa fa-check"></i><b>1.4.2</b> Exercise. Skewness of the Claim Severity Distribution</a></li>
+<li class="chapter" data-level="1.4.3" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-claim-severity-by-year"><i class="fa fa-check"></i><b>1.4.3</b> Exercise. Claim Severity by Year</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:LGPIFRatingVariaables"><i class="fa fa-check"></i><b>1.5</b> Property Fund Rating Variables</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Ex:ClaimByType"><i class="fa fa-check"></i><b>1.5.1</b> Exercise. Claim by Entity Type, Fire Class, and No Claim Credit</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#contributors-1"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="frequency-modeling.html"><a href="frequency-modeling.html"><i class="fa fa-check"></i><b>2</b> Frequency Modeling</a><ul>
+<li class="chapter" data-level="2.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#basic-frequency-distributions"><i class="fa fa-check"></i><b>2.1</b> Basic Frequency Distributions</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-representing-the-number-of-cyber-events-with-a-binomial-distribution"><i class="fa fa-check"></i><b>2.1.1</b> Exercise. Representing the Number of Cyber Events with a Binomial Distribution</a></li>
+<li class="chapter" data-level="2.1.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-representing-the-number-of-cyber-events-with-a-poisson-distribution"><i class="fa fa-check"></i><b>2.1.2</b> Exercise. Representing the Number of Cyber Events with a Poisson Distribution</a></li>
+<li class="chapter" data-level="2.1.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-comparing-basic-count-distributions"><i class="fa fa-check"></i><b>2.1.3</b> Exercise. Comparing Basic Count Distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#the-ab0-class"><i class="fa fa-check"></i><b>2.2</b> The (a,b,0) Class</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-determining-probabilities-recursively"><i class="fa fa-check"></i><b>2.2.1</b> Exercise. Determining Probabilities Recursively</a></li>
+<li class="chapter" data-level="2.2.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-reverse-engineering-and-recursive-r-functions"><i class="fa fa-check"></i><b>2.2.2</b> Exercise. Reverse Engineering and Recursive <code>R</code> Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#estimating-frequency-distributions"><i class="fa fa-check"></i><b>2.3</b> Estimating Frequency Distributions</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#Ex:CountDataCompression"><i class="fa fa-check"></i><b>2.3.1</b> Exercise. Count Data Compression - 1</a></li>
+<li class="chapter" data-level="2.3.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-count-data-compression---2"><i class="fa fa-check"></i><b>2.3.2</b> Exercise. Count Data Compression - 2</a></li>
+<li class="chapter" data-level="2.3.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-graphing-likelihoods"><i class="fa fa-check"></i><b>2.3.3</b> Exercise. Graphing Likelihoods</a></li>
+<li class="chapter" data-level="2.3.4" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-fitting-a-binomial-distribution"><i class="fa fa-check"></i><b>2.3.4</b> Exercise. Fitting a Binomial Distribution</a></li>
+<li class="chapter" data-level="2.3.5" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-fitting-a-negative-binomial-distribution"><i class="fa fa-check"></i><b>2.3.5</b> Exercise. Fitting a Negative Binomial Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="frequency-modeling.html"><a href="frequency-modeling.html#other-frequency-distributions"><i class="fa fa-check"></i><b>2.4</b> Other Frequency Distributions</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-the-ab1-distribution-and-its-moments"><i class="fa fa-check"></i><b>2.4.1</b> Exercise. The (<em>a,b</em>,1) Distribution and its Moments</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="frequency-modeling.html"><a href="frequency-modeling.html#mixture-distributions"><i class="fa fa-check"></i><b>2.5</b> Mixture Distributions</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-mixtures-of-workers-compensation-claims"><i class="fa fa-check"></i><b>2.5.1</b> Exercise. Mixtures of Workers’ Compensation Claims</a></li>
+<li class="chapter" data-level="2.5.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-finite-number-of-mixture-distributions"><i class="fa fa-check"></i><b>2.5.2</b> Exercise. Finite Number of Mixture Distributions</a></li>
+<li class="chapter" data-level="2.5.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-gamma-mixture-of-poissons"><i class="fa fa-check"></i><b>2.5.3</b> Exercise. Gamma Mixture of Poissons</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="frequency-modeling.html"><a href="frequency-modeling.html#goodness-of-fit"><i class="fa fa-check"></i><b>2.6</b> Goodness of Fit</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-goodness-of-fit-zero-modified-poisson"><i class="fa fa-check"></i><b>2.6.1</b> Exercise. Goodness of Fit: Zero-Modified Poisson</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="frequency-modeling.html"><a href="frequency-modeling.html#contributors-2"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html"><i class="fa fa-check"></i><b>3</b> Modeling Loss Severity</a><ul>
+<li class="chapter" data-level="3.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#basic-distributional-quantities"><i class="fa fa-check"></i><b>3.1</b> Basic Distributional Quantities</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-moments-can-be-misleading"><i class="fa fa-check"></i><b>3.1.1</b> Exercise. Moments Can Be Misleading</a></li>
+<li class="chapter" data-level="3.1.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-determining-boxplots-and-quantiles"><i class="fa fa-check"></i><b>3.1.2</b> Exercise. Determining Boxplots and Quantiles</a></li>
+<li class="chapter" data-level="3.1.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-gamma-moment-generating-function"><i class="fa fa-check"></i><b>3.1.3</b> Exercise. Gamma Moment Generating Function</a></li>
+<li class="chapter" data-level="3.1.4" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-visualizing-moment-generating-functions"><i class="fa fa-check"></i><b>3.1.4</b> Exercise. Visualizing Moment Generating Functions</a></li>
+<li class="chapter" data-level="3.1.5" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-determining-moments-using-moment-generating-functions"><i class="fa fa-check"></i><b>3.1.5</b> Exercise. Determining Moments using Moment Generating Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#continuous-distributions"><i class="fa fa-check"></i><b>3.2</b> Continuous Distributions</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise."><i class="fa fa-check"></i><b>3.2.1</b> Exercise.</a></li>
+<li class="chapter" data-level="3.2.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-visualizing-the-gamma-distribution"><i class="fa fa-check"></i><b>3.2.2</b> Exercise. Visualizing the Gamma Distribution</a></li>
+<li class="chapter" data-level="3.2.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#Ex:CreateParetoDensityFct"><i class="fa fa-check"></i><b>3.2.3</b> Exercise. Creating a Pareto Density Function</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#methods-of-creating-new-distributions"><i class="fa fa-check"></i><b>3.3</b> Methods of Creating New Distributions</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-using-the-logarithmic-transformation-to-create-a-new-distribution"><i class="fa fa-check"></i><b>3.3.1</b> Exercise. Using the Logarithmic Transformation to Create a New Distribution</a></li>
+<li class="chapter" data-level="3.3.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-creating-a-mixture-distribution"><i class="fa fa-check"></i><b>3.3.2</b> Exercise. Creating a Mixture Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#coverage-modifications"><i class="fa fa-check"></i><b>3.4</b> Coverage Modifications</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-calculate-moments-of-the-lognormal-distribution"><i class="fa fa-check"></i><b>3.4.1</b> Exercise. Calculate Moments of the Lognormal Distribution</a></li>
+<li class="chapter" data-level="3.4.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-calculate-limited-expected-value-of-the-lognormal-distribution"><i class="fa fa-check"></i><b>3.4.2</b> Exercise. Calculate Limited Expected Value of the Lognormal Distribution</a></li>
+<li class="chapter" data-level="3.4.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-expected-claims-subject-to-a-deductible"><i class="fa fa-check"></i><b>3.4.3</b> Exercise. Expected Claims Subject to a Deductible</a></li>
+<li class="chapter" data-level="3.4.4" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-expected-claims-subject-to-a-deductible-and-coinsurance"><i class="fa fa-check"></i><b>3.4.4</b> Exercise. Expected Claims Subject to a Deductible and Coinsurance</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>3.5</b> Maximum Likelihood Estimation</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#Ex:MLEPareto"><i class="fa fa-check"></i><b>3.5.1</b> Exercise. Maximum Likelihood Estimation for a Pareto Distribution</a></li>
+<li class="chapter" data-level="3.5.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-finding-standard-errors-for-maximum-likelihood-estimates"><i class="fa fa-check"></i><b>3.5.2</b> Exercise. Finding Standard Errors for Maximum Likelihood Estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#contributors-3"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html"><i class="fa fa-check"></i><b>4</b> Model Selection and Estimation</a><ul>
+<li class="chapter" data-level="4.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#Sec:NonInf"><i class="fa fa-check"></i><b>4.1</b> Nonparametric Inference</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-empirical-distribution-function-and-quartiles-percentiles-and-quantiles"><i class="fa fa-check"></i><b>4.1.1</b> Exercise. Empirical Distribution Function and Quartiles, Percentiles and Quantiles</a></li>
+<li class="chapter" data-level="4.1.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-density-estimators"><i class="fa fa-check"></i><b>4.1.2</b> Exercise. Density Estimators</a></li>
+<li class="chapter" data-level="4.1.3" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-claim-frequency-1"><i class="fa fa-check"></i><b>4.1.3</b> Exercise. Claim Frequency</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#tools-for-model-selection"><i class="fa fa-check"></i><b>4.2</b> Tools for Model Selection</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-probability-probability-pp-plot"><i class="fa fa-check"></i><b>4.2.1</b> Exercise. Probability-Probability (<span class="math inline">\(pp\)</span>) plot</a></li>
+<li class="chapter" data-level="4.2.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-quantile-quantile-qq-plot"><i class="fa fa-check"></i><b>4.2.2</b> Exercise. Quantile-Quantile (<span class="math inline">\(qq\)</span>) plot</a></li>
+<li class="chapter" data-level="4.2.3" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-kolmogorov-smirnov-test"><i class="fa fa-check"></i><b>4.2.3</b> Exercise. Kolmogorov-Smirnov test</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#model-selection-likelihood-ratio-tests-and-goodness-of-fit"><i class="fa fa-check"></i><b>4.3</b> Model Selection: Likelihood Ratio Tests and Goodness of Fit</a></li>
+<li class="chapter" data-level="4.4" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#estimation-using-modified-data-nonparametric-approach"><i class="fa fa-check"></i><b>4.4</b> Estimation using Modified Data: Nonparametric Approach</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-nonparametric-estimation-using-modified-data"><i class="fa fa-check"></i><b>4.4.1</b> Exercise. Nonparametric Estimation using Modified Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-nonparametric-estimation-using-modified-data-ii"><i class="fa fa-check"></i><b>4.4.2</b> Exercise. Nonparametric Estimation using Modified Data II</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#estimation-using-modified-data-parametric-approach"><i class="fa fa-check"></i><b>4.5</b> Estimation using Modified Data: Parametric Approach</a></li>
+<li class="chapter" data-level="4.6" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#bayesian-inference"><i class="fa fa-check"></i><b>4.6</b> Bayesian Inference</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#visualizing-bayesian-methods"><i class="fa fa-check"></i><b>4.6.1</b> Visualizing Bayesian Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#contributors-4"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html"><i class="fa fa-check"></i><b>5</b> Aggregate Loss Models</a><ul>
+<li class="chapter" data-level="5.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#introduction"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#individual-risk-model"><i class="fa fa-check"></i><b>5.2</b> Individual Risk Model</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#Ex:IRM1"><i class="fa fa-check"></i><b>5.2.1</b> Exercise. Individual Risk Model I</a></li>
+<li class="chapter" data-level="5.2.2" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-individual-risk-model-ii"><i class="fa fa-check"></i><b>5.2.2</b> Exercise. Individual Risk Model II</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#collective-risk-model---part-i"><i class="fa fa-check"></i><b>5.3</b> Collective Risk Model - Part I</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-collective-risk-model-i"><i class="fa fa-check"></i><b>5.3.1</b> Exercise. Collective Risk Model I</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#collective-risk-model---part-ii"><i class="fa fa-check"></i><b>5.4</b> Collective Risk Model - Part II</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-collective-risk-model-ii"><i class="fa fa-check"></i><b>5.4.1</b> Exercise. Collective Risk Model II</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#tweedie-distribution"><i class="fa fa-check"></i><b>5.5</b> Tweedie Distribution</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-tweedie-distribution"><i class="fa fa-check"></i><b>5.5.1</b> Exercise. Tweedie Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#effects-of-coverage-modifications"><i class="fa fa-check"></i><b>5.6</b> Effects of Coverage Modifications</a></li>
+<li class="chapter" data-level="" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#contributors-5"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/OpenActTextDev/LDACourse1/" target="blank">LDA Short Course on GitHub</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Loss Data Analytics: Short Course</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="frequency-modeling" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Frequency Modeling</h1>
+<p><strong>Chapter Description</strong></p>
+<p>A primary focus for insurers is estimating the magnitude of aggregate claims it must bear under its insurance contracts. Aggregate claims are affected by both the frequency and the severity of the insured event. Decomposing aggregate claims into these two components, each of which warrant significant attention, is essential for analysis and pricing. This chapter discusses frequency distributions, summary measures, and parameter estimation techniques.</p>
+<div class="blackbox">
+<ul>
+<li>Although not needed to go through the tutorials, some users may wish to download the overheads that the videos are based on. <button download><a href="https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/LDA1.Overheads/LDA1.Chap2.pdf">Download Chapter Two overheads as a .pdf file.</a></button></li>
+<li>By watching the videos and working through the tutorial exercises, you will get an appreciation for frequency modeling. For a deeper dive, see the corresponding chapter in the textbook, <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-Frequency-Modeling.html">Chapter Two of <em>Loss Data Analytics</em></a>.</li>
+</ul>
+</div>
+<div id="basic-frequency-distributions" class="section level2">
+<h2><span class="header-section-number">2.1</span> Basic Frequency Distributions</h2>
+<hr />
+<p>In this section, you learn how to:</p>
+<ul>
+<li>Determine quantities that summarize a distribution such as the (cumulative) distribution as well as moments such as the mean and variance.</li>
+<li>Define and compute the moment and probability generating functions.</li>
+<li>Describe and understand relationships among three important frequency distributions, the binomial, Poisson, and negative binomial distributions.</li>
+</ul>
+<hr />
+<div id="video-basic-frequency-distributions" class="section level4 unnumbered">
+<h4>Video: Basic Frequency Distributions</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_f9vceoba&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_m12oeksz" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+</div>
+<div id="overheads-basic-frequency-distributions-click-tab-to-view" class="section level4 unnumbered">
+<h4>Overheads: Basic Frequency Distributions (Click Tab to View)</h4>
+<div class="tab">
+<button class="tablinks" onclick="openTab(event, 'Sect21A')">A. Frequency Distributions</button>
+<button class="tablinks" onclick="openTab(event, 'Sect21B')">B. Foundations</button>
+<button class="tablinks" onclick="openTab(event, 'Sect21C')">C. Probability Generating Function</button>
+<button class="tablinks" onclick="openTab(event, 'Sect21D')">D. Important Frequency Distributions</button>
+<button class="tablinks" onclick="openTab(event, 'Sect21E')">E. Poisson Distribution</button>
+<button class="tablinks" onclick="openTab(event, 'Sect21F')">F. Binomial Distribution</button>
+<button class="tablinks" onclick="openTab(event, 'Sect21G')">G. Negative Binomial Distribution</button>
+<button class="tablinks" onclick="openTab(event, 'Sect21H')">H. Review</button>
+</div>
+<div id="Sect21A" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=10" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect21B" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=11" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect21C" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=12" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect21D" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=13" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect21E" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=14" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect21F" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=15" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect21G" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=16" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect21H" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=17" width="100%" height="400"> </iframe>
+</div>
+</div>
+<div id="exercise.-representing-the-number-of-cyber-events-with-a-binomial-distribution" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Exercise. Representing the Number of Cyber Events with a Binomial Distribution</h3>
+<p><strong>Assignment Text</strong></p>
+<p>Cyber risk for a firm is based on its liability for a data breach involving sensitive customer information, such as Social Security numbers, credit card numbers, account numbers, driver’s license numbers and health records. A company models its cyber risk using the following assumptions:</p>
+<ol style="list-style-type: lower-roman">
+<li>In any calendar quarter, there can be at most one cyber event.</li>
+<li>In any calendar quarter, the probability of a cyber event is 0.1.</li>
+<li>The numbers of cyber events in different calendar quarters are mutually independent.</li>
+</ol>
+<p>Based on these assumptions, you represent the total number of cyber events as a binomial distribution.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Identify the binomial distribution parameters for the number of cyber events in a 12 quarter (3 year) period.</li>
+<li>Calculate the probability that there are <span class="math inline">\(k\)</span> cyber events for <span class="math inline">\(k = 0, 1, \ldots, 12\)</span> using the function <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Binomial">dbinom()</a>.</li>
+<li>Create a data frame to present your results. All values within a specific column should be rounded to the same number of decimal places. Display the data frame.</li>
+<li>Graph the probability mass function of the number of cyber events using the function <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/barplot">barplot()</a>. Include a descriptive title and axis labels for the graph.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6IiMgTm9uZSBmb3IgdGhpcyBleGVyY2lzZSIsInNhbXBsZSI6InNpemUgPSA/P1xuQ3liZXIucHJvYiA9ID8/XG5cbm91dGNvbWVzIDwtIDA6c2l6ZVxucG1mIDwtIGRiaW5vbSh4PW91dGNvbWVzLCBzaXplPXNpemUsIHByb2I9Q3liZXIucHJvYikgIFxucG1mXG5cbnBtZjEgPC0gcm91bmQocG1mLCBkaWdpdHMgPSA2KVxub3V0Y29tZWRhdGFmIDwtIHJiaW5kKG91dGNvbWVzLCA/Pylcbm91dGNvbWVkYXRhZiBcblxuYmFycGxvdChwbWYsIG5hbWVzLmFyZz0/PywgY29sPVwibGlnaHRncmVlblwiLCB5bGFiID0gPz8sIHhsYWIgPSA/PykiLCJzb2x1dGlvbiI6InNpemUgPSAxMlxuQ3liZXIucHJvYiA9IDAuMDFcblxub3V0Y29tZXMgPC0gMDpzaXplXG5wbWYgPC0gZGJpbm9tKHg9b3V0Y29tZXMsIHNpemU9c2l6ZSwgcHJvYj1DeWJlci5wcm9iKSAgXG5wbWZcblxucG1mMSA8LSByb3VuZChwbWYsIGRpZ2l0cyA9IDYpXG5vdXRjb21lZGF0YWYgPC0gcmJpbmQob3V0Y29tZXMsIHBtZjEpXG5vdXRjb21lZGF0YWYgXG5cbmJhcnBsb3QocG1mLCBuYW1lcy5hcmc9b3V0Y29tZXMsIGNvbD1cImxpZ2h0Z3JlZW5cIiwgeWxhYiA9IFwiUHJvYmFiaWxpdHlcIiwgeGxhYiA9IFwiQ3liZXIgRXZlbnRzXCIpIiwic2N0Ijoic2l6ZW1zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgc2l6ZWA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcInNpemVcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYHNpemVgIVwiKSAlPiUgY2hlY2tfZXF1YWwoaW5jb3JyZWN0X21zZz1zaXplbXNnKVxuQ3liZXIucHJvYm1zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgQ3liZXIucHJvYmA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcIkN5YmVyLnByb2JcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYEN5YmVyLnByb2JgIVwiKSAlPiUgY2hlY2tfZXF1YWwoaW5jb3JyZWN0X21zZz1DeWJlci5wcm9ibXNnKVxub3V0Y29tZWRhdGFmbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBvdXRjb21lZGF0YWZgP1wiXG5leCgpICU+JSBjaGVja19vYmplY3QoXCJvdXRjb21lZGF0YWZcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYG91dGNvbWVkYXRhZmAhXCIpICU+JSBjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPW91dGNvbWVkYXRhZm1zZylcbmJhcnBsb3Rtc2cgPC0gXCJEaWQgeW91IGNvcnJlY3RseSBzcGVjaWZ5IHRoZSBhcmd1bWVudHM/XCJcbmV4KCkgJT4lIGNoZWNrX2Z1bmN0aW9uKFwiYmFycGxvdFwiLCBub3RfY2FsbGVkX21zZyA9YmFycGxvdG1zZykgJT4lIGNoZWNrX3Jlc3VsdChlcnJvcl9tc2c9YmFycGxvdG1zZykgJT4lIGNoZWNrX2VxdWFsKClcblxuc3VjY2Vzc19tc2coXCJFeGNlbGxlbnQgam9iISBNb3N0IGNvbnN1bWVycyBoYXZlIHNvbWUgZmFtaWxpYXJpdHkgd2l0aCB0aGUgYmlub21pYWwgZGlzdHJpYnV0aW9ucywgc28gaXQgaXMgaW1wb3J0YW50IGluIGFjdHVhcmlhbCBhcHBsaWNhdGlvbnMgdG8gYmUgYWJsZSB0byBjb252ZXkgbWVzc2FnZXMgYWJvdXQgY291bnRzIGluIHRoZSBjb250ZXh0IG9mIHRoaXMgZGlzdHJpYnV0aW9uLlwiKSIsImhpbnQiOiJSZXZpZXcgdGhlIGltcG9ydGFudCBjb3VudCBkaXN0cmlidXRpb25zIGluIDxhIGhyZWY9XCJodHRwczovL29wZW5hY3R0ZXh0cy5naXRodWIuaW8vTG9zcy1EYXRhLUFuYWx5dGljcy9DLUZyZXF1ZW5jeS1Nb2RlbGluZy5odG1sI1M6aW1wb3J0YW50LWZyZXF1ZW5jeS1kaXN0cmlidXRpb25zXCI+TG9zcyBEYXRhIEFuYWx5dGljcyBGcmVxdWVuY3kgTW9kZWxpbmc8L2E+IGNoYXB0ZXIuIn0=
+</div>
+</div>
+<div id="exercise.-representing-the-number-of-cyber-events-with-a-poisson-distribution" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Exercise. Representing the Number of Cyber Events with a Poisson Distribution</h3>
+<p><strong>Assignment Text</strong></p>
+<p>Another company is also concerned with cyber risk. Compared to the company in the prior exercise, this company is larger and does not wish to assume at most one cyber event in a quarter. Moreover, it believes that the distribution of cyber events is a function of its technical support staff size that has increased over time. Thus, it wishes to model the number of cyber events as a Poisson distribution with expected number of events as:</p>
+<p><span class="math display">\[
+{\small
+\begin{array}{l|cccccc} \hline
+\text{Quarter} &amp; 1 &amp; 2 &amp; 3&amp; 4&amp; 5&amp; 6 \\\hline
+\text{Expected Number}&amp; 0.1 &amp; 0.1 &amp; 0.1 &amp; 0.1 &amp; 0.2 &amp; 0.2 \\ \hline
+\text{Quarter} &amp; 7 &amp; 8 &amp; 9&amp; 10&amp; 11&amp; 12 \\ \hline 
+\text{Expected Number}&amp; 0.2 &amp; 0.2 &amp; 0.3 &amp; 0.3 &amp; 0.4 &amp; 0.5 \\ \hline
+\end{array}
+}
+\]</span></p>
+<p>Assuming that the numbers of cyber events in different calendar quarters are mutually independent, the total number of cyber events over the three year period (12 quarters) has a Poisson distribution with expected number <span class="math inline">\(\lambda = 2.7\)</span>. (Recall that the sum of independent Poisson random variables has a Poisson distribution.)</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Graph the probability mass function (pmf) of the number of cyber events using the function <code>barplot()</code>.</li>
+<li>Calculate the <em>pmf</em> and the cumulative probability distribution function for <span class="math inline">\(k = 0, 1, \ldots, 12\)</span> cyber events
+using the functions <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Poisson">dpois()</a>, <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Poisson">ppois()</a>. Create a data frame to present your results and display the data frame.</li>
+<li>From your data frame, identify the 95th percentile. Confirm your result using the <a href="https://www.rdocumentation.org/packages/stats/versions/3.3/topics/Poisson">qpois()</a> function.</li>
+<li>How are the probabilities changing over time? Plot the probability of zero cyber events versus quarter number <span class="math inline">\(k = 0, 1, \ldots, 12\)</span>.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJsYW1iZGF2ZWMgPC0gYyhyZXAoMC4xLDQpLCByZXAoMC4yLDQpLCAwLjMsIDAuMywgMC40LCAwLjUpXG5DeWJlci5sYW1iZGEgPC0gc3VtKD8/KVxuXG5vdXRjb21lcyA8LSAwOjEyXG5DeWJlci5wbWYgPC0gZHBvaXMoeD0/PywgbGFtYmRhPUN5YmVyLmxhbWJkYSlcbmJhcnBsb3QoQ3liZXIucG1mLCBuYW1lcy5hcmc9b3V0Y29tZXMsIGNvbD1cImxpZ2h0Z3JlZW5cIiwgeWxhYiA9IFwiUHJvYmFiaWxpdHlcIiwgeGxhYiA9IFwiQ3liZXIgRXZlbnRzXCIpXG5cbkN5YmVyLmRmIDwtIHBwb2lzKG91dGNvbWVzLCA/Pylcbm91dGNvbWVkYXRhZiA8LSByYmluZChvdXRjb21lcywgQ3liZXIucG1mLCBDeWJlci5kZilcbm91dGNvbWVkYXRhZiBcblxucXBvaXMoPz8sIGxhbWJkYT1DeWJlci5sYW1iZGEpXG5cblByb2J6ZXJvIDwtIGRwb2lzKHg9MCwgbGFtYmRhPWxhbWJkYXZlYylcbnBsb3QoPz8sUHJvYnplcm8sIHR5cGUgPSBcImxcIiwgeGxhYiA9IFwicXVhcnRlclwiLCB5bGFiID0gXCJQcm9iIG9mIFplcm9cIikiLCJzb2x1dGlvbiI6ImxhbWJkYXZlYyA8LSBjKHJlcCgwLjEsNCksIHJlcCgwLjIsNCksIDAuMywgMC4zLCAwLjQsIDAuNSlcbkN5YmVyLmxhbWJkYSA8LSBzdW0obGFtYmRhdmVjKVxuXG5vdXRjb21lcyA8LSAwOjEyXG5DeWJlci5wbWYgPC0gZHBvaXMoeD1vdXRjb21lcywgbGFtYmRhPUN5YmVyLmxhbWJkYSlcbmJhcnBsb3QoQ3liZXIucG1mLCBuYW1lcy5hcmc9b3V0Y29tZXMsIGNvbD1cImxpZ2h0Z3JlZW5cIiwgeWxhYiA9IFwiUHJvYmFiaWxpdHlcIiwgeGxhYiA9IFwiQ3liZXIgRXZlbnRzXCIpXG5cbkN5YmVyLmRmIDwtIHBwb2lzKG91dGNvbWVzLCBsYW1iZGE9Q3liZXIubGFtYmRhKVxub3V0Y29tZWRhdGFmIDwtIHJiaW5kKG91dGNvbWVzLCBDeWJlci5wbWYsIEN5YmVyLmRmKVxub3V0Y29tZWRhdGFmIFxuXG5xcG9pcygwLjk1LCBsYW1iZGE9Q3liZXIubGFtYmRhKVxuXG5Qcm9iemVybyA8LSBkcG9pcyh4PTAsIGxhbWJkYT1sYW1iZGF2ZWMpXG5wbG90KDE6MTIsUHJvYnplcm8sIHR5cGUgPSBcImxcIiwgeGxhYiA9IFwicXVhcnRlclwiLCB5bGFiID0gXCJQcm9iIG9mIFplcm9cIikiLCJzY3QiOiJDeWJlci5sYW1iZGFtc2cgPC0gXCJEaWQgeW91IGNvcnJlY3RseSBzcGVjaWZ5IHRoZSBvYmplY3QgYEN5YmVyLmxhbWJkYWA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcIkN5YmVyLmxhbWJkYVwiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgQ3liZXIubGFtYmRhYCFcIikgJT4lIGNoZWNrX2VxdWFsKGluY29ycmVjdF9tc2c9Q3liZXIubGFtYmRhbXNnKVxuQ3liZXIucG1mbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBDeWJlci5wbWZgP1wiXG5leCgpICU+JSBjaGVja19vYmplY3QoXCJDeWJlci5wbWZcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYEN5YmVyLnBtZmAhXCIpICU+JSBjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPUN5YmVyLnBtZm1zZylcbkN5YmVyLmRmbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBDeWJlci5kZmA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcIkN5YmVyLmRmXCIsIHVuZGVmaW5lZF9tc2cgPSBcIk1ha2Ugc3VyZSB0byBub3QgcmVtb3ZlIGBDeWJlci5kZmAhXCIpICU+JSBjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPUN5YmVyLmRmbXNnKVxuXG5zdWNjZXNzX21zZyhcIkV4Y2VsbGVudCBqb2IhIFRoZSBQb2lzc29uIGlzIHRoZSBiYXNpYyBjb3VudCBkaXN0cmlidXRpb24gaW4gYWN0dWFyaWFsIGFwcGxpY2F0aW9ucy4gQ29uc3VtZXJzIG9mdGVuIGhhdmUgZmFtaWxpYXJpdHkgd2l0aCB0aGUgZXhwZWN0ZWQgbnVtYmVyIG9mIGV2ZW50cyBhcyB3ZWxsIGFzIHRoZSBwcm9iYWJpbGl0eSBvZiB6ZXJvIGV2ZW50cy4gSW4gdGhlIGxhc3QgcGFydCwgeW91IGxlYXJuZWQgaG93IHRvIHBvcnRyYXkgaW5jcmVhc2luZyBtZWFucyBpbiB0ZXJtcyBvZiBkZWNyZWFzaW5nIGZyZXF1ZW5jeSBvZiB6ZXJvIGV2ZW50cywgY29ubmVjdGluZyB0aGVzZSBpbXBvcnRhbnQgc3VtbWFyeSBtZWFzdXJlcy5cIikiLCJoaW50IjoiWW91IHdpbGwgZmluZCBtb3JlIGRpc2N1c3Npb24gb2YgcGVyY2VudGlsZXMgaW4gU2VjdGlvbiA0LjEgb2YgPGEgaHJlZj1cImh0dHBzOi8vb3BlbmFjdHRleHRzLmdpdGh1Yi5pby9Mb3NzLURhdGEtQW5hbHl0aWNzL0MtTW9kZWxTZWxlY3Rpb24uaHRtbCNTOk1TOk5vblBhckluZlwiPkxvc3MgRGF0YSBBbmFseXRpY3M8L2E+LiJ9
+</div>
+</div>
+<div id="exercise.-comparing-basic-count-distributions" class="section level3">
+<h3><span class="header-section-number">2.1.3</span> Exercise. Comparing Basic Count Distributions</h3>
+<p><strong>Assignment Text</strong></p>
+<p>Your supervisor would like to have a better understanding of relationships among three important count distributions, the binomial, Poisson, and negative binomial. You could develop a mathematical appendix, demonstrating how:</p>
+<ul>
+<li>A binomial distribution with parameters <span class="math inline">\(m \to \infty\)</span> and <span class="math inline">\(mq \to \lambda\)</span> converges to a Poisson distribution.</li>
+<li>A negative binomial distribution with mean parameter <span class="math inline">\(r \beta = \lambda\)</span> and dispersion parameter <span class="math inline">\(r\)</span> converges to a Poisson distribution as <span class="math inline">\(r \to \infty\)</span>.</li>
+</ul>
+<p>Instead, you decide to demonstrate these relationships graphically.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Plot the probability mass function (pmf) of the binomial distribution with <span class="math inline">\(m=12\)</span> and <span class="math inline">\(q=0.1\)</span> over <span class="math inline">\(k = 0, 1, \ldots, 12\)</span> potential outcomes. Superimpose on this plot a Poisson <em>pmf</em> with the same mean using the <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/lines">lines()</a> function.</li>
+<li>Repeat this step with the same Poisson distribution but, for the binomial distribution, multiply <span class="math inline">\(m\)</span> by 5 and divide <span class="math inline">\(q\)</span> by 5. (You should see how the binomial becomes a better approximation to the Poisson.)</li>
+<li>Determine the <em>pmf</em> of the negative binomial distribution with mean parameter <span class="math inline">\(r \beta\)</span> and dispersion parameter <span class="math inline">\(r=1\)</span> using the function <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/NegBinomial">dnbinom()</a>. Use the same mean as for the binomial distribution.</li>
+<li>Demonstrate the convergence of the negative binomial to the Poisson by creating side-by-side graphical comparisons. That is, using the <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/par">par(mfrow = …)</a> syntax, compare:
+<ul>
+<li>A plot of this negative binomial distribution pmf, superimposed with baseline Poisson distribution (with the same mean).</li>
+<li>A plot of the negative binomial distribution <em>pmf</em> with the same mean and dispersion parameter <span class="math inline">\(r=100\)</span>, superimposed with baseline Poisson distribution.</li>
+</ul></li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJvdXRjb21lcyA8LSAwOjEyXG5cbkJpbm9tMS5wbWYgIDwtIGRiaW5vbSh4PW91dGNvbWVzLCBzaXplPTEyLCA/PykgIFxuUG9pc3Nvbi5wbWYgPC0gZHBvaXMoeD1vdXRjb21lcywgbGFtYmRhPTEuMilcbnBsb3Qob3V0Y29tZXMsID8/KVxubGluZXMob3V0Y29tZXMsID8/KVxuXG5CaW5vbTIucG1mIDwtIGRiaW5vbSh4PW91dGNvbWVzLCBzaXplPT8/LCBwcm9iPT8/KSBcbnBsb3Qob3V0Y29tZXMsIEJpbm9tMi5wbWYpXG5saW5lcyhvdXRjb21lcywgUG9pc3Nvbi5wbWYpXG5cbiggTmVnQmlub20xLnBtZiA8LSBkbmJpbm9tKG91dGNvbWVzLCBtdT0/PyBzaXplPT8/KSApXG5cbnBhcihtZnJvdyA9IGMoMSwyKSlcbnBsb3Qob3V0Y29tZXMsIE5lZ0Jpbm9tMS5wbWYpXG5saW5lcyhvdXRjb21lcywgUG9pc3Nvbi5wbWYpXG5OZWdCaW5vbTIucG1mIDwtIGRuYmlub20ob3V0Y29tZXMsIG11PT8/LCBzaXplPT8/KSAgIFxucGxvdChvdXRjb21lcywgTmVnQmlub20yLnBtZilcbmxpbmVzKG91dGNvbWVzLCBQb2lzc29uLnBtZikiLCJzb2x1dGlvbiI6Im91dGNvbWVzIDwtIDA6MTJcblxuQmlub20xLnBtZiAgPC0gZGJpbm9tKHg9b3V0Y29tZXMsIHNpemU9MTIsIHByb2I9MC4xKSAgXG5Qb2lzc29uLnBtZiA8LSBkcG9pcyh4PW91dGNvbWVzLCBsYW1iZGE9MS4yKVxucGxvdChvdXRjb21lcywgQmlub20xLnBtZilcbmxpbmVzKG91dGNvbWVzLCBQb2lzc29uLnBtZilcblxuQmlub20yLnBtZiA8LSBkYmlub20oeD1vdXRjb21lcywgc2l6ZT0xMio1LCBwcm9iPTAuMS81KSBcbnBsb3Qob3V0Y29tZXMsIEJpbm9tMi5wbWYpXG5saW5lcyhvdXRjb21lcywgUG9pc3Nvbi5wbWYpXG5cbiggTmVnQmlub20xLnBtZiA8LSBkbmJpbm9tKG91dGNvbWVzLCBtdT0xLjIsIHNpemU9MSkgKVxuXG5wYXIobWZyb3cgPSBjKDEsMikpXG5wbG90KG91dGNvbWVzLCBOZWdCaW5vbTEucG1mKVxubGluZXMob3V0Y29tZXMsIFBvaXNzb24ucG1mKVxuTmVnQmlub20yLnBtZiA8LSBkbmJpbm9tKG91dGNvbWVzLCBtdT0xLjIsIHNpemU9MTAwKSAgIFxucGxvdChvdXRjb21lcywgTmVnQmlub20yLnBtZilcbmxpbmVzKG91dGNvbWVzLCBQb2lzc29uLnBtZikiLCJzY3QiOiJCaW5vbTEucG1mbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBCaW5vbTEucG1mYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwiQmlub20xLnBtZlwiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgQmlub20xLnBtZmAhXCIpICU+JSBjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPUJpbm9tMS5wbWZtc2cpXG5CaW5vbTIucG1mbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBCaW5vbTIucG1mYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwiQmlub20yLnBtZlwiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgQmlub20yLnBtZmAhXCIpICU+JSBjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPUJpbm9tMi5wbWZtc2cpXG5OZWdCaW5vbTEucG1mbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBOZWdCaW5vbTEucG1mYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwiTmVnQmlub20xLnBtZlwiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgTmVnQmlub20xLnBtZmAhXCIpICU+JSBjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPU5lZ0Jpbm9tMS5wbWZtc2cpXG5OZWdCaW5vbTIucG1mbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBOZWdCaW5vbTIucG1mYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwiTmVnQmlub20yLnBtZlwiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgTmVnQmlub20yLnBtZmAhXCIpICU+JSBjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPU5lZ0Jpbm9tMi5wbWZtc2cpXG5cbnN1Y2Nlc3NfbXNnKFwiRXhjZWxsZW50IGpvYiEgQXMgeW91IHN0dWR5IGFjdHVhcmlhbCBkYXRhIGFwcGxpY2F0aW9ucywgZG8gbm90IHNoeSBhd2F5IGZyb20gdGhlIG1hdGhlbWF0aWNzISBPZnRlbiwgdGhlIGRpc2NpcGxpbmUgdXNlcyB0aGUgcmlnb3Igb2YgbWF0aGVtYXRpY3MgdG8gY3J5c3RhbGxpemUgaW1wb3J0YW50IGlkZWFzLiBPbmUgb2YgeW91ciBqb2JzIGlzIHRvIGJlIGFibGUgdG8gY29tbXVuaWNhdGUgdGhlc2UgaWRlYXMgdG8gYSBicm9hZGVyIHB1YmxpYy4gWW91IHdpbGwgZmluZCB0aGF0IGdyYXBoaWNhbCBwcmVzZW50YXRpb25zIGFyZSBoZWxwZnVsIGluIHRoaXMgcmVnYXJkLlwiKSIsImhpbnQiOiJUbyByZXZpZXcgdGhlIG5lZ2F0aXZlIGJpbm9taWFsIGRpc3RyaWJ1dGlvbiwgc2VlIDxhIGhyZWY9XCJodHRwczovL2V3ZnJlZXMuZ2l0aHViLmlvL0xvc3MtRGF0YS1BbmFseXRpY3MvQy1TdW1tYXJ5RGlzdHJpYnV0aW9ucy5odG1sI1M6RGlzY3JldGVEaXN0cmlidXRpb25zXCI+RGlzY3JldGUgRGlzdHJpYnV0aW9uczwvYT4ifQ==
+</div>
+</div>
+</div>
+<div id="the-ab0-class" class="section level2">
+<h2><span class="header-section-number">2.2</span> The (a,b,0) Class</h2>
+<hr />
+<p>In this section, you learn how to:</p>
+<ul>
+<li>Define the <span class="math inline">\((a,b,0)\)</span> class of frequency distributions.</li>
+<li>Discuss the importance of the recursive relationship underpinning this class of distributions.</li>
+<li>Identify conditions under which this general class reduces to each of the binomial, Poisson, and negative binomial distributions.</li>
+</ul>
+<hr />
+<div id="video-the-ab0-class" class="section level4 unnumbered">
+<h4>Video: The (a,b,0) Class</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_wmfy8z1y&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_qhfqhk7r" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+</div>
+<div id="overheads-the-ab0-class-click-tab-to-view" class="section level4 unnumbered">
+<h4>Overheads: The (a,b,0) Class (Click Tab to View)</h4>
+<div class="tab">
+<button class="tablinks" onclick="openTab(event, 'Sect22A')">A. (a, b, 0) Class</button>
+<button class="tablinks" onclick="openTab(event, 'Sect22B')">B. (a, b, 0) Class - Special Cases</button>
+<button class="tablinks" onclick="openTab(event, 'Sect22C')">C. Review</button>
+</div>
+<div id="Sect22A" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=19" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect22B" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=20" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect22C" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=21" width="100%" height="400"> </iframe>
+</div>
+</div>
+<div id="exercise.-determining-probabilities-recursively" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Exercise. Determining Probabilities Recursively</h3>
+<p><strong>Assignment Text</strong></p>
+<p>The <span class="math inline">\((a,b,0)\)</span> class can be expressed through the recursion</p>
+<p><span class="math display">\[
+\Pr(N=k) = p_k = p_{k-1} \left( a+ \frac{b}{k}\right) , \quad k\ge 1 ,
+\]</span></p>
+<p>where <span class="math inline">\(N\)</span> is a count random variable. From Section 2.3 of the text, we know that:</p>
+<ul>
+<li>if <span class="math inline">\(a=0\)</span> and <span class="math inline">\(b=\lambda\)</span>, then the recursion yields a Poisson distribution with parameter <span class="math inline">\(\lambda\)</span></li>
+<li>if <span class="math inline">\(a=-q/(1-q)\)</span> and <span class="math inline">\(b=(m+1)q/(1+q)\)</span>, then the recursion yields a binomial distribution with parameters <span class="math inline">\(m\)</span> and <span class="math inline">\(q\)</span></li>
+<li>if <span class="math inline">\(a=\beta/(1+\beta)\)</span> and <span class="math inline">\(b=(r-1)\beta/(1+\beta)\)</span>, then the recursion yields a negative binomial distribution with parameters <span class="math inline">\(r\)</span> and <span class="math inline">\(\beta\)</span>.</li>
+</ul>
+<p>The <span class="math inline">\((a,b,0)\)</span> class is a foundation for other, more complex, distributions, so let us check that we understand the recursions.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>For <span class="math inline">\(k=0, \ldots, 20\)</span>, using <span class="math inline">\(\lambda = 1.24\)</span> obtain <span class="math inline">\(p_k\)</span> values using <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Poisson">dpois()</a>.</li>
+<li>With the starting value <span class="math inline">\(p_0 = \exp(-\lambda)\)</span>, use the recursive <span class="math inline">\((a,b,0)\)</span> formula to obtain these probability values.</li>
+<li>Check your code by summing over the absolute value of the differences between the <code>dpois</code> and the <span class="math inline">\((a,b,0)\)</span> generated values.</li>
+<li>For <span class="math inline">\(k=0, \ldots, 20\)</span>, obtain <span class="math inline">\(p_k\)</span> values using the negative binomial distribution using the function <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/NegBinomial">dnbinom()</a>. Use the same mean as for the Poisson distribution but let the variance be 1.1 times the mean. <em>Hint</em>. See the <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-SummaryDistributions.html#discrete-distributions">Loss Data Analytics Summary of Distributions</a> for the parameterization used in this short course. It differs from that used by the <code>R</code> package.</li>
+<li>Use the recursive <span class="math inline">\((a,b,0)\)</span> formula to obtain these probability values.</li>
+<li>Check your code by summing over the absolute value of the differences between the <code>dnbinom</code> and the <span class="math inline">\((a,b,0)\)</span> generated values.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6IiMgTm9uZSBOZWVkZWQgZm9yIHRoaXMgRXhlcmNpc2UiLCJzYW1wbGUiOiJrdmVjIDwtIGMoMDo/PykgXG5Qb2lzc29uLnBfayA8LSBkcG9pcyh4PWt2ZWMsIGxhbWJkYT0/PykgXG5hID0gPz8gXG5iID0gPz9cbmFiMC52ZWNQIDwtICBleHAoLTEuMjQpIC0+IHAubmV3XG5mb3IgKGsgaW4gMjoyMSl7XG4gIHAubmV3IDwtIHAubmV3ICooYStiLyhrLTEpKVxuICBhYjAudmVjUCA8LSBhcHBlbmQoYWIwLnZlY1AscC5uZXcpXG4gIH1cbnN1bShhYnMoUG9pc3Nvbi5wX2sgLSA/PykpXG5cbk5lZ0Jpbm9tLnBfayA8LSBkbmJpbm9tKGt2ZWMsIHByb2I9MS8xLjEsIHNpemUgPSAxMi40KVxuYSA9ID8/IFxuYiA9ID8/XG5hYjAudmVjTkIgPC0gIDEuMSoqKC0xMi40KSAtPiBwLm5ld1xuZm9yIChrIGluID8/KXtcbiAgcC5uZXcgPC0gcC5uZXcgKihhK2IvaylcbiAgYWIwLnZlY05CIDwtIGFwcGVuZChhYjAudmVjTkIscC5uZXcpXG4gIH1cbnN1bShhYnMoTmVnQmlub20ucF9rIC0gPz8pKSIsInNvbHV0aW9uIjoia3ZlYyA8LSBjKDA6MjApIFxuUG9pc3Nvbi5wX2sgPC0gZHBvaXMoeD1rdmVjLCBsYW1iZGE9MS4yNCkgXG5hID0gMDsgXG5iID0gMS4yNFxuYWIwLnZlY1AgPC0gIGV4cCgtMS4yNCkgLT4gcC5uZXdcbmZvciAoayBpbiAxOjIwKXtcbiAgcC5uZXcgPC0gcC5uZXcgKihhK2IvaylcbiAgYWIwLnZlY1AgPC0gYXBwZW5kKGFiMC52ZWNQLHAubmV3KVxuICB9XG5zdW0oYWJzKFBvaXNzb24ucF9rIC0gYWIwLnZlY1ApKVxuXG5OZWdCaW5vbS5wX2sgPC0gZG5iaW5vbShrdmVjLCBwcm9iPTEvMS4xLCBzaXplID0gMTIuNClcbmEgPSAuMS8xLjE7IFxuYiA9IDExLjQqKDAuMSkvMS4xXG5hYjAudmVjTkIgPC0gIDEuMSoqKC0xMi40KSAtPiBwLm5ld1xuZm9yIChrIGluIDI6MjEpe1xuICBwLm5ldyA8LSBwLm5ldyAqKGErYi8oay0xKSlcbiAgYWIwLnZlY05CIDwtIGFwcGVuZChhYjAudmVjTkIscC5uZXcpXG4gIH1cbnN1bShhYnMoTmVnQmlub20ucF9rIC0gYWIwLnZlY05CKSkiLCJzY3QiOiJrdmVjbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBrdmVjYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwia3ZlY1wiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBga3ZlY2AhXCIpICU+JSBjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPWt2ZWNtc2cpXG5Qb2lzc29uLnBfa21zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgUG9pc3Nvbi5wX2tgP1wiXG5leCgpICU+JSBjaGVja19vYmplY3QoXCJQb2lzc29uLnBfa1wiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgUG9pc3Nvbi5wX2tgIVwiKSAlPiUgY2hlY2tfZXF1YWwoaW5jb3JyZWN0X21zZz1Qb2lzc29uLnBfa21zZylcbmFiMC52ZWNQbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBhYjAudmVjUGA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcImFiMC52ZWNQXCIsIHVuZGVmaW5lZF9tc2cgPSBcIk1ha2Ugc3VyZSB0byBub3QgcmVtb3ZlIGBhYjAudmVjUGAhXCIpICU+JSBjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPWFiMC52ZWNQbXNnKVxuTmVnQmlub20ucF9rbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBOZWdCaW5vbS5wX2tgP1wiXG5leCgpICU+JSBjaGVja19vYmplY3QoXCJOZWdCaW5vbS5wX2tcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYE5lZ0Jpbm9tLnBfa2AhXCIpICU+JSBjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPU5lZ0Jpbm9tLnBfa21zZylcbmFiMC52ZWNOQm1zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgYWIwLnZlY05CYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwiYWIwLnZlY05CXCIsIHVuZGVmaW5lZF9tc2cgPSBcIk1ha2Ugc3VyZSB0byBub3QgcmVtb3ZlIGBhYjAudmVjTkJgIVwiKSAlPiUgY2hlY2tfZXF1YWwoaW5jb3JyZWN0X21zZz1hYjAudmVjTkJtc2cpXG5cbnN1Y2Nlc3NfbXNnKFwiRXhjZWxsZW50IGpvYiEgQmVpbmcgYWJsZSB0byBkbyBjYWxjdWxhdGlvbnMgcmVjdXJzaXZlbHksIHN1Y2ggYXMgdXNpbmcgZm9yIGxvb3BzLCBpcyBhbiBpbXBvcnRhbnQgZm9yIGFjdHVhcmlhbCBtb2RlbHMuXCIpIiwiaGludCI6IlRoZXJlIGFyZSBzZXZlcmFsIHdheXMgdG8gZG8gcmVjdXJzaW9ucyBpbiA8Y29kZT5SPC9jb2RlPiwgeW91IG1pZ2h0IHN0YXJ0IHdpdGggYSBzaW1wbGUgPGEgaHJlZj1cImh0dHBzOi8vd3d3LnJkb2N1bWVudGF0aW9uLm9yZy9wYWNrYWdlcy9iYXNlL3ZlcnNpb25zLzMuNi4yL3RvcGljcy9Db250cm9sXCI+Zm9yKCk8L2E+IGV4cHJlc3Npb24uIn0=
+</div>
+</div>
+<div id="exercise.-reverse-engineering-and-recursive-r-functions" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Exercise. Reverse Engineering and Recursive <code>R</code> Functions</h3>
+<p><strong>Assignment Text</strong></p>
+<p>You want to generate probabilities from the <span class="math inline">\((a,b,0)\)</span> class so that later on you will be able to modify your code to produce alternative distributions (the subject of Section 2.5), a bit of so-called “reverse engineering.” In the first part of this problem, from a known distribution (e.g., the binomial), you will compute the ratio</p>
+<p><span class="math display">\[
+\frac{k ~p_k}{p_{k-1}} =  a k + b , \quad k\ge 1 ,
+\]</span></p>
+<p>to determine values of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. The second part of this problem utilizes recursive <code>R</code> functions. This is a function defined in terms of the same function but at a prior iteration. The classic example is the factorial function <span class="math inline">\(f(n) = n!\)</span> so <span class="math inline">\(f(n) = n f(n-1)\)</span>. For example, you can define the function</p>
+<pre><code>recursive.factorial &lt;- function(n) {
+  if (n == 0)    return (1)
+  else           return (n * recursive.factorial(n-1))
+  }</code></pre>
+<p>to determine that <code>recursive.factorial(5) = 120</code>. In this problem, we use a recursive <code>R</code> function to generate <span class="math inline">\((a,b,0)\)</span> probabilities.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>For <span class="math inline">\(k=0, \ldots, 4\)</span>, using <span class="math inline">\(\lambda = 1.24\)</span> obtain <span class="math inline">\(p_k\)</span> values from the <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Poisson">dpois()</a> function.</li>
+<li>Compute the ratio to identify values of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. <em>Hint</em>: In <code>R</code>, use of <em>negative indexing</em> is permitted. For example, <code>pop[-c(3, 7)]</code> removes the third and seventh elements of <code>pop</code>.</li>
+<li>For <span class="math inline">\(k=0, \ldots, 4\)</span>, using <span class="math inline">\(q =0.1\)</span> and <span class="math inline">\(m=10\)</span> obtain <span class="math inline">\(p_k\)</span> values from the <a href="https://www.rdocumentation.org/packages/stats/versions/3.3/topics/Binomial">dbinom()</a> function.</li>
+<li>Compute the ratio to identify values of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>.</li>
+<li>To check your work, develop the recursive <span class="math inline">\((a,b,0)\)</span> function to determine <span class="math inline">\(p_4 = \Pr(N=4)\)</span> based on the binomial distribution in the prior part.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6IiMgTm9uZSBOZWVkZWQgZm9yIHRoaXMgRXhlcmNpc2UiLCJzYW1wbGUiOiJrdmVjIDwtIGMoMDo0KSAgXG5Qb2lzc29uLnBfayA8LSBkcG9pcyh4PWt2ZWMsIGxhbWJkYT0xLjI0KSBcbmt2ZWNbPz9dICogUG9pc3Nvbi5wX2tbPz8vUG9pc3Nvbi5wX2tbLWxlbmd0aChrdmVjKV1cblxuQmlub20ucF9rIDwtIGRiaW5vbSh4PWt2ZWMsIHByb2IgPSAwLjEsIHNpemUgPSAxMCkgXG5vdXR2ZWMgPC0ga3ZlY1s/P10gKiBCaW5vbS5wX2tbPz9dL0Jpbm9tLnBfa1stbGVuZ3RoKGt2ZWMpXVxuKCBhID0gPz8gLSA/PyApXG4oIGIgPSA/PyAtIGEgKVxuXG4jIFJlY3Vyc2l2ZSBmdW5jdGlvbiB0byBmaW5kIGZhY3RvcmlhbFxucmVjdXJzaXZlLmFiMCA8LSBmdW5jdGlvbihrKSB7XG4gIGlmIChrID09IDApICByZXR1cm4gKCBCaW5vbS5wX2tbMV0gKVxuICBlbHNlICAgICAgICAgcmV0dXJuICggKGErYi9rKSAqIHJlY3Vyc2l2ZS5hYjAoay0xKSApXG4gIH1cbnJlY3Vyc2l2ZS5hYjAoPz8pXG5CaW5vbS5wX2tbPz9dIiwic29sdXRpb24iOiJrdmVjIDwtIGMoMDo0KSAgXG5Qb2lzc29uLnBfayA8LSBkcG9pcyh4PWt2ZWMsIGxhbWJkYT0xLjI0KSBcbmt2ZWNbLTFdICogUG9pc3Nvbi5wX2tbLTFdL1BvaXNzb24ucF9rWy1sZW5ndGgoa3ZlYyldXG5cbkJpbm9tLnBfayA8LSBkYmlub20oeD1rdmVjLCBwcm9iID0gMC4xLCBzaXplID0gMTApIFxub3V0dmVjIDwtIGt2ZWNbLTFdICogQmlub20ucF9rWy0xXS9CaW5vbS5wX2tbLWxlbmd0aChrdmVjKV1cbiggYSA9IG91dHZlY1syXSAtIG91dHZlY1sxXSApXG4oIGIgPSBvdXR2ZWNbMV0gLSBhIClcblxuIyBSZWN1cnNpdmUgZnVuY3Rpb24gdG8gZmluZCBmYWN0b3JpYWxcbnJlY3Vyc2l2ZS5hYjAgPC0gZnVuY3Rpb24oaykge1xuICBpZiAoayA9PSAwKSAgcmV0dXJuICggQmlub20ucF9rWzFdIClcbiAgZWxzZSAgICAgICAgIHJldHVybiAoIChhK2IvaykgKiByZWN1cnNpdmUuYWIwKGstMSkgKVxuICB9XG5yZWN1cnNpdmUuYWIwKDQpXG5CaW5vbS5wX2tbNV0iLCJzY3QiOiJQb2lzc29uLnBfa21zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgUG9pc3Nvbi5wX2tgP1wiXG5leCgpICU+JSBjaGVja19vYmplY3QoXCJQb2lzc29uLnBfa1wiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgUG9pc3Nvbi5wX2tgIVwiKSAlPiVjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPVBvaXNzb24ucF9rbXNnKVxuQmlub20ucF9rbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBCaW5vbS5wX2tgP1wiXG5leCgpICU+JSBjaGVja19vYmplY3QoXCJCaW5vbS5wX2tcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYEJpbm9tLnBfa2AhXCIpICU+JWNoZWNrX2VxdWFsKGluY29ycmVjdF9tc2c9Qmlub20ucF9rbXNnKVxucmVjdXJzaXZlLmFiMG1zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgcmVjdXJzaXZlLmFiMGA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcInJlY3Vyc2l2ZS5hYjBcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYHJlY3Vyc2l2ZS5hYjBgIVwiKSAlPiVjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPXJlY3Vyc2l2ZS5hYjBtc2cpXG5cbnN1Y2Nlc3NfbXNnKFwiU3VwZXJiISBXb3JraW5nIGZvcndhcmRzIGFuZCBiYWNrd2FyZHMgaXMgaW1wb3J0YW50IGluIGNvbXBsZXggdGFza3MuIFRoZSBpZGVhIG9mICdyZXZlcnNlIGVuZ2luZWVyaW5nJyBpcyBjb21tb24gaW4gY29tcGxleCBidXNpbmVzcyBzZXR0aW5ncy4gXCIpIiwiaGludCI6IllvdSBtaWdodCB3aXNoIHRvIGxlYXJuIG1vcmUgYWJvdXQgPGEgaHJlZj1cImh0dHBzOi8vd3d3LmRhdGFtZW50b3IuaW8vci1wcm9ncmFtbWluZy9yZWN1cnNpb24vXCI+UiByZWN1cnNpdmUgZnVuY3Rpb25zPC9hPiJ9
+</div>
+</div>
+</div>
+<div id="estimating-frequency-distributions" class="section level2">
+<h2><span class="header-section-number">2.3</span> Estimating Frequency Distributions</h2>
+<hr />
+<p>In this section, you learn how to:</p>
+<ul>
+<li>Define a likelihood for a sample of observations from a discrete distribution.</li>
+<li>Define the maximum likelihood estimator (<em>mle</em>) for a random sample of observations from a discrete distribution.</li>
+<li>Calculate the <em>mle</em> for the binomial, Poisson, and negative binomial distributions.</li>
+</ul>
+<hr />
+<div id="video-estimating-frequency-distributions" class="section level4 unnumbered">
+<h4>Video: Estimating Frequency Distributions</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_wr2ht513&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_78m5tjmh" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+</div>
+<div id="overheads-estimating-frequency-distributions-click-tab-to-view" class="section level4 unnumbered">
+<h4>Overheads: Estimating Frequency Distributions (Click Tab to View)</h4>
+<div class="tab">
+<button class="tablinks" onclick="openTab(event, 'Sect231A')">A. Basic Problem</button>
+<button class="tablinks" onclick="openTab(event, 'Sect231B')">B. Compression of Data</button>
+<button class="tablinks" onclick="openTab(event, 'Sect231C')">C. The Likelihood</button>
+<button class="tablinks" onclick="openTab(event, 'Sect231D')">D. Maximum Likelihood (ML) Estimation</button>
+<button class="tablinks" onclick="openTab(event, 'Sect231E')">E. ML Estimation - General Setup</button>
+<button class="tablinks" onclick="openTab(event, 'Sect231F')">F. Plot of Likelihood and Log-likelihood</button>
+</div>
+<div id="Sect231A" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=23" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect231B" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=24" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect231C" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=25" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect231D" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=26" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect231E" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=27" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect231F" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=28" width="100%" height="400"> </iframe>
+</div>
+</div>
+<div id="Ex:CountDataCompression" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Exercise. Count Data Compression - 1</h3>
+<p><strong>Assignment Text</strong></p>
+<p>Raw count data can often be compressed without loss of any statistical information. Typically, the compression is to the sequence of values <span class="math inline">\(\{m_k\}_{k\geq 0}\)</span>, where <span class="math inline">\(m_k\)</span> is the number of observations equal to <span class="math inline">\(k\)</span>, that is, <span class="math inline">\(m_k=\sum_{i= 1}^n I(x_i=k).\)</span> In this and the following exercise, we discuss two data structures for this compressed data and suggest implementations in <code>R</code>.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Store the count data <span class="math inline">\(\{3, 6, 0, 2, 3, 4, 4, 2, 4, 4, 6, 2, 3, 0, 2, 3, 1, 2, 4, 2\}\)</span> into an array, say <span class="math inline">\(\bf x\)</span>, using the <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/c">c()</a> (for concatenate) function</li>
+<li>Use the <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/table">table()</a> function to generate a frequency table of the data.</li>
+<li>Initialize an array (say <span class="math inline">\(\bf m.vec\)</span>) to hold the summarized counts of frequency, <span class="math inline">\(m_0, m_1, \ldots\)</span>. Do this using the <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/rep">rep()</a> function that replicates the values in <span class="math inline">\(x\)</span>. (It is a generic function, and the (internal) default method is described here.)</li>
+<li>Fill in the appropriate values into the array <span class="math inline">\(\bf m.vec\)</span>. Some illustrative code uses the functions <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/names">names()</a> (functions to get or set the names of an object), <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/integer">as.integer()</a> (it creates or tests for objects of type “integer”), and
+<a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/vector">as.vector()</a> (it produces a vector of the given length and mode).</li>
+<li>Use the array <span class="math inline">\(\bf m.vec\)</span> to determine the mean frequency.</li>
+<li>With the array <span class="math inline">\(\bf m.vec\)</span>, determine the count distribution using the function <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/barplot">barplot()</a> (it creates a bar plot with vertical or horizontal bars).</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4IDwtIGMoPz8pXG5cbnRhYmxlKD8/KVxuXG5tLnZlYyA8LSByZXAoMCxtYXgoPz8pKzEpXG4jIEZpbGwgaW4gYXBwcm9wcmlhdGVseVxuPz9bYXMuaW50ZWdlcihuYW1lcyh0YWJsZSg/PykpKSsxXSA9IGFzLnZlY3Rvcih0YWJsZSg/PykpXG5cbnN1bSgoMDoobGVuZ3RoKD8/KS0xKSkqPz8pL3N1bSg/PylcblxuYmFycGxvdCg/PyxuYW1lcy5hcmc9MDoobGVuZ3RoKD8/KS0xKSx5bGFiPVwiRnJlcXVlbmN5XCIsIHhsYWI9XCJDb3VudFwiKSIsInNvbHV0aW9uIjoieCA8LSBjKDMsIDYsIDAsIDIsIDMsIDQsIDQsIDIsIDQsIDQsIDYsIDIsIDMsIDAsIDIsIDMsXG4gICAgIDEsIDIsIDQsIDIpXG5cbnRhYmxlKHgpXG5cbm0udmVjIDwtIHJlcCgwLG1heCh4KSsxKVxuIyBGaWxsIGluIGFwcHJvcHJpYXRlbHlcbm0udmVjW2FzLmludGVnZXIobmFtZXModGFibGUoeCkpKSsxXT1hcy52ZWN0b3IodGFibGUoeCkpXG5cbnN1bSgoMDoobGVuZ3RoKG0udmVjKS0xKSkqbS52ZWMpL3N1bShtLnZlYylcblxuYmFycGxvdChtLnZlYyxuYW1lcy5hcmc9MDoobGVuZ3RoKG0udmVjKS0xKSx5bGFiPVwiRnJlcXVlbmN5XCIseGxhYj1cIkNvdW50XCIpIiwic2N0IjoieG1zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgeGA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcInhcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYHhgIVwiKSAlPiVjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPXhtc2cpXG5tLnZlY21zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgbS52ZWNgP1wiXG5leCgpICU+JSBjaGVja19vYmplY3QoXCJtLnZlY1wiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgbS52ZWNgIVwiKSAlPiVjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPW0udmVjbXNnKVxudGFibGVtc2cgPC0gXCJEaWQgeW91IGNvcnJlY3RseSBzcGVjaWZ5IHRoZSBhcmd1bWVudHM/XCJcbmV4KCkgJT4lIGNoZWNrX2Z1bmN0aW9uKFwidGFibGVcIiwgbm90X2NhbGxlZF9tc2cgPXRhYmxlbXNnKSAlPiUgY2hlY2tfcmVzdWx0KGVycm9yX21zZz10YWJsZW1zZykgJT4lIGNoZWNrX2VxdWFsKClcbmJhcnBsb3Rtc2cgPC0gXCJEaWQgeW91IGNvcnJlY3RseSBzcGVjaWZ5IHRoZSBhcmd1bWVudHM/XCJcbmV4KCkgJT4lIGNoZWNrX2Z1bmN0aW9uKFwiYmFycGxvdFwiLCBub3RfY2FsbGVkX21zZyA9YmFycGxvdG1zZykgJT4lIGNoZWNrX3Jlc3VsdChlcnJvcl9tc2c9YmFycGxvdG1zZykgJT4lIGNoZWNrX2VxdWFsKClcbnN1Y2Nlc3NfbXNnKFwiRXhjZWxsZW50IGpvYiEgQWN0dWFyaWFsIGFwcGxpY2F0aW9ucyBvZnRlbiBpbnZvbHZlIG1hc3NpdmUgZGF0YXNldHMuIEl0IGNhbiBiZSBoYW5keSBpZGVudGlmeWluZyBzaXR1YXRpb25zIGluIHdoaWNoIGRhdGEgY2FuIGJlIGNvbXByZXNzZWQgd2l0aG91dCBsb3NzIG9mIGluZm9ybWF0aW9uLiBTb21lIGFwcGxpY2F0aW9ucyBvZiBjb3VudCBkYXRhIGlzIG9uZSBzdWNoIHNpdHVhdGlvbi5cIikiLCJoaW50IjoiUGxheSB3aXRoIGEgc21hbGxlciBkYXRhIHNldCAoaS5lLiB4KSB0byB1bmRlcnN0YW5kIGVhY2ggbGluZSBvZiBjb2RlLiJ9
+</div>
+</div>
+<div id="exercise.-count-data-compression---2" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Exercise. Count Data Compression - 2</h3>
+<p><strong>Assignment Text</strong></p>
+<p>In Exercise <a href="frequency-modeling.html#Ex:CountDataCompression">2.3.1</a>, the count data range was narrow - counts range from 0 to 6. In that case the suggested manner to store <span class="math inline">\(m_k\)</span>’s worked well. In Section <a href="introduction-to-loss-data-analytics.html#Sec:LGPIF">1.3</a> of this short course, the Wisconsin Property Fund data has been introduced which consists of claim experience for fund members over the years 2006-2010, inclusive. It includes the frequency of claims <code>Freq</code> as well as the claim year <code>Year</code>. The Wisconsin Property Fund data has already been read into a data frame called <code>Insample</code>. In this assignment, we will compress the claims frequency data using a data structure that differs from that presented in the preceding exercise.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Using the dataframe <code>Insample</code>, create a smaller data set based on year 2007 experience.</li>
+<li>From the 2007 experience, create a frequency table.</li>
+<li>Store distinct claim counts observed into an array named <span class="math inline">\(\bf values\)</span>.</li>
+<li>Store the frequency of claim counts into an array named <span class="math inline">\(\bf m.vec\)</span>.</li>
+<li>Use the array <span class="math inline">\(\bf m.vec\)</span> to determine the mean frequency.</li>
+<li>The frequency table shows one observation with 157 claims. Use the <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/match">match()</a> function to verify this. (This function returns a vector of the positions of (first) matches of its first argument in its second).</li>
+<li>With the array <span class="math inline">\(\bf m.vec\)</span>, graph the count distribution.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0RGV2L0xEQUNvdXJzZTEvbWFpbi9EYXRhL0luc2FtcGxlLmNzdlwiLCBoZWFkZXI9VCxuYS5zdHJpbmdzPWMoXCIuXCIpLHN0cmluZ3NBc0ZhY3RvcnM9RkFMU0UpIiwic2FtcGxlIjoiSW5zYW1wbGV5ciA8LSBzdWJzZXQoPz8sIFllYXI9PT8/KVxuXG50YWJsZSg/PyRGcmVxKVxuXG52YWx1ZXMgPC0gYXMuaW50ZWdlcihuYW1lcyh0YWJsZSg/PykpKVxuXG5tLnZlYyA8LSBhcy52ZWN0b3IodGFibGUoPz8pKVxuXG5zdW0oPz8qbS52ZWMpL3N1bSg/PylcbiMgTnVtYmVyIG9mIGNsYWltIGNvdW50cyBlcXVhbCB0byAxNTdcbm0udmVjW21hdGNoKD8/LD8/KV1cblxuYmFycGxvdCg/PyxuYW1lcy5hcmc9Pz8seWxhYj1cIkZyZXF1ZW5jeVwiLHhsYWI9XCJDb3VudFwiKSIsInNvbHV0aW9uIjoiSW5zYW1wbGV5ciA8LSBzdWJzZXQoSW5zYW1wbGUsIFllYXI9PTIwMDcpXG5cbnRhYmxlKEluc2FtcGxleXIkRnJlcSlcblxudmFsdWVzIDwtIGFzLmludGVnZXIobmFtZXModGFibGUoSW5zYW1wbGV5ciRGcmVxKSkpXG5cbm0udmVjIDwtIGFzLnZlY3Rvcih0YWJsZShJbnNhbXBsZXlyJEZyZXEpKVxuXG5zdW0odmFsdWVzKm0udmVjKS9zdW0obS52ZWMpXG4jIE51bWJlciBvZiBjbGFpbSBjb3VudHMgZXF1YWwgdG8gMTU3XG5tLnZlY1ttYXRjaCgxNTcsdmFsdWVzKV1cblxuYmFycGxvdChtLnZlYyxuYW1lcy5hcmc9dmFsdWVzLHlsYWI9XCJGcmVxdWVuY3lcIix4bGFiPVwiQ291bnRcIikiLCJzY3QiOiJJbnNhbXBsZXlybXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBJbnNhbXBsZXlyYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwiSW5zYW1wbGV5clwiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgSW5zYW1wbGV5cmAhXCIpICU+JWNoZWNrX2VxdWFsKGluY29ycmVjdF9tc2c9SW5zYW1wbGV5cm1zZylcbnZhbHVlc21zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgdmFsdWVzYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwidmFsdWVzXCIsIHVuZGVmaW5lZF9tc2cgPSBcIk1ha2Ugc3VyZSB0byBub3QgcmVtb3ZlIGB2YWx1ZXNgIVwiKSAlPiVjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPXZhbHVlc21zZylcbm0udmVjbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBtLnZlY2A/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcIm0udmVjXCIsIHVuZGVmaW5lZF9tc2cgPSBcIk1ha2Ugc3VyZSB0byBub3QgcmVtb3ZlIGBtLnZlY2AhXCIpICU+JWNoZWNrX2VxdWFsKGluY29ycmVjdF9tc2c9bS52ZWNtc2cpXG50YWJsZW1zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIGFyZ3VtZW50cz9cIlxuZXgoKSAlPiUgY2hlY2tfZnVuY3Rpb24oXCJ0YWJsZVwiLCBub3RfY2FsbGVkX21zZyA9dGFibGVtc2cpICU+JSBjaGVja19yZXN1bHQoZXJyb3JfbXNnPXRhYmxlbXNnKSAlPiUgY2hlY2tfZXF1YWwoKVxuYmFycGxvdG1zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIGFyZ3VtZW50cz9cIlxuZXgoKSAlPiUgY2hlY2tfZnVuY3Rpb24oXCJiYXJwbG90XCIsIG5vdF9jYWxsZWRfbXNnID1iYXJwbG90bXNnKSAlPiUgY2hlY2tfcmVzdWx0KGVycm9yX21zZz1iYXJwbG90bXNnKSAlPiUgY2hlY2tfZXF1YWwoKVxuc3VjY2Vzc19tc2coXCJFeGNlbGxlbnQgam9iISBUaGVyZSBhcmUgMTEzOCBkaXN0aW5jdCBvYnNlcnZhdGlvbnMgaW4gdGhlIDIwMDcgZXhwZXJpZW5jZS4gV2l0aG91dCBhbnkgbG9zcyBvZiBpbmZvcm1hdGlvbiwgdGhlc2UgY291bGQgYmUgc3VtbWFyaXplZCBpbnRvIG9ubHkgMjAgdmFsdWVzLCBhIHRlcnJpZmljIHJlYWwgd29ybGQgZXhhbXBsZSBvZiBjb21wcmVzc2lvbi5cIikiLCJoaW50IjoiUGxheSB3aXRoIGEgc21hbGxlciBkYXRhIHNldCAoaS5lLiB4KSB0byB1bmRlcnN0YW5kIGVhY2ggbGluZSBvZiBjb2RlLiJ9
+</div>
+<div id="video-fitting-a-poisson-distribution" class="section level4 unnumbered">
+<h4>Video: Fitting a Poisson Distribution</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_xmnkpby4&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_dqkx5yeu" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+</div>
+</div>
+<div id="exercise.-graphing-likelihoods" class="section level3">
+<h3><span class="header-section-number">2.3.3</span> Exercise. Graphing Likelihoods</h3>
+<p><strong>Assignment Text</strong></p>
+<p>In this assignment you are asked to plot the Poisson likelihood and the log-likelihood for the data from Exercise <a href="frequency-modeling.html#Ex:CountDataCompression">2.3.1</a>. It is instructive to see that the maximum for both the curves are attained at the same point, the sample mean. These data have already been read into an array <span class="math inline">\(\bf x\)</span> with the counts in the array <span class="math inline">\(\bf m.vec\)</span>. Once you have a working code, scroll through the plots to understand what each piece of graph code does.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Write the likelihood as a function of the parameter <span class="math inline">\(\theta\)</span>.</li>
+<li>Create an array with values of <span class="math inline">\(\theta = 1, 1.01, 1.02, \ldots, 5\)</span>.</li>
+<li>Plot the likelihood over values of <span class="math inline">\(\theta\)</span>. You may find useful the function <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/sapply">sapply()</a>. (It applies a function over a list or vector.)</li>
+<li>Plot the log-likelihood over values of <span class="math inline">\(\theta\)</span>.</li>
+<li>Superimpose a vertical line at the mean to emphasize that both the likelihood and the log-likelihood reach their maximum values at the mean. For this, use the <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/abline">abline()</a> (this function adds one or more straight lines through the current plot).</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ing8LWMoMywgNiwgMCwgMiwgMywgNCwgNCwgMiwgNCwgNCwgNiwgMiwgMywgMCwgMiwgMyxcbiAgICAgMSwgMiwgNCwgMilcbm0udmVjIDwtIHJlcCgwLG1heCh4KSsxKVxubS52ZWNbYXMuaW50ZWdlcihuYW1lcyh0YWJsZSh4KSkpKzFdPWFzLnZlY3Rvcih0YWJsZSh4KSkiLCJzYW1wbGUiOiIjIExpa2VsaWhvb2QgRnVuY3Rpb25cbkxpa2UgIDwtICBmdW5jdGlvbih0aGV0YSl7XG4gIHByb2QoZHBvaXMoMDptYXgoeCksdGhldGEpXj8/KVxuICB9XG50aGV0YSA8LSA/P1xuICBcbnBhcihtYXI9Yyg1LCA1LCA0LCA1KSArIDAuMSkgIyBQbG90IE1hcmdpbnNcbiMgUGxvdCBMaWtlbGlob29kXG5wbG90KHRoZXRhLHNhcHBseSg/PyxMaWtlKSx0eXBlPVwibFwiLGF4ZXM9RkFMU0UseGxhYj1cIlwiLHlsYWI9XCJcIilcbmF4aXMoMiwgeWxpbT1jKDAsNWUtMTcpLGNvbD1cImJsYWNrXCIsbGFzPTEpICMgRmlyc3QgeS1heGlzXG5tdGV4dChcIkxpa2VsaWhvb2RcIixzaWRlPTIsbGluZT0zLjc1KVxuXG5wYXIobmV3PVRSVUUpICMgUmV1c2UgR3JhcGhcbiMgUGxvdCBMb2ctbGlrZWxpaG9vZFxucGxvdCg/Pyxsb2coc2FwcGx5KHRoZXRhLD8/KSksYXhlcz1GQUxTRSx4bGFiPVwiXCIseWxhYj1cIlwiLHlsaW09YygtNjUsLTM1KSxjb2w9XCJyZWRcIix0eXBlPVwibFwiKVxubXRleHQoXCJMb2ctbGlrZWxpaG9vZFwiLHNpZGU9NCxjb2w9XCJyZWRcIixsaW5lPTMpXG5heGlzKDQsIHlsaW09YygtMjUsLTE2KSwgY29sPVwicmVkXCIsY29sLmF4aXM9XCJyZWRcIiwgbGFzPTEpICMgU2Vjb25kIHktYXhpc1xuYXhpcygxLCBjKDEsMS41LDIsMi41LG1lYW4oeCksMy41LDQsNC41LDUpICkgIyBDb21tb24geC1heGlzXG5tdGV4dChleHByZXNzaW9uKHRoZXRhKSxzaWRlPTEsY29sPVwiYmxhY2tcIixsaW5lPTIuNSlcbiMgVmVydGljYWwgbGluZSBhdCB0aGUgY29tbW9uIGFyZ21heCAobWxlKVxuYWJsaW5lKHY9bWVhbig/PyksY29sPVwiZ3JlZW5cIikiLCJzb2x1dGlvbiI6IiMgTGlrZWxpaG9vZCBGdW5jdGlvblxuTGlrZSA8LSBmdW5jdGlvbih0aGV0YSl7XG4gIHByb2QoZHBvaXMoMDptYXgoeCksdGhldGEpXm0udmVjKVxuICB9XG50aGV0YSA8LSAoMTAwOjUwMCkvMTAwXG5cbnBhcihtYXI9Yyg1LCA1LCA0LCA1KSArIDAuMSkgIyBQbG90IE1hcmdpbnNcbiMgUGxvdCBMaWtlbGlob29kXG5wbG90KHRoZXRhLHNhcHBseSh0aGV0YSxMaWtlKSx0eXBlPVwibFwiLGF4ZXM9RkFMU0UseGxhYj1cIlwiLHlsYWI9XCJcIilcbmF4aXMoMiwgeWxpbT1jKDAsNWUtMTcpLGNvbD1cImJsYWNrXCIsbGFzPTEpICMgRmlyc3QgeS1heGlzXG5tdGV4dChcIkxpa2VsaWhvb2RcIixzaWRlPTIsbGluZT0zLjc1KVxuXG5wYXIobmV3PVRSVUUpICMgUmV1c2UgR3JhcGhcbiMgUGxvdCBMb2ctbGlrZWxpaG9vZFxucGxvdCh0aGV0YSxsb2coc2FwcGx5KHRoZXRhLExpa2UpKSxheGVzPUZBTFNFLHhsYWI9XCJcIix5bGFiPVwiXCIseWxpbT1jKC02NSwtMzUpLGNvbD1cInJlZFwiLHR5cGU9XCJsXCIpXG5tdGV4dChcIkxvZy1saWtlbGlob29kXCIsc2lkZT00LGNvbD1cInJlZFwiLGxpbmU9MylcbmF4aXMoNCwgeWxpbT1jKC0yNSwtMTYpLCBjb2w9XCJyZWRcIixjb2wuYXhpcz1cInJlZFwiLGxhcz0xKSAjIFNlY29uZCB5LWF4aXNcbmF4aXMoMSxjKDEsMS41LDIsMi41LG1lYW4oeCksMy41LDQsNC41LDUpKSAjIENvbW1vbiB4LWF4aXNcbm10ZXh0KGV4cHJlc3Npb24odGhldGEpLHNpZGU9MSxjb2w9XCJibGFja1wiLGxpbmU9Mi41KVxuIyBWZXJ0aWNhbCBsaW5lIGF0IHRoZSBjb21tb24gYXJnbWF4IChtbGUpXG5hYmxpbmUodj1tZWFuKHgpLGNvbD1cImdyZWVuXCIpIiwic2N0IjoidGhldGFtc2cgPC0gXCJEaWQgeW91IGNvcnJlY3RseSBzcGVjaWZ5IHRoZSBvYmplY3QgYHRoZXRhYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwidGhldGFcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYHRoZXRhYCFcIikgJT4lY2hlY2tfZXF1YWwoaW5jb3JyZWN0X21zZz10aGV0YW1zZylcbnN1Y2Nlc3NfbXNnKFwiRXhjZWxsZW50IGpvYiEgSW4gY29tcGxleCBhY3R1YXJpYWwgYXBwbGljYXRpb25zLCBtYXhpbXVtIGxpa2VsaWhvb2QgaXMgdXNlZCBleHRlbnNpdmVseSB0byBjYWxpYnJhdGUgbW9kZWxzIGJ5IGVzdGltYXRpbmcgdGhlIG1vc3QgbGlrZWx5IHBhcmFtZXRlciB2YWx1ZXMuIE9uZSBnZXRzIGluc2lnaHRzIGludG8gdGhpcyBwcm9jZXNzIGJ5IHZpc3VhbGl6aW5nIGZ1bmN0aW9ucyB0aGF0IGFyZSBiZWluZyBtYXhpbWl6ZWQuXCIpIiwiaGludCI6IlRvIHNpbXBsaWZ5IG1hdHRlcnMgZXZlbiBtb3JlLCB5b3UgY291bGQgdHJ5IHdpdGgganVzdCB0aHJlZSBwb2ludHMuIn0=
+</div>
+<div id="video-fitting-binominal-and-negative-binomial-distributions" class="section level4 unnumbered">
+<h4>Video: Fitting Binominal and Negative Binomial Distributions</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_ys8n0r8y&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_z2zfn7ka" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+</div>
+<div id="overheads-fitting-binominal-and-negative-binomial-distributions-click-tab-to-view" class="section level4 unnumbered">
+<h4>Overheads: Fitting Binominal and Negative Binomial Distributions (Click Tab to View)</h4>
+<div class="tab">
+<button class="tablinks" onclick="openTab(event, 'Sect233A')">A. Binomial Model</button>
+<button class="tablinks" onclick="openTab(event, 'Sect233B')">B. Negative Binomial Model</button>
+<button class="tablinks" onclick="openTab(event, 'Sect233C')">C. Reason Behind non-existence of MLE</button>
+<button class="tablinks" onclick="openTab(event, 'Sect233D')">D. REVIEW</button>
+</div>
+<div id="Sect233A" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=30" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect233B" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=31" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect233C" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=32" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect233D" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=33" width="100%" height="400"> </iframe>
+</div>
+</div>
+</div>
+<div id="exercise.-fitting-a-binomial-distribution" class="section level3">
+<h3><span class="header-section-number">2.3.4</span> Exercise. Fitting a Binomial Distribution</h3>
+<p><strong>Assignment Text</strong></p>
+<p>In this assignment you are asked to fit the binomial model to a small set of count data, <span class="math inline">\(\{1, 3, 3, 3, 5, 3, 0, 2, 4, 3, 4\}\)</span>. Recall that in this parameterization of the binomial model, <span class="math inline">\(m\)</span> is the potential number of 1’s (the number of “trials”).
+You will recall from <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-Frequency-Modeling.html#S:frequency-distributions-mle">Section 2.4.2 of <em>Loss Data Analytics</em></a> that when <span class="math inline">\(m\)</span> is known, the <em>mle</em> of <span class="math inline">\(q\)</span> is simply a sample average. Because <span class="math inline">\(m\)</span> is restricted to integer values, it is convenient to resort to brute force maximization of the <em>reduced</em> likelihood in order to find the <em>mle</em> for <span class="math inline">\(m\)</span>. But then it is a must to visually confirm the solution by plotting the reduced log-likelihood.</p>
+<p>Note that it is important to check that the sample mean exceeds sample variance for the <em>mle</em> of <span class="math inline">\(m\)</span> to be finite - lest the Poisson is the better model. The data are available in an array <span class="math inline">\(\bf x\)</span> and the array <span class="math inline">\(\bf m.vec\)</span> of Exercise <a href="frequency-modeling.html#Ex:CountDataCompression">2.3.1</a> is also made available.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Develop the reduced likelihood function based on the compressed data in the array <span class="math inline">\(\bf m.vec\)</span>.</li>
+<li>The value of <span class="math inline">\(m\)</span> must be at least as large as the largest observed value in the sample. Calculate potential values of the reduced likelihood over a range beginning from the maximum value in <span class="math inline">\(\bf m.vec\)</span>.</li>
+<li>Determine the maximum likelihood estimators of the parameters <span class="math inline">\(m\)</span> and <span class="math inline">\(q\)</span> by selecting the largest likelihood. For this, you will find helpful the function <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/match">match()</a> (it returns a vector of the positions of (first) matches of its first argument in its second).</li>
+<li>To check your results, plot the likelihood function over a range of <span class="math inline">\(m\)</span>. Superimpose a vertical line at the <em>mle</em>.</li>
+<li>Check to see whether the sample mean is greater than the sample variance. Doing so, you can use the function <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/var">var()</a> (it computes the variance using a denominator of <span class="math inline">\(n-1\)</span>). To avoid this, the sample code instead uses <code>var(c(x,mean(x)))</code> instead of <code>var(x)</code>. Ask yourself why?</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNldC5zZWVkKFwiMTIzNFwiKVxueCA8LSByYmlub20oMTEsOSwxLzMpXG4jIHggPC0gYygxLCAzLCAzLCAzLCA1LCAzLCAwLCAyLCA0LCAzLCA0KVxubS52ZWMgPC0gcmVwKDAsbWF4KHgpKzEpXG5tLnZlY1thcy5pbnRlZ2VyKG5hbWVzKHRhYmxlKHgpKSkrMV0gPSBhcy52ZWN0b3IodGFibGUoeCkpIiwic2FtcGxlIjoiIyBSZWR1Y2VkIExpa2VsaWhvb2QgRnVuY3Rpb24gXG5yZWR1Y2VkX2xpa2U8LWZ1bmN0aW9uKHBhcmFfbSl7XG4gIGlmIChwYXJhX20+PW1heCh4KSlcbiAgICBwcm9kKGRiaW5vbSgwOm1heCh4KSxwYXJhX20sbWVhbih4KS9jZWlsaW5nKHBhcmFfbSkpXm0udmVjKVxuICBlbHNlICAgIDBcbiAgfVxuIyBDb21wdXRlIHRoZSByZWR1Y2VkIGxpa2VsaWhvb2QgYWNyb3NzIGEgcmFuZ2Ugb2YgdmFsdWVzIGZvciBtXG5vYmogPC0gc2FwcGx5KG1heCh4KTooMyptYXgoeCkpLD8/KVxuXG4jIG1sZSBmb3IgbSBhbmQgcVxubV9NTEUgPC0gbWF0Y2gobWF4KG9iaiksb2JqKSttYXgoeCktMVxucV9NTEUgPC0gbWVhbih4KS8/P1xuIyBWaXN1YWxseSBjaGVjayB0aGUgcmVkdWNlZCBsb2ctbGlrZWxpaG9vZFxucGxvdChtYXgoeCk6KDMqbWF4KHgpKSxsb2coPz8pLHR5cGU9XCJsXCIseGxhYj1cIm1cIix5bGFiPWV4cHJlc3Npb24obChtLGJhcih4KS9tKSkpXG5hYmxpbmUodj1tX01MRSxjb2w9XCJncmVlblwiKVxuXG4jIENoZWNrIGlmIHNhbXBsZSBtZWFuID4gc2FtcGxlIHZhcmlhbmNlXG5jKG1lYW4oPz8pLCB2YXIoYyh4LG1lYW4oeCkpKSkiLCJzb2x1dGlvbiI6IiMgTGlrZWxpaG9vZCBGdW5jdGlvbiBcbnJlZHVjZWRfbGlrZTwtZnVuY3Rpb24ocGFyYV9tKXtcbiAgaWYgKHBhcmFfbT49bWF4KHgpKVxuICAgIHByb2QoZGJpbm9tKDA6bWF4KHgpLHBhcmFfbSxtZWFuKHgpL2NlaWxpbmcocGFyYV9tKSlebS52ZWMpXG4gIGVsc2UgICAgICAwXG4gIH1cbiMgIENvbXB1dGUgdGhlIHJlZHVjZWQgbGlrZWxpaG9vZCBhY3Jvc3MgYSByYW5nZSBvZiB2YWx1ZXMgZm9yIG1cbm9iaiA8LSBzYXBwbHkobWF4KHgpOigzKm1heCh4KSkscmVkdWNlZF9saWtlKVxuXG4jIE1MRSBmb3IgbSBhbmQgcVxubV9NTEUgPC0gbWF0Y2gobWF4KG9iaiksb2JqKSttYXgoeCktMVxucV9NTEUgPC0gbWVhbih4KS9tX01MRVxuIyBJbXBvcnRhbnQgdG8gdmlzdWFsbHkgY2hlY2sgdGhlIHJlZHVjZWQgbG9nLWxpa2VsaWhvb2RcbnBsb3QobWF4KHgpOigzKm1heCh4KSksbG9nKG9iaiksdHlwZT1cImxcIix4bGFiPVwibVwiLHlsYWI9ZXhwcmVzc2lvbihsKG0sYmFyKHgpL20pKSlcbmFibGluZSh2PW1fTUxFLGNvbD1cImdyZWVuXCIpXG5cbiMgQ2hlY2sgaWYgc2FtcGxlIG1lYW4gPiBzYW1wbGUgdmFyaWFuY2VcbmMobWVhbih4KSwgdmFyKGMoeCxtZWFuKHgpKSkpIiwic2N0Ijoib2JqbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBvYmpgP1wiXG5leCgpICU+JSBjaGVja19vYmplY3QoXCJvYmpcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYG9iamAhXCIpICU+JWNoZWNrX2VxdWFsKGluY29ycmVjdF9tc2c9b2JqbXNnKVxubV9NTEVtc2cgPC0gXCJEaWQgeW91IGNvcnJlY3RseSBzcGVjaWZ5IHRoZSBvYmplY3QgYG1fTUxFYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwibV9NTEVcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYG1fTUxFYCFcIikgJT4lY2hlY2tfZXF1YWwoaW5jb3JyZWN0X21zZz1tX01MRW1zZylcbnFfTUxFbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBxX01MRWA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcInFfTUxFXCIsIHVuZGVmaW5lZF9tc2cgPSBcIk1ha2Ugc3VyZSB0byBub3QgcmVtb3ZlIGBxX01MRWAhXCIpICU+JWNoZWNrX2VxdWFsKGluY29ycmVjdF9tc2c9cV9NTEVtc2cpXG5zdWNjZXNzX21zZyhcIkV4Y2VsbGVudCBqb2IhIFdoZW4gY29tcGFyaW5nIHRoZSBtZWFuIHRvIHRoZSB2YXJpYW5jZSBmb3IgdGhlIGJhc2ljIGNvdW50IGRpc3RyaWJ1dGlvbnMsIHRoZSB2YXJpYW5jZSBpcyBzbWFsbGVyIGZvciB0aGUgYmlub21pYWwsIGVxdWFsIGZvciB0aGUgUG9pc3NvbiwgYW5kIGxhcmdlciBmb3IgdGhlIG5lZ2F0aXZlIGJpbm9taWFsLiBTbyBjb21wYXJpbmcgdGhlIG1lYW4gdG8gdGhlIHZhcmlhbmNlIGlzIGEgcXVpY2sgc2lnbmFsIHRoYXQgaGVscHMgdG8gc3BlY2lmeSBhIGNvdW50IGRpc3RyaWJ1dGlvbi5cIikiLCJoaW50IjoiV2hlbiBpbnRlcnByZXRpbmcgdGhlIGNvZGUsIHRoaXMgZXhlcmNpc2UgdXNlcyB0aGUgbW9yZSBiYXNpYyBsaWtlbGlob29kLCBpbiBjb250cmFzdCB0byB0aGUgbW9yZSBjb21tb24gbG9nLWxpa2VsaWhvb2QgZnVuY3Rpb24uIEZ1cnRoZXIsIGZvciBhIGZpeGVkIDxlbT5tPC9lbT4sIHRoZSA8ZW0+bWxlPC9lbT4gb2YgPGVtPnE8L2VtPiBpcyBzaW1wbHkgdGhlIGF2ZXJhZ2UuIFNvLCB3ZSBvbmx5IG5lZWQgdG8gZG8gb25lIGRpbWVuc2lvbmFsIG9wdGltaXphdGlvbiBldmVuIHRob3VnaCB0aGVyZSBhcmUgdHdvIHBhcmFtZXRlcnMuIn0=
+</div>
+</div>
+<div id="exercise.-fitting-a-negative-binomial-distribution" class="section level3">
+<h3><span class="header-section-number">2.3.5</span> Exercise. Fitting a Negative Binomial Distribution</h3>
+<p><strong>Assignment Text</strong></p>
+<p>In this assignment, you are asked to fit the negative binomial model to a small set of count data, <span class="math inline">\(\{1, 1, 2, 6, 1, 1, 2, 5, 11\}\)</span>. Because <span class="math inline">\(r\)</span>, a parameter of the negative binomial distribution, is a positive real number, it is convenient to use the <code>optimize</code> function for maximizing the <em>reduced</em> likelihood in order to find its <em>mle</em>. It is always advisable to visually confirm the solution by plotting the reduced log-likelihood.</p>
+<p>Note that it is important to check that the sample mean is lower than sample variance for the <em>mle</em> of <span class="math inline">\(r\)</span> to be finite - lest the Poisson is the better model. The data are available in an array <span class="math inline">\(\bf x\)</span> and the array <span class="math inline">\(\bf m.vec\)</span> of Exercise <a href="frequency-modeling.html#Ex:CountDataCompression">2.3.1</a> is also made available.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Develop the reduced log-likelihood function based on the compressed data in the array <span class="math inline">\(\bf m.vec\)</span>.</li>
+<li>The optimization routine will need a range of potential values of <span class="math inline">\(r\)</span>. The illustrative code uses a moment estimator (based on techniques that we will cover formally later in <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-ModelSelection.html#S:MS:NonParEst">Section 4.1.1 of <em>Loss Data Analytics</em></a>).</li>
+<li>Determine the value of <span class="math inline">\(r\)</span> that minimizes the reduced log-likelihood using the function <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/optimize">optimize()</a> (a one dimensional optimization function).</li>
+<li>To check your results, plot the reduced log-likelihood function over a range of <span class="math inline">\(r\)</span>. Superimpose a vertical line at the <em>mle</em>.</li>
+<li>Check to see whether the sample mean is smaller than the sample variance. Is this consistent with the negative binomial distribution?</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNldC5zZWVkKFwiMTIzNFwiKVxueCA8LSBybmJpbm9tKDksMi4zLG11PTQpXG4jeCA8LSBjKDEsICAxLCAgMiwgIDYsICAxLCAgMSwgIDIsICA1LCAxMSlcbm0udmVjIDwtIHJlcCgwLG1heCh4KSsxKVxubS52ZWNbYXMuaW50ZWdlcihuYW1lcyh0YWJsZSh4KSkpKzFdID0gYXMudmVjdG9yKHRhYmxlKHgpKSIsInNhbXBsZSI6InJlZHVjZWRfbG9nbGlrZTwtZnVuY3Rpb24ocil7XG4gICAgc3VtKD8/KmxvZyhkbmJpbm9tKDA6bWF4KHgpLD8/LG11PW1lYW4oeCkpKSlcbn1cblxuIyBFc3RpbWF0b3IgZm9yIHJcbnJfbW9tZW50IDwtIG1lYW4oeCleMi8odmFyKHgpLW1lYW4oeCkpXG5yX01MRSA8LSBvcHRpbWl6ZSg/Pyxsb3dlcj0wLHVwcGVyPTMqcl9tb21lbnQsbWF4aW11bT1UUlVFKSRtYXhpbXVtXG5iZXRhX01MRSA8LSBtZWFuKHgpLz8/XG5jKHJfTUxFLGJldGFfTUxFKVxuXG4gICMgSW1wb3J0YW50IHRvIHZpc3VhbGx5IGNoZWNrIHRoZSBsb2ctbGlrZWxpaG9vZFxucGxvdChyPC0oMTooMzAwKnJfbW9tZW50KSkvMTAwLHNhcHBseSg/Pyw/PyksdHlwZT1cImxcIix4bGFiPVwibVwiLHlsYWI9ZXhwcmVzc2lvbihsKG0sYmFyKHgpL20pKSlcbmFibGluZSh2PT8/LGNvbD1cImdyZWVuXCIpXG5cbmMobWVhbig/PyksIHZhcihjKHgsPz8pKSkiLCJzb2x1dGlvbiI6InJlZHVjZWRfbG9nbGlrZTwtZnVuY3Rpb24ocil7XG4gICAgc3VtKG0udmVjKmxvZyhkbmJpbm9tKDA6bWF4KHgpLHIsbXU9bWVhbih4KSkpKVxufVxuXG4jIEVzdGltYXRvciBmb3Igclxucl9tb21lbnQgPC0gbWVhbih4KV4yLyh2YXIoeCktbWVhbih4KSlcbnJfTUxFIDwtIG9wdGltaXplKHJlZHVjZWRfbG9nbGlrZSxsb3dlcj0wLHVwcGVyPTMqcl9tb21lbnQsbWF4aW11bT1UUlVFKSRtYXhpbXVtXG5iZXRhX01MRSA8LSBtZWFuKHgpL3JfTUxFXG5jKHJfTUxFLGJldGFfTUxFKVxuXG4jIEltcG9ydGFudCB0byB2aXN1YWxseSBjaGVjayB0aGUgbG9nLWxpa2VsaWhvb2RcbnBsb3QocjwtKDE6KDMwMCpyX21vbWVudCkpLzEwMCxzYXBwbHkocixyZWR1Y2VkX2xvZ2xpa2UpLHR5cGU9XCJsXCIseGxhYj1cIm1cIix5bGFiPWV4cHJlc3Npb24obChtLGJhcih4KS9tKSkpXG5hYmxpbmUodj1yX01MRSxjb2w9XCJncmVlblwiKVxuXG5jKG1lYW4oeCksIHZhcihjKHgsbWVhbih4KSkpKSIsInNjdCI6InJfTUxFbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGByX01MRWA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcInJfTUxFXCIsIHVuZGVmaW5lZF9tc2cgPSBcIk1ha2Ugc3VyZSB0byBub3QgcmVtb3ZlIGByX01MRWAhXCIpICU+JWNoZWNrX2VxdWFsKGluY29ycmVjdF9tc2c9cl9NTEVtc2cpXG5iZXRhX01MRW1zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgYmV0YV9NTEVgP1wiXG5leCgpICU+JSBjaGVja19vYmplY3QoXCJiZXRhX01MRVwiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgYmV0YV9NTEVqYCFcIikgJT4lY2hlY2tfZXF1YWwoaW5jb3JyZWN0X21zZz1iZXRhX01MRW1zZylcbnN1Y2Nlc3NfbXNnKFwiU3VwZXJiISBUaGUgaW1wb3J0YW5jZSBvZiBtYXhpbXVtIGxpa2VsaWhvb2QgZXN0aW1hdGlvbiBpcyB2YWx1YWJsZSBpbiBhY3R1YXJpYWwgYXBwbGljYXRpb25zLiBIYXZpbmcgZmFtaWxpYXJpdHkgd2l0aCBmdW5kYW1lbnRhbCBjb25jZXB0cyBzdWNoIGFzIHdvcmtpbmcgd2l0aCByZWR1Y2VkIGxpa2VsaWhvb2RzIGFuZCBwbG90dGluZyBsaWtlbGlob29kIGZ1bmN0aW9ucyBoZWxwcyB0byBkZXZlbG9wIGEgZGVlcCBhcHByZWNpYXRpb24gb2YgdGhpcyBlc3RpbWF0aW9uIGFwcHJvYWNoLlwiKSIsImhpbnQiOiJGb3IgdGhlIG5lZ2F0aXZlIGJpbm9taWFsLCBhdCB0aGUgPGVtPm1sZTwvZW0+LCB3ZSBoYXZlIG9mIDxlbT5yIGJldGE8L2VtPiBpcyBzaW1wbHkgdGhlIGF2ZXJhZ2UuIFNvLCB3ZSBvbmx5IG5lZWQgdG8gZG8gb25lIGRpbWVuc2lvbmFsIG9wdGltaXphdGlvbiBldmVuIHRob3VnaCB0aGVyZSBhcmUgdHdvIHBhcmFtZXRlcnMuIFJldmlldyA8YSBocmVmPVwiaHR0cHM6Ly9vcGVuYWN0dGV4dHMuZ2l0aHViLmlvL0xvc3MtRGF0YS1BbmFseXRpY3MvQy1GcmVxdWVuY3ktTW9kZWxpbmcuaHRtbCNTOmZyZXF1ZW5jeS1kaXN0cmlidXRpb25zLW1sZVwiPlNlY3Rpb24gMi40LjIgb2YgPGVtPkxvc3MgRGF0YSBBbmFseXRpY3M8L2VtPjwvYT4gZm9yIGEgcmVtaW5kZXIuIn0=
+</div>
+</div>
+</div>
+<div id="other-frequency-distributions" class="section level2">
+<h2><span class="header-section-number">2.4</span> Other Frequency Distributions</h2>
+<hr />
+<p>In this section, you learn how to:</p>
+<ul>
+<li>Define the <span class="math inline">\((a,b,1)\)</span> class of frequency distributions and discuss the importance of the recursive relationship underpinning this class of distributions.</li>
+<li>Interpret zero truncated and modified versions of the binomial, Poisson, and negative binomial distributions.</li>
+<li>Compute probabilities using the recursive relationship.</li>
+</ul>
+<hr />
+<div id="video-other-frequency-distributions" class="section level4 unnumbered">
+<h4>Video: Other Frequency Distributions</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_pvbam51r&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_7m9q3vs0" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+</div>
+<div id="overheads-other-frequency-distributions-click-tab-to-view" class="section level4 unnumbered">
+<h4>Overheads: Other Frequency Distributions (Click Tab to View)</h4>
+<div class="tab">
+<button class="tablinks" onclick="openTab(event, 'Sect24A')">A. Why do we need more frequency distributions?</button>
+<button class="tablinks" onclick="openTab(event, 'Sect24B')">B. Heterogeneous Population</button>
+<button class="tablinks" onclick="openTab(event, 'Sect24C')">C. Visualizing Mixtures</button>
+<button class="tablinks" onclick="openTab(event, 'Sect24D')">D. Mixtures in General</button>
+<button class="tablinks" onclick="openTab(event, 'Sect24E')">E. Zero - Modification</button>
+<button class="tablinks" onclick="openTab(event, 'Sect24F')">F. Zero - Modification of (a,b,0) Class</button>
+<button class="tablinks" onclick="openTab(event, 'Sect24G')">G. The (a,b,1) Class</button>
+<button class="tablinks" onclick="openTab(event, 'Sect24H')">H. Review</button>
+</div>
+<div id="Sect24A" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=35" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect24B" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=36" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect24C" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=37" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect24D" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=39" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect24E" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=40" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect24F" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=42" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect24G" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=43" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect24H" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=44" width="100%" height="400"> </iframe>
+</div>
+</div>
+<div id="exercise.-the-ab1-distribution-and-its-moments" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Exercise. The (<em>a,b</em>,1) Distribution and its Moments</h3>
+<p><img src = "ContributorPics/hurdler.png" width = "65" height = "65" style = "float:right; margin-left: 10px; margin-top: 7px" />
+(<em>As a reminder, when you see this symbol, it means that this exercise is challenging and you may wish to skip it on your first pass through the course.</em>)</p>
+<p><strong>Assignment Text</strong></p>
+<p>An earlier exercise used recursions for the <span class="math inline">\((a,b,0)\)</span> class of distributions. The <span class="math inline">\((a,b,1)\)</span> features the same recursion but it starts at <span class="math inline">\(k=2\)</span>. In this assignment you are given <span class="math inline">\(p_1\)</span>, <span class="math inline">\(p_2\)</span> and <span class="math inline">\(p_3\)</span> (in an array <span class="math inline">\(\bf p\)</span>) from an <span class="math inline">\((a,b,1)\)</span> distribution. You are tasked to identify the distribution and compute its mean and variance.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong>. For this exercise, you may find it useful to review matrix operations in <code>R</code>. For one nice resource click <a href="https://www.statmethods.net/advstats/matrix.html">here</a>.</p>
+<ul>
+<li>Setup equation in matrix form and solve for <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. Consider a <span class="math inline">\(2 \times 2\)</span> coefficient matrix <span class="math inline">\(\bf C\)</span> such that
+<span class="math inline">\({\bf C} \left(\begin{array}{c}a \\ b \end{array}\right) = \left(\begin{array}{c}p_3/p_2 \\ p_2/p_1 \end{array}\right)\)</span>. Write an expression for <span class="math inline">\(\bf C\)</span>.</li>
+<li>Invert the matrix <span class="math inline">\(\bf C\)</span> and solve for the vector of coefficients <span class="math inline">\(\left(\begin{array}{c}a \\ b \end{array}\right)\)</span>.</li>
+<li>Use the sign of the coefficients to identify the <span class="math inline">\((a,b,1)\)</span> distribution.</li>
+<li>Use the functional form of this distribution to compute <em>pmf</em> up to <span class="math inline">\(p_{100}\)</span> directly.</li>
+<li>From these generated probabilities, determine the mean and the variance.</li>
+<li>From the functional form, use the closed form expressions for this distribution to check your mean and the variance calculations in the prior step. See in particular <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-SummaryDistributions.html#the-ab1-class">Section 18.2 of <em>Loss Data Analytics</em></a>.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImR1bSA8LSAzLzRcbnAgPC0gYyhkdW0sZHVtXjIvMixkdW1eMy8zKS9sb2coMS1kdW0pIiwic2FtcGxlIjoiQyA8LSBtYXRyaXgoYygxLD8/LD8/LDEvMiksbnJvdz0yLGJ5cm93PVRSVUUpIFxuXG5hYiA8LSBzb2x2ZShDKSUqJWMoPz8scFsyXS9wWzFdKVxuIyBVc2luZyB0aGUgc2lnbiBvZiB0aGUgY29lZmZpY2llbnRzIGlkZW50aWZ5IHRoZSAoYSxiLDEpIGRpc3RyaWJ1dGlvblxuYWJbMl0vYWJbMV1cbiMgVXNlIHRoZSBmdW5jdGlvbmFsIGZvcm0gb2YgdGhpcyBkaXN0cmlidXRpb24gdG8gY29tcHV0ZSBwbWYgdXAgdG8gcF8xMDAgZGlyZWN0bHkgXG5wX2NvbXAgPC0gPz9cbiAgIyBDaGVjayBmb3IgemVyby1tb2RpZmljYXRpb25cbnBbPz9dLXBfY29tcFs/P11cbiMgTWVhbiBhbmQgVmFyaWFuY2VcbmMobXU8LXN1bShwX2NvbXAqKD8/OjEwMCkpLHN1bShwX2NvbXAqKD8/OjEwMCleMiktbXVeMilcbiMgQ2hlY2sgdXNpbmcgY2xvc2VkIGZvcm0gZm9ybXVsYWUgZm9yIHRoZSBmaXJzdCB0d28gbW9tZW50c1xuYyg/Pyw/PykiLCJzb2x1dGlvbiI6IkMgPC0gbWF0cml4KGMoMSwxLzMsMSwxLzIpLG5yb3c9MixieXJvdz1UUlVFKSBcblxuYWIgPC0gc29sdmUoQyklKiVjKHBbM10vcFsyXSxwWzJdL3BbMV0pXG4jIFVzaW5nIHRoZSBzaWduIG9mIHRoZSBjb2VmZmljaWVudHMgaWRlbnRpZnkgdGhlIChhLGIsMSkgZGlzdHJpYnV0aW9uXG4jIFNpbmNlIGE+MCBhbmQgYjwwIGl0IGlzIEVUTkIgb3IgTG9nYXJpdGhtaWM7IGhlbmNlIGNvbXB1dGUgYi9hXG5hYlsyXS9hYlsxXVxuIyBTaW5jZSBhYm92ZSBlcXVhbHMgLTEsIHI9MCBhbmQgaXQgaXMgbG9nYXJpdGhtaWNcbiMgcF9rID0gLTEvbG9nKDEtYSkgYV5rL2tcbnBfY29tcCA8LSAtMS9sb2coMS1hYlsxXSkgKmFiWzFdXihrPC0oMToxMDApKS8oaylcbiMgQ2hlY2sgZm9yIHplcm8tbW9kaWZpY2F0aW9uXG5wWzFdLXBfY29tcFsxXVxuIyBNZWFuIGFuZCBWYXJpYW5jZVxuYyhtdSA8LSBzdW0ocF9jb21wKmspLHN1bShwX2NvbXAqa14yKS1tdV4yKVxuIyBDaGVjayB1c2luZyBmb3JtdWxhZSBvZiBsb2dhcml0aG1pYyBtb21lbnRzXG5jKC0xL2xvZygxLWFiWzFdKSAqYWJbMV0vKDEtYWJbMV0pLC0oYWJbMV1eMithYlsxXSpsb2coMS1hYlsxXSkpLygoMS1hYlsxXSleMioobG9nKDEtYWJbMV0pKV4yKSkiLCJzY3QiOiJDbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBDYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwiQ1wiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgQ2AhXCIpICU+JWNoZWNrX2VxdWFsKGluY29ycmVjdF9tc2c9Q21zZylcbmFibXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBhYmA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcImFiXCIsIHVuZGVmaW5lZF9tc2cgPSBcIk1ha2Ugc3VyZSB0byBub3QgcmVtb3ZlIGBhYmAhXCIpICU+JWNoZWNrX2VxdWFsKGluY29ycmVjdF9tc2c9YWJtc2cpXG5wX2NvbXBtc2cgPC0gXCJEaWQgeW91IGNvcnJlY3RseSBzcGVjaWZ5IHRoZSBvYmplY3QgYHBfY29tcGA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcInBfY29tcFwiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgcF9jb21wYCFcIikgJT4lY2hlY2tfZXF1YWwoaW5jb3JyZWN0X21zZz1wX2NvbXBtc2cpXG5zdWNjZXNzX21zZyhcIlRlcnJpZmljISBXb3JraW5nIHdpdGggbWF0cmljZXMgY2FuIHNhdmUgY29uc2lkZXJhYmxlIHRpbWUgaW4gaGlnaC1kaW1lbnNpb25hbCBhbmFseXRpY3MgcHJvYmxlbXMuXCIpIiwiaGludCI6IldpdGggc21hbGwgbWF0cmljZXMgYW5kIHZlY3RvcnMsIHRyeSB2YXJpb3VzIG9wZXJhdGlvbnMuIFlvdSB3aWxsIGZpbmQgc3VtbWFyaWVzIG9mICg8ZW0+YSxiPC9lbT4sMSkgZGlzdHJpYnV0aW9ucyBpbiA8YSBocmVmPVwiaHR0cHM6Ly9vcGVuYWN0dGV4dHMuZ2l0aHViLmlvL0xvc3MtRGF0YS1BbmFseXRpY3MvQy1TdW1tYXJ5RGlzdHJpYnV0aW9ucy5odG1sI3RoZS1hYjEtY2xhc3NzXCI+U2VjdGlvbiAxOC4xLnMgb2YgPGVtPkxvc3MgRGF0YSBBbmFseXRpY3M8L2VtPjwvYT4ifQ==
+</div>
+</div>
+</div>
+<div id="mixture-distributions" class="section level2">
+<h2><span class="header-section-number">2.5</span> Mixture Distributions</h2>
+<hr />
+<p>In this section, you learn how to:</p>
+<ul>
+<li>Define a mixture distribution when the mixing component is based on a finite number of sub-groups.</li>
+<li>Compute mixture distribution probabilities from mixing proportions and knowledge of the distribution of each subgroup.</li>
+<li>Define a mixture distribution when the mixing component is continuous.</li>
+</ul>
+<hr />
+<div id="video-mixture-distributions" class="section level4 unnumbered">
+<h4>Video: Mixture Distributions</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_8a24c5ar&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_a5yef0t6" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+</div>
+<div id="overheads-mixture-distributions-click-tab-to-view" class="section level4 unnumbered">
+<h4>Overheads: Mixture Distributions (Click Tab to View)</h4>
+<div class="tab">
+<button class="tablinks" onclick="openTab(event, 'Sect25A')">A. Discrete/Finite Mixtures</button>
+<button class="tablinks" onclick="openTab(event, 'Sect25B')">B. Discrete Mixture Probability Mass Function</button>
+<button class="tablinks" onclick="openTab(event, 'Sect25C')">C. Discrete Mixture Example</button>
+<button class="tablinks" onclick="openTab(event, 'Sect25D')">D. Mixture Moments</button>
+<button class="tablinks" onclick="openTab(event, 'Sect25E')">E. Continuous Mixtures</button>
+<button class="tablinks" onclick="openTab(event, 'Sect25F')">F. Continuous Mixtures II</button>
+<button class="tablinks" onclick="openTab(event, 'Sect25G')">G. Review</button>
+</div>
+<div id="Sect25A" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=46" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect25B" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=47" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect25C" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=48" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect25D" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=49" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect25E" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=50" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect25F" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=51" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect25G" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=52" width="100%" height="400"> </iframe>
+</div>
+</div>
+<div id="exercise.-mixtures-of-workers-compensation-claims" class="section level3">
+<h3><span class="header-section-number">2.5.1</span> Exercise. Mixtures of Workers’ Compensation Claims</h3>
+<p><strong>Assignment Text</strong></p>
+<p>You are analyzing a set of workers’ compensation claims (claims that pay in the event of injury at a work-place) and focus on the frequency portion. Suppose that it is known that if claims arise from a low-risk class, such as accountants and actuaries working within “four walls,” that the number of claims follows a Poisson distribution with parameter <span class="math inline">\(\lambda=4\)</span>. However, if claims arise from a high-risk class, such as roofers and lumberjacks, then the number follows a negative binomial distribution with parameters <span class="math inline">\(r=4\)</span> and <span class="math inline">\(\beta=3\)</span>. For a particular firm, you do not know whether it is low or high risk but you do know that probability of being low-risk is <span class="math inline">\(\alpha=0.6\)</span>.</p>
+<p>In this exercise, we will compare the shape of the mixture distribution to the low and high risk distributions.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Determine the probability mass functions for the low and high risk populations for <span class="math inline">\(k=0, \ldots, 20\)</span> possible claim outcomes.</li>
+<li>Compute the corresponding probability mass function for the mixture distribution.</li>
+<li>Plot the mixture distribution with superimposed lines for the low and high risk populations. Use different colors and plotting symbols for the three distributions to help viewers distinguish among them.</li>
+<li>Determine distribution functions for the low, high, and mixture distributions.</li>
+<li>Plot the mixture distribution function with superimposed lines for the low and high risk populations.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJhbHBoYSA8LSAwLjY7IGxhbWJkYSA8LSA/PyAgXG5yIDwtIDQ7ICAgICAgIGJldGEgPC0gPz8gXG5rdmVjIDwtIDA6MjBcblxubG93cmlzayA8LSBkcG9pcyhrdmVjLCBsYW1iZGE9bGFtYmRhKVxuaGlnaHJpc2sgPC0gZG5iaW5vbShrdmVjLCBwcm9iPT8/ICwgc2l6ZSA9ID8/IClcbnBvcHJpc2sgPC0gPz8gXG5cbnBsb3Qoa3ZlYywgcG9wcmlzaywgeWxpbSA9IGMoMCwgLjIpLCB4bGFiID0gXCJOdW1iZXIgb2YgQ2xhaW1zXCIsIHlsYWIgPSBcIlByb2JhYmlsaXR5XCIsIHR5cGUgPSBcImJcIiwgcGNoID0gMTkpXG5saW5lcyhrdmVjLCBsb3dyaXNrLCBjb2wgPSBcImJsdWVcIiwgdHlwZSA9IFwiYlwiKVxubGluZXMoa3ZlYywgaGlnaHJpc2ssIGNvbCA9IFwicmVkXCIsIHR5cGUgPSBcImJcIiwgcGNoID0gMjMpXG5cbmxvd3Jpc2sucCA8LSBwcG9pcyhrdmVjLCBsYW1iZGE9bGFtYmRhKVxuaGlnaHJpc2sucCA8LSBwbmJpbm9tKGt2ZWMsIHByb2I9Pz8gLCBzaXplID0gPz8gKVxucG9wcmlzay5wIDwtID8/IFxuXG5wbG90KGt2ZWMsIHBvcHJpc2sucCwgeWxpbSA9IGMoMCwgMSksIHhsYWIgPSBcIk51bWJlciBvZiBDbGFpbXNcIiwgeWxhYiA9IFwiRGlzdHJpYnV0aW9uIEZ1bmN0aW9uXCIsIHR5cGUgPSBcImJcIiwgcGNoID0gMTkpXG5saW5lcyhrdmVjLCBsb3dyaXNrLnAsIGNvbCA9IFwiYmx1ZVwiLCB0eXBlID0gXCJiXCIpXG5saW5lcyhrdmVjLCBoaWdocmlzay5wLCBjb2wgPSBcInJlZFwiLCB0eXBlID0gXCJiXCIsIHBjaCA9IDIzKSIsInNvbHV0aW9uIjoiYWxwaGEgPC0gMC42OyBsYW1iZGEgPC0gNDsgXG5yIDwtIDQ7ICAgICAgIGJldGEgPC0gM1xua3ZlYyA8LSAwOjIwXG5cbmxvd3Jpc2sgPC0gZHBvaXMoa3ZlYywgbGFtYmRhPWxhbWJkYSlcbmhpZ2hyaXNrIDwtIGRuYmlub20oa3ZlYywgcHJvYj0xLygxK2JldGEpLCBzaXplID0gcilcbnBvcHJpc2sgPC0gYWxwaGEqbG93cmlzayArICgxLWFscGhhKSpoaWdocmlza1xuXG5wbG90KGt2ZWMsIHBvcHJpc2ssIHlsaW0gPSBjKDAsIC4yKSwgeGxhYiA9IFwiTnVtYmVyIG9mIENsYWltc1wiLCB5bGFiID0gXCJQcm9iYWJpbGl0eVwiLCB0eXBlID0gXCJiXCIsIHBjaCA9IDE5KVxubGluZXMoa3ZlYywgbG93cmlzaywgY29sID0gXCJibHVlXCIsIHR5cGUgPSBcImJcIilcbmxpbmVzKGt2ZWMsIGhpZ2hyaXNrLCBjb2wgPSBcInJlZFwiLCB0eXBlID0gXCJiXCIsIHBjaCA9IDIzKVxuXG5sb3dyaXNrLnAgPC0gcHBvaXMoa3ZlYywgbGFtYmRhPWxhbWJkYSlcbmhpZ2hyaXNrLnAgPC0gcG5iaW5vbShrdmVjLCBwcm9iPTEvKDErYmV0YSksIHNpemUgPSByKVxucG9wcmlzay5wIDwtIGFscGhhKmxvd3Jpc2sucCArICgxLWFscGhhKSpoaWdocmlzay5wXG5cbnBsb3Qoa3ZlYywgcG9wcmlzay5wLCB5bGltID0gYygwLCAxKSwgeGxhYiA9IFwiTnVtYmVyIG9mIENsYWltc1wiLCB5bGFiID0gXCJEaXN0cmlidXRpb24gRnVuY3Rpb25cIiwgdHlwZSA9IFwiYlwiLCBwY2ggPSAxOSlcbmxpbmVzKGt2ZWMsIGxvd3Jpc2sucCwgY29sID0gXCJibHVlXCIsIHR5cGUgPSBcImJcIilcbmxpbmVzKGt2ZWMsIGhpZ2hyaXNrLnAsIGNvbCA9IFwicmVkXCIsIHR5cGUgPSBcImJcIiwgcGNoID0gMjMpIiwic2N0IjoibGFtYmRhbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBsYW1iZGFgP1wiXG5leCgpICU+JSBjaGVja19vYmplY3QoXCJsYW1iZGFcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYGxhbWJkYWAhXCIpICU+JWNoZWNrX2VxdWFsKGluY29ycmVjdF9tc2c9bGFtYmRhbXNnKVxuYmV0YW1zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgYmV0YWA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcImJldGFcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYGJldGFgIVwiKSAlPiVjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPWJldGFtc2cpXG5oaWdocmlza21zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgaGlnaHJpc2tgP1wiXG5leCgpICU+JSBjaGVja19vYmplY3QoXCJoaWdocmlza1wiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgaGlnaHJpc2tgIVwiKSAlPiVjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPWhpZ2hyaXNrbXNnKVxucG9wcmlza21zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgcG9wcmlza2A/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcInBvcHJpc2tcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYHBvcHJpc2tgIVwiKSAlPiVjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPXBvcHJpc2ttc2cpXG5oaWdocmlzay5wbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBoaWdocmlzay5wYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwiaGlnaHJpc2sucFwiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgaGlnaHJpc2sucGAhXCIpICU+JWNoZWNrX2VxdWFsKGluY29ycmVjdF9tc2c9aGlnaHJpc2sucG1zZylcbnBvcHJpc2sucG1zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgcG9wcmlzay5wYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwicG9wcmlzay5wXCIsIHVuZGVmaW5lZF9tc2cgPSBcIk1ha2Ugc3VyZSB0byBub3QgcmVtb3ZlIGBwb3ByaXNrLnBgIVwiKSAlPiVjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPXBvcHJpc2sucG1zZylcblxuc3VjY2Vzc19tc2coXCJTdXBlcmIhIERldGVybWluaW5nIG1peHR1cmUgZGlzdHJpYnV0aW9ucyBhcmUgdXN1YWxseSBkaWZmaWN1bHQgdG8gZG8gYnkgaGFuZCBidXQgYXJlIHN0cmFpZ2h0Zm9yd2FyZCB3aXRoIGNvbXB1dGF0aW9uYWwgdG9vbHMgc3VjaCBhcyAnUicuIEluc3VyYW5jZSBhbmFseXN0cyBjb250aW51YWxseSBmcmV0IGFib3V0IHVub2JzZXJ2ZWQgY2hhcmFjdGVyaXN0aWNzIChzdWNoIGFzIGxvdyB2ZXJzdXMgaGlnaCByaXNrKSBhbmQgbWl4dHVyZSBkaXN0cmlidXRpb25zIGlzIGEgdG9vbCBvZnRlbiB1c2VkIHRvIGhlbHAgcXVhbnRpZnkgdGhlc2UgdW5vYnNlcnZlZCBwaWVjZXMgb2YgaW5mb3JtYXRpb24uIFwiKSIsImhpbnQiOiJTZWUgdGhlIDxhIGhyZWY9XCJodHRwczovL29wZW5hY3R0ZXh0cy5naXRodWIuaW8vTG9zcy1EYXRhLUFuYWx5dGljcy9DLVN1bW1hcnlEaXN0cmlidXRpb25zLmh0bWwjZGlzY3JldGUtZGlzdHJpYnV0aW9uc1wiPmFwcGVuZGl4IG9mIHRoZSBMb3NzIERhdGEgQW5hbHl0aWNzPC9hPiBcbiAgIGZvciBjb2RlIG9uIHVzaW5nIHBhcmFtZXRlcnMgaW4gUi4ifQ==
+</div>
+</div>
+<div id="exercise.-finite-number-of-mixture-distributions" class="section level3">
+<h3><span class="header-section-number">2.5.2</span> Exercise. Finite Number of Mixture Distributions</h3>
+<p><strong>Assignment Text</strong></p>
+<p>The following describes a “classic” actuarial exam problem. We use this problem to motivate an introduction of more complex techniques for calculating mixture distributions. Unlike classic exam problems designed for hand calculations, these techniques can readily be extended to a large number of unobserved sub-populations.</p>
+<p>In a certain town the number of common colds an individual will get in a year follows a Poisson distribution that depends on the individual’s age and smoking status:</p>
+<p><span class="math display">\[
+{\small
+\begin{array}{l|cc} \hline
+&amp; \text{Proportion of population} &amp; \text{Mean number of colds} \\ \hline
+  \text{Children} &amp;        0.3 &amp;          3 \\
+\text{Adult Non-Smokers} &amp;        0.6 &amp;          1 \\
+\text{Adult Smokers} &amp;        0.1 &amp;          4 \\\hline
+\end{array}
+}
+\]</span></p>
+<p>In this exercise, we will use <code>R</code> to calculate the probabilities that a randomly drawn person has a cold in a year.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Create a vector of proportions <span class="math inline">\(\alpha\)</span> and a vector of Poisson parameters <span class="math inline">\(\lambda\)</span>.</li>
+<li>Use the function <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Poisson">dpois()</a> to obtain a vector of Poisson probability mass function (pmf) with different means for <span class="math inline">\(k=3\)</span> colds. Then, use the matrix operation <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/matmult">%*%</a> to obtain the mixture <em>pmf</em> as the inner product of the two vectors containing the Poisson pmfs and population percentages.</li>
+<li>In the same way, use the <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Poisson">ppois()</a> function to compute the probability of at most 3 colds within a year.</li>
+<li>Now, consider <span class="math inline">\(k=0, \ldots, 8\)</span> colds during a year. For each value of <span class="math inline">\(k\)</span>, determine the probability of <span class="math inline">\(k\)</span> colds within a year.</li>
+<li>Provide a <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/barplot">barplot()</a> of the distribution of number of colds during a year over the range <span class="math inline">\(k=0, \ldots, 8\)</span>.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJhbHBoYSA8LSBjKDAuMywgMC42LCAwLjEpXG5sYW1iZGEudmVjPC0gPz9cblxuIyBQcm9iYWJpbGl0eSBvZiBoYXZpbmcgMyBjb21tb24gY29sZHMgaW4gYSB5ZWFyXG5ieXJpc2sgPC0gZHBvaXMoPz8sIGxhbWJkYT1sYW1iZGEudmVjKVxuYnlyaXNrICAlKiUgYWxwaGFcblxuIyBQcm9iYWJpbGl0eSBvZiBhdCBtb3N0IDMgY29tbW9uIGNvbGRzIGluIGEgeWVhclxucHBvaXMocT0zLCBsYW1iZGE9bGFtYmRhLnZlYykgJSolID8/XG5cbmt2ZWMgPSAwOjhcbnByb2JzID0gcmVwKDAsbGVuZ3RoKGt2ZWMpKVxuZm9yIChpbmRleCBpbiBrdmVjKSB7cHJvYnNbaW5kZXgrMV0gPSA/PyhpbmRleCwgbGFtYmRhPWxhbWJkYS52ZWMpICUqJSBhbHBoYX1cblxuYmFycGxvdChwcm9icywgeGxhYiA9IFwiTnVtYmVyIG9mIENsYWltc1wiLCBuYW1lcy5hcmcgPSBrdmVjKSIsInNvbHV0aW9uIjoiYWxwaGEgPC0gYygwLjMsIDAuNiwgMC4xKVxubGFtYmRhLnZlYzwtIGMoMywgMSwgNClcbmJ5cmlzayA8LSBkcG9pcygzLCBsYW1iZGE9bGFtYmRhLnZlYylcbiMgUHJvYmFiaWxpdHkgb2YgaGF2aW5nIDMgY29tbW9uIGNvbGRzIGluIGEgeWVhclxuYnlyaXNrICAlKiUgYWxwaGFcblxuIyBQcm9iYWJpbGl0eSBvZiBhdCBtb3N0IDMgY29tbW9uIGNvbGRzIGluIGEgeWVhclxucHBvaXMocT0zLCBsYW1iZGE9bGFtYmRhLnZlYykgJSolIGFscGhhXG5cbmt2ZWMgPSAwOjhcbnByb2JzID0gcmVwKDAsbGVuZ3RoKGt2ZWMpKVxuZm9yIChpbmRleCBpbiBrdmVjKSB7cHJvYnNbaW5kZXgrMV0gPSAgZHBvaXMoaW5kZXgsIGxhbWJkYT1sYW1iZGEudmVjKSAlKiUgYWxwaGF9XG5cbmJhcnBsb3QocHJvYnMsIHhsYWIgPSBcIk51bWJlciBvZiBDbGFpbXNcIiwgbmFtZXMuYXJnID0ga3ZlYykiLCJzY3QiOiJsYW1iZGEudmVjbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBsYW1iZGEudmVjYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwibGFtYmRhLnZlY1wiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgbGFtYmRhLnZlY2AhXCIpICU+JWNoZWNrX2VxdWFsKGluY29ycmVjdF9tc2c9bGFtYmRhLnZlY21zZylcbmJ5cmlza21zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgYnlyaXNrYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwiYnlyaXNrXCIsIHVuZGVmaW5lZF9tc2cgPSBcIk1ha2Ugc3VyZSB0byBub3QgcmVtb3ZlIGBieXJpc2tgIVwiKSAlPiVjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPWJ5cmlza21zZylcblxuc3VjY2Vzc19tc2coXCJTdXBlcmIhIFRoaXMgZXhlcmNpc2UgZXhwbGljaXRseSBpbmNsdWRlcyBvbmx5IHRocmVlIHN1Yi1wb3B1bGF0aW9ucyBidXQgaG9wZWZ1bGx5IGl0IGlzIGFwcGFyZW50IGhvdyBpdCBjb3VsZCBiZSBleHRlbmRlZCB0byBhIGxhcmdlIG51bWJlciBvZiBzdWItcG9wdWxhdGlvbnMuIEluIHRoZSBuZXh0IGV4ZXJjaXNlLCB3ZSBjb25zaWRlciBhbiBpbmZpbml0ZSBudW1iZXIhXCIpIiwiaGludCI6IlRha2Ugc29tZSB0aW1lIHRvIGV4cGxvcmUgdGhlIG9ubGluZSA8Y29kZT5SPC9jb2RlPiBkb2N1bWVudGF0aW9uLiJ9
+</div>
+</div>
+<div id="exercise.-gamma-mixture-of-poissons" class="section level3">
+<h3><span class="header-section-number">2.5.3</span> Exercise. Gamma Mixture of Poissons</h3>
+<p><img src = "ContributorPics/hurdler.png" width = "65" height = "65" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
+<p><strong>Assignment Text</strong></p>
+<p>For a population, suppose that each risk has a Poisson number of claims with a parameter <span class="math inline">\(\lambda\)</span> that is specific to that risk (an infinite number of risk classes). We can think of the risk parameter as following a distribution and so is itself random, denoted as a capital <span class="math inline">\(\Lambda\)</span>. A mathematically convenient assumption is to assume that the risk parameter follows a gamma distribution. That is, as we have learned from the text, a gamma mixture of Poissons turns out to have a negative binomial distribution. More precisely, if <span class="math inline">\(N|\Lambda \sim\)</span> Poisson<span class="math inline">\((\Lambda)\)</span> and <span class="math inline">\(\Lambda \sim \text{gamma}(\alpha, \theta)\)</span>, then <span class="math inline">\(N \sim \text{Negative Binomial}\)</span> <span class="math inline">\((r = \alpha, \beta = \theta)\)</span>. For example, one can determine the probability mass function of <span class="math inline">\(N\)</span> as</p>
+<p><span class="math display">\[
+\Pr(N=k) = \int^{\infty}_0 e^{-\lambda} \frac{\lambda^k}{k!} ~ g(\lambda;\alpha, \beta = \theta )~ d \lambda, 
+\]</span></p>
+<p>where <span class="math inline">\(g(\cdot;\alpha, \beta = \theta )\)</span> is a gamma density. The proof of this result is in the text; here, we check it using <code>R</code>, in the special case of <span class="math inline">\(k=3\)</span>, <span class="math inline">\(\alpha =3\)</span>, and <span class="math inline">\(\theta = 4\)</span>.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Establish the parameter values for <span class="math inline">\(\alpha =3\)</span> and <span class="math inline">\(\theta = 4\)</span>.</li>
+<li>Express the conditional Poisson mass function as a function of the parameter <span class="math inline">\(\lambda\)</span> (not the number of outcomes <span class="math inline">\(k\)</span>) (called “lambda.arg” for the lambda argument in the following sample code).</li>
+<li>Express the product of the conditional Poisson mass function and the gamma density as a function of <span class="math inline">\(\lambda\)</span>.</li>
+<li><a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/integrate">integrate()</a> this product over values of <span class="math inline">\(\lambda\)</span>. Check the result by using the negative binomial probability mass function.</li>
+<li>Repeat this process using distribution functions in lieu of probability mass functions. Specifically, express the product of the conditional Poisson <strong>distribution</strong> function and the gamma <strong>density</strong> as a function of <span class="math inline">\(\lambda\)</span>. Integrate this and check the result using the negative binomial <strong>distribution</strong> function.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJhbHBoYSA9ID8/OyAgICAgdGhldGEgPSA/P1xuXG5wZGZQb2lzc29uIDwtIGZ1bmN0aW9uKGxhbWJkYS5hcmcpe2Rwb2lzKDMsIGxhbWJkYT1sYW1iZGEuYXJnKX1cbnBkZmdhbVBvaSA8LSBmdW5jdGlvbihsYW1iZGEuYXJnKXtkZ2FtbWEobGFtYmRhLmFyZywgc2hhcGUgPSBhbHBoYSwgc2NhbGUgPSB0aGV0YSkqcGRmUG9pc3NvbihsYW1iZGEuYXJnKX1cbmludGVncmF0ZShwZGZnYW1Qb2ksIGxvd2VyID0gMCwgdXBwZXIgPSBJbmYpJHZhbHVlIFxuXG5kbmJpbm9tKDMsIHByb2I9MS8oMSt0aGV0YSksIHNpemUgPSBhbHBoYSlcblxucGRmZ2FtUG9pLnAgPC0gZnVuY3Rpb24obGFtYmRhLmFyZyl7ZGdhbW1hKD8/LCBzaGFwZSA9IGFscGhhLCBzY2FsZSA9IHRoZXRhKSpwcG9pcygzLCBsYW1iZGE9Pz8pfVxuaW50ZWdyYXRlKHBkZmdhbVBvaS5wLCBsb3dlciA9IDAsIHVwcGVyID0gPz8pJHZhbHVlIFxuXG5wbmJpbm9tKD8/LCBwcm9iPT8/LCBzaXplID0gPz8pIiwic29sdXRpb24iOiJhbHBoYSA9IDNcbnRoZXRhID0gNFxuXG5wZGZQb2lzc29uIDwtIGZ1bmN0aW9uKGxhbWJkYS5hcmcpe2Rwb2lzKDMsIGxhbWJkYT1sYW1iZGEuYXJnKX1cbnBkZmdhbVBvaSA8LSBmdW5jdGlvbihsYW1iZGEuYXJnKXtkZ2FtbWEobGFtYmRhLmFyZywgc2hhcGUgPSBhbHBoYSwgc2NhbGUgPSB0aGV0YSkqcGRmUG9pc3NvbihsYW1iZGEuYXJnKX1cbmludGVncmF0ZShwZGZnYW1Qb2ksIGxvd2VyID0gMCwgdXBwZXIgPSBJbmYpJHZhbHVlIFxuXG5kbmJpbm9tKDMsIHByb2I9MS8oMSt0aGV0YSksIHNpemUgPSBhbHBoYSlcblxucGRmZ2FtUG9pLnAgPC0gZnVuY3Rpb24obGFtYmRhLmFyZyl7ZGdhbW1hKGxhbWJkYS5hcmcsIHNoYXBlID0gYWxwaGEsIHNjYWxlID0gdGhldGEpKnBwb2lzKDMsIGxhbWJkYT1sYW1iZGEuYXJnKX1cbmludGVncmF0ZShwZGZnYW1Qb2kucCwgbG93ZXIgPSAwLCB1cHBlciA9IEluZikkdmFsdWUgXG5cbnBuYmlub20oMywgcHJvYj0xLygxK3RoZXRhKSwgc2l6ZSA9IGFscGhhKSIsInNjdCI6ImFscGhhbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBhbHBoYWA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcImFscGhhXCIsIHVuZGVmaW5lZF9tc2cgPSBcIk1ha2Ugc3VyZSB0byBub3QgcmVtb3ZlIGBhbHBoYWAhXCIpICU+JWNoZWNrX2VxdWFsKGluY29ycmVjdF9tc2c9YWxwaGFtc2cpXG50aGV0YW1zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgdGhldGFgP1wiXG5leCgpICU+JSBjaGVja19vYmplY3QoXCJ0aGV0YVwiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgdGhldGFgIVwiKSAlPiVjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPXRoZXRhbXNnKVxucGRmZ2FtUG9pLnBtc2cgPC0gXCJEaWQgeW91IGNvcnJlY3RseSBzcGVjaWZ5IHRoZSBvYmplY3QgYHBkZmdhbVBvaS5wYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwicGRmZ2FtUG9pLnBcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYHBkZmdhbVBvaS5wYCFcIikgJT4lY2hlY2tfZXF1YWwoaW5jb3JyZWN0X21zZz1wZGZnYW1Qb2kucG1zZylcbnBuYmlub21tc2cgPC0gXCJDaGVjayB0aGUgcGFyYW1ldGVycyBvZiB0aGUgbmVnYXRpdmUgYmlub21pYWwgZGlzdHJpYnV0aW9uLlwiXG5leCgpICU+JSBjaGVja19mdW5jdGlvbihcInBuYmlub21cIikgJT4lIGNoZWNrX3Jlc3VsdCgpICU+JSBjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPXBuYmlub21tc2cpXG5cbnN1Y2Nlc3NfbXNnKFwiRXhjZWxsZW50ISBBbiBpbXBvcnRhbnQgc3RyZW5ndGggb2YgdGhpcyBjb21wdXRhdGlvbmFsIGFwcHJvYWNoIChhcyB3ZSB3aWxsIHNlZSBtb3JlIGluIHRoZSBCYXllc2lhbiBzZWN0aW9uKSBpcyB0aGF0IHdlIG5vIGxvbmdlciBhcmUgbGltaXRlZCB0byBzaW1wbHkgZ2FtbWEgbWl4aW5nIGRpc3RyaWJ1dGlvbnMuIEdhbW1hcyBhcmUgdGVycmlmaWMgZm9yIGdldHRpbmcgY2xvc2VkIGZvcm0gbmVnYXRpdmUgYmlub21pYWwgZGlzdHJpYnV0aW9ucyBidXQsIGlmIHdlIG9ubHkgd2FudCBudW1lcmljYWwgcmVzdWx0cywgdGhlbiB3ZSBoYXZlIG1hbnkgbW9yZSBjaG9pY2VzLlwiKSIsImhpbnQiOiJGb3IgdGhlIGxhc3QgcGFydCBvZiB0aGlzIHByb2JsZW0sIGl0IGlzIGVhc3kgdG8gZ2V0IGNvbmZ1c2VkIGFib3V0IHdoaWNoIGlzIGEgZGYgYW5kIHdoaWNoIGlzIGEgPGVtPnBtZjwvZW0+IChvciA8ZW0+cGRmPC9lbT4pLiBSZW1lbWJlciwgd2UgYXJlIGludGVncmF0aW5nIG92ZXIgZGlmZmVyZW50IHZhbHVlcyBvZiBsYW1iZGEgYW5kIHRoaXMgZGlzdHJpYnV0aW9uIGlzIGRldGVybWluZWQgYnkgdGhlIGdhbW1hIHByb2Nlc3MuIFNvLCB0aGUgZ2FtbWEgc3RheXMgYXMgYSA8ZW0+cGRmPC9lbT4uIn0=
+</div>
+</div>
+</div>
+<div id="goodness-of-fit" class="section level2">
+<h2><span class="header-section-number">2.6</span> Goodness of Fit</h2>
+<hr />
+<p>In this section, you learn how to:</p>
+<ul>
+<li>Calculate a goodness of fit statistic to compare a hypothesized discrete distribution to a sample of discrete observations.</li>
+<li>Compare the statistic to a reference distribution to assess the adequacy of the fit.</li>
+</ul>
+<hr />
+<div id="video-goodness-of-fit" class="section level4 unnumbered">
+<h4>Video: Goodness of Fit</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_svaw2bgx&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_1bvm4vxr" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+</div>
+<div id="overheads-goodness-of-fit-click-tab-to-view" class="section level4 unnumbered">
+<h4>Overheads: Goodness of Fit (Click Tab to View)</h4>
+<div class="tab">
+<button class="tablinks" onclick="openTab(event, 'Sect26A')">A. The Goodness of Fit Problem</button>
+<button class="tablinks" onclick="openTab(event, 'Sect26B')">B. Example: Singapore Automobile Data</button>
+<button class="tablinks" onclick="openTab(event, 'Sect26C')">C. Fitting a Poisson</button>
+<button class="tablinks" onclick="openTab(event, 'Sect26D')">D. Adequacy of the Poisson Model</button>
+</div>
+<div id="Sect26A" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=54" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect26B" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=55" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect26C" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=56" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect26D" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap2.pdf#page=57" width="100%" height="400"> </iframe>
+</div>
+</div>
+<div id="exercise.-goodness-of-fit-zero-modified-poisson" class="section level3">
+<h3><span class="header-section-number">2.6.1</span> Exercise. Goodness of Fit: Zero-Modified Poisson</h3>
+<p><img src = "ContributorPics/hurdler.png" width = "65" height = "65" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
+<p><strong>Assignment Text</strong></p>
+<p>A dataset pertaining to a 1993 portfolio of 7,483 automobile insurance policies from a major Singaporean insurance company that contains several characteristics to explain automobile claim frequency is provided by the General Insurance Association of Singapore. The claims frequency is contained in the field <code>Clm_Count</code>, and the data set has already been read into a data frame called <code>Insample</code> and made available to you. You can learn more about the data set at <a href="https://instruction.bus.wisc.edu/jfrees/jfreesbooks/Regression%20Modeling/BookWebDec2010/DataDescriptions.pdf">Singapore Auto Claims</a> (see description of Table 19: Singapore Auto Claims on page 21).</p>
+<p>In this assignment, you are asked to fit a zero-modified Poisson using the <em>mle</em> method and test the goodness of fit. In a sense, it is a continuation of the example discussed in <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-Frequency-Modeling.html#S:goodness-of-fitt">Section 2.7 of <em>Loss Data Analytics</em></a> where the inadequacy of the Poisson model was observed.</p>
+<p>The <em>mle</em> of <span class="math inline">\(p_0\)</span> is simply the number of zeros divided by the sample size. The <em>mle</em> of <span class="math inline">\(\lambda\)</span> turns out to be the solution of the equation</p>
+<p><span class="math display">\[
+\frac{{\lambda}}{1-\exp({-\lambda})}=\frac{\sum_{k\geq0} k \cdot m_k}{n-m_0}.
+\]</span></p>
+<p>You can learn more about the development of the <em>mle</em> below.</p>
+<h5 style="text-align: center;">
+<a id="displayTheory.MLECalc.1" href="javascript:toggleTheory('toggleTheory.MLECalc.1','displayCode.MLECalc.1');"><i><strong>Verify Development of the MLE derivation for zero-modified Poisson</strong></i></a>
+</h5>
+<div id="toggleTheory.MLECalc.1" style="display: none">
+<p><strong>MLE derivation for zero-modified Poisson: </strong> The zero-modified Poisson is a type of <span class="math inline">\((a,b,1)\)</span> distribution that has two parameters. This is seen by the form of its <em>pmf</em>,
+<span class="math display">\[
+ p_k:=\frac{(1-p_0)}{1-\exp(-\lambda)} \exp(-\lambda) \frac{\lambda^k}{k!}, k=1,2,\ldots,
+\]</span>
+with <span class="math inline">\(p_0\in[0,1]\)</span> and <span class="math inline">\(\lambda&gt;0\)</span>. The <em>nice</em> part of this two-parameter family is that the likelihood factorizes into two parts which are solely a function of exactly a single parameter - one corresponding to <span class="math inline">\(p_0\)</span> and the other to <span class="math inline">\(\lambda\)</span>. This is shown below:</p>
+<p><span class="math display">\[
+L(p_0,\lambda)= \underbrace{\left(p_0^{m_0} (1-p_0)^{n-m_0}\right)}_{\hbox{$p_0$-part}}\underbrace{\left( (1-\exp(-\lambda))^{-(n-m_0)} \lambda^{\sum_{k\geq1} km_k}\right)}_{\hbox{$\lambda$-part}} \underbrace{\left(\prod_{k\geq 1} (k!)^{m_k}\right)^{-1}}_\hbox{Constant} .
+\]</span></p>
+<p>The above observation implies maximizing the likelihood with respect to both the parameters can be reduced to two one-variable maximization problems. The first part is precisely a Bernoulli likelihood, the maximization results in the <em>mle</em> of <span class="math inline">\(p_0\)</span> given by <span class="math inline">\(\hat{p_0}=m_0/n\)</span>. Maximizing the second part implies that the <em>mle</em> <span class="math inline">\(\hat{\lambda}\)</span> satisfies,</p>
+<p><span class="math display">\[
+\frac{\hat{\lambda}}{1-\exp(\hat{-\lambda})}=\frac{\sum_{k\geq0} k \cdot m_k}{n-m_0}.
+\]</span>
+Observe that the right hand side equals <span class="math inline">\(\bar{x}/(1-\hat{p_0})\)</span>. As an aside, the latter being the empirical mean of positive counts and <span class="math inline">\(\frac{{\lambda}}{1-\exp({-\lambda})}\)</span> its population analog lend a method-of-moments interpretation for the <em>mle</em>. Computing <span class="math inline">\(\hat{\lambda}\)</span> then reduces to solving the equation
+<span class="math display">\[
+\frac{{\lambda}}{1-\exp({-\lambda})}=\frac{\sum_{k\geq0} k \cdot m_k}{n-m_0}.
+\]</span>
+Because the left-hand side is a strictly increasing function (show this using calculus and the fact that <span class="math inline">\(e^x\geq 1+x\)</span>; otherwise, see the plot of the function below) on <span class="math inline">\([0,\infty)\)</span> assuming a value of <span class="math inline">\(1\)</span> at <span class="math inline">\(0\)</span> and increasing to infinity, and the right-hand side is at least <span class="math inline">\(1\)</span> (Why?), there is a unique solution to the above equation. In other words, <span class="math inline">\(\hat{\lambda}\)</span> is well-defined.</p>
+<p><img src="LDAShortCourse_files/figure-html/unnamed-chunk-96-1.png" width="288" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>To get a feel for the data, start by generating the frequency table.</li>
+<li>Store distinct claim counts observed in array named values.</li>
+<li>Store the frequency of claim counts in <span class="math inline">\(\bf m.vec\)</span>.</li>
+<li>Calculate sample mean of claim counts and the <em>mle</em> for <span class="math inline">\(p_0\)</span>.</li>
+<li>Code the function that provides the framework for determining the <em>mle</em> of <span class="math inline">\(\lambda\)</span></li>
+<li>Find the <em>mle</em> of <span class="math inline">\(\lambda\)</span> by solving for the root of the function using <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/uniroot">uniroot()</a>. (This function searches the interval from lower to upper for a root (i.e., zero) of the function f with respect to its first argument.)</li>
+<li>Construct a 2 by 1 vector containing the observed and estimated probabilities. The five bins are <span class="math inline">\(\{0\}, \{1\},\)</span> <span class="math inline">\(\{2\}, \{3\}, \{4,5,...\}\)</span>.</li>
+<li>Use a barplot to compare observed and estimated probabilities.</li>
+<li>Compute the chi-square statistic and the 95th percentile of the appropriate chi- square distribution.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6IkluU2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0RGV2L0xEQUNvdXJzZTEvbWFpbi9EYXRhL1NpbmdhcG9yZUF1dG8uY3N2XCIsIGhlYWRlcj1ULG5hLnN0cmluZ3M9YyhcIi5cIiksc3RyaW5nc0FzRmFjdG9ycz1GQUxTRSkiLCJzYW1wbGUiOiJ0YWJsZShJblNhbXBsZSQ/PylcbiMgU3RvcmUgZGlzdGluY3QgY2xhaW0gY291bnRzIG9ic2VydmVkIGluIGFycmF5IG5hbWVkIHZhbHVlc1xudmFsdWVzIDwtIGFzLmludGVnZXIobmFtZXModGFibGUoPz8pKSlcbiMgU3RvcmUgdGhlIGZyZXF1ZW5jeSBvZiBjbGFpbSBjb3VudHMgaW4gbS52ZWNcbm0udmVjIDwtIGFzLnZlY3Rvcih0YWJsZSg/PykpXG4jIENhbGN1bGF0ZSBzYW1wbGUgbWVhbiBvZiBjbGFpbSBjb3VudHNcbnhiYXIgPC0gc3VtKD8/Kj8/KS9zdW0oPz8pXG4jIE1MRSBmb3IgcF8wXG5wXzBfTUxFIDwtIG0udmVjWz8/XS9zdW0oPz8pXG4jIE1MRSBmb3IgbGFtYmRhXG5NTEVfZXFuIDwtIGZ1bmN0aW9uKGxhbSl7XG4gIGlmZWxzZShsYW09PTAsPz8sbGFtLygxLWV4cCgtbGFtKSkpLXhiYXIvKDEtcF8wX01MRSlcbn1cbmxhbWJkYV9NTEUgPC0gdW5pcm9vdCg/PyxjKDAseGJhci8oMS1wXzBfTUxFKSkpJHJvb3RcbiMgQ29uc3RydWN0aW5nIGEgMngxIHZlY3RvciBjb250YWluaW5nIHRoZSBvYnNlcnZlZCBhbmQgZXN0aW1hdGVkIHByb2JhYmlsaXRpZXMgXG4jIFRoZSBmaXZlIGJpbnMgYXJlIHswfSwgezF9LCB7Mn0sIHszfSwgezQsNSwuLi59XG5kYXRhX2ZpdCA8LSBjYmluZChjKG0udmVjL3N1bShtLnZlYyksMCksIGMocF8wX01MRSwoMS1wXzBfTUxFKS8oMS1leHAoLWxhbWJkYV9NTEUpKSpkcG9pcyh2YWx1ZXNbMjpsZW5ndGgodmFsdWVzKV0sbGFtYmRhX01MRSksXG4oMS1wXzBfTUxFKS8oMS1leHAoLWxhbWJkYV9NTEUpKSooMS1leHAoLWxhbWJkYV9NTEUpLXN1bShkcG9pcyh2YWx1ZXNbMjpsZW5ndGgodmFsdWVzKV0sbGFtYmRhX01MRSkpKSApIClcbiNiYXJwbG90XG5iYXJwbG90KHQoZGF0YV9maXQpLG5hbWVzLmFyZz1jKHZhbHVlcyxcIj49NFwiKSx5bGFiPVwiRnJlcXVlbmN5XCIseGxhYj1cIkNvdW50XCIsYmVzaWRlPVQsY29sPWMoXCJibGFja1wiLFwiYmx1ZVwiKSx5bGltPWMoMCwxKSlcbmxlZ2VuZCg1LDAuOCwgYyhcIk9ic2VydmVkXCIsIFwiRml0dGVkXCIpLCBob3JpeiA9IFQsIGNvbD1jKFwiYmxhY2tcIixcImJsdWVcIiksIGZpbGw9YyhcImJsYWNrXCIsXCJibHVlXCIpKVxuIyBDb21wdXRlIHRoZSBjaGktc3F1YXJlIHN0YXRpc3RpY1xuIyBBbmQgOTV0aC0laWxlIG9mIHRoZSBhcHByb3ByaWF0ZSBjaGktIHNxdWFyZSBkaXN0cmlidXRpb25cbmMocWNoaXNxKD8/LD8/KSxzdW0oKGRhdGFfZml0JSolYygxLD8/KSlePz8vZGF0YV9maXRbLD8/XSkqc3VtKD8/KSkiLCJzb2x1dGlvbiI6InRhYmxlKEluU2FtcGxlJENsbV9Db3VudClcbiMgU3RvcmUgZGlzdGluY3QgY2xhaW0gY291bnRzIG9ic2VydmVkIGluIGFycmF5IG5hbWVkIHZhbHVlc1xudmFsdWVzIDwtIGFzLmludGVnZXIobmFtZXModGFibGUoSW5TYW1wbGUkQ2xtX0NvdW50KSkpXG4jIFN0b3JlIHRoZSBmcmVxdWVuY3kgb2YgY2xhaW0gY291bnRzIGluIG0udmVjXG5tLnZlYyA8LSBhcy52ZWN0b3IodGFibGUoSW5TYW1wbGUkQ2xtX0NvdW50KSlcbiMgQ2FsY3VsYXRlIHNhbXBsZSBtZWFuIG9mIGNsYWltIGNvdW50c1xueGJhciA8LSBzdW0odmFsdWVzKm0udmVjKS9zdW0obS52ZWMpXG4jIE1MRSBmb3IgcF8wXG5wXzBfTUxFIDwtIG0udmVjWzFdL3N1bShtLnZlYylcbiMgTUxFIGZvciBsYW1iZGFcbk1MRV9lcW4gPC0gZnVuY3Rpb24obGFtKXtcbiAgaWZlbHNlKGxhbT09MCwxLGxhbS8oMS1leHAoLWxhbSkpKS14YmFyLygxLXBfMF9NTEUpXG59XG5sYW1iZGFfTUxFIDwtIHVuaXJvb3QoTUxFX2VxbixjKDAseGJhci8oMS1wXzBfTUxFKSkpJHJvb3RcbiMgQ29uc3RydWN0aW5nIGEgMngxIHZlY3RvciBjb250YWluaW5nIHRoZSBvYnNlcnZlZCBhbmQgZXN0aW1hdGVkIHByb2JhYmlsaXRpZXMgXG4jIFRoZSBmaXZlIGJpbnMgYXJlIHswfSwgezF9LCB7Mn0sIHszfSwgezQsNSwuLi59XG5kYXRhX2ZpdCA8LSBjYmluZChjKG0udmVjL3N1bShtLnZlYyksMCksICBjKHBfMF9NTEUsKDEtcF8wX01MRSkvKDEtZXhwKC1sYW1iZGFfTUxFKSkqZHBvaXModmFsdWVzWzI6bGVuZ3RoKHZhbHVlcyldLGxhbWJkYV9NTEUpLFxuKDEtcF8wX01MRSkvKDEtZXhwKC1sYW1iZGFfTUxFKSkqKDEtZXhwKC1sYW1iZGFfTUxFKS1zdW0oZHBvaXModmFsdWVzWzI6bGVuZ3RoKHZhbHVlcyldLGxhbWJkYV9NTEUpKSkgICkgKVxuI2JhcnBsb3RcbmJhcnBsb3QodChkYXRhX2ZpdCksbmFtZXMuYXJnPWModmFsdWVzLFwiPj00XCIpLHlsYWI9XCJGcmVxdWVuY3lcIix4bGFiPVwiQ291bnRcIixiZXNpZGU9VCxjb2w9YyhcImJsYWNrXCIsXCJibHVlXCIpLHlsaW09YygwLDEpKVxubGVnZW5kKDUsMC44LCBjKFwiT2JzZXJ2ZWRcIiwgXCJGaXR0ZWRcIiksIGhvcml6ID0gVCwgY29sPWMoXCJibGFja1wiLFwiYmx1ZVwiKSwgZmlsbD1jKFwiYmxhY2tcIixcImJsdWVcIikpXG4jIENvbXB1dGUgdGhlIGNoaS1zcXVhcmUgc3RhdGlzdGljXG4jIEFuZCA5NXRoLSVpbGUgb2YgdGhlIGFwcHJvcHJpYXRlIGNoaS1zcXVhcmUgZGlzdHJpYnV0aW9uXG5jKHFjaGlzcSgwLjk1LDIpLHN1bSgoZGF0YV9maXQlKiVjKDEsLTEpKV4yL2RhdGFfZml0WywyXSkqc3VtKG0udmVjKSkiLCJzY3QiOiJ2YWx1ZXNtc2cgPC0gXCJEaWQgeW91IGNvcnJlY3RseSBzcGVjaWZ5IHRoZSBvYmplY3QgYHZhbHVlc2A/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcInZhbHVlc1wiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgdmFsdWVzYCFcIikgJT4lY2hlY2tfZXF1YWwoaW5jb3JyZWN0X21zZz12YWx1ZXNtc2cpXG5tLnZlY21zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgbS52ZWNgP1wiXG5leCgpICU+JSBjaGVja19vYmplY3QoXCJtLnZlY1wiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgbS52ZWNgIVwiKSAlPiVjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPW0udmVjbXNnKVxuXG5wXzBfTUxFbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBwXzBfTUxFYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwicF8wX01MRVwiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgcF8wX01MRWAhXCIpICU+JWNoZWNrX2VxdWFsKGluY29ycmVjdF9tc2c9cF8wX01MRW1zZylcblxubGFtYmRhX01MRW1zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgbGFtYmRhX01MRWA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcImxhbWJkYV9NTEVcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYGxhbWJkYV9NTEVgIVwiKSAlPiVjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPWxhbWJkYV9NTEVtc2cpXG5cbmRhdGFfZml0bXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBkYXRhX2ZpdGA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcImRhdGFfZml0XCIsIHVuZGVmaW5lZF9tc2cgPSBcIk1ha2Ugc3VyZSB0byBub3QgcmVtb3ZlIGBkYXRhX2ZpdGAhXCIpICU+JWNoZWNrX2VxdWFsKGluY29ycmVjdF9tc2c9ZGF0YV9maXRtc2cpXG5cbnN1Y2Nlc3NfbXNnKFwiU3VjY2VzcyEgTm93IGNvbXBhcmUgdGhlIGFib3ZlICptbGUqIGZvciBsYW1iZGEgd2l0aCB0aGF0IGZvciB0aGUgUG9pc3NvbiBtb2RlbCAoc2VlIFNlY3Rpb24gMi43KVwiKSIsImhpbnQiOiJSZWFkIHRocm91Z2ggPGEgaHJlZj1cImh0dHBzOi8vb3BlbmFjdHRleHRzLmdpdGh1Yi5pby9Mb3NzLURhdGEtQW5hbHl0aWNzL0MtRnJlcXVlbmN5LU1vZGVsaW5nLmh0bWwjUzpnb29kbmVzcy1vZi1maXR0XCI+U2VjdGlvbiAyLjcgb2YgPGVtPkxvc3MgRGF0YSBBbmFseXRpY3M8L2VtPjwvYT4gYW5kIHRoZSAgaW5zdHJ1Y3Rpb25zIGNhcmVmdWxseS4ifQ==
+</div>
+</div>
+</div>
+<div id="contributors-2" class="section level2 unnumbered">
+<h2>Contributors</h2>
+<ul>
+<li><strong>Authors</strong>. <strong>N.D. Shyamalkumar</strong>, The University of Iowa, <strong>Michelle Xia</strong>, Northern Illinois University, and <strong>Edward (Jed) Frees</strong>, University of Wisconsin-Madison and Australian National University, are the principal authors of the initial version of this chapter.</li>
+<li><strong>Chapter Maintainers</strong>. Please contact ??? and/or Jed at <a href="mailto:jfrees@bus.wisc.edu" class="email">jfrees@bus.wisc.edu</a> for chapter comments and suggested improvements.</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction-to-loss-data-analytics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="modeling-loss-severity.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

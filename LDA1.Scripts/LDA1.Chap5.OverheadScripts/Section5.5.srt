@@ -1,0 +1,245 @@
+1
+00:00:00,880 --> 00:00:07,520
+Welcome to the tutorial on aggregate loss 
+models. My name is Peng Shi, a professor in  
+
+2
+00:00:07,520 --> 00:00:12,080
+the Risk and Insurance department at 
+the University of Wisconsin-Madison.  
+
+3
+00:00:12,800 --> 00:00:19,440
+In this video, I discuss the effect of coverage 
+modifications on the aggregate loss.
+ 
+
+4
+00:00:21,440 --> 00:00:25,680
+Several contractual provisions 
+of an insurance contract  
+
+5
+00:00:25,680 --> 00:00:32,080
+could affect the aggregate loss of the 
+insurer. This section focuses on deductible.  
+
+6
+00:00:32,880 --> 00:00:40,320
+We discuss two types of deductibles, the aggregate 
+deductible and the per-occurrence deductible.
+ 
+
+7
+00:00:42,880 --> 00:00:49,520
+The aggregate deductible applies to the 
+aggregate losses of the insurer. Let S
+ 
+
+8
+00:00:49,520 --> 00:00:55,520
+be the aggregate loss which can be 
+from either an individual risk model  
+
+9
+00:00:55,520 --> 00:01:02,000
+or a collective risk model. With an 
+aggregate deductible d, the insurer  
+
+10
+00:01:02,000 --> 00:01:08,480
+is liable for the amount of losses in excess 
+of the deductible, that is, (S−d)+.
+ 
+
+11
+00:01:11,920 --> 00:01:18,880
+Insurance on aggregate losses, subject to a 
+deductible, is called stop-loss insurance.  
+
+12
+00:01:20,160 --> 00:01:26,160
+This agreement is often used 
+between an insurer and a reinsurer,  
+
+13
+00:01:26,960 --> 00:01:33,360
+where the insurer puts a cap d on the 
+losses from a portfolio of policies.
+ 
+
+14
+00:01:36,080 --> 00:01:42,560
+The expected cost of this insurance 
+is called the net stop-loss premium.  
+
+15
+00:01:43,360 --> 00:01:48,400
+It can be calculated as difference 
+between the expected aggregate  
+
+16
+00:01:48,400 --> 00:01:57,360
+loss and the expected losses below deductible. 
+The calculation requires the knowledge of the  
+
+17
+00:01:57,360 --> 00:02:03,600
+distribution of the aggregate loss, which 
+we have discussed in previous sections.
+ 
+
+18
+00:02:06,800 --> 00:02:10,960
+The per-occurrence deductible 
+applies to each loss event.  
+
+19
+00:02:11,840 --> 00:02:18,640
+Therefore, it makes sense to think of 
+aggregate loss using the collective risk model.  
+
+20
+00:02:19,840 --> 00:02:27,920
+We will see that the deductible affects both claim 
+frequency and claim severity in this context.
+ 
+
+21
+00:02:31,600 --> 00:02:34,480
+When there is a per-occurrence deductible,  
+
+22
+00:02:35,040 --> 00:02:42,720
+the insurer is only liable for the claims with 
+ground-up loss greater than the deductible.  
+
+23
+00:02:43,600 --> 00:02:51,280
+In fact, small claims might not even 
+be reported to the insurer. Let N
+ 
+
+24
+00:02:51,280 --> 00:03:00,080
+be the number of loss events and NP be the 
+number of payments. One could also interpret  
+
+25
+00:03:00,080 --> 00:03:09,680
+NP as the number of reported claims. We could 
+represent NP as a compound frequency distribution.  
+
+26
+00:03:10,880 --> 00:03:19,760
+The indicator I is created to count the number 
+of reported loss events. The probability of  
+
+27
+00:03:19,760 --> 00:03:26,720
+reporting is calculated as the probability 
+of ground-up loss exceeding deductible.
+ 
+
+28
+00:03:30,320 --> 00:03:33,600
+The relation between the distribution of N  
+
+29
+00:03:33,600 --> 00:03:41,760
+and NP can be established using probability 
+generating functions. This relation will  
+
+30
+00:03:41,760 --> 00:03:47,920
+allow us to derive the distribution of 
+NP for a given distribution of N.
+ 
+
+31
+00:03:51,360 --> 00:03:58,320
+For instance, if the number of loss 
+events N is Poisson with mean λ,  
+
+32
+00:03:59,360 --> 00:04:01,920
+using the probability generating function,  
+
+33
+00:04:02,560 --> 00:04:13,280
+we can show that the number of reported claims 
+NP is also Poisson with mean vλ, where v
+ 
+
+34
+00:04:13,280 --> 00:04:21,040
+is the probability that the claim amount 
+is great than deductible. Similar results  
+
+35
+00:04:21,040 --> 00:04:27,840
+can be obtained for other frequency 
+distributions introduced in Chapter 2.
+ 
+
+36
+00:04:29,760 --> 00:04:37,200
+The per-occurrence deductible affects not only 
+the number of claims, but also the amount of  
+
+37
+00:04:37,200 --> 00:04:46,960
+each claim. For a given claim, let X be the 
+ground-up loss and XP be the amount of payments.  
+
+38
+00:04:48,400 --> 00:04:55,840
+Then XP can be calculated as difference 
+of the ground-up loss and the deductible.  
+
+39
+00:04:56,720 --> 00:05:01,200
+We emphasize that XP is defined only when X>d.  
+
+40
+00:05:03,520 --> 00:05:11,680
+This definition also allows us to establish the 
+relation between the distributions of XP and X.
+ 
+
+41
+00:05:15,600 --> 00:05:18,720
+Now we have discussed how a per-occurrence  
+
+42
+00:05:19,280 --> 00:05:27,280
+deductible affects claim frequency and claim 
+severity. Combining the two components,  
+
+43
+00:05:27,840 --> 00:05:35,200
+we can express the insurer’s loss using 
+a collective risk model, where NP
+ 
+
+44
+00:05:35,200 --> 00:05:43,280
+is the number of reported claims, and XP is the 
+amount of payments for individual claims.
+ 
+
+45
+00:05:47,200 --> 00:05:54,880
+To summarize, in this section, we 
+have learned how to price stop-loss  
+
+46
+00:05:54,880 --> 00:06:00,800
+insurance, and examine the effect 
+of per-occurrence deductible on  
+
+47
+00:06:01,840 --> 00:06:09,120
+frequency and severity components in the 
+collective risk model. Thanks for watching.
+

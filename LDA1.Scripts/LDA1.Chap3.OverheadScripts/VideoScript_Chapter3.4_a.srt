@@ -1,0 +1,481 @@
+1
+00:00:00,240 --> 00:00:04,560
+Hello, welcome back to this video on 
+introduction to Loss Data Analytics
+ 
+
+2
+00:00:04,560 --> 00:00:09,440
+My name is Nii Okine; I am an assistant 
+professor at the Maths Department of  
+
+3
+00:00:09,440 --> 00:00:13,520
+Appalachian State University.
+In this video, I will discuss the  
+
+4
+00:00:13,520 --> 00:00:18,640
+impacts of coverage modifications with a 
+focus on policyholder deductibles.
+ 
+
+5
+00:00:23,440 --> 00:00:28,240
+We now consider a risk retention framework 
+where an insurer is obligated to pay  
+
+6
+00:00:28,240 --> 00:00:35,440
+a portion of a loss amount X suffered by an 
+insured under an insurance contract. We denote Y  
+
+7
+00:00:35,440 --> 00:00:39,360
+to be the insurer s payment. 
+This section introduces standard  
+
+8
+00:00:39,360 --> 00:00:45,360
+mechanisms that insurers use to reduce or 
+mitigate their risk, including deductibles,  
+
+9
+00:00:45,360 --> 00:00:49,920
+policy limits, and coinsurance. We 
+will also introduce reinsurance,  
+
+10
+00:00:49,920 --> 00:00:54,800
+an insurance mechanism for insurance 
+companies. Further, we will examine  
+
+11
+00:00:54,800 --> 00:01:00,400
+how the distribution of the insurer s 
+obligations depends on these mechanisms.
+ 
+
+12
+00:01:00,400 --> 00:01:04,240
+In this video, we focus on 
+impacts of deductibles.
+ 
+
+13
+00:01:07,360 --> 00:01:13,360
+Under an ordinary deductible policy, the insured 
+(policyholder) agrees to cover a fixed amount  
+
+14
+00:01:13,360 --> 00:01:18,560
+of an insurance claim before the insurer 
+starts to pay. This fixed expense paid  
+
+15
+00:01:18,560 --> 00:01:24,640
+out of pocket is called the deductible and 
+often denoted by d. If the loss exceeds d,  
+
+16
+00:01:25,280 --> 00:01:30,080
+then the insurer is responsible for covering 
+the loss X less the deductible d. 
+ 
+
+17
+00:01:30,960 --> 00:01:35,360
+Depending on the agreement, the 
+deductible may apply to each covered loss  
+
+18
+00:01:35,360 --> 00:01:40,720
+or the total losses during a defined benefit 
+period (such as a month, year, etc.)
+ 
+
+19
+00:01:41,440 --> 00:01:46,240
+Regarding the benefit paid to the policyholder 
+Y, we differentiate between two variables:  
+
+20
+00:01:46,880 --> 00:01:50,800
+The payment per loss variable and 
+the payment per payment variable.
+ 
+
+21
+00:01:51,520 --> 00:01:58,720
+The payment per loss variable is denoted 
+by YL or (X-d)+, where (X-d)+ means  
+
+22
+00:01:59,440 --> 00:02:06,240
+take the positive part of of the X-d variable. 
+The payment per loss is equal to zero for values  
+
+23
+00:02:06,240 --> 00:02:12,720
+of X that are less than or equal to d 
+and equal to X-d for values of X that  
+
+24
+00:02:12,720 --> 00:02:18,160
+are greater than d. Hence it is referred to 
+as a left-censored and shifted variable.
+ 
+
+25
+00:02:18,800 --> 00:02:25,200
+On the other hand, the payment per payment 
+variable denoted by YP is defined only when  
+
+26
+00:02:25,760 --> 00:02:32,400
+there is a payment. Specifically, YP equals 
+X?d on the event X is greater than d. 
+ 
+
+27
+00:02:33,040 --> 00:02:38,320
+Here, YP is often referred to as 
+left truncated and shifted variable  
+
+28
+00:02:38,320 --> 00:02:45,120
+or excess loss variable because the 
+claims smaller than d are not reported,  
+
+29
+00:02:45,120 --> 00:02:56,800
+and values above d are shifted by d.
+Even when the distribution of X is continuous,  
+
+30
+00:02:56,800 --> 00:03:02,080
+the distribution of the payment per loss 
+variable YL is a hybrid combination of  
+
+31
+00:03:02,080 --> 00:03:08,160
+discrete and continuous components. The discrete 
+part of the distribution is concentrated at Y=0  
+
+32
+00:03:09,200 --> 00:03:16,160
+when X?d, and the continuous part is 
+spread over the interval Y>0, when X>d. 
+ 
+
+33
+00:03:18,880 --> 00:03:22,880
+For the discrete part, the 
+probability that no payment is made  
+
+34
+00:03:22,880 --> 00:03:25,760
+is the probability that losses 
+fall below the deductible;  
+
+35
+00:03:25,760 --> 00:03:32,800
+which is equal to the cdf of X at d. 
+Also, using the transformation YL=X?d  
+
+36
+00:03:34,320 --> 00:03:40,960
+for the continuous part of the distribution, 
+the pdf of YL is equal to cdf of X at d  
+
+37
+00:03:41,600 --> 00:03:43,652
+when y=0 and equal to pdf of X at y+d when y>0.
+Accordingly, the cdf of YL is equal to cdf of X  
+
+38
+00:03:43,652 --> 00:03:47,760
+at d when y=0 and equal to the cdf 
+of X at y+d when y>0.
+ 
+
+39
+00:04:10,400 --> 00:04:14,960
+We can see that the payment per payment 
+variable is the payment per loss  
+
+40
+00:04:14,960 --> 00:04:22,000
+variable conditional on the loss exceeding the 
+deductible. Alternatively, YP can be expressed  
+
+41
+00:04:22,000 --> 00:04:29,760
+as the loss in excess of the deductible given 
+that the loss exceeds the deductible. Hence,  
+
+42
+00:04:29,760 --> 00:04:40,320
+the pdf of YP is given by pdf of X at y+d divided 
+by 1- cdf of X at d for y greater than zero.
+ 
+
+43
+00:04:41,040 --> 00:04:48,320
+Accordingly, the distribution function of YP can 
+be found directly using the pdf of X and equal to  
+
+44
+00:04:48,320 --> 00:04:59,360
+the cdf of X at y+d - cdf of X at d all divided by 
+1- cdf of X at d for y greater than zero.
+ 
+
+45
+00:05:05,680 --> 00:05:11,680
+The raw moments of YL can be found directly 
+using the pdf of X and given as the integral  
+
+46
+00:05:11,680 --> 00:05:18,720
+from d to infinity of X-d to the power 
+k multiplied by the pdf of X dx. 
+ 
+
+47
+00:05:19,440 --> 00:05:24,960
+Similarly, the raw moments of YP 
+are given by the raw moments of YL  
+
+48
+00:05:24,960 --> 00:05:32,080
+divided by 1- the cdf of X at d. 
+When k=1, we can use the survival  
+
+49
+00:05:32,080 --> 00:05:39,360
+function to calculate the expected value of YL 
+and given by the integral from d to infinity  
+
+50
+00:05:39,360 --> 00:05:46,000
+of 1- cdf of X dx. This could be 
+easily proved if we start with the  
+
+51
+00:05:46,000 --> 00:05:52,320
+initial definition of expected payment per loss 
+variable and use integration by parts.
+ 
+
+52
+00:05:52,320 --> 00:05:59,680
+Also, when k=1, the expected value of 
+YP is known as mean excess loss ex(d)  
+
+53
+00:06:00,240 --> 00:06:06,720
+and equal to the expected value of YL 
+divided by 1- the cdf of X at d.
+ 
+
+54
+00:06:12,000 --> 00:06:17,840
+We now consider an actuarial exam question. 
+We have been given that losses have the density  
+
+55
+00:06:17,840 --> 00:06:24,880
+function equal to 0.02x for x values 
+between 0 and 10 or zero otherwise.  
+
+56
+00:06:25,440 --> 00:06:32,560
+Further, the insurance has an ordinary 
+deductible of 4 per loss. If we define YP  
+
+57
+00:06:32,560 --> 00:06:39,440
+as the claim payment per payment random variable, 
+we want to calculate the expected value of YP. 
+ 
+
+58
+00:06:40,320 --> 00:06:46,720
+To answer this question, first, we need to define 
+the YP random variable, which is defined only when  
+
+59
+00:06:47,520 --> 00:06:56,240
+there is a payment, i.e., YP equals X?4 on 
+the event the loss X is greater than 4. 
+ 
+
+60
+00:06:57,200 --> 00:07:02,880
+Then, the expected value of YP also known 
+as mean excess loss can be expressed  
+
+61
+00:07:02,880 --> 00:07:13,120
+as the integral from 4 to 10 of (x-4) 
+multiplied by 0.02x dx, all divided by 1-  
+
+62
+00:07:13,120 --> 00:07:23,200
+the cdf of X at 4. Solving gives us 3.43
+Note that we divide by survival at 4, i.e.,  
+
+63
+00:07:23,200 --> 00:07:30,400
+1- the cdf of X at 4, as this is the probability 
+where the variable YP is defined.
+ 
+
+64
+00:07:36,480 --> 00:07:41,280
+We have seen that the deductible d imposed 
+on an insurance policy is the amount of  
+
+65
+00:07:41,280 --> 00:07:45,840
+loss that has to be paid out of pocket 
+before the insurer makes any payment.  
+
+66
+00:07:46,960 --> 00:07:52,000
+The deductible d imposed on an insurance 
+policy reduces the insurer s payment and  
+
+67
+00:07:52,000 --> 00:07:58,080
+reduce premiums for the policyholders.
+The loss elimination ratio is the percentage  
+
+68
+00:07:58,080 --> 00:08:03,440
+decrease in the expected payment of the 
+insurer as a result of imposing the deductible.  
+
+69
+00:08:04,000 --> 00:08:10,480
+It is defined as the expected value of the loss 
+random variable without any coverage modification  
+
+70
+00:08:10,480 --> 00:08:15,440
+minus the expected value of the payment per 
+loss variable, all divided by the expected  
+
+71
+00:08:15,440 --> 00:08:19,520
+value of the loss random variable without 
+any coverage modification. 
+ 
+
+72
+00:08:25,360 --> 00:08:30,240
+A little less common type of policy 
+deductible is the franchise deductible.
+ 
+
+73
+00:08:30,240 --> 00:08:35,840
+The franchise deductible will apply to the 
+policy in the same way as ordinary deductible  
+
+74
+00:08:35,840 --> 00:08:39,520
+except that when the loss 
+exceeds the deductible d,  
+
+75
+00:08:39,520 --> 00:08:45,280
+the full loss is covered by the insurer. 
+The payment per loss variable YL takes the  
+
+76
+00:08:45,280 --> 00:08:53,040
+value of zero for values of X that are less than 
+or equal to d and the value of X for values of  
+
+77
+00:08:53,040 --> 00:08:56,480
+X that are greater than d. 
+On the other hand,  
+
+78
+00:08:56,480 --> 00:09:02,320
+the payment per payment variable YP is equal X 
+on the event X is greater than d. 
+ 
+
+79
+00:09:08,240 --> 00:09:13,120
+In this video, under an ordinary deductible 
+policy we differentiate between two variables:  
+
+80
+00:09:13,120 --> 00:09:17,760
+The payment per payment variable YP and 
+the payment per loss variable YL.
+ 
+
+81
+00:09:17,760 --> 00:09:21,840
+These two variables are based on what 
+information is available to the insurer. 
+ 
+
+82
+00:09:22,480 --> 00:09:28,000
+The payment per payment variable YP is often 
+referred to as left truncated and shifted  
+
+83
+00:09:28,000 --> 00:09:34,160
+variable or excess loss variable because 
+the claims smaller than d are not reported,  
+
+84
+00:09:35,280 --> 00:09:42,000
+and values above d are shifted by d.
+The expected value of YP is known as mean  
+
+85
+00:09:42,000 --> 00:09:45,680
+excess loss e(d). 
+The payment per loss variable  
+
+86
+00:09:45,680 --> 00:09:53,760
+YL is equal to zero for values of X that are less 
+than or equal to d and equal to X-d for values of  
+
+87
+00:09:53,760 --> 00:09:58,480
+X that are greater than d. Hence it is referred 
+to as a left-censored and shifted variable.
+ 
+
+88
+00:09:59,840 --> 00:10:02,960
+The expected value of YL 
+can be written as the mean  
+
+89
+00:10:03,520 --> 00:10:10,160
+excess loss e(d) multiplied by survival at d. 
+Also, we can use the survival function to  
+
+90
+00:10:10,160 --> 00:10:15,520
+calculate the expected value of YL 
+which is given by the integral from d  
+
+91
+00:10:15,520 --> 00:10:20,560
+to infinity of the survival of X dx. 
+Thank you for watching this video.
+ 
+

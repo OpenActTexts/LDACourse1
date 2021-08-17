@@ -1,0 +1,114 @@
+1
+00:00:00,799 --> 00:00:06,050
+Hello, I am Miyuki Ebisaki, a member of ASTIN
+board.
+
+2
+00:00:06,050 --> 00:00:11,780
+Thank you for volunteered for this project,
+a short course of Loss Data Analytics, which
+
+3
+00:00:11,780 --> 00:00:13,740
+forms a part of ASTIN Academy.
+
+4
+00:00:13,740 --> 00:00:20,769
+I would like to give a short explanation about
+ASTIN, and what ASTIN would like to achieve
+
+5
+00:00:20,769 --> 00:00:26,239
+through ASTIN Academy.
+
+6
+00:00:26,239 --> 00:00:33,149
+ASTIN is a well-established worldwide leading
+forum of risk and actuarial professionals
+
+7
+00:00:33,149 --> 00:00:39,460
+of non-life insurance industry. Created as
+the first Section of the International Actuarial
+
+8
+00:00:39,460 --> 00:00:45,840
+Association (IAA) in 1957.
+
+9
+00:00:45,840 --> 00:00:52,600
+ASTIN has evolved and broadened its boundaries
+to areas ranging from the well-established
+
+10
+00:00:52,600 --> 00:01:00,530
+Ratemaking and Reserving to more contemporary
+Risk and Capital Management, and newly emerging
+
+11
+00:01:00,530 --> 00:01:03,300
+Data Science and Machine Learning.
+
+12
+00:01:03,300 --> 00:01:10,730
+This table shows how ASTIN plans to develop
+actuarial education for audience of beginners
+
+13
+00:01:10,730 --> 00:01:17,730
+and professionals, with lectures given by
+professionals and authorities.
+
+14
+00:01:17,730 --> 00:01:27,140
+We have held colloquia for fifty times in
+sixty years. In recent years, we introduced
+
+15
+00:01:27,140 --> 00:01:34,080
+a series of specialised workshops, with the
+aim of bridging the gap between academia and
+
+16
+00:01:34,080 --> 00:01:36,590
+industry.
+
+17
+00:01:36,590 --> 00:01:43,630
+ASTIN plans to produce a series of online
+masterclasses on a wide range of non-life
+
+18
+00:01:43,630 --> 00:01:53,350
+insurance topics. The last but the most important
+development is education for beginners conveyed
+
+19
+00:01:53,350 --> 00:02:02,430
+by authorities. It is ASTIN Academy to fill
+in the missing piece.
+
+20
+00:02:02,430 --> 00:02:09,950
+The mission of the ASTIN Academy is to provide
+high quality free educational materials in
+
+21
+00:02:09,950 --> 00:02:17,440
+non-life insurance to actuarial students across
+the world. The Academy is committed to open
+
+22
+00:02:17,440 --> 00:02:24,940
+course development under Creative Commons
+license and seeks innovation in teaching methodologies
+
+23
+00:02:24,940 --> 00:02:27,160
+and application of technology.
+
+24
+00:02:27,160 --> 00:02:36,000
+Let’s build the future of actuarial education
+together.
+

@@ -1,0 +1,603 @@
+1
+00:00:00,099 --> 00:00:04,700
+Hello, welcome back to this video on introduction
+to Loss Data Analytics
+
+2
+00:00:04,700 --> 00:00:10,980
+My name is Nii Okine; I am an assistant professor
+at the Maths Department of Appalachian State
+
+3
+00:00:10,980 --> 00:00:11,980
+University.
+
+4
+00:00:11,980 --> 00:00:18,910
+In this video, we are going to continue our
+discussion on the impacts of coverage modifications
+
+5
+00:00:18,910 --> 00:00:21,940
+with a focus on coinsurance, and reinsurance.
+
+6
+00:00:21,940 --> 00:00:31,560
+Under a coinsurance policy, the retained loss
+by the insurer is a percentage of the incurred
+
+7
+00:00:31,560 --> 00:00:32,560
+loss X.
+
+8
+00:00:32,560 --> 00:00:38,239
+The percentage ?, often referred to as the
+coinsurance factor, is the percentage of claim
+
+9
+00:00:38,239 --> 00:00:40,620
+the insurance company is required to cover.
+
+10
+00:00:40,620 --> 00:00:46,429
+If the policy is subject to an ordinary deductible
+and policy limit, coinsurance refers to the
+
+11
+00:00:46,429 --> 00:00:52,649
+percentage of claim the insurer is required
+to cover, after imposing the ordinary deductible
+
+12
+00:00:52,649 --> 00:00:54,190
+d and policy limit u.
+
+13
+00:00:54,190 --> 00:01:00,139
+Then, the payment per loss variable, YL, is
+equal to zero for values of X that are less
+
+14
+00:01:00,139 --> 00:01:06,510
+than or equal to d, equal to alpha multiplied
+by X-d for values of X that are greater than
+
+15
+00:01:06,510 --> 00:01:14,640
+d but less than of equal to u, and equal to
+alpha multiplied by u-d for values of X greater
+
+16
+00:01:14,640 --> 00:01:15,869
+than u.
+
+17
+00:01:15,869 --> 00:01:26,460
+The maximum amount paid by the insurer in
+this case is ?(u?d), while u is the maximum
+
+18
+00:01:26,460 --> 00:01:27,799
+covered loss.
+
+19
+00:01:27,799 --> 00:01:39,650
+When a loss is subject to both a deductible
+d and a limit u the per-loss variable YL can
+
+20
+00:01:39,650 --> 00:01:45,640
+be expressed as the limited loss variable
+at the limit u minus the limited loss variable
+
+21
+00:01:45,640 --> 00:01:52,290
+at the limit d. With coinsurance, the payment
+per loss random variable YL can be expressed
+
+22
+00:01:52,290 --> 00:01:59,299
+as alpha multiplied by the limited loss variable
+at the limit u minus the limited loss variable
+
+23
+00:01:59,299 --> 00:02:00,299
+at the limit d.
+
+24
+00:02:00,299 --> 00:02:04,219
+Then the expected value of the payment per
+loss variable equal to the alpha multiplied
+
+25
+00:02:04,219 --> 00:02:09,060
+by the limited expected value at u minus the
+limited expected value at d.
+
+26
+00:02:09,060 --> 00:02:15,640
+The k-th moment of the payment per loss random
+variable is expressed using the initial definition
+
+27
+00:02:15,640 --> 00:02:22,780
+of payment per loss variable and given as
+shown.
+
+28
+00:02:22,780 --> 00:02:30,330
+A growth factor (1+r) may be applied to X
+resulting in an inflated loss random variable
+
+29
+00:02:30,330 --> 00:02:32,530
+(1+r)X
+
+30
+00:02:32,530 --> 00:02:39,630
+With the prespecified d and u remain unchanged,
+the resulting per loss variable can be written
+
+31
+00:02:39,630 --> 00:02:50,090
+as equal to zero for values of X that are
+less than or equal to d divided by 1+r, equal
+
+32
+00:02:50,090 --> 00:02:56,490
+to alpha multiplied by (1+r)X-d for values
+of X that are greater than d divided by 1+r
+
+33
+00:02:56,490 --> 00:03:06,010
+but less than or equal to u divided by 1+r,
+and equal to alpha multiplied by u-d for values
+
+34
+00:03:06,010 --> 00:03:08,700
+of X greater than u divided by 1+r.
+
+35
+00:03:08,700 --> 00:03:18,450
+Note that the limit and deductible are divided
+by 1+r to correspond to the deflated values.
+
+36
+00:03:18,450 --> 00:03:26,210
+The first moment of the payment per loss variable
+equal to the alpha multiplied by 1+r multiplied
+
+37
+00:03:26,210 --> 00:03:32,090
+by the limited expected value at u divided
+by 1+r minus the limited expected value at
+
+38
+00:03:32,090 --> 00:03:39,120
+d divided by 1+r. In this case we have the
+maximum covered loss and the deductible at
+
+39
+00:03:39,120 --> 00:03:43,510
+their deflated values, computed the average
+payment, and then reinflated back.
+
+40
+00:03:43,510 --> 00:03:49,150
+For the second moments, we can incorporate
+inflation in a manner similar to the formulas
+
+41
+00:03:49,150 --> 00:03:54,270
+for first moments. However, since the second
+moment is in dollars squared,
+
+42
+00:03:54,270 --> 00:04:01,170
+we reinflate back by multiplying by (1+r)
+squared. Also, we multiply by the coinsurance
+
+43
+00:04:01,170 --> 00:04:04,600
+factor squared. Then the second moment can
+be expressed as shown.
+
+44
+00:04:04,600 --> 00:04:10,440
+One can combine the formulas for the first
+and second moments in order to calculate the
+
+45
+00:04:10,440 --> 00:04:11,440
+variance.
+
+46
+00:04:11,440 --> 00:04:17,150
+The formulas given for the first and second
+moments of YL are general. Under full coverage,
+
+47
+00:04:17,150 --> 00:04:26,180
+?=1, r=0, u=?, d=0 and expected value of YL
+reduces to expected of X.
+
+48
+00:04:26,180 --> 00:04:38,740
+If only an ordinary deductible is imposed,
+?=1, r=0, u=? and expected value of YL reduces
+
+49
+00:04:38,740 --> 00:04:43,280
+to expected of X minus limited expected value
+at d.
+
+50
+00:04:43,280 --> 00:04:49,840
+If only a policy limit is imposed ?=1, r=0,
+d=0 and expected value of YL reduces to limited
+
+51
+00:04:49,840 --> 00:04:52,610
+expected value at u.
+
+52
+00:04:52,610 --> 00:04:57,460
+We now consider an actuarial exam question.
+
+53
+00:04:57,460 --> 00:05:05,710
+We have been given that the ground up loss
+random variable for a health insurance policy
+
+54
+00:05:05,710 --> 00:05:12,360
+in 2006 is modeled with X, a random variable
+with an exponential distribution having mean
+
+55
+00:05:12,360 --> 00:05:18,270
+1000. An insurance policy pays the loss above
+an ordinary deductible of 100, with a maximum
+
+56
+00:05:18,270 --> 00:05:24,510
+annual payment of 500. The ground up loss
+random variable is expected to be 5% larger
+
+57
+00:05:24,510 --> 00:05:31,820
+in 2007, but the insurance in 2007 has the
+same deductible and maximum payment as in
+
+58
+00:05:31,820 --> 00:05:39,050
+2006. Find the percentage increase in the
+expected cost per payment from 2006 to 2007.
+
+59
+00:05:39,050 --> 00:05:48,090
+To answer this question, first, we need to
+define the amount per loss variable YL for
+
+60
+00:05:48,090 --> 00:05:49,900
+2006, and 2007.
+
+61
+00:05:49,900 --> 00:05:58,770
+The amount per loss variable YL for 2006 is
+equal to zero for values of X that are less
+
+62
+00:05:58,770 --> 00:06:05,960
+than or equal to 100, equal to X-100 for values
+of X that are greater than 100 but less than
+
+63
+00:06:05,960 --> 00:06:14,060
+or equal to 600, and equal to 500, that is
+600 minus 100 for values of X greater than
+
+64
+00:06:14,060 --> 00:06:16,820
+600.
+
+65
+00:06:16,820 --> 00:06:25,920
+Also, with inflation rate equal to 5%, the
+amount per loss variable YL for 2007 is equal
+
+66
+00:06:25,920 --> 00:06:36,260
+to zero for values of X that are less than
+or equal to 100 divided by 1.05 that is 95.24,
+
+67
+00:06:36,260 --> 00:06:47,650
+equal to 1.05X-100 for values of X that are
+greater than 95.24 but less than or equal
+
+68
+00:06:47,650 --> 00:07:00,511
+to 571.43 which is 600 divided by 1.05, and
+YL is equal to 500 that is 600 minus 100 for
+
+69
+00:07:00,511 --> 00:07:05,290
+values of X greater than 571.43.
+
+70
+00:07:05,290 --> 00:07:12,180
+The expected cost per payment from 2006 is
+equal to the expected cost per loss from 2006
+
+71
+00:07:12,180 --> 00:07:20,340
+divided by survival of X at the deductible
+100. Solving using the limited loss random
+
+72
+00:07:20,340 --> 00:07:27,199
+variable and survival function based on the
+exponential distribution gives us an answer
+
+73
+00:07:27,199 --> 00:07:28,600
+of 393.469.
+
+74
+00:07:28,600 --> 00:07:38,669
+Similarly, solving for the expected cost per
+payment from 2007 gives us an answer of 397.797.
+
+75
+00:07:38,669 --> 00:07:46,030
+Then, the percentage increase in the expected
+cost per payment from 2006 to 2007 is given
+
+76
+00:07:46,030 --> 00:07:54,200
+by the expected cost per payment from 2007
+divided by the expected cost per payment from
+
+77
+00:07:54,200 --> 00:07:58,610
+2006 minus 1. Which is equal to 1.1%
+
+78
+00:07:58,610 --> 00:08:08,030
+Therefore, there is an increase of 1.1% from
+2006 to 2007. Due to the policy limit, the
+
+79
+00:08:08,030 --> 00:08:17,300
+cost per payment event grew by only 1.1% between
+2006 and 2007 even though the ground up losses
+
+80
+00:08:17,300 --> 00:08:21,940
+increased by 5% between the two years.
+
+81
+00:08:21,940 --> 00:08:28,590
+Here, we discuss an example of R code that
+we can use to calculate the expected value
+
+82
+00:08:28,590 --> 00:08:33,379
+of the claims insured subject to a deductible
+and a policy limit.
+
+83
+00:08:33,379 --> 00:08:38,399
+The first chunk of code assigns the parameters
+for the lognormal distribution and simulates
+
+84
+00:08:38,399 --> 00:08:39,899
+the claims severities.
+
+85
+00:08:39,899 --> 00:08:45,069
+The second chunk of code determines the number
+of claims resulting in reimbursement both
+
+86
+00:08:45,069 --> 00:08:52,949
+from the data and based on the lognormal model
+using plnorm, the distribution function of
+
+87
+00:08:52,949 --> 00:08:58,839
+the lognormal model.
+The third chunk of code calculates the expected
+
+88
+00:08:58,839 --> 00:09:04,279
+value of the claims insured subject to a $1
+million deductible and a $5 million policy
+
+89
+00:09:04,279 --> 00:09:05,279
+limit.
+
+90
+00:09:05,279 --> 00:09:10,889
+The last chunk of code calculates the expected
+value of the claims insured subject to a $1
+
+91
+00:09:10,889 --> 00:09:16,089
+million deductible and a $5 million policy
+limit based on the lognormal distribution
+
+92
+00:09:16,089 --> 00:09:22,320
+using the levlnorm function, a user-defined
+function introduced in the previous video.
+
+93
+00:09:22,320 --> 00:09:28,769
+The tutorial you will be working on at the
+end of this video will require you to calculates
+
+94
+00:09:28,769 --> 00:09:34,291
+the expected values of claims under a policy
+with a deductible, policy limit, and coinsurance.
+
+95
+00:09:34,291 --> 00:09:44,180
+In a 
+deductible policy insurance contract, there
+
+96
+00:09:44,180 --> 00:09:49,649
+is a contractual arrangement under which an
+insured transfers part of the risk by securing
+
+97
+00:09:49,649 --> 00:09:55,949
+coverage from an insurer in return for an
+insurance premium. Under that policy, the
+
+98
+00:09:55,949 --> 00:10:01,009
+insured must pay all losses up to the deductible,
+and the insurer only pays the amount (if any)
+
+99
+00:10:01,009 --> 00:10:02,040
+above the deductible.
+
+100
+00:10:02,040 --> 00:10:08,779
+Under the reinsurance, there is a contractual
+arrangement under which an insurer transfers
+
+101
+00:10:08,779 --> 00:10:15,360
+part of the underlying insured risk by securing
+coverage from another insurer referred to
+
+102
+00:10:15,360 --> 00:10:20,279
+as a reinsurer in return for a reinsurance
+premium.
+
+103
+00:10:20,279 --> 00:10:25,990
+Although reinsurance involves a relationship
+between three parties: the original insured,
+
+104
+00:10:25,990 --> 00:10:33,179
+the insurer often referred to as cedant and
+the reinsurer, the parties of the reinsurance
+
+105
+00:10:33,179 --> 00:10:39,470
+agreement are only the primary insurer and
+the reinsurer. There is no contractual agreement
+
+106
+00:10:39,470 --> 00:10:43,389
+between the original insured and the reinsurer.
+
+107
+00:10:43,389 --> 00:10:48,699
+Though many different types of reinsurance
+contracts exist, a common form is the excess
+
+108
+00:10:48,699 --> 00:10:54,480
+of loss coverage. In such contracts, the primary
+insurer must make all required payments to
+
+109
+00:10:54,480 --> 00:11:01,529
+the insured until the primary insurer s total
+payments reach a fixed reinsurance deducible.
+
+110
+00:11:01,529 --> 00:11:06,519
+The reinsurer is then only responsible for
+paying losses above the reinsurance deductible.
+
+111
+00:11:06,519 --> 00:11:14,290
+The maximum amount retained by the primary
+insurer in the reinsurance agreement is called
+
+112
+00:11:14,290 --> 00:11:15,290
+retention.
+
+113
+00:11:15,290 --> 00:11:21,160
+Reinsurance arrangements allow insurers with
+limited financial resources to increase the
+
+114
+00:11:21,160 --> 00:11:27,130
+capacity to write insurance and meet client
+requests for larger insurance coverage while
+
+115
+00:11:27,130 --> 00:11:34,029
+reducing the impact of potential losses and
+protecting the insurance company against catastrophic
+
+116
+00:11:34,029 --> 00:11:35,449
+losses.
+
+117
+00:11:35,449 --> 00:11:41,940
+Reinsurance also allows the primary insurer
+to benefit from underwriting skills, expertise
+
+118
+00:11:41,940 --> 00:11:50,379
+and proficient complex claim file handling
+of the larger reinsurance companies.
+
+119
+00:11:50,379 --> 00:11:58,470
+This is the last video in a series of three
+videos in this section. We introduced standard
+
+120
+00:11:58,470 --> 00:12:02,929
+mechanisms that insurers use to reduce or
+mitigate their risk, including deductibles,
+
+121
+00:12:02,929 --> 00:12:04,679
+policy limits, and coinsurance.
+
+122
+00:12:04,679 --> 00:12:11,930
+In this video, we evaluated the impacts of
+coinsurance and inflation on insurer's costs.
+
+123
+00:12:11,930 --> 00:12:17,600
+And we examined how the distribution of the
+insurer's obligations depends on these mechanisms.
+
+124
+00:12:17,600 --> 00:12:23,759
+We also introduced reinsurance, a mechanism
+of insurance for insurance companies, and
+
+125
+00:12:23,759 --> 00:12:27,980
+discussed the advantages of reinsurance to
+the primary insurer.
+
+126
+00:12:27,980 --> 00:12:31,050
+Thank you for watching this video.
+

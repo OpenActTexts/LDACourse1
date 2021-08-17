@@ -1,0 +1,346 @@
+1
+00:00:02,244 --> 00:00:02,800
+﻿
+Hello!  
+
+2
+00:00:03,360 --> 00:00:07,840
+I am Shyamal Kumar from the Department of 
+Statistics and Actuarial Science at the University  
+
+3
+00:00:07,840 --> 00:00:15,920
+of Iowa. This lecture concerns extensions of 
+the (a,b,0) class of frequency distributions. 
+
+4
+00:00:18,240 --> 00:00:23,680
+Recall that the (a,b,0)-class of count 
+distributions consists of three distributions:  
+
+5
+00:00:24,640 --> 00:00:31,520
+Binomial, Poisson, and Negative Binomial. 
+While these cater well to many modeling needs,  
+
+6
+00:00:32,640 --> 00:00:35,040
+actuaries need more distributions in practice.
+
+7
+00:00:36,240 --> 00:00:39,840
+To begin with, the (a,b,0) 
+being a two-parameter family  
+
+8
+00:00:40,720 --> 00:00:45,360
+is a small subset of the infinite-dimensional 
+set of all count distributions.  
+
+9
+00:00:46,080 --> 00:00:51,120
+So the need for more distributions in the 
+actuarial tool kit should come as no surprise. 
+
+10
+00:00:52,800 --> 00:00:57,760
+The following slides concern two natural 
+reasons for extending the (a,b,0)-class.  
+
+11
+00:00:58,960 --> 00:01:05,040
+In a mathematical sense, these extensions 
+are actuarially driven closure requirements  
+
+12
+00:01:05,040 --> 00:01:12,160
+on the set of distributions in an actuarial tool 
+kit. This latter point will become apparent soon. 
+
+13
+00:01:16,080 --> 00:01:22,800
+Actuaries often encounter heterogeneity at 
+the population level. A modeling technique  
+
+14
+00:01:22,800 --> 00:01:26,000
+is to divide the population into 
+homogeneous sub-populations.  
+
+15
+00:01:27,200 --> 00:01:30,880
+Actuaries commonly do so for risk 
+rating, among other reasons. 
+
+16
+00:01:32,240 --> 00:01:39,120
+(a,b,0)-class of distributions often works well 
+at the sub-population level, even if not at the  
+
+17
+00:01:39,120 --> 00:01:45,360
+population level. For example, two distinct 
+binomially distributed sub-populations  
+
+18
+00:01:45,920 --> 00:01:48,720
+do not lead to a binomially 
+distributed population.  
+
+19
+00:01:49,760 --> 00:01:53,840
+The extension this prompts is explained 
+graphically in the next slide.
+
+20
+00:01:54,960 --> 00:02:00,480
+Consider a portfolio of policies consisting 
+of two sub-portfolios with their number of  
+
+21
+00:02:00,480 --> 00:02:08,080
+policies in the ratio of 2:1. Their respective 
+distributions of claims per policy are binomials  
+
+22
+00:02:08,080 --> 00:02:16,560
+with parameter m equal to two and parameter q 
+equal one-fourth and two-thirds, respectively.
+
+23
+00:02:18,240 --> 00:02:24,240
+Distributions with support consisting of 
+counts zero, one, and two are defined by the  
+
+24
+00:02:24,240 --> 00:02:30,560
+probabilities they assign to one and two, which 
+allows us to plot them on a graph as shown here.  
+
+25
+00:02:31,760 --> 00:02:38,400
+The plotted curve, in black, represents all 
+binomials with parameter m equal to two,  
+
+26
+00:02:39,360 --> 00:02:44,560
+and the red dots represent the two binomials 
+corresponding to the two sub-portfolios.  
+
+27
+00:02:46,640 --> 00:02:49,840
+A simple calculation shows 
+that the green dot represents  
+
+28
+00:02:50,560 --> 00:02:54,640
+the count distribution of a randomly 
+selected policy from this portfolio.  
+
+29
+00:02:56,240 --> 00:03:04,080
+Notice that since it does not lie on the 
+curve, it is not a binomial distribution.
+
+30
+00:03:04,080 --> 00:03:08,880
+This example conveys the need for all the 
+distributions represented by the points in  
+
+31
+00:03:08,880 --> 00:03:15,280
+the shaded region interior to the curve, 
+the mixtures of the binomials with m=2.  
+
+32
+00:03:18,320 --> 00:03:23,360
+We saw an actuarial motivation to round out 
+the distributions in the actuarial tool chest  
+
+33
+00:03:24,160 --> 00:03:27,760
+by including their mixtures. Mathematically,  
+
+34
+00:03:27,760 --> 00:03:33,280
+a mixture distribution is a convex combination 
+of its components, with their number being either  
+
+35
+00:03:33,280 --> 00:03:40,000
+finite or infinite. Section 2.5 discusses 
+the mechanics of working with mixtures.  
+
+36
+00:03:41,120 --> 00:03:45,840
+We now present another natural 
+extension of a set of distributions.
+
+37
+00:03:48,480 --> 00:03:52,640
+Employers provide insurance coverage 
+to their employees in many countries,  
+
+38
+00:03:53,360 --> 00:03:55,920
+leading to redundant coverage for working couples.  
+
+39
+00:03:57,040 --> 00:04:03,040
+As a result, a proportion of insureds may not 
+file any claims on some of their policies. 
+
+40
+00:04:04,560 --> 00:04:06,400
+Such market realities,  
+
+41
+00:04:06,400 --> 00:04:13,280
+among others, create an out-sized proportion of 
+zero claims which is ill-fitted by the standard  
+
+42
+00:04:13,280 --> 00:04:18,880
+parametric families of distributions, 
+including those of the (a,b,0) class. 
+
+43
+00:04:20,320 --> 00:04:24,000
+Modifying a probability mass 
+function p as shown here,  
+
+44
+00:04:24,720 --> 00:04:31,440
+with the resulting probability of zero counts 
+equal to q0, is called its zero-modification.  
+
+45
+00:04:32,720 --> 00:04:37,840
+And such modifications extend a set of 
+distributions by adding the extra parameter  
+
+46
+00:04:37,840 --> 00:04:43,200
+q0, enabling accommodation of 
+any probability for zero counts.  
+
+47
+00:04:44,320 --> 00:04:51,360
+Moreover, the zero-modification specified 
+aligns with the insurance market realities. 
+
+48
+00:04:52,880 --> 00:05:03,440
+Zero-modification of a distribution, with q0 equal 
+to 0, results in its zero-truncated version. In  
+
+49
+00:05:03,440 --> 00:05:08,400
+other words, the zero-truncated version 
+is the conditional distribution of counts  
+
+50
+00:05:09,040 --> 00:05:14,880
+given at least one count, which is of 
+independent actuarial interest as well.
+
+51
+00:05:15,920 --> 00:05:22,720
+A noteworthy feature of zero modification is that 
+the ratio of successive probabilities beyond zero  
+
+52
+00:05:22,720 --> 00:05:28,320
+remains unchanged. The identical 
+shifts of the probabilities beyond zero  
+
+53
+00:05:28,320 --> 00:05:32,480
+in the log-plot of the probability mass 
+functions of zero-modified versions  
+
+54
+00:05:33,200 --> 00:05:37,840
+from its underlying confirms the above invariance.
+
+55
+00:05:40,640 --> 00:05:47,040
+An (a,b,0) distribution satisfies the displayed 
+recurrence for values of k starting from zero.  
+
+56
+00:05:48,400 --> 00:05:53,440
+The invariance described in the previous 
+slide implies that a zero-modified version  
+
+57
+00:05:53,440 --> 00:05:59,440
+of an (a,b,0) distribution satisfies the same 
+recurrence but for values beginning from one. 
+
+58
+00:06:01,040 --> 00:06:06,480
+The (a,b,1) class of distributions consists 
+of those that satisfy the above recurrence  
+
+59
+00:06:06,480 --> 00:06:08,160
+for values beginning from one.  
+
+60
+00:06:09,520 --> 00:06:19,360
+This class is parameterized by p0, a, and b, with 
+p1 chosen to make the total probability one. 
+
+61
+00:06:21,120 --> 00:06:26,480
+Clearly, modified versions of (a,b,0) 
+distributions belong to the (a,b,1)-class.  
+
+62
+00:06:27,920 --> 00:06:32,160
+A natural question to ask is if all of the members  
+
+63
+00:06:32,160 --> 00:06:38,080
+of the (a,b,1) class are zero-modified 
+versions of (a,b,0) distributions. 
+
+64
+00:06:41,120 --> 00:06:47,440
+To answer this question, we note that when a is 
+positive, the constraint on b is dependent on the  
+
+65
+00:06:47,440 --> 00:06:55,120
+lowest value of k at which the recurrence relation 
+holds. So when we move from (a,b,0) to (a,b,1),  
+
+66
+00:06:56,320 --> 00:07:07,520
+the constraint relaxes from a+b>0 to 
+a+b/2>0, which enlarges the parameter space.  
+
+67
+00:07:09,360 --> 00:07:16,720
+This enlargement allows for zero modified 
+versions of extended truncated negative binomials  
+
+68
+00:07:17,440 --> 00:07:24,800
+and logarithmic distribution. These are not 
+zero-modified versions of (a,b,0) distributions.
+
+69
+00:07:26,160 --> 00:07:29,840
+In the exercise below, you would 
+get to test your understanding  
+
+70
+00:07:30,400 --> 00:07:32,800
+of the (a,b,1) class of distributions.  
+
+71
+00:07:34,480 --> 00:07:36,720
+Thank you!
+

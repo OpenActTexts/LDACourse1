@@ -1,0 +1,61 @@
+﻿Welcome back to the tutorial on an Introduction to Loss Data Analytics. 
+
+Hello, my name is Yvonne Cheuh. In this video, I am going to demonstrate analytics of severity distributions for the Wisconsin Property Fund. 
+
+OVERHEAD 1 - Severity Distribution (2010)
+
+In the prior video on frequency of claims, we learned that of the 1110 policyholders in 2010, 707 did not experience any claims. This means that 403, which is 1110 minus 707, policyholders had at least one claim.
+
+When examining the severity, or the amount, of claims, there are at least two basic approaches. One approach is to follow each claim and use this information to get a sense of the distribution. Another approach, taken here, is to follow each policyholder. The drawback of following a policyholder is that we typically no longer have information about individual claims, only the sum of claims attributable to a policyholder. 
+
+To make information among policyholders comparable, it is customary to examine the average claim for each policyholder. To illustrate, 209 policyholders had only one claim. Here, the average claim is the single recorded claim. In contrast, for example the average claim for the Madison Metropolitan School District is the average over 209 different recorded events.
+
+With this as background, the table displayed shows summary statistics for the 403 average claims. From this table, one immediately notices that the maximum claim is over $12 million USD. This unusually large amount is from a real event (a flood in a Milwaukee courthouse) and is very financially important to the fund. In other areas of statistics, one might think of this as an "outlier" and so a candidate of removal from the rest of the data set. However, in insurance statistics, unusually large events and skewed distributions are common, not the exception.
+
+For example, take a look at the distribution plotted on the left-hand side. This histrogram is not really helpful for the analyst because it is dominated by the extreme large value, causing all the observations to be clustered together on the left. One approach is to remove this large point, at least for plotting purposes. However, this does not help as other observations take on a similar role. As an alternative, it is common to plot logarithmic values, as done in the right-hand panel. This graphs gives use a much better sense of the severity distribution.
+
+OVERHEAD 2 - Claims Severity - R Code
+
+So that you can replicate these results, here is a look at the R code.
+
+As with our frequency analysis, the first two lines show how to bring in the data and produce a data frame based on only 2010 information. The third line creates a new data frame, InsamplePos2010, that takes a subset of policyholders with a positive average severity. You can check that there are 403 policyholders with the "length" command. The "summary" command produces the table of summary statistics.
+
+The rest of the code produces the two histograms that we looked at. This is very handy because we often want to  compare phenomena graphically. The "mfrow" syntax produces a figure with 1 row and 2 columns.
+
+OVERHEAD 3 - Claim Outcomes and Coverage by Year
+
+We have seen analytics of frequency and severity for 2010, so now let's take a look at trends over years. One could produce distributions over the years but, to begin, we look to simpler averages. In the following display, we also include the coverage. This plus the number of policyholders gives a sense of the overall exposure of the fund.
+
+From the table, we see that the average frequency is stable over the years, certainly in comparison with the severity. As we might guess from the analysis of a single year for the severity, it tends to be volatile and is sensitive to the impact of potentially large obsevations.
+
+Both exposure measures indicate stability over this time period. The coverage is slightly increasing and the number of policyholders slightly decreasing.
+
+OVERHEAD 4 - Analysis by Year - R Code
+
+Here is some R code that produces the results. This uses the "summaryBy" function in the package "doBy". Although a lot of this course is learning by doing combined with replicating examples, you will also want to get into the habit of looking up the documentation for functions that you might use. This function also uses a function internally that we created, labelled as "FUN1".
+
+You will see more code like this as we go forward, so I won't go over all the details now. But, note that as a result, we produced the data frame "Table1In". Then, we used the "names" function to give lables for each column - this is very handy way of keeping track of elements. 
+
+OVERHEAD 5 - Claim Frequency and Severity, Deductibles, and Coverage
+
+For a different look at the 2006-2010 data, this table summarizes the distribution of our two outcomes, frequency and claims amount. In each case, the average exceeds the median, suggesting that the two distributions are right-skewed. In addition, the table summarizes our continuous rating variables, coverage and deductible amount. The table also suggests that these variables also have right-skewed distributions.
+
+OVERHEAD 6 - Claim Frequency and Severity, Deductibles, and Coverage - R Code
+
+Here is the R code used to produce this table. Note that again we used the "SummaryBy" function even though there way "By" part - this was done just so that you can see another application of this function. Also a little different - the output from the function was converted from a data frame to numbers using the "as.numeric" function. This was done so that the outputs could be combine into a matrix that allows for easier display of row and column names.
+
+You will see that R gives users quite a bit of flexibility. There is more than one way to accomplish an end goal.
+
+
+OVERHEAD 7 - Cost of Insurance
+
+To wrap up this video on claims analytics, I want to briefly mention some thoughts on how a claims distribution can be used to determine the cost of insurance. I first note that the Wisconsin property fund is a pool of government entities. Unlike commercial insurers, it does no underwriting and coverage cannot be denied. This makes our job of assessing the cost of insurance a bit easier - we can treat experience from all policyholders as representative of the pool of interest.
+
+Now, to determine the cost of insurance, if we make a decision based only on 2010 data, we might use 33,026.
+This number was determined by dividing the total payout, the total fund claims, by the number of policyholders.
+
+However, we get a very different answer based on 2009 data (it turns out to be 9,934). This can be attributed to the volatility of the claims distributions.
+
+Moreover, having a single price for all policyholders is nice but hardly seems fair. Should small government libraries be charged the same as the city of Green Bay? In the next video, we introduce the basics of rating variables, designed to put the costs among different entities on a more equitable footing.
+
+Thanks for watching!

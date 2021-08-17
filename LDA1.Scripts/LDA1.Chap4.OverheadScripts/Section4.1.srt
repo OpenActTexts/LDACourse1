@@ -1,0 +1,219 @@
+1
+00:00:01,430 --> 00:00:05,430
+Hello and welcome to chapter 4. My name is
+Brian Hartman and I am an associate professor
+
+2
+00:00:05,430 --> 00:00:10,420
+at Brigham Young University.
+There are times when you do not want to or
+
+3
+00:00:10,420 --> 00:00:15,390
+cannot make strong assumptions about the distribution
+of a quantity of interest. In those situations,
+
+4
+00:00:15,390 --> 00:00:20,610
+we use nonparametric estimation, sometimes
+called empirical estimation. All we need to
+
+5
+00:00:20,610 --> 00:00:25,860
+assume is that the observations come from
+a random sample, or are independent and identically
+
+6
+00:00:25,860 --> 00:00:31,790
+distributed, or iid. We do not assume any
+specific cdf F.
+
+7
+00:00:31,790 --> 00:00:37,880
+Some of the simplest nonparametric estimators
+are the moment estimators. The kth raw moment
+
+8
+00:00:37,880 --> 00:00:42,961
+is the expected value of X to the k. We estimate
+that moment using the sample average of x
+
+9
+00:00:42,961 --> 00:00:49,079
+to the k. The kth central moment is the expected
+value of the quantity x minus the overall
+
+10
+00:00:49,079 --> 00:00:55,250
+population mean mu to the k. That is estimated
+by the sample average of the kth power of
+
+11
+00:00:55,250 --> 00:01:00,039
+the difference between each observation and
+the sample mean.
+
+12
+00:01:00,039 --> 00:01:04,860
+With no parametric assumptions about the distribution,
+we can approximate it through the empirical
+
+13
+00:01:04,860 --> 00:01:09,030
+cumulative distribution function, which is
+simply the proportion of observations less
+
+14
+00:01:09,030 --> 00:01:14,390
+than or equal to x for each x. When the random
+variable is discrete, we can also estimate
+
+15
+00:01:14,390 --> 00:01:19,390
+the pmf by using the proportion of the sample
+equal to x.
+
+16
+00:01:19,390 --> 00:01:25,240
+In this toy example, we can estimate the mean
+by using the sample mean and get 19.7. We
+
+17
+00:01:25,240 --> 00:01:30,939
+can also estimate the second central moment
+and get 31.01.
+
+18
+00:01:30,939 --> 00:01:36,371
+This plot shows the empirical cumulative distribution
+function of the toy example. For each x, this
+
+19
+00:01:36,371 --> 00:01:39,000
+is the proportion of samples less than or
+equal to x.
+
+20
+00:01:39,000 --> 00:01:46,600
+Back to our toy example, the median can be
+any value between 20 and 23, though many software
+
+21
+00:01:46,600 --> 00:01:52,990
+packages use the average, in this case 21.5.
+The smoothed empirical percentile uses linear
+
+22
+00:01:52,990 --> 00:01:58,439
+interpolation to estimate the quantiles between
+samples.
+
+23
+00:01:58,439 --> 00:02:04,939
+To see how this works, we will find the 50th
+and 20th quantiles in the toy example. The
+
+24
+00:02:04,939 --> 00:02:08,970
+computational details are on the slide, but
+heuristically, the 50th quantile is exactly
+
+25
+00:02:08,970 --> 00:02:14,269
+between the 5th and 6th observations while
+the 20th quantile is closer to the 2nd observation
+
+26
+00:02:14,269 --> 00:02:18,499
+than the 3rd, though in this case it does
+not matter because those two observations
+
+27
+00:02:18,499 --> 00:02:22,559
+are the same.
+When the data is discrete, we can estimate
+
+28
+00:02:22,559 --> 00:02:28,239
+the probability mass function by the proportion
+of observations at each value. Alternatively,
+
+29
+00:02:28,239 --> 00:02:32,249
+you can group the observations into intervals
+and then estimate the probability mass function
+
+30
+00:02:32,249 --> 00:02:36,769
+for each of those intervals using the sample
+proportions.
+
+31
+00:02:36,769 --> 00:02:41,299
+Because empirically estimated pmfs can be
+rather jagged and variable, they can be smoothed
+
+32
+00:02:41,299 --> 00:02:45,980
+using kernel density estimators. First, you
+pick a bandwidth. If we are estimating the
+
+33
+00:02:45,980 --> 00:02:50,650
+probability mass function at x, any observation
+within b of x will contribute to the probability
+
+34
+00:02:50,650 --> 00:02:56,480
+mass at x. The larger the bandwidth, the smoother
+the function will be. Additionally, the uniform
+
+35
+00:02:56,480 --> 00:03:00,810
+kernel density estimator is an asymptotically
+unbiased estimator of f of x.
+
+36
+00:03:00,810 --> 00:03:06,370
+More generally, you can use many different
+types of kernels to estimate the density.
+
+37
+00:03:06,370 --> 00:03:10,230
+Some commonly used examples are described
+on the slide here. Most software defaults
+
+38
+00:03:10,230 --> 00:03:17,999
+to the Gaussian kernel, but is easily changed.
+We apply the kernel density estimator to the
+
+39
+00:03:17,999 --> 00:03:27,730
+distribution function like this. For illustration,
+the uniform kernel will work like this.
+
+40
+00:03:27,730 --> 00:03:31,089
+Observations can be grouped into intervals.
+The empirical CDF is still defined at the
+
+41
+00:03:31,089 --> 00:03:37,379
+boundaries in the usual way. Within each interval,
+we can use the ogive which is the same linear
+
+42
+00:03:37,379 --> 00:03:43,150
+approximation we used before.
+One interesting thing about the ogive is its
+
+43
+00:03:43,150 --> 00:03:47,879
+derivative is called the histogram and is
+the same as the histograms that we plot to
+
+44
+00:03:47,879 --> 00:03:52,969
+get a basic understanding of the data.
+

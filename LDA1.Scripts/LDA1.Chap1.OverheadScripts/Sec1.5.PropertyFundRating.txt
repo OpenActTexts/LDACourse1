@@ -1,0 +1,86 @@
+﻿Welcome back to the tutorial on an Introduction to Loss Data Analytics. 
+
+Hello, my name is Jed Frees, an emeritus professor at the University of Wisconsin and the Australian National University. In this video, I am going to demonstrate how different characteristics may affect our assessment of insurance costs in the context of the Wisconsin Property Fund. 
+
+
+OVERHEAD 1 - Description of Rating Variables
+
+Here is a list of available characteristics; hopefully, these are variables that you think might naturally be related to claims outcomes. 
+
+It is common to refer to these as rating variables. Conceptually, these variables may affect the distribution of insurance outcomes that we have discussed, the frequency and severity. As they affect these claims distributions, they affect estimates of insurance costs and so our determination of rates that one pays for insurance. 
+
+The two approximately continuous variables are coverage and deductibles.
+To handle their skewness, we focus on logarithmic transformations. Most rating variables employed in the analysis of insurance claims are of the categorical type. Here, we have entity type, type of credit for smoke alarm, as well as indicators for no claim credit and presence of a fire station. In our analysis, we focus on the categorical variables.
+
+OVERHEAD 2 - Claims by Entity Type, Fire Class, and No Claim Credit
+
+Here are some summary statistics by three of the four categorical variables, with alarm credit being deferred to later. As before, we present simple averages to get a quick idea of differences in the distributions. 
+
+The first thing to notice from the table is that there is substantial variation in the frequency and severity by entity type. This is intuitively plausible; for example, we expect more claims for small villages in comparison to larger counties. This will imply very different costs of insurance by entity types.
+
+As anticipated, we see both lower frequency and lower severity when the policyholder had no claims in the past two years, so that NoClaimCredit indicator is 1. This is also common in the analysis of insurance claims, past experience is often an excellent predictor of current and future behavior.
+
+Somewhat surprising is the higher frequency and severity for the Fire5 (=1) variable. This is counter-intuitive in that one would expect lower claim amounts for those policyholders in areas with better public protection (when the protection code is five or less). There are at least two possible explanations for this. One is that policyholders who greater public protection nearby become more careless. 
+
+The second is that there may be a joint effect that is being masked by our univariate analysis. For example, it could be that there are many more Fire5=1 policyholders that are counties and we have already seen that counties are more risky compared to other entities. So, the Fire5=1 variable effect is being distorted by another variable. Or, it may be that areas with better public protection are naturally higher risk areas; the protection is there because it is thought to be needed and we have no other variable that indicates this need. 
+
+This emphasizes a major drawback of this type of presentation. These tables look at the effects of each variable in isolation of the others and so are referred to as a "univariate" analyses. As another example, you may have seen "simple linear regression" in your other studies. In any case, you will find any type of univariate analysis to be very convenient because it is simple to execute and easy to explain to others. However, it is limiting in that does not permit an understanding of the joint effects of variables.
+
+
+OVERHEAD 3 - Claims by Entity Type, Fire Class, and No Claim Credit - R Code
+
+Here is the R code for this analysis.
+
+As in prior examples, we used the "subset" function to split the data set into smaller pieces of interest and then used the "summaryBy" function to pull out the relevant summary statistics. 
+
+Because we were interested in so many statistics, a small function was created to automate the tasks.
+
+OVERHEAD 4 - Claims by Entity Type and Alarm Credit Category
+
+Here is an analysis of the fourth categorical variable, Alarm Credits.
+
+When you take a look at the totals by entity, we see the same counter intuitive results as we did for the fire protection code. For example, we would expect to see lower frequency and severity for 15% alarm credits compared to no alarm credits.
+
+In this analysis, we attempted to dig a little deeper by showing results by entity type. To illustrate, from this table, we can compare villages by different levels of alarm credits. Again, for example, comparing 15% to no alarm credits, we again see the same counter-intuitive results. Villages with 15% alarm credits actually experience higher frequency and severity compared to villages without alarm credits.
+
+As before, the explanation could be that we are missing a hidden variable that causes this behavior. Or, it could be that managers who purchase expensive alarm systems become careless and suffer more accidents as a result.
+
+OVERHEAD 5 -Initiating Insurance
+
+These are the types of considerations that come into play when trying to estimate the cost of insurance that is needed to set insurance rates.
+
+As we have already seen, we have to take care in choosing the time frame for our data. Based on the 2010 data, we saw that the average claim is 33,026. However, if we use 2009 data, we arrive at a very different conclusion, 9,934.
+
+From the analysis in this video, we see that the distribution of claim outcomes varies tremendously by entity type. So, knowing whether a policyholder is a village, city, or so on is an important determinant of the cost of insurance. Although we haven't done the analysis here, you can make a similar case for coverage. It makes sense that  larger risks should have larger insurance costs.
+
+What makes less sense is how to handle alarm credits. If we follow the same logic, then we would estimate the cost of insurance to be smaller for an insured without an alarm credit compared to one that has one. This is really bad - we want to encourage insureds to invest in protection of their risks. They should not be discouraged from purchasing alarm systems by paying more for insurance.
+
+This is just one of the really interesting questions that we will be able to discuss as we develop our understanding of insurance analytics.
+
+REVIEW
+
+I hope that you found this case study on the Wisconsin Property Fund to be useful. In this section, we learned how to:
+
+☻  Describe how insurance events can produce data of interest to analysts.
+☻  Produce relevant summary statistics for each variable.
+☻  Describe how these summary statistics can be used to develop the cost of insurance.
+
+For this case study, we raise a number of very interesting questions about how to estimate the cost of insurance. Many students will be surprised that we did not give answers to these questions. We raised these questions in part because they are real issues that insurers deal with regularly and often there is no clean answer. However, a solid discussion of these issues rests on a good understanding of the analytics of insurance claims. And this is the focus of this course.
+
+
+Thanks for watching!
+
+(about 1200 words)
+
+
+
+
+
+
+
+
+
+
+
+
+

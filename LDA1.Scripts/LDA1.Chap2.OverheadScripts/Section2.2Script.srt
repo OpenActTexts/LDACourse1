@@ -1,0 +1,259 @@
+1
+00:00:01,069 --> 00:00:02,057
+Hello everyone!
+
+2
+00:00:02,057 --> 00:00:03,592
+My name is Michelle Xia.
+
+3
+00:00:03,592 --> 00:00:07,672
+And I am an associate professor at Northern Illinois University.
+
+4
+00:00:07,672 --> 00:00:12,034
+In the previous lecture, we have learned the basic frequency distributions
+
+5
+00:00:12,034 --> 00:00:14,359
+for modeling claim counts.
+
+6
+00:00:14,359 --> 00:00:19,021
+In this lecture, I am going to introduce the (a, b, 0) class of distributions
+
+7
+00:00:19,021 --> 00:00:23,300
+and show that the Poisson, binomial, and negative binomial distributions
+
+8
+00:00:23,300 --> 00:00:27,467
+we learned in the previous lecture all belong to this class.
+
+9
+00:00:28,472 --> 00:00:32,055
+We first introduce the definition and properties of
+
+10
+00:00:32,055 --> 00:00:34,726
+the (a, b, 0) class of distributions.
+
+11
+00:00:35,034 --> 00:00:40,034
+For the definition, a count distribution is
+a member of the (a, b, 0) class
+
+12
+00:00:40,034 --> 00:00:44,034
+if its probabilities pk satisfy the recursive formula that,
+
+13
+00:00:44,034 --> 00:00:50,020
+for any k from the support, the ratio of pk and p(k-1) equals
+
+14
+00:00:50,020 --> 00:00:54,017
+the sum of a constant "a" and a constant "b" divided by k.
+
+15
+00:00:54,017 --> 00:00:58,461
+Only three distributions are members of the (a, b, 0) class:
+
+16
+00:00:58,461 --> 00:01:02,287
+the Poisson distribution with the constant "a" equals 0,
+
+17
+00:01:02,287 --> 00:01:05,597
+the binomial distribution with "a" smaller than 0,
+
+18
+00:01:05,597 --> 00:01:09,608
+and the negative binomial distribution with "a" larger than 0.
+
+19
+00:01:09,608 --> 00:01:13,871
+For the (a, b, 0) class, the recursive expression given above
+
+20
+00:01:13,871 --> 00:01:19,152
+provides a computationally efficient way to generate the probabilities pk.
+
+21
+00:01:19,152 --> 00:01:23,232
+In addition, the recursive formulation allows us to
+
+22
+00:01:23,232 --> 00:01:25,700
+introduce modifications to the distributions.
+
+23
+00:01:25,700 --> 00:01:30,100
+In particular, in insurance, the treatment
+of zero claims 
+
+24
+00:01:30,100 --> 00:01:32,600
+often requires special adjustments
+
+25
+00:01:32,600 --> 00:01:38,634
+and the (a,b,0) structure allows us to readily accommodate these adjustments.
+
+26
+00:01:38,634 --> 00:01:42,134
+We will introduce such modifications later in Section 2.5.
+
+27
+00:01:43,134 --> 00:01:48,134
+For the three examples of (a, b, 0) frequency distributions,
+
+28
+00:01:48,134 --> 00:01:51,500
+we can obtain the corresponding recursive expressions
+
+29
+00:01:51,500 --> 00:01:55,500
+based on their probability mass functions, or pmfs.
+
+30
+00:01:55,500 --> 00:01:58,434
+For the first example, the Poisson distribution,
+
+31
+00:01:58,434 --> 00:02:02,500
+we recall that its probability pk has the
+form
+
+32
+00:02:02,500 --> 00:02:09,500
+lambda of power k divided by k factorial times the exponential of negative lambda.
+
+33
+00:02:09,500 --> 00:02:13,034
+Plugging in the expressions of pk and p(k-1),
+
+34
+00:02:13,134 --> 00:02:17,267
+we can obtain their ratio as lambda divided by k.
+
+35
+00:02:17,267 --> 00:02:20,367
+Thus, the Poisson distribution belongs to the (a, b, 0) class
+
+36
+00:02:20,700 --> 00:02:24,034
+with "a" equals 0, "b" equals lambda
+
+37
+00:02:24,034 --> 00:02:29,267
+and the probability of "0", p0, equals
+the exponential of negative lambda.
+
+38
+00:02:29,267 --> 00:02:31,767
+For the binomial distribution, we can show
+
+39
+00:02:31,767 --> 00:02:37,100
+that the constant "a" equals -q divided by (1-q),
+
+40
+00:02:37,100 --> 00:02:45,267
+"b" equals (m+1) times q divided by (1-q), and p0 equals (1-q) of power m.
+
+41
+00:02:45,267 --> 00:02:48,767
+Similarly, we can obtain the recursive expression
+
+42
+00:02:48,767 --> 00:02:51,267
+for the negative binomial distribution,
+
+43
+00:02:51,267 --> 00:02:55,767
+and verify that the constant "a" equals
+beta divided by (1+beta),
+
+44
+00:02:55,767 --> 00:03:00,934
+"b" equals (r-1) times beta divided by (1+beta),
+
+45
+00:03:00,934 --> 00:03:04,767
+and p0 equals (1+beta) of power -r.
+
+46
+00:03:04,767 --> 00:03:07,934
+Using the above recursive formulas,
+
+47
+00:03:07,934 --> 00:03:11,100
+we can generate and modify the probabilities
+
+48
+00:03:11,100 --> 00:03:15,267
+for the three frequency distributions
+when we know the parameter values.
+
+49
+00:03:16,267 --> 00:03:18,767
+In this section, you learn how to define
+
+50
+00:03:18,767 --> 00:03:22,267
+the (a, b, 0) class of frequency distributions
+
+51
+00:03:22,267 --> 00:03:24,800
+by deriving the recursive expressions
+
+52
+00:03:24,800 --> 00:03:27,300
+based on the probability mass functions.
+
+53
+00:03:27,300 --> 00:03:31,800
+We then discuss the importance of the recursive relationship
+
+54
+00:03:31,800 --> 00:03:36,800
+underpinning the (a, b, 0) class of frequency distributions.
+
+55
+00:03:36,800 --> 00:03:39,800
+Finally, we identify conditions under which
+
+56
+00:03:39,800 --> 00:03:43,300
+this general class reduces to each of
+
+57
+00:03:43,300 --> 00:03:46,800
+the binomial, Poisson,
+and negative binomial distributions.
+
+58
+00:03:46,800 --> 00:03:50,034
+Based on the recursive expressions we derive
+
+59
+00:03:50,034 --> 00:03:53,734
+for the binomial, Poisson, and negative binomial distributions,
+
+60
+00:03:53,734 --> 00:03:56,734
+we can generate the probability mass functions
+
+61
+00:03:56,734 --> 00:03:58,500
+when we know the parameter values.
+
+62
+00:03:58,500 --> 00:04:01,500
+The exercise below shows how to generate Poisson
+
+63
+00:04:01,500 --> 00:04:09,400
+and negative binomial probabilities in R using the recursive formulas.
+

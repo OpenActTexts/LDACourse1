@@ -1,0 +1,308 @@
+1
+00:00:00,610 --> 00:00:04,270
+Welcome back to this video on an Introduction
+to Analytics.
+
+2
+00:00:04,270 --> 00:00:09,890
+Hi, my name is Paul Johnson. I am a lecturer
+in the Wisconsin School of Business at the
+
+3
+00:00:09,890 --> 00:00:14,900
+University of Wisconsin-Madison.
+And in this video, I am going to introduce
+
+4
+00:00:14,900 --> 00:00:20,160
+the Wisconsin Property Fund, an example that
+we will be using throughout this course.
+
+5
+00:00:20,160 --> 00:00:25,360
+OVERHEAD 1 - Wisconsin Property Fund
+
+6
+00:00:25,360 --> 00:00:30,890
+In the US State of Wisconsin, the insurance
+regulator, known as the Office of the Insurance
+
+7
+00:00:30,890 --> 00:00:36,700
+Commissioner, administers an insurance pool
+for state and local government agencies. The
+
+8
+00:00:36,700 --> 00:00:41,710
+pool is called the Local Government Property
+Insurance Fund, sometimes known through the
+
+9
+00:00:41,710 --> 00:00:46,821
+acronym LGPIF, and that we will call the Wisconsin
+Property Fund.
+
+10
+00:00:46,821 --> 00:00:54,880
+This fund has offered since 1911 and provides
+insurance on property such as government buildings,
+
+11
+00:00:54,880 --> 00:00:58,430
+schools, libraries, and motor vehicles.
+
+12
+00:00:58,430 --> 00:01:03,899
+The policyholders in the fund consist of over
+a thousand local government entities that
+
+13
+00:01:03,899 --> 00:01:09,450
+include counties, cities, towns, villages,
+school districts, and library boards.
+
+14
+00:01:09,450 --> 00:01:12,350
+OVERHEAD 2 - LGPIF Policyholder A
+
+15
+00:01:12,350 --> 00:01:18,570
+These policyholders are not people but rather
+government agencies. So, this is fund is closer
+
+16
+00:01:18,570 --> 00:01:24,250
+to commercial insurance, or insurance for
+businesses, rather than personal insurance
+
+17
+00:01:24,250 --> 00:01:26,860
+which is insurance for people.
+
+18
+00:01:26,860 --> 00:01:32,860
+Just to get a feel for what we are insuring,
+here is the first of two examples. This is
+
+19
+00:01:32,860 --> 00:01:37,619
+a picture of an elementary school building
+which is part of a school district.
+
+20
+00:01:37,619 --> 00:01:44,939
+Specifically, it is part of the Madison Metropolitan
+School District that has 98 buildings, 18
+
+21
+00:01:44,939 --> 00:01:52,140
+major pieces of equipment, and 630 properties
+in the open. The open properties include benches,
+
+22
+00:01:52,140 --> 00:01:59,869
+playsets, goals, and so forth. The insured
+value of the property is $640 millions of
+
+23
+00:01:59,869 --> 00:02:00,869
+USD.
+
+24
+00:02:00,869 --> 00:02:04,570
+OVERHEAD 3 - LGPIF Policyholder B
+
+25
+00:02:04,570 --> 00:02:10,300
+But, the Madison Metropolitan School District
+is not the largest of the approximately one
+
+26
+00:02:10,300 --> 00:02:17,140
+thousand insureds. That honor goes to the
+city of Green Bay that has insured value of
+
+27
+00:02:17,140 --> 00:02:26,970
+approximately $2.4 billions of USD. Of its
+118 sites, here is a picture of Lambeau Field.
+
+28
+00:02:26,970 --> 00:02:32,590
+This is the stadium in which a professional
+American football team, the Green Bay Packers,
+
+29
+00:02:32,590 --> 00:02:33,629
+plays.
+
+30
+00:02:33,629 --> 00:02:40,290
+Interestingly, because of its world-wide reknown,
+the fund has a separate terrorism reinsurance
+
+31
+00:02:40,290 --> 00:02:41,651
+coverage for this property.
+
+32
+00:02:41,651 --> 00:02:44,750
+OVERHEAD 4 - Property Fund
+
+33
+00:02:44,750 --> 00:02:52,440
+To give you a feel for the size, the fund
+receives approximately $25 million in premiums
+
+34
+00:02:52,440 --> 00:03:00,640
+each year and provides insurance coverage
+for about $75 billion.
+
+35
+00:03:00,640 --> 00:03:06,660
+The fund offers three major groups of insurance
+coverage: building and contents, construction
+
+36
+00:03:06,660 --> 00:03:09,720
+equipment, and motor vehicles.
+
+37
+00:03:09,720 --> 00:03:14,490
+For building and contents, the fund covers
+all property losses except those resulting
+
+38
+00:03:14,490 --> 00:03:22,830
+from flood, earthquake, wear and tear, extremes
+in temperature, mold, war, nuclear reactions,
+
+39
+00:03:22,830 --> 00:03:25,260
+and embezzlement or theft by an employee.
+
+40
+00:03:25,260 --> 00:03:28,489
+OVERHEAD 5 - Claims Frequency - R Code
+
+41
+00:03:28,489 --> 00:03:35,019
+Now that we have described a meaningful business
+context, let's move directly to the analytics.
+
+42
+00:03:35,019 --> 00:03:40,800
+We want to show how statistical code can be
+used to provide some useful results for understanding
+
+43
+00:03:40,800 --> 00:03:43,430
+the business of insurance.
+
+44
+00:03:43,430 --> 00:03:50,520
+Here are 4 lines of code.
+In the first, we read in the the data, externally
+
+45
+00:03:50,520 --> 00:04:03,090
+stored in a "csv", for "comma-separated-value"
+format, into an internal data frame, in this
+
+46
+00:04:03,090 --> 00:04:10,810
+case called "Insample".
+Next, we restrict attention to a subset of
+
+47
+00:04:10,810 --> 00:04:19,800
+year 2010 experience. It is common to examine
+insurance data on a yearly basis to separate
+
+48
+00:04:19,800 --> 00:04:26,879
+the investigation of trends.
+In the last two lines, we summarize the data.
+
+49
+00:04:26,879 --> 00:04:31,889
+Instead of showing the direct result from
+these commands, in the next overhead we present
+
+50
+00:04:31,889 --> 00:04:35,819
+the output in a format one might use to make
+business decisions.
+
+51
+00:04:35,819 --> 00:04:38,830
+OVERHEAD 6 - Claims Frequency (2010)
+
+52
+00:04:38,830 --> 00:04:48,379
+From the frequency table, we learn several
+things. For example, the table shows 1,110
+
+53
+00:04:48,379 --> 00:04:56,740
+policyholders who have 1,377 claims. Of these
+claims, almost two-thirds of the policyholders
+
+54
+00:04:56,740 --> 00:05:07,979
+did not have any claims, 18.8% had one claim
+and remaining 17.5% had more than one claim.
+
+55
+00:05:07,979 --> 00:05:13,349
+From the summary statistics, we learn that
+one policyholder with the highest number recorded
+
+56
+00:05:13,349 --> 00:05:24,050
+239 claims. Further digging shows that this
+was the Madison Metropolitan School district.
+
+57
+00:05:24,050 --> 00:05:28,939
+Many of these claims were from minor damage
+such as broken windows caused by misbehaving
+
+58
+00:05:28,939 --> 00:05:35,289
+children. Further, the average number of claims
+for this sample was 1.24.
+
+59
+00:05:35,289 --> 00:05:36,289
+REVIEW
+
+60
+00:05:36,289 --> 00:05:40,599
+This provide just a brief glimpse of the data.
+But, let's pause for a moment to give you
+
+61
+00:05:40,599 --> 00:05:43,279
+time to practice the tools introduce so far.
+
+62
+00:05:43,279 --> 00:05:44,610
+I hope that you found this overview of Wisconsin
+Property Fund to be useful.
+
+63
+00:05:44,610 --> 00:05:51,101
+In this video, we examined the frequency of
+claims for the fund. In the next video, you
+
+64
+00:05:51,101 --> 00:05:56,839
+will learn how to analyze claim amounts, also
+known as the severity of claims.
+
+65
+00:05:56,839 --> 00:05:59,339
+Thanks for watching!
+

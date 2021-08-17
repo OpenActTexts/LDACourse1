@@ -1,0 +1,1295 @@
+
+# Aggregate Loss Models 
+
+**Chapter Description**
+
+This chapter introduces probability models for describing the aggregate (total) claims that arise from a portfolio of insurance contracts. We present two standard modeling approaches, the individual risk model and the collective risk model. Further, we discuss strategies for computing the distribution of the aggregate claims, including exact methods for special cases, recursion, and simulation. Finally, we examine the effects of individual policy modifications such as deductibles, coinsurance, and inflation, on the frequency and severity distributions, and thus on the aggregate loss distribution.
+
+
+:::: {.blackbox }
+
+-  Although not needed to go through the tutorials, some users may wish to download the overheads that the videos are based on. <button download><a href="https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/LDA1.Overheads/LDA1.Chap5.pdf">Download Chapter Five overheads as a .pdf file.</a></button>
+-  By watching the videos and working through the tutorial exercises, you will get an appreciation for aggregate loss models. For a deeper dive, see the corresponding chapter in the textbook, [Chapter Five of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-AggLossModels.html).
+:::: 
+
+
+## Introduction 
+
+***
+
+In this section, we learn how to:
+
+- Record aggregate losses from an insurance system.
+- Identify actuarial applications of aggregate loss models.
+
+***
+
+####  Video: Introduction to Aggregate Loss Models {-}
+
+<center>
+
+<iframe id="kaltura_player"  src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_bock2cl4&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_1bqvxhby" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+#### Overheads: Introduction to Aggregate Loss Models (Click Tab to View) {-}
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Sect51A')">A. Basic Terminology</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect51B')">B. Goal</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect51C')">C. Models</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect51D')">D. Example</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect51E')">E. Applications</button>
+      </div>
+
+<div id="Sect51A" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=3" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect51B" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=4" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect51C" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=5" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect51D" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=7" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect51E" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=8" width="100%" height="400"> </iframe>
+  </div>
+
+
+
+## Individual Risk Model
+
+***
+
+In this section, we learn how to:
+
+- Build an individual risk model for a portfolio of insurance contracts.
+- Apply the individual risk model to life and nonlife insurance.
+- Compute the distribution of aggregate losses from an individual risk model.
+
+***
+
+####  Video: Individual Risk Model {-}
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_ndjyp3ql&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ivcxtqyq" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+#### Overheads: Individual Risk Model (Click Tab to View) {-}
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Sect52A')">A. Individual Risk Model</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect52B')">B. Applications</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect52C')">C. Example</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect52D')">D. Aggregate Loss Distribution</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect52E')">E. R Example #1</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect52F')">F. R Example #2</button>
+      </div>
+
+<div id="Sect52A" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=10" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect52B" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=11" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect52C" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=13" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect52D" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=15" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect52E" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=16" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect52F" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=17" width="100%" height="400"> </iframe>
+  </div>
+
+### Exercise. Individual Risk Model I {#Ex:IRM1}
+
+**Assignment Text**
+  
+In this assignment, we revisit [Example 5.2.1 of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-AggLossModels.html) using *simulation* in `R`. Even though we "officially" start to work with simulation beginning in  [Chapter 6 in *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-Simulation.html), this exercise provides you with an opportunity to taste a flavor of simulation.
+
+:::: {.blackbox }
+**Instructions**
+
+-  Use the function [rbinom()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Binomial) to simulate the number of claims that follow binomial distribution. For reproducibility of results set the initial 'seed' as `1000` and then generate 10,000 observations of claim frequencies for each group of policies.
+- Specify the size and probability when you simulate the number of claims with binomial distribution in each group of policies.
+::::
+
+<br>
+
+```{r ex="LDA5.5.2.1", type="hint", tut=TRUE}
+Note that number of policies and probability of claim per policy correspond to the size and incidence probability in a binomial distribution for a claim frequency random variable, respectively.
+```
+
+
+```{r ex="LDA5.5.2.1", type="sample-code", tut=TRUE}
+set.seed(??)     
+r  <- ??         
+q1 <- 0.05         
+q2 <- ??         
+n1 <- ??         
+n2 <- 200          
+
+n1 <- rbinom(r, size=n1, prob=q1) 
+n2 <- rbinom(r, size=??, prob=??) 
+```
+
+
+```{r ex="LDA5.5.2.1", type="solution", tut=TRUE}
+set.seed(1000)     # For reproducibility of results
+r  <- 10000        # Number of observations to simulate for each policy
+q1 <- 0.05         # Probability of claim from policy 1
+q2 <- 0.06         # Probability of claim from policy 2
+n1 <- 100          # Number of type 1 policies
+n2 <- 200          # Number of type 2 policies
+
+
+n1 <- rbinom(r, size=n1, prob=q1) # Generate r=10000 observations of N1 from Binomial
+n2 <- rbinom(r, size=n2, prob=q2) # Generate r=10000 observations of N2 from Binomial
+```
+
+
+```{r ex="LDA5.5.2.1", type="sct", tut=TRUE}
+success_msg("Good job! This exercise is basically a recapitulation of Chapter 2 but still quite important as one of the building blocks of Individual Risk Models.")
+```
+
+
+
+### Exercise. Individual Risk Model II
+
+**Assignment Text**
+  
+Continuing our work in Exercise \@ref(Ex:IRM1), we now reproduce the theoretical results for  calculation of moments in individual risk models using simulation. We use the simulated frequencies for each group of policies from Exercise \@ref(Ex:IRM1) and continue to simulate compound losses in an individual risk model as elaborated in [Section 5.4.2 on *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-AggLossModels.html#computing-the-aggregate-claims-distribution).
+
+:::: {.blackbox }
+**Instructions**
+
+-  Use the function [runif()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Uniform) to claim amounts that follow *uniform* distribution for each group of policies. 
+- Specify the parameters of uniform random variables, minimum and maximum values of claim amounts from each type of policies.
+- Initialize an empty vector of length $R$ to store $R$ observations of simulated $S$. In each simulation,  calculate the $j$th simulated aggregate loss and store it in $j$th component of $S$ for $j=1, \ldots, R$.
+-  Compute the mean and variance of $S$ by simulation using [mean()](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/mean) and [var()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor). Then, compare these values to their corresponding theoretical values, 2,800 and 600,467, respectively.
+::::
+
+<br>
+
+
+```{r ex="LDA5.5.2.2", type="pre-exercise-code", tut=TRUE}
+set.seed(1000)     # For reproducibility of results
+r  <- 10000        # Number of observations to simulate for each policy
+q1 <- 0.05         # Probability of claim from policy 1
+q2 <- 0.06         # Probability of claim from policy 2
+n1 <- 100          # Number of type 1 policies
+n2 <- 200          # Number of type 2 policies
+
+n1 <- rbinom(r, size=n1, prob=q1) # Generate r=10000 observations of N1 from Binomial
+n2 <- rbinom(r, size=n2, prob=q2) # Generate r=10000 observations of N2 from Binomial
+```
+  
+```{r ex="LDA5.5.2.2", type="hint", tut=TRUE}
+Note that we need to simulate claim amounts that corresponds to the number of claims so that the parameters used in `runif()` function may depend on the number of simulated claims.
+```
+
+
+```{r ex="LDA5.5.2.2", type="sample-code", tut=TRUE}
+set.seed(1000)     
+r  <- 10000        
+m1 <- 0; M1 <- ?? 
+m2 <- _; M2 <- 300 
+
+# n1: Generated 10000 observations of claim frequency from the first  group of policies with Binomial
+# n2: Generated 10000 observations of claim frequency from the second group of policies with Binomial
+
+S <- rep(??, r) 
+
+for(j in 1:r) { 
+  x1_j <- runif(n1[j], min=m1, max=??)
+  x2_j <- runif(??, min=??, max=M2)
+  S[j] <- sum(x1_j)+sum(??)
+}
+??(S) 
+var(_)  
+```
+
+
+```{r ex="LDA5.5.2.2", type="solution", tut=TRUE}
+set.seed(1000)     # For reproducibility of results
+r  <- 10000        # Number of observations to simulate for each policy
+m1 <- 0; M1 <- 400 # Parameters for severity distribution X_1
+m2 <- 0; M2 <- 300 # Parameters for severity distribution X_2
+
+# n1: Generated 10000 observations of claim frequency from the first  group of policies with Binomial
+# n2: Generated 10000 observations of claim frequency from the second group of policies with Binomial
+
+S <- rep(NA, r) # Initialize an empty vector to store S observations
+
+
+for(j in 1:r) { 
+  x1_j <- runif(n1[j], min=m1, max=M1)
+  x2_j <- runif(n2[j], min=m2, max=M2)
+  S[j]  <- sum(x1_j)+sum(x2_j) # Calculate jth simulated aggregate loss and store it at S[j]
+}
+  
+mean(S) # Compare to theoretical value of 2,800
+var(S)  # Compare to theoretical value of 600,467
+```
+
+```{r ex="LDA5.5.2.2", type="sct", tut=TRUE}
+success_msg("Good job! Note that simulation is one of the most powerful techniques in loss data analytics so we believe this exercise helped you a bit to grow as an expert in loss data analytics.")
+```
+
+
+## Collective Risk Model  - Part I
+
+***
+
+In this section, we learn how to:
+
+- Build a collective risk model for a portfolio of insurance contracts.
+- Calculate the mean and variance of the aggregate loss.
+- Fit frequency and severity components in a collective risk model.
+
+***
+
+####  Video: Collective Risk Model - Part I {-}
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_w76qa2ja&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_g39djg7z" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+#### Overheads: Collective Risk Model  - Part I (Click Tab to View) {-}
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Sect531A')">A. Collective Risk Model</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect531B')">B. Compound Distribution</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect531C')">C. Moments</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect531D')">D. Model Fitting</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect531E')">E. Model Fitting - Property Fund</button>
+      </div>
+
+<div id="Sect531A" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=20" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect531B" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=21" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect531C" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=22" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect531D" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=23" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect531E" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=24" width="100%" height="400"> </iframe>
+  </div>
+  
+
+### Exercise. Collective Risk Model I
+
+**Assignment Text**
+  
+In this assignment, we will fit a collective risk model for an actual portfolio of insurance contracts, **LGPIF** data with `R`. We use *negative binomial* and *Pareto* distributions for the frequency and severity components, respectively.
+
+:::: {.blackbox }
+**Instructions**
+
+-  Use the function [optim()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/optim) to find the maximum likelihood estimates of the frequency and severity distributions.
+- For the likelihood of frequency component, we use [dnbinom()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/NegBinomial). Note that we use the same parametrization as in the [Section 2.2 of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-Frequency-Modeling.html#S:important-frequency-distributions) so that $\text{size}=r$ and $\text{prob}=1/(1+\beta)$.
+- For the likelihood of severity component, we use [dlomax()](https://www.rdocumentation.org/packages/bayesmeta/versions/2.6/topics/dlomax). Note that we use the same parametrization as in the [Section 3.2 of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-Severity.html#S:ContinuousDistn) so that $\text{shape}=\alpha$ and $\text{scale}=\theta$.
+::::
+
+<br>
+
+```{r ex="LDA5.5.3.1", type="hint", tut=TRUE}
+Since *optim* minimizes given function by default, we put the negative likelihood as an objective function to be minimized.
+```
+
+```{r ex="LDA5.5.3.1", type="pre-exercise-code", tut=TRUE}
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+library(lme4)
+
+dlomax <- function(x, shape=1, scale=1, log=FALSE) {
+  if (log==FALSE) result <- shape*scale^shape / (scale + x)^(shape+1)
+  if (log==TRUE ) result <- log(shape)+shape*log(scale)-(shape+1)*log(scale + x)
+  return(result) }
+```
+
+```{r ex="LDA5.5.3.1", type="sample-code", tut=TRUE, warning=FALSE, message=FALSE}
+InsampleTown <- subset(Insample, TypeTown==1)
+
+# The negative binomial frequency model: N
+N <- InsampleTown$Freq
+freq_lik <- function(parm) {
+  r    <- parm[1]
+  beta <- parm[2]
+  lik  <- -sum(dnbinom(N, size=_, prob=1/(1+??), log=TRUE))
+  return(lik)
+}
+init.parm.freq <- c(mean(N)/(var(N)/mean(N)-1), var(N)/mean(N)-1) # initial estimates by method of moments
+freq_mod       <- ??(par=init.parm.freq, fn=??) # Maximum likelihood estimation for the frequency model
+
+r.est    <- freq_mod$par[1]
+beta.est <- freq_mod$par[2]
+
+freq_table <- cbind(table(N)[1:4]/length(N), dnbinom(0:3, size=??, prob=1/(1+beta.est)))
+freq_table <- rbind(freq_table, 1-colSums(freq_table))
+rownames(freq_table)[5] <- "4+"
+colnames(freq_table)    <- c("Empirical", "Theoretical")
+# Empirical and fitted distributions of observed N
+freq_table
+
+# The Pareto severity model: Xbar
+Xbar <- InsampleTown$yAvg[which(InsampleTown$Freq>0)]
+sev_lik <- function(parm) {
+  alpha <-  parm[1]
+  theta <-  parm[2]
+  lik   <- -sum(dlomax(Xbar, shape=??, scale=??, log=TRUE))
+  return(lik)
+}
+init.parm.sev <- c( 2/(1-mean(Xbar)^2/var(Xbar))  , mean(Xbar)*(2/(1-mean(Xbar)^2/var(Xbar))-1) ) # initial estimates by method of moments
+sev_mod       <- ??(par=??, fn=sev_lik, method="L-BFGS-B") # Maximum likelihood estimation for the severity model
+alpha.est     <- sev_mod$par[1]
+theta.est     <- sev_mod$par[2]
+
+# Empirical and fitted distributions of observed Xbar
+plot(1-(theta.est/(theta.est+sort(Xbar)))^alpha.est, rank(sort(Xbar))/(length(Xbar)+1),
+     ylab = "Empirical Quantiles", xlab = "Theoretical Quantiles",
+     main = "Severity Model")
+
+```
+
+
+```{r ex="LDA5.5.3.1", type="solution", tut=TRUE, warning=FALSE, message=FALSE}
+InsampleTown <- subset(Insample, TypeTown==1)
+
+# The negative binomial frequency model: N
+N <- InsampleTown$Freq
+freq_lik <- function(parm) {
+  r    <- parm[1]
+  beta <- parm[2]
+  lik  <- -sum(dnbinom(N, size=r, prob=1/(1+beta), log=TRUE))
+  return(lik)
+}
+init.parm.freq <- c(mean(N)/(var(N)/mean(N)-1), var(N)/mean(N)-1) # initial estimates by method of moments
+freq_mod       <- optim(par=init.parm.freq, fn=freq_lik) # Maximum likelihood estimation for the frequency model
+
+r.est    <- freq_mod$par[1]
+beta.est <- freq_mod$par[2]
+
+freq_table <- cbind(table(N)[1:4]/length(N), dnbinom(0:3, size=r.est, prob=1/(1+beta.est)))
+freq_table <- rbind(freq_table, 1-colSums(freq_table))
+rownames(freq_table)[5] <- "4+"
+colnames(freq_table)    <- c("Empirical", "Theoretical")
+# Empirical and fitted distributions of observed N
+freq_table
+
+# The Pareto severity model: Xbar
+Xbar <- InsampleTown$yAvg[which(InsampleTown$Freq>0)]
+sev_lik <- function(parm) {
+  alpha <-  parm[1]
+  theta <-  parm[2]
+  lik   <- -sum(dlomax(Xbar, shape=alpha, scale=theta, log=TRUE))
+  return(lik)
+}
+init.parm.sev <- c( 2/(1-mean(Xbar)^2/var(Xbar))  , mean(Xbar)*(2/(1-mean(Xbar)^2/var(Xbar))-1) ) # initial estimates by method of moments
+sev_mod       <- optim(par=init.parm.sev, fn=sev_lik, method="L-BFGS-B") # Maximum likelihood estimation for the severity model
+alpha.est     <- sev_mod$par[1]
+theta.est     <- sev_mod$par[2]
+
+# Empirical and fitted distributions of observed Xbar
+plot(1-(theta.est/(theta.est+sort(Xbar)))^alpha.est, rank(sort(Xbar))/(length(Xbar)+1),
+     ylab = "Empirical Quantiles", xlab = "Theoretical Quantiles",
+     main = "Severity Model")
+
+```
+
+```{r ex="LDA5.5.3.1", type="sct", tut=TRUE}
+success_msg("Cheers! Note that we usually add covariates in the frequency and severity models for risk classification purpose in practice.")
+```
+  
+
+
+## Collective Risk Model - Part II
+
+***
+
+
+In this section, we learn how to:
+
+-  Compute the aggregate loss distribution.
+-  Implement numerical strategies in `R`.
+
+***
+
+####  Video: Collective Risk Model  - Part II {-}
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_37zojz7d&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_v2a227tt" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+#### Overheads: Collective Risk Model  - Part II (Click Tab to View) {-}
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Sect532A')">A. Computing the Aggregate Loss Distribution</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect532B')">B. Direct Calculation</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect532C')">C. Direct Calculation - R Code</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect532D')">D. Recursive Method</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect532E')">E. Recursive Method - R Code</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect532F')">F. Monte Carlo Simulation</button>
+      </div>
+
+<div id="Sect532A" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=29" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect532B" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=30" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect532C" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=32" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect532D" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=34" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect532E" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=36" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect532F" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=37" width="100%" height="400"> </iframe>
+  </div>
+
+
+### Exercise. Collective Risk Model II
+<img src = "ContributorPics\hurdler.png" width = "65" height = "65" style = "float:right; margin-left: 10px; margin-top: 7px" />
+
+**Assignment Text**
+  
+In this assignment, we will analyze the aggregate loss distribution by combining fitted frequency and severity components. Since it is usually very hard to obtain a closed form expression for the distribution function of the compound loss in a collective risk model, we rely on simulations to compute the aggregate loss distribution. 
+
+
+:::: {.blackbox }
+**Instructions**
+
+
+- We use the fitted frequency and severity models using **LGPIF** data as we have done in Tutorial 5.3, with negative binomial and Pareto distributions, respectively.
+- To generate random samples from the fitted frequency and severity models, we use [rnbinom()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/NegBinomial) and  [rlomax()](https://www.rdocumentation.org/packages/bayesmeta/versions/2.6/topics/dlomax). Note that these generated random samples are used as inputs to compute the aggregate claim amount distribution.
+- We use [aggregateDist()](https://www.rdocumentation.org/packages/actuar/versions/3.1-1/topics/aggregateDist) to simulate compound losses that match the observed data upon the fitted frequency and severity models. It is an important task in order to visualize the distribution of compound losses and make subsequent decisions on ratemaking.
+::::
+
+<br>
+
+```{r ex="LDA5.5.4.1", type="hint", tut=TRUE}
+We should use the estimated parameters from the frequency and severity distributions in calculation of the aggregate claim amount distribution.
+```
+
+```{r ex="LDA5.5.4.1", type="pre-exercise-code", tut=TRUE}
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+library(lme4)
+
+aggregate.portfolio <- function(x, by = names(x$nodes), FUN = sum,
+                                classification = TRUE, prefix = NULL, ...)
+{
+    level.names <- names(x$nodes)       # level names
+    nlevels <- length(level.names)      # number of levels
+    years <- level.names[nlevels]       # name of last level
+
+    ## Match level names in 'by' to those in the model
+    by <- match.arg(by, level.names, several.ok = TRUE)
+
+    ## Version of FUN able to work on lists
+    fun <- function(x, ...) FUN(unlist(x), ...)
+
+    ## The most common case should be to aggregate claim amounts by
+    ## node. This case being very simple, it is treated separately.
+    if (identical(by, level.names))
+        return(cbind(if (classification) x$classification,
+                     array(sapply(x$data, FUN, ...), dim(x$data),
+                           dimnames = list(NULL, paste(prefix, colnames(x$data), sep = "")))))
+
+    ## Summaries only by last level (years) are also simple to handle.
+    if (identical(by, years))
+    {
+        res <- apply(x$data, 2, fun, ...)
+        names(res) <- paste(prefix, colnames(x$data), sep = "")
+        return(res)
+    }
+
+    ## The other possibilities require to split the data in groups as
+    ## specified in argument 'by'. If the last level (years) is in
+    ## 'by', then the matrix structure must be retained to make the
+    ## summaries. Otherwise, it can just be dropped since summaries
+    ## will span the years of observation.
+    ##
+    ## Convert the sequence of subscripts into factors by pasting the
+    ## digits together. It is important *not* to sort the levels in
+    ## case the levels in 'by' are not in the same order as in
+    ## 'level.names'.
+    rows <- setdiff(by, years)          # groups other than years
+    s <- x$classification[, rows, drop = FALSE] # subscripts
+    f <- apply(s, 1, paste, collapse = "")      # grouping IDs
+    f <- factor(f, levels = unique(f))          # factors
+    s <- s[match(levels(f), f), , drop = FALSE] # unique subscripts
+    xx <- split(x$data, f)                      # split data
+
+    ## Make summaries
+    if (years %in% by)
+    {
+        xx <- lapply(xx, matrix, ncol = ncol(x$data))
+        res <- t(sapply(xx, function(x, ...) apply(x, 2, fun, ...), ...))
+        cols <- colnames(x$data)
+    }
+    else
+    {
+        res <- sapply(xx, fun, ...)
+        cols <- deparse(substitute(FUN))
+    }
+
+    ## Return results as a matrix
+    structure(cbind(if (classification) s, res),
+              dimnames = list(NULL, c(if (classification) rows, paste(prefix, cols, sep = ""))))
+}
+
+simS <- function(n, model.freq, model.sev)
+{
+  
+    n=1000
+    model.freq = freq
+    model.sev = sev
+    
+    ## Prepare the call to simul() by building up 'nodes'
+    level.names <- names(if (is.null(model.freq)) model.sev else model.freq)
+    nlevels <- length(level.names)
+    nodes <- as.list(c(rep(1, nlevels - 1), n))
+    names(nodes) <- level.names
+
+    ## Get sample
+    x <- aggregate(simul(nodes = nodes,
+                         model.freq = model.freq,
+                         model.sev = model.sev))[-1]
+
+    ## Compute the empirical cdf of the sample. Done manually instead
+    ## of calling stats:::ecdf() to keep a copy of the empirical pmf
+    ## in the environment without computing it twice.
+    x <- sort(x)
+    vals <- unique(x)
+    fs <- tabulate(match(x, vals))/length(x)
+    FUN <- approxfun(vals, pmin(cumsum(fs), 1), method = "constant",
+                     yleft = 0, yright = 1, f = 0, ties = "ordered")
+    class(FUN) <- c("ecdf", "stepfun", class(FUN))
+    assign("fs", fs, envir = environment(FUN))
+    FUN
+}
+
+aggregateDist <-
+    function(method = c("recursive", "convolution", "normal", "npower", "simulation"),
+             model.freq = NULL, model.sev = NULL, p0 = NULL, x.scale = 1,
+             convolve = 0, moments, nb.simul, ...,
+             tol = 1e-06, maxit = 500, echo = FALSE)
+{
+    Call <- match.call()
+
+    ## The method used essentially tells which function should be
+    ## called for the calculation of the aggregate claims
+    ## distribution.
+    method <- match.arg(method)
+
+    if (method == "normal")
+    {
+        ## An error message is issued if the number of moments listed
+        ## is not appropriate for the method. However it is the user's
+        ## responsibility to list the moments in the correct order
+        ## since the vector is not required to be named.
+        if (missing(moments) || length(moments) < 2)
+            stop("'moments' must supply the mean and variance of the distribution")
+        FUN <- normal(moments[1], moments[2])
+        comment(FUN) <- "Normal approximation"
+    }
+
+    else if (method == "npower")
+    {
+        if (missing(moments) || length(moments) < 3)
+            stop("'moments' must supply the mean, variance and skewness of the distribution")
+        FUN <- npower(moments[1], moments[2], moments[3])
+        comment(FUN) <- "Normal Power approximation"
+    }
+    else if (method == "simulation")
+    {
+        if (missing(nb.simul))
+            stop("'nb.simul' must supply the number of simulations")
+        if (is.null(names(model.freq)) && is.null(names(model.sev)))
+            stop("expressions in 'model.freq' and 'model.sev' must be named")
+        FUN <- simS(nb.simul, model.freq = model.freq, model.sev = model.sev)
+        comment(FUN) <- "Approximation by simulation"
+    }
+    else
+    {
+        ## "recursive" and "convolution" cases. Both require a
+        ## discrete distribution of claim amounts, that is a vector of
+        ## probabilities in argument 'model.sev'.
+        if (!is.numeric(model.sev))
+            stop("'model.sev' must be a vector of probabilities")
+
+        ## Recursive method uses a model for the frequency distribution.
+        if (method == "recursive")
+        {
+            if (is.null(model.freq) || !is.character(model.freq))
+                stop("frequency distribution must be supplied as a character string")
+            dist <- match.arg(tolower(model.freq),
+                              c("poisson",
+                                "geometric",
+                                "negative binomial",
+                                "binomial",
+                                "logarithmic",
+                                "zero-truncated poisson",
+                                "zero-truncated geometric",
+                                "zero-truncated negative binomial",
+                                "zero-truncated binomial",
+                                "zero-modified logarithmic",
+                                "zero-modified poisson",
+                                "zero-modified geometric",
+                                "zero-modified negative binomial",
+                                "zero-modified binomial"))
+            FUN <- panjer(fx = model.sev, dist = dist, p0 = p0,
+                          x.scale = x.scale, ..., convolve = convolve,
+                          tol = tol, maxit = maxit, echo = echo)
+            comment(FUN) <- "Recursive method approximation"
+        }
+
+        ## Convolution method requires a vector of probabilities in
+        ## argument 'model.freq'.
+        else if (method == "convolution")
+        {
+            if (!is.numeric(model.freq))
+                stop("'model.freq' must be a vector of probabilities")
+            FUN <- exact(fx = model.sev, pn = model.freq, x.scale = x.scale)
+            comment(FUN) <- "Exact calculation (convolutions)"
+        }
+        else
+            stop("internal error")
+    }
+
+    ## Return cumulative distribution function
+    class(FUN) <- c("aggregateDist", class(FUN))
+    attr(FUN, "call") <- Call
+    FUN
+    }
+
+
+plot.aggregateDist <- function(x, xlim,
+                               ylab = expression(F[S](x)),
+                               main = "Aggregate Claim Amount Distribution",
+                               sub = comment(x), ...)
+{
+    ## Function plot() is used for the step cdfs and function curve()
+    ## in the continuous cases.
+    if ("stepfun" %in% class(x))
+    {
+        ## Method for class 'ecdf' will most probably be used.
+        NextMethod(main = main, ylab = ylab, ...)
+    }
+    else
+    {
+        ## Limits for the x-axis are supplied if none are given
+        ## in argument.
+        if (missing(xlim))
+        {
+            mean <- get("mean", envir = environment(x))
+            sd <- sqrt(get("variance", envir = environment(x)))
+            xlim <- c(mean - 3 * sd, mean + 3 * sd)
+        }
+        curve(x, main = main, ylab = ylab, xlim = xlim, ylim = c(0, 1), ...)
+    }
+    mtext(sub, line = 0.5)
+}
+
+simul <- function(nodes, model.freq = NULL, model.sev = NULL, weights = NULL)
+{
+    ## Get level names. Each could be NULL.
+    level.names <- names(nodes)
+    freq.names <- names(model.freq)
+    sev.names <- names(model.sev)
+
+    ## 'nodes' must be a named list. One exception is allowed: there
+    ## is only one level. In this case, add a predetermined name if
+    ## there isn't one already and make sure 'nodes' is a list.
+    if (length(nodes) == 1L)
+    {
+        if (is.null(level.names))
+            names(nodes) <- "X"
+        nodes <- as.list(nodes)
+    }
+    else
+    {
+        if (!is.list(nodes) || is.null(level.names))
+            stop("'nodes' must be a named list")
+    }
+
+    ## Determine if frequency and severity models are present. Keep
+    ## for future use.
+    has.freq <- !all(sapply(model.freq, is.null))
+    has.sev  <- !all(sapply(model.sev, is.null))
+
+    ## Check that at least one of 'model.freq' or 'model.sev' is
+    ## present and that the level names match with those of 'nodes'.
+    ## Perhaps is there a fancier way to do all these tests, but the
+    ## version below is at least easy to follow.
+    if (has.freq)
+    {
+        if (has.sev)
+        {
+            if (! (identical(level.names, freq.names) &&
+                   identical(level.names, sev.names)))
+                stop("level names different in 'nodes', 'model.freq' and 'model.sev'")
+        }
+        else
+        {
+            if (!identical(level.names, freq.names))
+                stop("level names different in 'nodes', 'model.freq' and 'model.sev'")
+        }
+    }
+    else
+    {
+        if (has.sev)
+        {
+            if (!identical(level.names, sev.names))
+                stop("level names different in 'nodes', 'model.freq' and 'model.sev'")
+        }
+        else
+            stop("one of 'model.freq' or 'model.sev' must be non-NULL")
+    }
+
+    ## The function is written for models with at least two levels
+    ## (entity and year). If there is only one, add a dummy level to
+    ## avoid scattering the code with conditions.
+    if (length(nodes) < 2L)
+    {
+        nodes <- c(node = 1, nodes)
+        model.freq <-
+            if (has.freq) c(expression(node = NULL), model.freq) else NULL
+        model.sev <-
+            if (has.sev) c(expression(node = NULL), model.sev) else NULL
+    }
+
+    ## Frequently used quantities
+    level.names <- names(nodes)         # need to reset!
+    nlevels <- length(nodes)            # number of levels
+
+    ## Recycling of the number of nodes (if needed) must be done
+    ## "manually". We do it here once and for all since in any case
+    ## below we will need to know the total number of nodes in the
+    ## portfolio. Furthermore, the recycled list 'nodes' will be
+    ## returned by the function.
+    for (i in 2L:nlevels)       # first node doesn't need recycling
+        nodes[[i]] <- rep(nodes[[i]], length = sum(nodes[[i - 1L]]))
+
+    ## Simulation of the frequency mixing parameters for each level
+    ## (e.g. class, contract) and, at the last level, the actual
+    ## frequencies. If 'model.freq' is NULL, this is equivalent to
+    ## having one claim per node.
+    if (has.freq)
+    {
+        ## Normally, only the immediately above mixing parameter will
+        ## be used in the model for a level, but the code here allows
+        ## for more general schemes. For this to work, all mixing
+        ## parameters have to be correctly recycled at each level
+        ## where they *could* be used. Since the model at any level
+        ## could be NULL, 'params' will keep track of the mixing
+        ## parameters that were simulated in previous iteration of the
+        ## forthcoming loop.
+        params <- character(0)
+
+        for (i in seq_len(nlevels))
+        {
+            ## Number of nodes at the current level
+            n.current <- nodes[[i]]
+
+            ## Extract simulation model for the level.
+            Call <- model.freq[[i]]
+
+            ## Repeat the mixing parameters of all levels above the
+            ## current one that were simulated in the past.
+            for (j in seq_along(params))
+                eval(substitute(x <- rep.int(x, n.current),
+                                list(x = as.name(params[[j]]))))
+
+            ## Simulate data only if there is a model at the current
+            ## level.
+            if (!is.null(Call))
+            {
+                ## Add the number of variates to the call.
+                Call$n <- sum(n.current)
+
+                ## Simulation of the mixing parameters or the data. In
+                ## the latter case, store the results in a fixed
+                ## variable name.
+                if (i < nlevels)
+                {
+                    assign(level.names[[i]], eval(Call))
+                    params[i] <- level.names[[i]] # remember the parameter
+                }
+                else
+                    frequencies <- eval(Call)
+            }
+        }
+    }
+    else
+        frequencies <- rep.int(1, sum(nodes[[nlevels]]))
+
+    ## Simulation of the claim amounts. If 'model.sev' is NULL, this
+    ## is equivalent to simulating frequencies only.
+    if (has.sev)
+    {
+        ## Repeat the same procedure as for the frequency model, with
+        ## one difference: when reaching the last level (claim
+        ## amounts), the number of variates to simulate is not given
+        ## by the number of nodes but rather by the number of claims
+        ## as found in 'frequencies'.
+        params <- character(0)
+
+        for (i in seq_len(nlevels))
+        {
+            n.current <- nodes[[i]]
+            Call <- model.sev[[i]]
+
+            for (j in seq_along(params))
+                eval(substitute(x <- rep.int(x, n.current),
+                                list(x = as.name(params[[j]]))))
+
+            if (!is.null(Call))
+            {
+                ## The rest of the procedure differs depending if we
+                ## are still simulating mixing parameters or claim
+                ## amounts.
+                if (i < nlevels)
+                {
+                    ## Simulation of mixing parameters is identical to the
+                    ## simulation of frequencies.
+                    Call$n <- sum(n.current)
+                    assign(level.names[[i]], eval(Call))
+                    params[i] <- level.names[[i]]
+                }
+                else
+                {
+                    ## For the simulation of claim amounts, the number
+                    ## of variates is rather given by the
+                    ## 'frequencies' object. Furthermore, the mixing
+                    ## parameters must be recycled once more to match
+                    ## the vector of frequencies.
+                    for (p in intersect(all.vars(Call), params))
+                        eval(substitute(x <- rep.int(x, frequencies),
+                                        list(x = as.name(p))))
+                    Call$n <- sum(frequencies)
+                    severities <-eval(Call)
+                }
+            }
+        }
+    }
+    else
+        severities <- rep.int(1, sum(frequencies))
+
+    ## We must now distribute the claim amounts in vector 'severities'
+    ## to the appropriate nodes. This is complicated by the
+    ## possibility to have different number of nodes (years of
+    ## observation) for each entity. The result must be a matrix
+    ## with the number of columns equal to the maximum number of last
+    ## level nodes.
+    ##
+    ## The number of nodes (years of observation) per entity is
+    ## given by 'n.current' since we reached the last level in (either
+    ## one of) the above loops.
+    ##
+    ## Assign a unique ID to each node, leaving gaps for nodes without
+    ## observations.
+    ind <- unlist(mapply(seq,
+                         from = seq(by = max(n.current), along = n.current),
+                         length = n.current))
+
+    ## Repeating the vector of IDs according to the frequencies
+    ## effectively assigns a node ID to each claim amount. The vector
+    ## of claim amounts is then split by node, yielding a list where
+    ## each element corresponds to a node with claims.
+    f <- rep.int(ind, frequencies)
+    severities <- split(severities, f)
+
+    ## Identify nodes with frequency equal to 0, which is different
+    ## from having no observation (NA).
+    freq0 <- ind[which(frequencies == 0)]
+
+    ## Rearrange the list of claim amounts in a matrix;
+    ##
+    ##      number of rows: number of nodes at the penultimate level
+    ##                      (number of entities)
+    ##   number of columns: maximum number of nodes at the last level
+    ##                      (number of years of observation).
+    ##
+    ## Moreover, assign a value of 'numeric(0)' to nodes with a
+    ## frequency of 0.
+    nrow <- length(n.current)           # number of entities
+    ncol <- max(n.current)              # number of years
+    res <- as.list(rep.int(NA, nrow * ncol))
+    res[unique(f)] <- severities
+    res[freq0] <- lapply(rep.int(0, length(freq0)), numeric)
+    res <- matrix(res, nrow, ncol, byrow = TRUE,
+                  dimnames = list(NULL,
+                                  paste(level.names[nlevels],
+                                        seq_len(ncol), sep = ".")))
+
+    ## Reshape weights as a matrix, if necessary.
+    weights <- if (is.null(weights))
+        NULL
+    else
+    {
+        ## Integrate NAs into the weights matrix as appropriate.
+        w <- rep.int(NA, nrow * ncol)
+        w[ind] <- weights
+        matrix(w, nrow = nrow, byrow = TRUE, dimnames = dimnames(res))
+    }
+
+    ## Finally, create a matrix where each row contains the series of
+    ## identifiers for an entity in the portfolio, e.g. if the data
+    ## is denoted X_{ijkt}, one line of the matrix will contain
+    ## subscripts i, j and k. As we move from right to left in the
+    ## columns of 'm', the subscripts are increasingly repeated.
+    ncol <- nlevels - 1L
+    m <- matrix(1, nrow, ncol,
+                dimnames = list(NULL, head(level.names, ncol)))
+    for (i in seq_len(ncol - 1L))    # all but the last column
+    {
+        ## Vector 'x' will originally contain all subscripts for one
+        ## level. These subscripts are then repeated as needed to give
+        ## the desired result. To avoid another explicit loop, I use a
+        ## 'lapply' with a direct assignment in the current
+        ## frame. Somewhat unusual, but this is the simplest procedure
+        ## I managed to come up with.
+        x <- unlist(lapply(nodes[[i]], seq))
+        lapply(nodes[(i + 1L):(nlevels - 1L)],
+               function(v) assign("x", rep.int(x, v), envir = parent.frame(2)))
+        m[, i] <- x
+    }
+    m[, ncol] <- unlist(lapply(nodes[[ncol]], seq)) # last column
+
+    ## Return object of class 'portfolio'
+    structure(list(data = res,
+                   weights = weights,
+                   classification = m,
+                   nodes = nodes,
+                   model.freq = model.freq,
+                   model.sev = model.sev),
+              class = "portfolio")
+}
+
+dlomax <- function(x, shape=1, scale=1, log=FALSE) {
+  if (log==FALSE) result <- shape*scale^shape / (scale + x)^(shape+1)
+  if (log==TRUE ) result <- log(shape)+shape*log(scale)-(shape+1)*log(scale + x)
+  return(result) }
+
+rlomax <- function(n, shape=1, scale=1) {
+  u <- runif(n)
+  result <- scale*((1 - u)^(-1/shape)-1)
+  return(result) }
+
+InsampleTown <- subset(Insample, TypeTown==1)
+
+# The negative binomial frequency model: N
+N <- InsampleTown$Freq
+freq_lik <- function(parm) {
+  r    <- parm[1]
+  beta <- parm[2]
+  lik  <- -sum(dnbinom(N, size=r, prob=1/(1+beta), log=TRUE))
+  return(lik)
+}
+init.parm.freq <- c(mean(N)/(var(N)/mean(N)-1), var(N)/mean(N)-1) # initial estimates by method of moments
+freq_mod       <- optim(par=init.parm.freq, fn=freq_lik) # Maximum likelihood estimation for the frequency model
+
+r.est    <- freq_mod$par[1]
+beta.est <- freq_mod$par[2]
+
+
+# The Pareto severity model: Xbar
+Xbar <- InsampleTown$yAvg[which(InsampleTown$Freq>0)]
+sev_lik <- function(parm) {
+  alpha <-  parm[1]
+  theta <-  parm[2]
+  lik   <- -sum(dlomax(Xbar, shape=alpha, scale=theta, log=TRUE))
+  return(lik)
+}
+init.parm.sev <- c( 2/(1-mean(Xbar)^2/var(Xbar))  , mean(Xbar)*(2/(1-mean(Xbar)^2/var(Xbar))-1) ) # initial estimates by method of moments
+sev_mod       <- optim(par=init.parm.sev, fn=sev_lik, method="L-BFGS-B") # Maximum likelihood estimation for the severity model
+alpha.est     <- sev_mod$par[1]
+theta.est     <- sev_mod$par[2]
+
+```
+
+
+```{r ex="LDA5.5.4.1", type="sample-code", tut=TRUE}
+
+# Parameter estimates from the frequency model: alpha.est, theta.est
+# Parameter estimates from the severity  model:     r.est,  beta.est
+
+freq <- expression(data =  ??(size=??, prob=1/(1+??)))  # random samples from the fitted frequency model
+sev  <- expression(data =  ??(shape=??, scale=??)) # random samples from the fitted severity model
+Fs   <- aggregateDist("simulation", nb.simul = 1000,
+                      model.freq = ??, model.sev = ??)
+plot(Fs)
+lines(ecdf(InsampleTown$y),  col="blue")
+
+legend("bottomright", legend = c("Simulation", "Empirical"), col=c("black","blue"), lty=c(1,2), pch=c(1, 19))
+```
+
+```{r ex="LDA5.5.4.1", type="solution", tut=TRUE}
+
+# Parameter estimates from the frequency model: alpha.est, theta.est
+# Parameter estimates from the severity  model:     r.est,  beta.est
+
+freq <- expression(data =  rnbinom(size=r.est, prob=1/(1+beta.est))) # random samples from the fitted frequency model
+sev  <- expression(data =  rlomax(shape=alpha.est, scale=theta.est)) # random samples from the fitted severity model
+Fs   <- aggregateDist("simulation", nb.simul = 1000,
+                      model.freq = freq, model.sev = sev)
+plot(Fs)
+lines(ecdf(InsampleTown$y),  col="blue")
+
+legend("bottomright", legend = c("Simulation", "Empirical"), col=c("black","blue"), lty=c(1,2), pch=c(1, 19))
+```
+
+
+```{r ex="LDA5.5.4.1", type="sct", tut=TRUE}
+success_msg("Good job! This is the second time that we used the simulation technique. Note that it is usual to observe that an actual claims dataset may come with very few positive claims but also heavy tail behavior.")
+```
+
+
+
+## Tweedie Distribution 
+
+
+In this section, we learn how to:
+
+*  Construct the Tweedie distribution from a collective risk model.
+*  Establish the Tweedie distribution as a member of the exponential family of distributions.
+*  Fit Tweedie distribution as a generalized linear model.
+
+***
+
+
+
+####  Video: Tweedie Distribution {-}
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_lxnu6a93&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_jjd6r5f9" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+#### Overheads: Tweedie Distribution (Click Tab to View) {-}
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Sect54A')">A. Tweedie Distribution</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect54B')">B. Tweedie Distribution with Exposure</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect54C')">C. Distribution Function for Tweedie Distribution</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect54D')">D. Example</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect54E')">E. Example - R Code</button>
+      </div>
+
+<div id="Sect54A" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=41" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect54B" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=42" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect54C" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=43" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect54D" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=45" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect54E" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=46" width="100%" height="400"> </iframe>
+  </div>
+
+
+
+### Exercise. Tweedie Distribution
+<img src = "ContributorPics\hurdler.png" width = "65" height = "65" style = "float:right; margin-left: 10px; margin-top: 7px" />
+
+**Assignment Text**
+  
+In this assignment, we will fit a Tweedie model for a collective risk model using observed compound losses in LGPIF data with `R`. Unlike the previous tutorials that required separate model fitting for the frequency and severity components, use of Tweedie distribution enables us to fit a collective risk model in one step.
+
+:::: {.blackbox }
+**Instructions**
+
+- For the likelihood of the compound loss, We use [dtweedie()](https://www.rdocumentation.org/packages/tweedie/versions/2.3.3/topics/Tweedie), which is one of the built-in functions of `R` library [tweedie](https://cran.r-project.org/web/packages/tweedie/tweedie.pdf) .
+- From the fitted Tweedie model via [optim()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/optim), extract the estimated mu, phi, and p.
+- After estimating the parameters of the Tweedie model, plot the empirical quantiles against the quantiles from the fitted model. Note that we generate the theoretical quantiles via [qtweedie()](https://www.rdocumentation.org/packages/tweedie/versions/2.3.3/topics/Tweedie) and the estimated Tweedie parameters.
+::::
+
+<br>
+
+
+```{r ex="LDA5.5.5.1", type="hint", tut=TRUE}
+For Tweedie distribution, we estimate three parameters (mu, phi, p) that explain the overal mean, dispersion, and shape of the distribution.
+```
+
+```{r ex="LDA5.5.5.1", type="pre-exercise-code", tut=TRUE}
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+library(lme4)
+
+source("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/RCode/TweedieSourceCode.Rmd")
+
+```
+
+
+```{r ex="LDA5.5.5.1", type="sample-code", tut=TRUE}
+InsampleTown <- subset(Insample, TypeTown==1)
+
+# The Tweedie compound loss model: S
+S <- ??$y
+comploss_lik <- function(parm) {
+  mu    <- parm[1]
+  phi   <- parm[2]
+  p     <- parm[3]
+  lik  <- -sum(  log(dtweedie(S, mu=mu, phi=phi, power=_)) )
+  return(lik)
+}
+init.parm.comploss <- c( mean(S), 300, 1.5)    # initial estimates 
+comploss_mod       <- optim(par=??,
+                            fn=??, method="L-BFGS-B") # Maximum likelihood estimation for the compound loss model
+
+
+mu.est  <- comploss_mod$par[1]
+phi.est <- comploss_mod$??
+p.est   <- comploss_mod$??
+
+pct <- seq(0.01,0.99,0.01)
+plot(qtweedie(pct, mu=??, phi=??, power=p.est) ,quantile(InsampleTown$y, probs=pct), xlab="Theoretical Quantile", ylab="Empirical Quantile", xlim=c(0,50000), ylim=c(0,50000))
+abline(0,1)
+
+```
+
+```{r ex="LDA5.5.5.1", type="solution", tut=TRUE}
+InsampleTown <- subset(Insample, TypeTown==1)
+
+# The Tweedie compound loss model: S
+S <- InsampleTown$y
+comploss_lik <- function(parm) {
+  mu    <- parm[1]
+  phi   <- parm[2]
+  p     <- parm[3]
+  lik  <- -sum(  log(dtweedie(S, mu=mu, phi=phi, power=p)) )
+  return(lik)
+}
+init.parm.comploss <- c( mean(S), 300, 1.5)    # initial estimates 
+comploss_mod       <- optim(par=init.parm.comploss,
+                            fn=comploss_lik, method="CG") # Maximum likelihood estimation for the compound loss model
+
+
+mu.est  <- comploss_mod$par[1]
+phi.est <- comploss_mod$par[2]
+p.est   <- comploss_mod$par[3]
+
+pct <- seq(0.01,0.99,0.01)
+plot(qtweedie(pct, mu=mu.est, phi=phi.est, power=p.est) ,quantile(InsampleTown$y, probs=pct), xlab="Theoretical Quantile", ylab="Empirical Quantile", xlim=c(0,50000), ylim=c(0,50000))
+abline(0,1)
+
+```
+
+
+```{r ex="LDA5.5.5.1", type="sct", tut=TRUE}
+success_msg("While Tweedie distribution enables us to fit a compound loss distribution in one step, actual claims dataset might not fit into the distribution especially when we observe heavy-tail behavior.")
+```
+
+## Effects of Coverage Modifications
+
+***
+
+In this section, we learn how to:
+
+- Examine the impact of aggregate deductible on the aggregate loss.
+- Examine the effect of per-occurrence deductible on frequency and severity components in the aggregate loss.
+
+***
+
+####  Video: Effects of Coverage Modifications {-}
+
+<center>
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&playerId=kaltura_player&entry_id=1_ux66n6m1&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_t0nnom35" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"  frameborder="0" title="Kaltura Player"></iframe>
+
+</center>
+
+#### Overheads: Effects of Coverage Modifications (Click Tab to View) {-}
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Sect55A')">A. Aggregate Deductible</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect55B')">B. Per-occurrence Deductible</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect55C')">C. Per-occurrence Deductible and Frequency</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect55D')">D. Example</button>
+  <button class="tablinks" onclick="openTab(event, 'Sect55E')">E. Per-occurrence Deductible</button>
+      </div>
+
+<div id="Sect55A" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=51" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect55B" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=53" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect55C" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=54" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect55D" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=56" width="100%" height="400"> </iframe>
+  </div>
+<div id="Sect55E" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">Hide</span>
+  <iframe src="./Overheads/LDA1.Chap5.pdf#page=58" width="100%" height="400"> </iframe>
+  </div>
+  
+
+## Contributors {-}
+
+-  **Authors**. **Himchan Jeong**, Simon Fraser University, and **Peng Shi**, University of Wisconsin-Madison, are the principal authors of the initial version of this chapter.
+-  **Chapter Maintainers**. Please contact ??? and/or Jed at <jfrees@bus.wisc.edu> for chapter comments and suggested improvements.
+
+
+  
+

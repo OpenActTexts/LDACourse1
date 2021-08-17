@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Aggregate Loss Models | Loss Data Analytics: Short Course</title>
+  <meta name="description" content="This is an interactive, online, freely available short course. It will contain many interactive objects (quizzes, computer demonstrations, interactive graphs, video, and the like) to promote deeper learning." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Aggregate Loss Models | Loss Data Analytics: Short Course" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is an interactive, online, freely available short course. It will contain many interactive objects (quizzes, computer demonstrations, interactive graphs, video, and the like) to promote deeper learning." />
+  <meta name="github-repo" content="https://github.com/OpenActTextDev/LDAShortCourse1" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Aggregate Loss Models | Loss Data Analytics: Short Course" />
+  
+  <meta name="twitter:description" content="This is an interactive, online, freely available short course. It will contain many interactive objects (quizzes, computer demonstrations, interactive graphs, video, and the like) to promote deeper learning." />
+  
+
+<meta name="author" content="A short course authored by the Actuarial Community" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="model-selection-and-estimation.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<!-- Various toggle functions used throughout --> 
+<script language="javascript">
+function toggle(id1,id2) {
+	var ele = document.getElementById(id1); var text = document.getElementById(id2);
+	if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Solution";}
+		else {ele.style.display = "block"; text.innerHTML = "Hide Solution";}}
+function togglecode(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show R Code";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide R Code";}}
+function toggleEX(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Example";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide Example";}}
+function toggleTheory(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Theory";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide Theory";}}
+function toggleQuiz(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Quiz Solution";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide Quiz Solution";}}      
+</script>
+
+<!-- A few functions for revealing definitions -->
+<script language="javascript">
+<!--   $( function() {
+    $("#tabs").tabs();
+  } ); -->
+
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
+});
+</script>
+<script language="javascript">
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+
+<script language="javascript">
+function toggle(id1,id2) {
+	var ele = document.getElementById(id1); var text = document.getElementById(id2);
+	if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Solution";}
+		else {ele.style.display = "block"; text.innerHTML = "Hide Solution";}}
+</script>
+
+<script language="javascript">
+function togglecode(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show R Code";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide R Code";}}
+</script>
+<script language="javascript">
+function toggleEX(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Example";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide Example";}}
+</script>
+<script language="javascript">
+function toggleTheory(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Theory";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide Theory";}}
+</script>
+
+<script language="javascript">
+function toggleDet(id1,id2) {
+   var ele = document.getElementById(id1); var text = document.getElementById(id2);
+   if (ele.style.display == "block") {ele.style.display = "none"; text.innerHTML = "Show Details";}
+      else {ele.style.display = "block"; text.innerHTML = "Hide  Details";}}
+</script>
+
+<script language="javascript">
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
+});
+</script>
+
+
+<script src=https://cdn.datacamp.com/datacamp-light-latest.min.js></script>
+
+
+<style>
+/* Rearrange console label */
+.datacamp-exercise ol li, .datacamp-exercise ul li {
+  margin-bottom: 0em !important;
+}
+
+/* Remove bullet marker */
+.datacamp-exercise ol li::before, .datacamp-exercise ul li::before {
+  content: '' !important;
+}
+</style>
+
+
+<script language="javascript">
+var submitAnswer = function() {
+
+  var radios = document.getElementsByName('choice');
+  var val= "";
+  for (var i = 0, length = radios.length; i < length; i++) {
+      if (radios[i].checked) {
+         val = radios[i].value; 
+         break;
+       }
+  }
+  
+  if (val == "" ) {
+    alert('please select choice answer');
+  } else if ( val == "Correct" ) {
+    alert('Answer is correct !');
+  } else {
+    alert('Answer is wrong');
+  }
+};
+</script>
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-125587869-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-125587869-1');
+</script>
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Loss Data Analytics: Short Course</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-loss-data-analytics"><i class="fa fa-check"></i>Why Loss Data Analytics?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i>Resources</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#how-to-navigate-this-tutorial"><i class="fa fa-check"></i>How to Navigate this Tutorial</a></li>
+<li><a href="index.html#a-word-from-our-sponsor-astin-education-astin-academy">A Word from our Sponsor: <br> Astin + Education = Astin Academy</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html"><i class="fa fa-check"></i><b>1</b> Introduction to Loss Data Analytics</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:Intro"><i class="fa fa-check"></i><b>1.1</b> Relevance of Analytics to Insurance Activities</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:PredModApps"><i class="fa fa-check"></i><b>1.2</b> Insurance Company Operations</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:LGPIF"><i class="fa fa-check"></i><b>1.3</b> Case Study: Property Fund Introduction</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-claim-frequency"><i class="fa fa-check"></i><b>1.3.1</b> Exercise. Claim Frequency</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:PropertyFundSeverity"><i class="fa fa-check"></i><b>1.4</b> Property Fund Claim Severity</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-exploring-claim-severities"><i class="fa fa-check"></i><b>1.4.1</b> Exercise. Exploring Claim Severities</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-skewness-of-the-claim-severity-distribution"><i class="fa fa-check"></i><b>1.4.2</b> Exercise. Skewness of the Claim Severity Distribution</a></li>
+<li class="chapter" data-level="1.4.3" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-claim-severity-by-year"><i class="fa fa-check"></i><b>1.4.3</b> Exercise. Claim Severity by Year</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:LGPIFRatingVariaables"><i class="fa fa-check"></i><b>1.5</b> Property Fund Rating Variables</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Ex:ClaimByType"><i class="fa fa-check"></i><b>1.5.1</b> Exercise. Claim by Entity Type, Fire Class, and No Claim Credit</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#contributors-1"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="frequency-modeling.html"><a href="frequency-modeling.html"><i class="fa fa-check"></i><b>2</b> Frequency Modeling</a><ul>
+<li class="chapter" data-level="2.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#basic-frequency-distributions"><i class="fa fa-check"></i><b>2.1</b> Basic Frequency Distributions</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-representing-the-number-of-cyber-events-with-a-binomial-distribution"><i class="fa fa-check"></i><b>2.1.1</b> Exercise. Representing the Number of Cyber Events with a Binomial Distribution</a></li>
+<li class="chapter" data-level="2.1.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-representing-the-number-of-cyber-events-with-a-poisson-distribution"><i class="fa fa-check"></i><b>2.1.2</b> Exercise. Representing the Number of Cyber Events with a Poisson Distribution</a></li>
+<li class="chapter" data-level="2.1.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-comparing-basic-count-distributions"><i class="fa fa-check"></i><b>2.1.3</b> Exercise. Comparing Basic Count Distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#the-ab0-class"><i class="fa fa-check"></i><b>2.2</b> The (a,b,0) Class</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-determining-probabilities-recursively"><i class="fa fa-check"></i><b>2.2.1</b> Exercise. Determining Probabilities Recursively</a></li>
+<li class="chapter" data-level="2.2.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-reverse-engineering-and-recursive-r-functions"><i class="fa fa-check"></i><b>2.2.2</b> Exercise. Reverse Engineering and Recursive <code>R</code> Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#estimating-frequency-distributions"><i class="fa fa-check"></i><b>2.3</b> Estimating Frequency Distributions</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#Ex:CountDataCompression"><i class="fa fa-check"></i><b>2.3.1</b> Exercise. Count Data Compression - 1</a></li>
+<li class="chapter" data-level="2.3.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-count-data-compression---2"><i class="fa fa-check"></i><b>2.3.2</b> Exercise. Count Data Compression - 2</a></li>
+<li class="chapter" data-level="2.3.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-graphing-likelihoods"><i class="fa fa-check"></i><b>2.3.3</b> Exercise. Graphing Likelihoods</a></li>
+<li class="chapter" data-level="2.3.4" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-fitting-a-binomial-distribution"><i class="fa fa-check"></i><b>2.3.4</b> Exercise. Fitting a Binomial Distribution</a></li>
+<li class="chapter" data-level="2.3.5" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-fitting-a-negative-binomial-distribution"><i class="fa fa-check"></i><b>2.3.5</b> Exercise. Fitting a Negative Binomial Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="frequency-modeling.html"><a href="frequency-modeling.html#other-frequency-distributions"><i class="fa fa-check"></i><b>2.4</b> Other Frequency Distributions</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-the-ab1-distribution-and-its-moments"><i class="fa fa-check"></i><b>2.4.1</b> Exercise. The (<em>a,b</em>,1) Distribution and its Moments</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="frequency-modeling.html"><a href="frequency-modeling.html#mixture-distributions"><i class="fa fa-check"></i><b>2.5</b> Mixture Distributions</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-mixtures-of-workers-compensation-claims"><i class="fa fa-check"></i><b>2.5.1</b> Exercise. Mixtures of Workers’ Compensation Claims</a></li>
+<li class="chapter" data-level="2.5.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-finite-number-of-mixture-distributions"><i class="fa fa-check"></i><b>2.5.2</b> Exercise. Finite Number of Mixture Distributions</a></li>
+<li class="chapter" data-level="2.5.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-gamma-mixture-of-poissons"><i class="fa fa-check"></i><b>2.5.3</b> Exercise. Gamma Mixture of Poissons</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="frequency-modeling.html"><a href="frequency-modeling.html#goodness-of-fit"><i class="fa fa-check"></i><b>2.6</b> Goodness of Fit</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-goodness-of-fit-zero-modified-poisson"><i class="fa fa-check"></i><b>2.6.1</b> Exercise. Goodness of Fit: Zero-Modified Poisson</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="frequency-modeling.html"><a href="frequency-modeling.html#contributors-2"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html"><i class="fa fa-check"></i><b>3</b> Modeling Loss Severity</a><ul>
+<li class="chapter" data-level="3.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#basic-distributional-quantities"><i class="fa fa-check"></i><b>3.1</b> Basic Distributional Quantities</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-moments-can-be-misleading"><i class="fa fa-check"></i><b>3.1.1</b> Exercise. Moments Can Be Misleading</a></li>
+<li class="chapter" data-level="3.1.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-determining-boxplots-and-quantiles"><i class="fa fa-check"></i><b>3.1.2</b> Exercise. Determining Boxplots and Quantiles</a></li>
+<li class="chapter" data-level="3.1.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-gamma-moment-generating-function"><i class="fa fa-check"></i><b>3.1.3</b> Exercise. Gamma Moment Generating Function</a></li>
+<li class="chapter" data-level="3.1.4" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-visualizing-moment-generating-functions"><i class="fa fa-check"></i><b>3.1.4</b> Exercise. Visualizing Moment Generating Functions</a></li>
+<li class="chapter" data-level="3.1.5" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-determining-moments-using-moment-generating-functions"><i class="fa fa-check"></i><b>3.1.5</b> Exercise. Determining Moments using Moment Generating Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#continuous-distributions"><i class="fa fa-check"></i><b>3.2</b> Continuous Distributions</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise."><i class="fa fa-check"></i><b>3.2.1</b> Exercise.</a></li>
+<li class="chapter" data-level="3.2.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-visualizing-the-gamma-distribution"><i class="fa fa-check"></i><b>3.2.2</b> Exercise. Visualizing the Gamma Distribution</a></li>
+<li class="chapter" data-level="3.2.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#Ex:CreateParetoDensityFct"><i class="fa fa-check"></i><b>3.2.3</b> Exercise. Creating a Pareto Density Function</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#methods-of-creating-new-distributions"><i class="fa fa-check"></i><b>3.3</b> Methods of Creating New Distributions</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-using-the-logarithmic-transformation-to-create-a-new-distribution"><i class="fa fa-check"></i><b>3.3.1</b> Exercise. Using the Logarithmic Transformation to Create a New Distribution</a></li>
+<li class="chapter" data-level="3.3.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-creating-a-mixture-distribution"><i class="fa fa-check"></i><b>3.3.2</b> Exercise. Creating a Mixture Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#coverage-modifications"><i class="fa fa-check"></i><b>3.4</b> Coverage Modifications</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-calculate-moments-of-the-lognormal-distribution"><i class="fa fa-check"></i><b>3.4.1</b> Exercise. Calculate Moments of the Lognormal Distribution</a></li>
+<li class="chapter" data-level="3.4.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-calculate-limited-expected-value-of-the-lognormal-distribution"><i class="fa fa-check"></i><b>3.4.2</b> Exercise. Calculate Limited Expected Value of the Lognormal Distribution</a></li>
+<li class="chapter" data-level="3.4.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-expected-claims-subject-to-a-deductible"><i class="fa fa-check"></i><b>3.4.3</b> Exercise. Expected Claims Subject to a Deductible</a></li>
+<li class="chapter" data-level="3.4.4" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-expected-claims-subject-to-a-deductible-and-coinsurance"><i class="fa fa-check"></i><b>3.4.4</b> Exercise. Expected Claims Subject to a Deductible and Coinsurance</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>3.5</b> Maximum Likelihood Estimation</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#Ex:MLEPareto"><i class="fa fa-check"></i><b>3.5.1</b> Exercise. Maximum Likelihood Estimation for a Pareto Distribution</a></li>
+<li class="chapter" data-level="3.5.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-finding-standard-errors-for-maximum-likelihood-estimates"><i class="fa fa-check"></i><b>3.5.2</b> Exercise. Finding Standard Errors for Maximum Likelihood Estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#contributors-3"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html"><i class="fa fa-check"></i><b>4</b> Model Selection and Estimation</a><ul>
+<li class="chapter" data-level="4.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#Sec:NonInf"><i class="fa fa-check"></i><b>4.1</b> Nonparametric Inference</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-empirical-distribution-function-and-quartiles-percentiles-and-quantiles"><i class="fa fa-check"></i><b>4.1.1</b> Exercise. Empirical Distribution Function and Quartiles, Percentiles and Quantiles</a></li>
+<li class="chapter" data-level="4.1.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-density-estimators"><i class="fa fa-check"></i><b>4.1.2</b> Exercise. Density Estimators</a></li>
+<li class="chapter" data-level="4.1.3" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-claim-frequency-1"><i class="fa fa-check"></i><b>4.1.3</b> Exercise. Claim Frequency</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#tools-for-model-selection"><i class="fa fa-check"></i><b>4.2</b> Tools for Model Selection</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-probability-probability-pp-plot"><i class="fa fa-check"></i><b>4.2.1</b> Exercise. Probability-Probability (<span class="math inline">\(pp\)</span>) plot</a></li>
+<li class="chapter" data-level="4.2.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-quantile-quantile-qq-plot"><i class="fa fa-check"></i><b>4.2.2</b> Exercise. Quantile-Quantile (<span class="math inline">\(qq\)</span>) plot</a></li>
+<li class="chapter" data-level="4.2.3" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-kolmogorov-smirnov-test"><i class="fa fa-check"></i><b>4.2.3</b> Exercise. Kolmogorov-Smirnov test</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#model-selection-likelihood-ratio-tests-and-goodness-of-fit"><i class="fa fa-check"></i><b>4.3</b> Model Selection: Likelihood Ratio Tests and Goodness of Fit</a></li>
+<li class="chapter" data-level="4.4" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#estimation-using-modified-data-nonparametric-approach"><i class="fa fa-check"></i><b>4.4</b> Estimation using Modified Data: Nonparametric Approach</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-nonparametric-estimation-using-modified-data"><i class="fa fa-check"></i><b>4.4.1</b> Exercise. Nonparametric Estimation using Modified Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-nonparametric-estimation-using-modified-data-ii"><i class="fa fa-check"></i><b>4.4.2</b> Exercise. Nonparametric Estimation using Modified Data II</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#estimation-using-modified-data-parametric-approach"><i class="fa fa-check"></i><b>4.5</b> Estimation using Modified Data: Parametric Approach</a></li>
+<li class="chapter" data-level="4.6" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#bayesian-inference"><i class="fa fa-check"></i><b>4.6</b> Bayesian Inference</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#visualizing-bayesian-methods"><i class="fa fa-check"></i><b>4.6.1</b> Visualizing Bayesian Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#contributors-4"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html"><i class="fa fa-check"></i><b>5</b> Aggregate Loss Models</a><ul>
+<li class="chapter" data-level="5.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#introduction"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#individual-risk-model"><i class="fa fa-check"></i><b>5.2</b> Individual Risk Model</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#Ex:IRM1"><i class="fa fa-check"></i><b>5.2.1</b> Exercise. Individual Risk Model I</a></li>
+<li class="chapter" data-level="5.2.2" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-individual-risk-model-ii"><i class="fa fa-check"></i><b>5.2.2</b> Exercise. Individual Risk Model II</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#collective-risk-model---part-i"><i class="fa fa-check"></i><b>5.3</b> Collective Risk Model - Part I</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-collective-risk-model-i"><i class="fa fa-check"></i><b>5.3.1</b> Exercise. Collective Risk Model I</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#collective-risk-model---part-ii"><i class="fa fa-check"></i><b>5.4</b> Collective Risk Model - Part II</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-collective-risk-model-ii"><i class="fa fa-check"></i><b>5.4.1</b> Exercise. Collective Risk Model II</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#tweedie-distribution"><i class="fa fa-check"></i><b>5.5</b> Tweedie Distribution</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-tweedie-distribution"><i class="fa fa-check"></i><b>5.5.1</b> Exercise. Tweedie Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#effects-of-coverage-modifications"><i class="fa fa-check"></i><b>5.6</b> Effects of Coverage Modifications</a></li>
+<li class="chapter" data-level="" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#contributors-5"><i class="fa fa-check"></i>Contributors</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/OpenActTextDev/LDACourse1/" target="blank">LDA Short Course on GitHub</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Loss Data Analytics: Short Course</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="aggregate-loss-models" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Aggregate Loss Models</h1>
+<p><strong>Chapter Description</strong></p>
+<p>This chapter introduces probability models for describing the aggregate (total) claims that arise from a portfolio of insurance contracts. We present two standard modeling approaches, the individual risk model and the collective risk model. Further, we discuss strategies for computing the distribution of the aggregate claims, including exact methods for special cases, recursion, and simulation. Finally, we examine the effects of individual policy modifications such as deductibles, coinsurance, and inflation, on the frequency and severity distributions, and thus on the aggregate loss distribution.</p>
+<div class="blackbox">
+<ul>
+<li>Although not needed to go through the tutorials, some users may wish to download the overheads that the videos are based on. <button download><a href="https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/LDA1.Overheads/LDA1.Chap5.pdf">Download Chapter Five overheads as a .pdf file.</a></button></li>
+<li>By watching the videos and working through the tutorial exercises, you will get an appreciation for aggregate loss models. For a deeper dive, see the corresponding chapter in the textbook, <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-AggLossModels.html">Chapter Five of <em>Loss Data Analytics</em></a>.</li>
+</ul>
+</div>
+<div id="introduction" class="section level2">
+<h2><span class="header-section-number">5.1</span> Introduction</h2>
+<hr />
+<p>In this section, we learn how to:</p>
+<ul>
+<li>Record aggregate losses from an insurance system.</li>
+<li>Identify actuarial applications of aggregate loss models.</li>
+</ul>
+<hr />
+<div id="video-introduction-to-aggregate-loss-models" class="section level4 unnumbered">
+<h4>Video: Introduction to Aggregate Loss Models</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_bock2cl4&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_1bqvxhby" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+</div>
+<div id="overheads-introduction-to-aggregate-loss-models-click-tab-to-view" class="section level4 unnumbered">
+<h4>Overheads: Introduction to Aggregate Loss Models (Click Tab to View)</h4>
+<div class="tab">
+<button class="tablinks" onclick="openTab(event, 'Sect51A')">A. Basic Terminology</button>
+<button class="tablinks" onclick="openTab(event, 'Sect51B')">B. Goal</button>
+<button class="tablinks" onclick="openTab(event, 'Sect51C')">C. Models</button>
+<button class="tablinks" onclick="openTab(event, 'Sect51D')">D. Example</button>
+<button class="tablinks" onclick="openTab(event, 'Sect51E')">E. Applications</button>
+</div>
+<div id="Sect51A" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=3" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect51B" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=4" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect51C" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=5" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect51D" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=7" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect51E" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=8" width="100%" height="400"> </iframe>
+</div>
+</div>
+</div>
+<div id="individual-risk-model" class="section level2">
+<h2><span class="header-section-number">5.2</span> Individual Risk Model</h2>
+<hr />
+<p>In this section, we learn how to:</p>
+<ul>
+<li>Build an individual risk model for a portfolio of insurance contracts.</li>
+<li>Apply the individual risk model to life and nonlife insurance.</li>
+<li>Compute the distribution of aggregate losses from an individual risk model.</li>
+</ul>
+<hr />
+<div id="video-individual-risk-model" class="section level4 unnumbered">
+<h4>Video: Individual Risk Model</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_ndjyp3ql&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_ivcxtqyq" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+</div>
+<div id="overheads-individual-risk-model-click-tab-to-view" class="section level4 unnumbered">
+<h4>Overheads: Individual Risk Model (Click Tab to View)</h4>
+<div class="tab">
+<button class="tablinks" onclick="openTab(event, 'Sect52A')">A. Individual Risk Model</button>
+<button class="tablinks" onclick="openTab(event, 'Sect52B')">B. Applications</button>
+<button class="tablinks" onclick="openTab(event, 'Sect52C')">C. Example</button>
+<button class="tablinks" onclick="openTab(event, 'Sect52D')">D. Aggregate Loss Distribution</button>
+<button class="tablinks" onclick="openTab(event, 'Sect52E')">E. R Example #1</button>
+<button class="tablinks" onclick="openTab(event, 'Sect52F')">F. R Example #2</button>
+</div>
+<div id="Sect52A" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=10" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect52B" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=11" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect52C" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=13" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect52D" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=15" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect52E" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=16" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect52F" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=17" width="100%" height="400"> </iframe>
+</div>
+</div>
+<div id="Ex:IRM1" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Exercise. Individual Risk Model I</h3>
+<p><strong>Assignment Text</strong></p>
+<p>In this assignment, we revisit <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-AggLossModels.html">Example 5.2.1 of <em>Loss Data Analytics</em></a> using <em>simulation</em> in <code>R</code>. Even though we “officially” start to work with simulation beginning in <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-Simulation.html">Chapter 6 in <em>Loss Data Analytics</em></a>, this exercise provides you with an opportunity to taste a flavor of simulation.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Use the function <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Binomial">rbinom()</a> to simulate the number of claims that follow binomial distribution. For reproducibility of results set the initial ‘seed’ as <code>1000</code> and then generate 10,000 observations of claim frequencies for each group of policies.</li>
+<li>Specify the size and probability when you simulate the number of claims with binomial distribution in each group of policies.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXQuc2VlZCg/PykgICAgIFxuciAgPC0gPz8gICAgICAgICBcbnExIDwtIDAuMDUgICAgICAgICBcbnEyIDwtID8/ICAgICAgICAgXG5uMSA8LSA/PyAgICAgICAgIFxubjIgPC0gMjAwICAgICAgICAgIFxuXG5uMSA8LSByYmlub20ociwgc2l6ZT1uMSwgcHJvYj1xMSkgXG5uMiA8LSByYmlub20ociwgc2l6ZT0/PywgcHJvYj0/PykgIiwic29sdXRpb24iOiJzZXQuc2VlZCgxMDAwKSAgICAgIyBGb3IgcmVwcm9kdWNpYmlsaXR5IG9mIHJlc3VsdHNcbnIgIDwtIDEwMDAwICAgICAgICAjIE51bWJlciBvZiBvYnNlcnZhdGlvbnMgdG8gc2ltdWxhdGUgZm9yIGVhY2ggcG9saWN5XG5xMSA8LSAwLjA1ICAgICAgICAgIyBQcm9iYWJpbGl0eSBvZiBjbGFpbSBmcm9tIHBvbGljeSAxXG5xMiA8LSAwLjA2ICAgICAgICAgIyBQcm9iYWJpbGl0eSBvZiBjbGFpbSBmcm9tIHBvbGljeSAyXG5uMSA8LSAxMDAgICAgICAgICAgIyBOdW1iZXIgb2YgdHlwZSAxIHBvbGljaWVzXG5uMiA8LSAyMDAgICAgICAgICAgIyBOdW1iZXIgb2YgdHlwZSAyIHBvbGljaWVzXG5cblxubjEgPC0gcmJpbm9tKHIsIHNpemU9bjEsIHByb2I9cTEpICMgR2VuZXJhdGUgcj0xMDAwMCBvYnNlcnZhdGlvbnMgb2YgTjEgZnJvbSBCaW5vbWlhbFxubjIgPC0gcmJpbm9tKHIsIHNpemU9bjIsIHByb2I9cTIpICMgR2VuZXJhdGUgcj0xMDAwMCBvYnNlcnZhdGlvbnMgb2YgTjIgZnJvbSBCaW5vbWlhbCIsInNjdCI6InN1Y2Nlc3NfbXNnKFwiR29vZCBqb2IhIFRoaXMgZXhlcmNpc2UgaXMgYmFzaWNhbGx5IGEgcmVjYXBpdHVsYXRpb24gb2YgQ2hhcHRlciAyIGJ1dCBzdGlsbCBxdWl0ZSBpbXBvcnRhbnQgYXMgb25lIG9mIHRoZSBidWlsZGluZyBibG9ja3Mgb2YgSW5kaXZpZHVhbCBSaXNrIE1vZGVscy5cIikiLCJoaW50IjoiTm90ZSB0aGF0IG51bWJlciBvZiBwb2xpY2llcyBhbmQgcHJvYmFiaWxpdHkgb2YgY2xhaW0gcGVyIHBvbGljeSBjb3JyZXNwb25kIHRvIHRoZSBzaXplIGFuZCBpbmNpZGVuY2UgcHJvYmFiaWxpdHkgaW4gYSBiaW5vbWlhbCBkaXN0cmlidXRpb24gZm9yIGEgY2xhaW0gZnJlcXVlbmN5IHJhbmRvbSB2YXJpYWJsZSwgcmVzcGVjdGl2ZWx5LiJ9
+</div>
+</div>
+<div id="exercise.-individual-risk-model-ii" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> Exercise. Individual Risk Model II</h3>
+<p><strong>Assignment Text</strong></p>
+<p>Continuing our work in Exercise <a href="aggregate-loss-models.html#Ex:IRM1">5.2.1</a>, we now reproduce the theoretical results for calculation of moments in individual risk models using simulation. We use the simulated frequencies for each group of policies from Exercise <a href="aggregate-loss-models.html#Ex:IRM1">5.2.1</a> and continue to simulate compound losses in an individual risk model as elaborated in <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-AggLossModels.html#computing-the-aggregate-claims-distribution">Section 5.4.2 on <em>Loss Data Analytics</em></a>.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Use the function <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Uniform">runif()</a> to claim amounts that follow <em>uniform</em> distribution for each group of policies.</li>
+<li>Specify the parameters of uniform random variables, minimum and maximum values of claim amounts from each type of policies.</li>
+<li>Initialize an empty vector of length <span class="math inline">\(R\)</span> to store <span class="math inline">\(R\)</span> observations of simulated <span class="math inline">\(S\)</span>. In each simulation, calculate the <span class="math inline">\(j\)</span>th simulated aggregate loss and store it in <span class="math inline">\(j\)</span>th component of <span class="math inline">\(S\)</span> for <span class="math inline">\(j=1, \ldots, R\)</span>.</li>
+<li>Compute the mean and variance of <span class="math inline">\(S\)</span> by simulation using <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/mean">mean()</a> and <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor">var()</a>. Then, compare these values to their corresponding theoretical values, 2,800 and 600,467, respectively.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNldC5zZWVkKDEwMDApICAgICAjIEZvciByZXByb2R1Y2liaWxpdHkgb2YgcmVzdWx0c1xuciAgPC0gMTAwMDAgICAgICAgICMgTnVtYmVyIG9mIG9ic2VydmF0aW9ucyB0byBzaW11bGF0ZSBmb3IgZWFjaCBwb2xpY3lcbnExIDwtIDAuMDUgICAgICAgICAjIFByb2JhYmlsaXR5IG9mIGNsYWltIGZyb20gcG9saWN5IDFcbnEyIDwtIDAuMDYgICAgICAgICAjIFByb2JhYmlsaXR5IG9mIGNsYWltIGZyb20gcG9saWN5IDJcbm4xIDwtIDEwMCAgICAgICAgICAjIE51bWJlciBvZiB0eXBlIDEgcG9saWNpZXNcbm4yIDwtIDIwMCAgICAgICAgICAjIE51bWJlciBvZiB0eXBlIDIgcG9saWNpZXNcblxubjEgPC0gcmJpbm9tKHIsIHNpemU9bjEsIHByb2I9cTEpICMgR2VuZXJhdGUgcj0xMDAwMCBvYnNlcnZhdGlvbnMgb2YgTjEgZnJvbSBCaW5vbWlhbFxubjIgPC0gcmJpbm9tKHIsIHNpemU9bjIsIHByb2I9cTIpICMgR2VuZXJhdGUgcj0xMDAwMCBvYnNlcnZhdGlvbnMgb2YgTjIgZnJvbSBCaW5vbWlhbCIsInNhbXBsZSI6InNldC5zZWVkKDEwMDApICAgICBcbnIgIDwtIDEwMDAwICAgICAgICBcbm0xIDwtIDA7IE0xIDwtID8/IFxubTIgPC0gXzsgTTIgPC0gMzAwIFxuXG4jIG4xOiBHZW5lcmF0ZWQgMTAwMDAgb2JzZXJ2YXRpb25zIG9mIGNsYWltIGZyZXF1ZW5jeSBmcm9tIHRoZSBmaXJzdCAgZ3JvdXAgb2YgcG9saWNpZXMgd2l0aCBCaW5vbWlhbFxuIyBuMjogR2VuZXJhdGVkIDEwMDAwIG9ic2VydmF0aW9ucyBvZiBjbGFpbSBmcmVxdWVuY3kgZnJvbSB0aGUgc2Vjb25kIGdyb3VwIG9mIHBvbGljaWVzIHdpdGggQmlub21pYWxcblxuUyA8LSByZXAoPz8sIHIpIFxuXG5mb3IoaiBpbiAxOnIpIHsgXG4gIHgxX2ogPC0gcnVuaWYobjFbal0sIG1pbj1tMSwgbWF4PT8/KVxuICB4Ml9qIDwtIHJ1bmlmKD8/LCBtaW49Pz8sIG1heD1NMilcbiAgU1tqXSA8LSBzdW0oeDFfaikrc3VtKD8/KVxufVxuPz8oUykgXG52YXIoXykgICIsInNvbHV0aW9uIjoic2V0LnNlZWQoMTAwMCkgICAgICMgRm9yIHJlcHJvZHVjaWJpbGl0eSBvZiByZXN1bHRzXG5yICA8LSAxMDAwMCAgICAgICAgIyBOdW1iZXIgb2Ygb2JzZXJ2YXRpb25zIHRvIHNpbXVsYXRlIGZvciBlYWNoIHBvbGljeVxubTEgPC0gMDsgTTEgPC0gNDAwICMgUGFyYW1ldGVycyBmb3Igc2V2ZXJpdHkgZGlzdHJpYnV0aW9uIFhfMVxubTIgPC0gMDsgTTIgPC0gMzAwICMgUGFyYW1ldGVycyBmb3Igc2V2ZXJpdHkgZGlzdHJpYnV0aW9uIFhfMlxuXG4jIG4xOiBHZW5lcmF0ZWQgMTAwMDAgb2JzZXJ2YXRpb25zIG9mIGNsYWltIGZyZXF1ZW5jeSBmcm9tIHRoZSBmaXJzdCAgZ3JvdXAgb2YgcG9saWNpZXMgd2l0aCBCaW5vbWlhbFxuIyBuMjogR2VuZXJhdGVkIDEwMDAwIG9ic2VydmF0aW9ucyBvZiBjbGFpbSBmcmVxdWVuY3kgZnJvbSB0aGUgc2Vjb25kIGdyb3VwIG9mIHBvbGljaWVzIHdpdGggQmlub21pYWxcblxuUyA8LSByZXAoTkEsIHIpICMgSW5pdGlhbGl6ZSBhbiBlbXB0eSB2ZWN0b3IgdG8gc3RvcmUgUyBvYnNlcnZhdGlvbnNcblxuXG5mb3IoaiBpbiAxOnIpIHsgXG4gIHgxX2ogPC0gcnVuaWYobjFbal0sIG1pbj1tMSwgbWF4PU0xKVxuICB4Ml9qIDwtIHJ1bmlmKG4yW2pdLCBtaW49bTIsIG1heD1NMilcbiAgU1tqXSAgPC0gc3VtKHgxX2opK3N1bSh4Ml9qKSAjIENhbGN1bGF0ZSBqdGggc2ltdWxhdGVkIGFnZ3JlZ2F0ZSBsb3NzIGFuZCBzdG9yZSBpdCBhdCBTW2pdXG59XG4gIFxubWVhbihTKSAjIENvbXBhcmUgdG8gdGhlb3JldGljYWwgdmFsdWUgb2YgMiw4MDBcbnZhcihTKSAgIyBDb21wYXJlIHRvIHRoZW9yZXRpY2FsIHZhbHVlIG9mIDYwMCw0NjciLCJzY3QiOiJzdWNjZXNzX21zZyhcIkdvb2Qgam9iISBOb3RlIHRoYXQgc2ltdWxhdGlvbiBpcyBvbmUgb2YgdGhlIG1vc3QgcG93ZXJmdWwgdGVjaG5pcXVlcyBpbiBsb3NzIGRhdGEgYW5hbHl0aWNzIHNvIHdlIGJlbGlldmUgdGhpcyBleGVyY2lzZSBoZWxwZWQgeW91IGEgYml0IHRvIGdyb3cgYXMgYW4gZXhwZXJ0IGluIGxvc3MgZGF0YSBhbmFseXRpY3MuXCIpIiwiaGludCI6Ik5vdGUgdGhhdCB3ZSBuZWVkIHRvIHNpbXVsYXRlIGNsYWltIGFtb3VudHMgdGhhdCBjb3JyZXNwb25kcyB0byB0aGUgbnVtYmVyIG9mIGNsYWltcyBzbyB0aGF0IHRoZSBwYXJhbWV0ZXJzIHVzZWQgaW4gPGNvZGU+cnVuaWYoKTwvY29kZT4gZnVuY3Rpb24gbWF5IGRlcGVuZCBvbiB0aGUgbnVtYmVyIG9mIHNpbXVsYXRlZCBjbGFpbXMuIn0=
+</div>
+</div>
+</div>
+<div id="collective-risk-model---part-i" class="section level2">
+<h2><span class="header-section-number">5.3</span> Collective Risk Model - Part I</h2>
+<hr />
+<p>In this section, we learn how to:</p>
+<ul>
+<li>Build a collective risk model for a portfolio of insurance contracts.</li>
+<li>Calculate the mean and variance of the aggregate loss.</li>
+<li>Fit frequency and severity components in a collective risk model.</li>
+</ul>
+<hr />
+<div id="video-collective-risk-model---part-i" class="section level4 unnumbered">
+<h4>Video: Collective Risk Model - Part I</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_w76qa2ja&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_g39djg7z" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+</div>
+<div id="overheads-collective-risk-model---part-i-click-tab-to-view" class="section level4 unnumbered">
+<h4>Overheads: Collective Risk Model - Part I (Click Tab to View)</h4>
+<div class="tab">
+<button class="tablinks" onclick="openTab(event, 'Sect531A')">A. Collective Risk Model</button>
+<button class="tablinks" onclick="openTab(event, 'Sect531B')">B. Compound Distribution</button>
+<button class="tablinks" onclick="openTab(event, 'Sect531C')">C. Moments</button>
+<button class="tablinks" onclick="openTab(event, 'Sect531D')">D. Model Fitting</button>
+<button class="tablinks" onclick="openTab(event, 'Sect531E')">E. Model Fitting - Property Fund</button>
+</div>
+<div id="Sect531A" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=20" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect531B" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=21" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect531C" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=22" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect531D" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=23" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect531E" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=24" width="100%" height="400"> </iframe>
+</div>
+</div>
+<div id="exercise.-collective-risk-model-i" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> Exercise. Collective Risk Model I</h3>
+<p><strong>Assignment Text</strong></p>
+<p>In this assignment, we will fit a collective risk model for an actual portfolio of insurance contracts, <strong>LGPIF</strong> data with <code>R</code>. We use <em>negative binomial</em> and <em>Pareto</em> distributions for the frequency and severity components, respectively.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>Use the function <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/optim">optim()</a> to find the maximum likelihood estimates of the frequency and severity distributions.</li>
+<li>For the likelihood of frequency component, we use <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/NegBinomial">dnbinom()</a>. Note that we use the same parametrization as in the <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-Frequency-Modeling.html#S:important-frequency-distributions">Section 2.2 of <em>Loss Data Analytics</em></a> so that <span class="math inline">\(\text{size}=r\)</span> and <span class="math inline">\(\text{prob}=1/(1+\beta)\)</span>.</li>
+<li>For the likelihood of severity component, we use <a href="https://www.rdocumentation.org/packages/bayesmeta/versions/2.6/topics/dlomax">dlomax()</a>. Note that we use the same parametrization as in the <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-Severity.html#S:ContinuousDistn">Section 3.2 of <em>Loss Data Analytics</em></a> so that <span class="math inline">\(\text{shape}=\alpha\)</span> and <span class="math inline">\(\text{scale}=\theta\)</span>.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0RGV2L0xEQUNvdXJzZTEvbWFpbi9EYXRhL0luc2FtcGxlLmNzdlwiLCBoZWFkZXI9VCwgbmEuc3RyaW5ncz1jKFwiLlwiKSwgc3RyaW5nc0FzRmFjdG9ycz1GQUxTRSlcbmxpYnJhcnkobG1lNClcblxuZGxvbWF4IDwtIGZ1bmN0aW9uKHgsIHNoYXBlPTEsIHNjYWxlPTEsIGxvZz1GQUxTRSkge1xuICBpZiAobG9nPT1GQUxTRSkgcmVzdWx0IDwtIHNoYXBlKnNjYWxlXnNoYXBlIC8gKHNjYWxlICsgeCleKHNoYXBlKzEpXG4gIGlmIChsb2c9PVRSVUUgKSByZXN1bHQgPC0gbG9nKHNoYXBlKStzaGFwZSpsb2coc2NhbGUpLShzaGFwZSsxKSpsb2coc2NhbGUgKyB4KVxuICByZXR1cm4ocmVzdWx0KSB9Iiwic2FtcGxlIjoiSW5zYW1wbGVUb3duIDwtIHN1YnNldChJbnNhbXBsZSwgVHlwZVRvd249PTEpXG5cbiMgVGhlIG5lZ2F0aXZlIGJpbm9taWFsIGZyZXF1ZW5jeSBtb2RlbDogTlxuTiA8LSBJbnNhbXBsZVRvd24kRnJlcVxuZnJlcV9saWsgPC0gZnVuY3Rpb24ocGFybSkge1xuICByICAgIDwtIHBhcm1bMV1cbiAgYmV0YSA8LSBwYXJtWzJdXG4gIGxpayAgPC0gLXN1bShkbmJpbm9tKE4sIHNpemU9XywgcHJvYj0xLygxKz8/KSwgbG9nPVRSVUUpKVxuICByZXR1cm4obGlrKVxufVxuaW5pdC5wYXJtLmZyZXEgPC0gYyhtZWFuKE4pLyh2YXIoTikvbWVhbihOKS0xKSwgdmFyKE4pL21lYW4oTiktMSkgIyBpbml0aWFsIGVzdGltYXRlcyBieSBtZXRob2Qgb2YgbW9tZW50c1xuZnJlcV9tb2QgICAgICAgPC0gPz8ocGFyPWluaXQucGFybS5mcmVxLCBmbj0/PykgIyBNYXhpbXVtIGxpa2VsaWhvb2QgZXN0aW1hdGlvbiBmb3IgdGhlIGZyZXF1ZW5jeSBtb2RlbFxuXG5yLmVzdCAgICA8LSBmcmVxX21vZCRwYXJbMV1cbmJldGEuZXN0IDwtIGZyZXFfbW9kJHBhclsyXVxuXG5mcmVxX3RhYmxlIDwtIGNiaW5kKHRhYmxlKE4pWzE6NF0vbGVuZ3RoKE4pLCBkbmJpbm9tKDA6Mywgc2l6ZT0/PywgcHJvYj0xLygxK2JldGEuZXN0KSkpXG5mcmVxX3RhYmxlIDwtIHJiaW5kKGZyZXFfdGFibGUsIDEtY29sU3VtcyhmcmVxX3RhYmxlKSlcbnJvd25hbWVzKGZyZXFfdGFibGUpWzVdIDwtIFwiNCtcIlxuY29sbmFtZXMoZnJlcV90YWJsZSkgICAgPC0gYyhcIkVtcGlyaWNhbFwiLCBcIlRoZW9yZXRpY2FsXCIpXG4jIEVtcGlyaWNhbCBhbmQgZml0dGVkIGRpc3RyaWJ1dGlvbnMgb2Ygb2JzZXJ2ZWQgTlxuZnJlcV90YWJsZVxuXG4jIFRoZSBQYXJldG8gc2V2ZXJpdHkgbW9kZWw6IFhiYXJcblhiYXIgPC0gSW5zYW1wbGVUb3duJHlBdmdbd2hpY2goSW5zYW1wbGVUb3duJEZyZXE+MCldXG5zZXZfbGlrIDwtIGZ1bmN0aW9uKHBhcm0pIHtcbiAgYWxwaGEgPC0gIHBhcm1bMV1cbiAgdGhldGEgPC0gIHBhcm1bMl1cbiAgbGlrICAgPC0gLXN1bShkbG9tYXgoWGJhciwgc2hhcGU9Pz8sIHNjYWxlPT8/LCBsb2c9VFJVRSkpXG4gIHJldHVybihsaWspXG59XG5pbml0LnBhcm0uc2V2IDwtIGMoIDIvKDEtbWVhbihYYmFyKV4yL3ZhcihYYmFyKSkgICwgbWVhbihYYmFyKSooMi8oMS1tZWFuKFhiYXIpXjIvdmFyKFhiYXIpKS0xKSApICMgaW5pdGlhbCBlc3RpbWF0ZXMgYnkgbWV0aG9kIG9mIG1vbWVudHNcbnNldl9tb2QgICAgICAgPC0gPz8ocGFyPT8/LCBmbj1zZXZfbGlrLCBtZXRob2Q9XCJMLUJGR1MtQlwiKSAjIE1heGltdW0gbGlrZWxpaG9vZCBlc3RpbWF0aW9uIGZvciB0aGUgc2V2ZXJpdHkgbW9kZWxcbmFscGhhLmVzdCAgICAgPC0gc2V2X21vZCRwYXJbMV1cbnRoZXRhLmVzdCAgICAgPC0gc2V2X21vZCRwYXJbMl1cblxuIyBFbXBpcmljYWwgYW5kIGZpdHRlZCBkaXN0cmlidXRpb25zIG9mIG9ic2VydmVkIFhiYXJcbnBsb3QoMS0odGhldGEuZXN0Lyh0aGV0YS5lc3Qrc29ydChYYmFyKSkpXmFscGhhLmVzdCwgcmFuayhzb3J0KFhiYXIpKS8obGVuZ3RoKFhiYXIpKzEpLFxuICAgICB5bGFiID0gXCJFbXBpcmljYWwgUXVhbnRpbGVzXCIsIHhsYWIgPSBcIlRoZW9yZXRpY2FsIFF1YW50aWxlc1wiLFxuICAgICBtYWluID0gXCJTZXZlcml0eSBNb2RlbFwiKSIsInNvbHV0aW9uIjoiSW5zYW1wbGVUb3duIDwtIHN1YnNldChJbnNhbXBsZSwgVHlwZVRvd249PTEpXG5cbiMgVGhlIG5lZ2F0aXZlIGJpbm9taWFsIGZyZXF1ZW5jeSBtb2RlbDogTlxuTiA8LSBJbnNhbXBsZVRvd24kRnJlcVxuZnJlcV9saWsgPC0gZnVuY3Rpb24ocGFybSkge1xuICByICAgIDwtIHBhcm1bMV1cbiAgYmV0YSA8LSBwYXJtWzJdXG4gIGxpayAgPC0gLXN1bShkbmJpbm9tKE4sIHNpemU9ciwgcHJvYj0xLygxK2JldGEpLCBsb2c9VFJVRSkpXG4gIHJldHVybihsaWspXG59XG5pbml0LnBhcm0uZnJlcSA8LSBjKG1lYW4oTikvKHZhcihOKS9tZWFuKE4pLTEpLCB2YXIoTikvbWVhbihOKS0xKSAjIGluaXRpYWwgZXN0aW1hdGVzIGJ5IG1ldGhvZCBvZiBtb21lbnRzXG5mcmVxX21vZCAgICAgICA8LSBvcHRpbShwYXI9aW5pdC5wYXJtLmZyZXEsIGZuPWZyZXFfbGlrKSAjIE1heGltdW0gbGlrZWxpaG9vZCBlc3RpbWF0aW9uIGZvciB0aGUgZnJlcXVlbmN5IG1vZGVsXG5cbnIuZXN0ICAgIDwtIGZyZXFfbW9kJHBhclsxXVxuYmV0YS5lc3QgPC0gZnJlcV9tb2QkcGFyWzJdXG5cbmZyZXFfdGFibGUgPC0gY2JpbmQodGFibGUoTilbMTo0XS9sZW5ndGgoTiksIGRuYmlub20oMDozLCBzaXplPXIuZXN0LCBwcm9iPTEvKDErYmV0YS5lc3QpKSlcbmZyZXFfdGFibGUgPC0gcmJpbmQoZnJlcV90YWJsZSwgMS1jb2xTdW1zKGZyZXFfdGFibGUpKVxucm93bmFtZXMoZnJlcV90YWJsZSlbNV0gPC0gXCI0K1wiXG5jb2xuYW1lcyhmcmVxX3RhYmxlKSAgICA8LSBjKFwiRW1waXJpY2FsXCIsIFwiVGhlb3JldGljYWxcIilcbiMgRW1waXJpY2FsIGFuZCBmaXR0ZWQgZGlzdHJpYnV0aW9ucyBvZiBvYnNlcnZlZCBOXG5mcmVxX3RhYmxlXG5cbiMgVGhlIFBhcmV0byBzZXZlcml0eSBtb2RlbDogWGJhclxuWGJhciA8LSBJbnNhbXBsZVRvd24keUF2Z1t3aGljaChJbnNhbXBsZVRvd24kRnJlcT4wKV1cbnNldl9saWsgPC0gZnVuY3Rpb24ocGFybSkge1xuICBhbHBoYSA8LSAgcGFybVsxXVxuICB0aGV0YSA8LSAgcGFybVsyXVxuICBsaWsgICA8LSAtc3VtKGRsb21heChYYmFyLCBzaGFwZT1hbHBoYSwgc2NhbGU9dGhldGEsIGxvZz1UUlVFKSlcbiAgcmV0dXJuKGxpaylcbn1cbmluaXQucGFybS5zZXYgPC0gYyggMi8oMS1tZWFuKFhiYXIpXjIvdmFyKFhiYXIpKSAgLCBtZWFuKFhiYXIpKigyLygxLW1lYW4oWGJhcileMi92YXIoWGJhcikpLTEpICkgIyBpbml0aWFsIGVzdGltYXRlcyBieSBtZXRob2Qgb2YgbW9tZW50c1xuc2V2X21vZCAgICAgICA8LSBvcHRpbShwYXI9aW5pdC5wYXJtLnNldiwgZm49c2V2X2xpaywgbWV0aG9kPVwiTC1CRkdTLUJcIikgIyBNYXhpbXVtIGxpa2VsaWhvb2QgZXN0aW1hdGlvbiBmb3IgdGhlIHNldmVyaXR5IG1vZGVsXG5hbHBoYS5lc3QgICAgIDwtIHNldl9tb2QkcGFyWzFdXG50aGV0YS5lc3QgICAgIDwtIHNldl9tb2QkcGFyWzJdXG5cbiMgRW1waXJpY2FsIGFuZCBmaXR0ZWQgZGlzdHJpYnV0aW9ucyBvZiBvYnNlcnZlZCBYYmFyXG5wbG90KDEtKHRoZXRhLmVzdC8odGhldGEuZXN0K3NvcnQoWGJhcikpKV5hbHBoYS5lc3QsIHJhbmsoc29ydChYYmFyKSkvKGxlbmd0aChYYmFyKSsxKSxcbiAgICAgeWxhYiA9IFwiRW1waXJpY2FsIFF1YW50aWxlc1wiLCB4bGFiID0gXCJUaGVvcmV0aWNhbCBRdWFudGlsZXNcIixcbiAgICAgbWFpbiA9IFwiU2V2ZXJpdHkgTW9kZWxcIikiLCJzY3QiOiJzdWNjZXNzX21zZyhcIkNoZWVycyEgTm90ZSB0aGF0IHdlIHVzdWFsbHkgYWRkIGNvdmFyaWF0ZXMgaW4gdGhlIGZyZXF1ZW5jeSBhbmQgc2V2ZXJpdHkgbW9kZWxzIGZvciByaXNrIGNsYXNzaWZpY2F0aW9uIHB1cnBvc2UgaW4gcHJhY3RpY2UuXCIpIiwiaGludCI6IlNpbmNlIDxlbT5vcHRpbTwvZW0+IG1pbmltaXplcyBnaXZlbiBmdW5jdGlvbiBieSBkZWZhdWx0LCB3ZSBwdXQgdGhlIG5lZ2F0aXZlIGxpa2VsaWhvb2QgYXMgYW4gb2JqZWN0aXZlIGZ1bmN0aW9uIHRvIGJlIG1pbmltaXplZC4ifQ==
+</div>
+</div>
+</div>
+<div id="collective-risk-model---part-ii" class="section level2">
+<h2><span class="header-section-number">5.4</span> Collective Risk Model - Part II</h2>
+<hr />
+<p>In this section, we learn how to:</p>
+<ul>
+<li>Compute the aggregate loss distribution.</li>
+<li>Implement numerical strategies in <code>R</code>.</li>
+</ul>
+<hr />
+<div id="video-collective-risk-model---part-ii" class="section level4 unnumbered">
+<h4>Video: Collective Risk Model - Part II</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_37zojz7d&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_v2a227tt" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+</div>
+<div id="overheads-collective-risk-model---part-ii-click-tab-to-view" class="section level4 unnumbered">
+<h4>Overheads: Collective Risk Model - Part II (Click Tab to View)</h4>
+<div class="tab">
+<button class="tablinks" onclick="openTab(event, 'Sect532A')">A. Computing the Aggregate Loss Distribution</button>
+<button class="tablinks" onclick="openTab(event, 'Sect532B')">B. Direct Calculation</button>
+<button class="tablinks" onclick="openTab(event, 'Sect532C')">C. Direct Calculation - R Code</button>
+<button class="tablinks" onclick="openTab(event, 'Sect532D')">D. Recursive Method</button>
+<button class="tablinks" onclick="openTab(event, 'Sect532E')">E. Recursive Method - R Code</button>
+<button class="tablinks" onclick="openTab(event, 'Sect532F')">F. Monte Carlo Simulation</button>
+</div>
+<div id="Sect532A" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=29" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect532B" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=30" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect532C" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=32" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect532D" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=34" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect532E" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=36" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect532F" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=37" width="100%" height="400"> </iframe>
+</div>
+</div>
+<div id="exercise.-collective-risk-model-ii" class="section level3">
+<h3><span class="header-section-number">5.4.1</span> Exercise. Collective Risk Model II</h3>
+<p><img src = "ContributorPics/hurdler.png" width = "65" height = "65" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
+<p><strong>Assignment Text</strong></p>
+<p>In this assignment, we will analyze the aggregate loss distribution by combining fitted frequency and severity components. Since it is usually very hard to obtain a closed form expression for the distribution function of the compound loss in a collective risk model, we rely on simulations to compute the aggregate loss distribution.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>We use the fitted frequency and severity models using <strong>LGPIF</strong> data as we have done in Tutorial 5.3, with negative binomial and Pareto distributions, respectively.</li>
+<li>To generate random samples from the fitted frequency and severity models, we use <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/NegBinomial">rnbinom()</a> and <a href="https://www.rdocumentation.org/packages/bayesmeta/versions/2.6/topics/dlomax">rlomax()</a>. Note that these generated random samples are used as inputs to compute the aggregate claim amount distribution.</li>
+<li>We use <a href="https://www.rdocumentation.org/packages/actuar/versions/3.1-1/topics/aggregateDist">aggregateDist()</a> to simulate compound losses that match the observed data upon the fitted frequency and severity models. It is an important task in order to visualize the distribution of compound losses and make subsequent decisions on ratemaking.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0RGV2L0xEQUNvdXJzZTEvbWFpbi9EYXRhL0luc2FtcGxlLmNzdlwiLCBoZWFkZXI9VCwgbmEuc3RyaW5ncz1jKFwiLlwiKSwgc3RyaW5nc0FzRmFjdG9ycz1GQUxTRSlcbmxpYnJhcnkobG1lNClcblxuYWdncmVnYXRlLnBvcnRmb2xpbyA8LSBmdW5jdGlvbih4LCBieSA9IG5hbWVzKHgkbm9kZXMpLCBGVU4gPSBzdW0sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNsYXNzaWZpY2F0aW9uID0gVFJVRSwgcHJlZml4ID0gTlVMTCwgLi4uKVxue1xuICAgIGxldmVsLm5hbWVzIDwtIG5hbWVzKHgkbm9kZXMpICAgICAgICMgbGV2ZWwgbmFtZXNcbiAgICBubGV2ZWxzIDwtIGxlbmd0aChsZXZlbC5uYW1lcykgICAgICAjIG51bWJlciBvZiBsZXZlbHNcbiAgICB5ZWFycyA8LSBsZXZlbC5uYW1lc1tubGV2ZWxzXSAgICAgICAjIG5hbWUgb2YgbGFzdCBsZXZlbFxuXG4gICAgIyMgTWF0Y2ggbGV2ZWwgbmFtZXMgaW4gJ2J5JyB0byB0aG9zZSBpbiB0aGUgbW9kZWxcbiAgICBieSA8LSBtYXRjaC5hcmcoYnksIGxldmVsLm5hbWVzLCBzZXZlcmFsLm9rID0gVFJVRSlcblxuICAgICMjIFZlcnNpb24gb2YgRlVOIGFibGUgdG8gd29yayBvbiBsaXN0c1xuICAgIGZ1biA8LSBmdW5jdGlvbih4LCAuLi4pIEZVTih1bmxpc3QoeCksIC4uLilcblxuICAgICMjIFRoZSBtb3N0IGNvbW1vbiBjYXNlIHNob3VsZCBiZSB0byBhZ2dyZWdhdGUgY2xhaW0gYW1vdW50cyBieVxuICAgICMjIG5vZGUuIFRoaXMgY2FzZSBiZWluZyB2ZXJ5IHNpbXBsZSwgaXQgaXMgdHJlYXRlZCBzZXBhcmF0ZWx5LlxuICAgIGlmIChpZGVudGljYWwoYnksIGxldmVsLm5hbWVzKSlcbiAgICAgICAgcmV0dXJuKGNiaW5kKGlmIChjbGFzc2lmaWNhdGlvbikgeCRjbGFzc2lmaWNhdGlvbixcbiAgICAgICAgICAgICAgICAgICAgIGFycmF5KHNhcHBseSh4JGRhdGEsIEZVTiwgLi4uKSwgZGltKHgkZGF0YSksXG4gICAgICAgICAgICAgICAgICAgICAgICAgICBkaW1uYW1lcyA9IGxpc3QoTlVMTCwgcGFzdGUocHJlZml4LCBjb2xuYW1lcyh4JGRhdGEpLCBzZXAgPSBcIlwiKSkpKSlcblxuICAgICMjIFN1bW1hcmllcyBvbmx5IGJ5IGxhc3QgbGV2ZWwgKHllYXJzKSBhcmUgYWxzbyBzaW1wbGUgdG8gaGFuZGxlLlxuICAgIGlmIChpZGVudGljYWwoYnksIHllYXJzKSlcbiAgICB7XG4gICAgICAgIHJlcyA8LSBhcHBseSh4JGRhdGEsIDIsIGZ1biwgLi4uKVxuICAgICAgICBuYW1lcyhyZXMpIDwtIHBhc3RlKHByZWZpeCwgY29sbmFtZXMoeCRkYXRhKSwgc2VwID0gXCJcIilcbiAgICAgICAgcmV0dXJuKHJlcylcbiAgICB9XG5cbiAgICAjIyBUaGUgb3RoZXIgcG9zc2liaWxpdGllcyByZXF1aXJlIHRvIHNwbGl0IHRoZSBkYXRhIGluIGdyb3VwcyBhc1xuICAgICMjIHNwZWNpZmllZCBpbiBhcmd1bWVudCAnYnknLiBJZiB0aGUgbGFzdCBsZXZlbCAoeWVhcnMpIGlzIGluXG4gICAgIyMgJ2J5JywgdGhlbiB0aGUgbWF0cml4IHN0cnVjdHVyZSBtdXN0IGJlIHJldGFpbmVkIHRvIG1ha2UgdGhlXG4gICAgIyMgc3VtbWFyaWVzLiBPdGhlcndpc2UsIGl0IGNhbiBqdXN0IGJlIGRyb3BwZWQgc2luY2Ugc3VtbWFyaWVzXG4gICAgIyMgd2lsbCBzcGFuIHRoZSB5ZWFycyBvZiBvYnNlcnZhdGlvbi5cbiAgICAjI1xuICAgICMjIENvbnZlcnQgdGhlIHNlcXVlbmNlIG9mIHN1YnNjcmlwdHMgaW50byBmYWN0b3JzIGJ5IHBhc3RpbmcgdGhlXG4gICAgIyMgZGlnaXRzIHRvZ2V0aGVyLiBJdCBpcyBpbXBvcnRhbnQgKm5vdCogdG8gc29ydCB0aGUgbGV2ZWxzIGluXG4gICAgIyMgY2FzZSB0aGUgbGV2ZWxzIGluICdieScgYXJlIG5vdCBpbiB0aGUgc2FtZSBvcmRlciBhcyBpblxuICAgICMjICdsZXZlbC5uYW1lcycuXG4gICAgcm93cyA8LSBzZXRkaWZmKGJ5LCB5ZWFycykgICAgICAgICAgIyBncm91cHMgb3RoZXIgdGhhbiB5ZWFyc1xuICAgIHMgPC0geCRjbGFzc2lmaWNhdGlvblssIHJvd3MsIGRyb3AgPSBGQUxTRV0gIyBzdWJzY3JpcHRzXG4gICAgZiA8LSBhcHBseShzLCAxLCBwYXN0ZSwgY29sbGFwc2UgPSBcIlwiKSAgICAgICMgZ3JvdXBpbmcgSURzXG4gICAgZiA8LSBmYWN0b3IoZiwgbGV2ZWxzID0gdW5pcXVlKGYpKSAgICAgICAgICAjIGZhY3RvcnNcbiAgICBzIDwtIHNbbWF0Y2gobGV2ZWxzKGYpLCBmKSwgLCBkcm9wID0gRkFMU0VdICMgdW5pcXVlIHN1YnNjcmlwdHNcbiAgICB4eCA8LSBzcGxpdCh4JGRhdGEsIGYpICAgICAgICAgICAgICAgICAgICAgICMgc3BsaXQgZGF0YVxuXG4gICAgIyMgTWFrZSBzdW1tYXJpZXNcbiAgICBpZiAoeWVhcnMgJWluJSBieSlcbiAgICB7XG4gICAgICAgIHh4IDwtIGxhcHBseSh4eCwgbWF0cml4LCBuY29sID0gbmNvbCh4JGRhdGEpKVxuICAgICAgICByZXMgPC0gdChzYXBwbHkoeHgsIGZ1bmN0aW9uKHgsIC4uLikgYXBwbHkoeCwgMiwgZnVuLCAuLi4pLCAuLi4pKVxuICAgICAgICBjb2xzIDwtIGNvbG5hbWVzKHgkZGF0YSlcbiAgICB9XG4gICAgZWxzZVxuICAgIHtcbiAgICAgICAgcmVzIDwtIHNhcHBseSh4eCwgZnVuLCAuLi4pXG4gICAgICAgIGNvbHMgPC0gZGVwYXJzZShzdWJzdGl0dXRlKEZVTikpXG4gICAgfVxuXG4gICAgIyMgUmV0dXJuIHJlc3VsdHMgYXMgYSBtYXRyaXhcbiAgICBzdHJ1Y3R1cmUoY2JpbmQoaWYgKGNsYXNzaWZpY2F0aW9uKSBzLCByZXMpLFxuICAgICAgICAgICAgICBkaW1uYW1lcyA9IGxpc3QoTlVMTCwgYyhpZiAoY2xhc3NpZmljYXRpb24pIHJvd3MsIHBhc3RlKHByZWZpeCwgY29scywgc2VwID0gXCJcIikpKSlcbn1cblxuc2ltUyA8LSBmdW5jdGlvbihuLCBtb2RlbC5mcmVxLCBtb2RlbC5zZXYpXG57XG4gIFxuICAgIG49MTAwMFxuICAgIG1vZGVsLmZyZXEgPSBmcmVxXG4gICAgbW9kZWwuc2V2ID0gc2V2XG4gICAgXG4gICAgIyMgUHJlcGFyZSB0aGUgY2FsbCB0byBzaW11bCgpIGJ5IGJ1aWxkaW5nIHVwICdub2RlcydcbiAgICBsZXZlbC5uYW1lcyA8LSBuYW1lcyhpZiAoaXMubnVsbChtb2RlbC5mcmVxKSkgbW9kZWwuc2V2IGVsc2UgbW9kZWwuZnJlcSlcbiAgICBubGV2ZWxzIDwtIGxlbmd0aChsZXZlbC5uYW1lcylcbiAgICBub2RlcyA8LSBhcy5saXN0KGMocmVwKDEsIG5sZXZlbHMgLSAxKSwgbikpXG4gICAgbmFtZXMobm9kZXMpIDwtIGxldmVsLm5hbWVzXG5cbiAgICAjIyBHZXQgc2FtcGxlXG4gICAgeCA8LSBhZ2dyZWdhdGUoc2ltdWwobm9kZXMgPSBub2RlcyxcbiAgICAgICAgICAgICAgICAgICAgICAgICBtb2RlbC5mcmVxID0gbW9kZWwuZnJlcSxcbiAgICAgICAgICAgICAgICAgICAgICAgICBtb2RlbC5zZXYgPSBtb2RlbC5zZXYpKVstMV1cblxuICAgICMjIENvbXB1dGUgdGhlIGVtcGlyaWNhbCBjZGYgb2YgdGhlIHNhbXBsZS4gRG9uZSBtYW51YWxseSBpbnN0ZWFkXG4gICAgIyMgb2YgY2FsbGluZyBzdGF0czo6OmVjZGYoKSB0byBrZWVwIGEgY29weSBvZiB0aGUgZW1waXJpY2FsIHBtZlxuICAgICMjIGluIHRoZSBlbnZpcm9ubWVudCB3aXRob3V0IGNvbXB1dGluZyBpdCB0d2ljZS5cbiAgICB4IDwtIHNvcnQoeClcbiAgICB2YWxzIDwtIHVuaXF1ZSh4KVxuICAgIGZzIDwtIHRhYnVsYXRlKG1hdGNoKHgsIHZhbHMpKS9sZW5ndGgoeClcbiAgICBGVU4gPC0gYXBwcm94ZnVuKHZhbHMsIHBtaW4oY3Vtc3VtKGZzKSwgMSksIG1ldGhvZCA9IFwiY29uc3RhbnRcIixcbiAgICAgICAgICAgICAgICAgICAgIHlsZWZ0ID0gMCwgeXJpZ2h0ID0gMSwgZiA9IDAsIHRpZXMgPSBcIm9yZGVyZWRcIilcbiAgICBjbGFzcyhGVU4pIDwtIGMoXCJlY2RmXCIsIFwic3RlcGZ1blwiLCBjbGFzcyhGVU4pKVxuICAgIGFzc2lnbihcImZzXCIsIGZzLCBlbnZpciA9IGVudmlyb25tZW50KEZVTikpXG4gICAgRlVOXG59XG5cbmFnZ3JlZ2F0ZURpc3QgPC1cbiAgICBmdW5jdGlvbihtZXRob2QgPSBjKFwicmVjdXJzaXZlXCIsIFwiY29udm9sdXRpb25cIiwgXCJub3JtYWxcIiwgXCJucG93ZXJcIiwgXCJzaW11bGF0aW9uXCIpLFxuICAgICAgICAgICAgIG1vZGVsLmZyZXEgPSBOVUxMLCBtb2RlbC5zZXYgPSBOVUxMLCBwMCA9IE5VTEwsIHguc2NhbGUgPSAxLFxuICAgICAgICAgICAgIGNvbnZvbHZlID0gMCwgbW9tZW50cywgbmIuc2ltdWwsIC4uLixcbiAgICAgICAgICAgICB0b2wgPSAxZS0wNiwgbWF4aXQgPSA1MDAsIGVjaG8gPSBGQUxTRSlcbntcbiAgICBDYWxsIDwtIG1hdGNoLmNhbGwoKVxuXG4gICAgIyMgVGhlIG1ldGhvZCB1c2VkIGVzc2VudGlhbGx5IHRlbGxzIHdoaWNoIGZ1bmN0aW9uIHNob3VsZCBiZVxuICAgICMjIGNhbGxlZCBmb3IgdGhlIGNhbGN1bGF0aW9uIG9mIHRoZSBhZ2dyZWdhdGUgY2xhaW1zXG4gICAgIyMgZGlzdHJpYnV0aW9uLlxuICAgIG1ldGhvZCA8LSBtYXRjaC5hcmcobWV0aG9kKVxuXG4gICAgaWYgKG1ldGhvZCA9PSBcIm5vcm1hbFwiKVxuICAgIHtcbiAgICAgICAgIyMgQW4gZXJyb3IgbWVzc2FnZSBpcyBpc3N1ZWQgaWYgdGhlIG51bWJlciBvZiBtb21lbnRzIGxpc3RlZFxuICAgICAgICAjIyBpcyBub3QgYXBwcm9wcmlhdGUgZm9yIHRoZSBtZXRob2QuIEhvd2V2ZXIgaXQgaXMgdGhlIHVzZXInc1xuICAgICAgICAjIyByZXNwb25zaWJpbGl0eSB0byBsaXN0IHRoZSBtb21lbnRzIGluIHRoZSBjb3JyZWN0IG9yZGVyXG4gICAgICAgICMjIHNpbmNlIHRoZSB2ZWN0b3IgaXMgbm90IHJlcXVpcmVkIHRvIGJlIG5hbWVkLlxuICAgICAgICBpZiAobWlzc2luZyhtb21lbnRzKSB8fCBsZW5ndGgobW9tZW50cykgPCAyKVxuICAgICAgICAgICAgc3RvcChcIidtb21lbnRzJyBtdXN0IHN1cHBseSB0aGUgbWVhbiBhbmQgdmFyaWFuY2Ugb2YgdGhlIGRpc3RyaWJ1dGlvblwiKVxuICAgICAgICBGVU4gPC0gbm9ybWFsKG1vbWVudHNbMV0sIG1vbWVudHNbMl0pXG4gICAgICAgIGNvbW1lbnQoRlVOKSA8LSBcIk5vcm1hbCBhcHByb3hpbWF0aW9uXCJcbiAgICB9XG5cbiAgICBlbHNlIGlmIChtZXRob2QgPT0gXCJucG93ZXJcIilcbiAgICB7XG4gICAgICAgIGlmIChtaXNzaW5nKG1vbWVudHMpIHx8IGxlbmd0aChtb21lbnRzKSA8IDMpXG4gICAgICAgICAgICBzdG9wKFwiJ21vbWVudHMnIG11c3Qgc3VwcGx5IHRoZSBtZWFuLCB2YXJpYW5jZSBhbmQgc2tld25lc3Mgb2YgdGhlIGRpc3RyaWJ1dGlvblwiKVxuICAgICAgICBGVU4gPC0gbnBvd2VyKG1vbWVudHNbMV0sIG1vbWVudHNbMl0sIG1vbWVudHNbM10pXG4gICAgICAgIGNvbW1lbnQoRlVOKSA8LSBcIk5vcm1hbCBQb3dlciBhcHByb3hpbWF0aW9uXCJcbiAgICB9XG4gICAgZWxzZSBpZiAobWV0aG9kID09IFwic2ltdWxhdGlvblwiKVxuICAgIHtcbiAgICAgICAgaWYgKG1pc3NpbmcobmIuc2ltdWwpKVxuICAgICAgICAgICAgc3RvcChcIiduYi5zaW11bCcgbXVzdCBzdXBwbHkgdGhlIG51bWJlciBvZiBzaW11bGF0aW9uc1wiKVxuICAgICAgICBpZiAoaXMubnVsbChuYW1lcyhtb2RlbC5mcmVxKSkgJiYgaXMubnVsbChuYW1lcyhtb2RlbC5zZXYpKSlcbiAgICAgICAgICAgIHN0b3AoXCJleHByZXNzaW9ucyBpbiAnbW9kZWwuZnJlcScgYW5kICdtb2RlbC5zZXYnIG11c3QgYmUgbmFtZWRcIilcbiAgICAgICAgRlVOIDwtIHNpbVMobmIuc2ltdWwsIG1vZGVsLmZyZXEgPSBtb2RlbC5mcmVxLCBtb2RlbC5zZXYgPSBtb2RlbC5zZXYpXG4gICAgICAgIGNvbW1lbnQoRlVOKSA8LSBcIkFwcHJveGltYXRpb24gYnkgc2ltdWxhdGlvblwiXG4gICAgfVxuICAgIGVsc2VcbiAgICB7XG4gICAgICAgICMjIFwicmVjdXJzaXZlXCIgYW5kIFwiY29udm9sdXRpb25cIiBjYXNlcy4gQm90aCByZXF1aXJlIGFcbiAgICAgICAgIyMgZGlzY3JldGUgZGlzdHJpYnV0aW9uIG9mIGNsYWltIGFtb3VudHMsIHRoYXQgaXMgYSB2ZWN0b3Igb2ZcbiAgICAgICAgIyMgcHJvYmFiaWxpdGllcyBpbiBhcmd1bWVudCAnbW9kZWwuc2V2Jy5cbiAgICAgICAgaWYgKCFpcy5udW1lcmljKG1vZGVsLnNldikpXG4gICAgICAgICAgICBzdG9wKFwiJ21vZGVsLnNldicgbXVzdCBiZSBhIHZlY3RvciBvZiBwcm9iYWJpbGl0aWVzXCIpXG5cbiAgICAgICAgIyMgUmVjdXJzaXZlIG1ldGhvZCB1c2VzIGEgbW9kZWwgZm9yIHRoZSBmcmVxdWVuY3kgZGlzdHJpYnV0aW9uLlxuICAgICAgICBpZiAobWV0aG9kID09IFwicmVjdXJzaXZlXCIpXG4gICAgICAgIHtcbiAgICAgICAgICAgIGlmIChpcy5udWxsKG1vZGVsLmZyZXEpIHx8ICFpcy5jaGFyYWN0ZXIobW9kZWwuZnJlcSkpXG4gICAgICAgICAgICAgICAgc3RvcChcImZyZXF1ZW5jeSBkaXN0cmlidXRpb24gbXVzdCBiZSBzdXBwbGllZCBhcyBhIGNoYXJhY3RlciBzdHJpbmdcIilcbiAgICAgICAgICAgIGRpc3QgPC0gbWF0Y2guYXJnKHRvbG93ZXIobW9kZWwuZnJlcSksXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjKFwicG9pc3NvblwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcImdlb21ldHJpY1wiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIm5lZ2F0aXZlIGJpbm9taWFsXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiYmlub21pYWxcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJsb2dhcml0aG1pY1wiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcInplcm8tdHJ1bmNhdGVkIHBvaXNzb25cIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJ6ZXJvLXRydW5jYXRlZCBnZW9tZXRyaWNcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJ6ZXJvLXRydW5jYXRlZCBuZWdhdGl2ZSBiaW5vbWlhbFwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcInplcm8tdHJ1bmNhdGVkIGJpbm9taWFsXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiemVyby1tb2RpZmllZCBsb2dhcml0aG1pY1wiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcInplcm8tbW9kaWZpZWQgcG9pc3NvblwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcInplcm8tbW9kaWZpZWQgZ2VvbWV0cmljXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiemVyby1tb2RpZmllZCBuZWdhdGl2ZSBiaW5vbWlhbFwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcInplcm8tbW9kaWZpZWQgYmlub21pYWxcIikpXG4gICAgICAgICAgICBGVU4gPC0gcGFuamVyKGZ4ID0gbW9kZWwuc2V2LCBkaXN0ID0gZGlzdCwgcDAgPSBwMCxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgeC5zY2FsZSA9IHguc2NhbGUsIC4uLiwgY29udm9sdmUgPSBjb252b2x2ZSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgdG9sID0gdG9sLCBtYXhpdCA9IG1heGl0LCBlY2hvID0gZWNobylcbiAgICAgICAgICAgIGNvbW1lbnQoRlVOKSA8LSBcIlJlY3Vyc2l2ZSBtZXRob2QgYXBwcm94aW1hdGlvblwiXG4gICAgICAgIH1cblxuICAgICAgICAjIyBDb252b2x1dGlvbiBtZXRob2QgcmVxdWlyZXMgYSB2ZWN0b3Igb2YgcHJvYmFiaWxpdGllcyBpblxuICAgICAgICAjIyBhcmd1bWVudCAnbW9kZWwuZnJlcScuXG4gICAgICAgIGVsc2UgaWYgKG1ldGhvZCA9PSBcImNvbnZvbHV0aW9uXCIpXG4gICAgICAgIHtcbiAgICAgICAgICAgIGlmICghaXMubnVtZXJpYyhtb2RlbC5mcmVxKSlcbiAgICAgICAgICAgICAgICBzdG9wKFwiJ21vZGVsLmZyZXEnIG11c3QgYmUgYSB2ZWN0b3Igb2YgcHJvYmFiaWxpdGllc1wiKVxuICAgICAgICAgICAgRlVOIDwtIGV4YWN0KGZ4ID0gbW9kZWwuc2V2LCBwbiA9IG1vZGVsLmZyZXEsIHguc2NhbGUgPSB4LnNjYWxlKVxuICAgICAgICAgICAgY29tbWVudChGVU4pIDwtIFwiRXhhY3QgY2FsY3VsYXRpb24gKGNvbnZvbHV0aW9ucylcIlxuICAgICAgICB9XG4gICAgICAgIGVsc2VcbiAgICAgICAgICAgIHN0b3AoXCJpbnRlcm5hbCBlcnJvclwiKVxuICAgIH1cblxuICAgICMjIFJldHVybiBjdW11bGF0aXZlIGRpc3RyaWJ1dGlvbiBmdW5jdGlvblxuICAgIGNsYXNzKEZVTikgPC0gYyhcImFnZ3JlZ2F0ZURpc3RcIiwgY2xhc3MoRlVOKSlcbiAgICBhdHRyKEZVTiwgXCJjYWxsXCIpIDwtIENhbGxcbiAgICBGVU5cbiAgICB9XG5cblxucGxvdC5hZ2dyZWdhdGVEaXN0IDwtIGZ1bmN0aW9uKHgsIHhsaW0sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgeWxhYiA9IGV4cHJlc3Npb24oRltTXSh4KSksXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbWFpbiA9IFwiQWdncmVnYXRlIENsYWltIEFtb3VudCBEaXN0cmlidXRpb25cIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdWIgPSBjb21tZW50KHgpLCAuLi4pXG57XG4gICAgIyMgRnVuY3Rpb24gcGxvdCgpIGlzIHVzZWQgZm9yIHRoZSBzdGVwIGNkZnMgYW5kIGZ1bmN0aW9uIGN1cnZlKClcbiAgICAjIyBpbiB0aGUgY29udGludW91cyBjYXNlcy5cbiAgICBpZiAoXCJzdGVwZnVuXCIgJWluJSBjbGFzcyh4KSlcbiAgICB7XG4gICAgICAgICMjIE1ldGhvZCBmb3IgY2xhc3MgJ2VjZGYnIHdpbGwgbW9zdCBwcm9iYWJseSBiZSB1c2VkLlxuICAgICAgICBOZXh0TWV0aG9kKG1haW4gPSBtYWluLCB5bGFiID0geWxhYiwgLi4uKVxuICAgIH1cbiAgICBlbHNlXG4gICAge1xuICAgICAgICAjIyBMaW1pdHMgZm9yIHRoZSB4LWF4aXMgYXJlIHN1cHBsaWVkIGlmIG5vbmUgYXJlIGdpdmVuXG4gICAgICAgICMjIGluIGFyZ3VtZW50LlxuICAgICAgICBpZiAobWlzc2luZyh4bGltKSlcbiAgICAgICAge1xuICAgICAgICAgICAgbWVhbiA8LSBnZXQoXCJtZWFuXCIsIGVudmlyID0gZW52aXJvbm1lbnQoeCkpXG4gICAgICAgICAgICBzZCA8LSBzcXJ0KGdldChcInZhcmlhbmNlXCIsIGVudmlyID0gZW52aXJvbm1lbnQoeCkpKVxuICAgICAgICAgICAgeGxpbSA8LSBjKG1lYW4gLSAzICogc2QsIG1lYW4gKyAzICogc2QpXG4gICAgICAgIH1cbiAgICAgICAgY3VydmUoeCwgbWFpbiA9IG1haW4sIHlsYWIgPSB5bGFiLCB4bGltID0geGxpbSwgeWxpbSA9IGMoMCwgMSksIC4uLilcbiAgICB9XG4gICAgbXRleHQoc3ViLCBsaW5lID0gMC41KVxufVxuXG5zaW11bCA8LSBmdW5jdGlvbihub2RlcywgbW9kZWwuZnJlcSA9IE5VTEwsIG1vZGVsLnNldiA9IE5VTEwsIHdlaWdodHMgPSBOVUxMKVxue1xuICAgICMjIEdldCBsZXZlbCBuYW1lcy4gRWFjaCBjb3VsZCBiZSBOVUxMLlxuICAgIGxldmVsLm5hbWVzIDwtIG5hbWVzKG5vZGVzKVxuICAgIGZyZXEubmFtZXMgPC0gbmFtZXMobW9kZWwuZnJlcSlcbiAgICBzZXYubmFtZXMgPC0gbmFtZXMobW9kZWwuc2V2KVxuXG4gICAgIyMgJ25vZGVzJyBtdXN0IGJlIGEgbmFtZWQgbGlzdC4gT25lIGV4Y2VwdGlvbiBpcyBhbGxvd2VkOiB0aGVyZVxuICAgICMjIGlzIG9ubHkgb25lIGxldmVsLiBJbiB0aGlzIGNhc2UsIGFkZCBhIHByZWRldGVybWluZWQgbmFtZSBpZlxuICAgICMjIHRoZXJlIGlzbid0IG9uZSBhbHJlYWR5IGFuZCBtYWtlIHN1cmUgJ25vZGVzJyBpcyBhIGxpc3QuXG4gICAgaWYgKGxlbmd0aChub2RlcykgPT0gMUwpXG4gICAge1xuICAgICAgICBpZiAoaXMubnVsbChsZXZlbC5uYW1lcykpXG4gICAgICAgICAgICBuYW1lcyhub2RlcykgPC0gXCJYXCJcbiAgICAgICAgbm9kZXMgPC0gYXMubGlzdChub2RlcylcbiAgICB9XG4gICAgZWxzZVxuICAgIHtcbiAgICAgICAgaWYgKCFpcy5saXN0KG5vZGVzKSB8fCBpcy5udWxsKGxldmVsLm5hbWVzKSlcbiAgICAgICAgICAgIHN0b3AoXCInbm9kZXMnIG11c3QgYmUgYSBuYW1lZCBsaXN0XCIpXG4gICAgfVxuXG4gICAgIyMgRGV0ZXJtaW5lIGlmIGZyZXF1ZW5jeSBhbmQgc2V2ZXJpdHkgbW9kZWxzIGFyZSBwcmVzZW50LiBLZWVwXG4gICAgIyMgZm9yIGZ1dHVyZSB1c2UuXG4gICAgaGFzLmZyZXEgPC0gIWFsbChzYXBwbHkobW9kZWwuZnJlcSwgaXMubnVsbCkpXG4gICAgaGFzLnNldiAgPC0gIWFsbChzYXBwbHkobW9kZWwuc2V2LCBpcy5udWxsKSlcblxuICAgICMjIENoZWNrIHRoYXQgYXQgbGVhc3Qgb25lIG9mICdtb2RlbC5mcmVxJyBvciAnbW9kZWwuc2V2JyBpc1xuICAgICMjIHByZXNlbnQgYW5kIHRoYXQgdGhlIGxldmVsIG5hbWVzIG1hdGNoIHdpdGggdGhvc2Ugb2YgJ25vZGVzJy5cbiAgICAjIyBQZXJoYXBzIGlzIHRoZXJlIGEgZmFuY2llciB3YXkgdG8gZG8gYWxsIHRoZXNlIHRlc3RzLCBidXQgdGhlXG4gICAgIyMgdmVyc2lvbiBiZWxvdyBpcyBhdCBsZWFzdCBlYXN5IHRvIGZvbGxvdy5cbiAgICBpZiAoaGFzLmZyZXEpXG4gICAge1xuICAgICAgICBpZiAoaGFzLnNldilcbiAgICAgICAge1xuICAgICAgICAgICAgaWYgKCEgKGlkZW50aWNhbChsZXZlbC5uYW1lcywgZnJlcS5uYW1lcykgJiZcbiAgICAgICAgICAgICAgICAgICBpZGVudGljYWwobGV2ZWwubmFtZXMsIHNldi5uYW1lcykpKVxuICAgICAgICAgICAgICAgIHN0b3AoXCJsZXZlbCBuYW1lcyBkaWZmZXJlbnQgaW4gJ25vZGVzJywgJ21vZGVsLmZyZXEnIGFuZCAnbW9kZWwuc2V2J1wiKVxuICAgICAgICB9XG4gICAgICAgIGVsc2VcbiAgICAgICAge1xuICAgICAgICAgICAgaWYgKCFpZGVudGljYWwobGV2ZWwubmFtZXMsIGZyZXEubmFtZXMpKVxuICAgICAgICAgICAgICAgIHN0b3AoXCJsZXZlbCBuYW1lcyBkaWZmZXJlbnQgaW4gJ25vZGVzJywgJ21vZGVsLmZyZXEnIGFuZCAnbW9kZWwuc2V2J1wiKVxuICAgICAgICB9XG4gICAgfVxuICAgIGVsc2VcbiAgICB7XG4gICAgICAgIGlmIChoYXMuc2V2KVxuICAgICAgICB7XG4gICAgICAgICAgICBpZiAoIWlkZW50aWNhbChsZXZlbC5uYW1lcywgc2V2Lm5hbWVzKSlcbiAgICAgICAgICAgICAgICBzdG9wKFwibGV2ZWwgbmFtZXMgZGlmZmVyZW50IGluICdub2RlcycsICdtb2RlbC5mcmVxJyBhbmQgJ21vZGVsLnNldidcIilcbiAgICAgICAgfVxuICAgICAgICBlbHNlXG4gICAgICAgICAgICBzdG9wKFwib25lIG9mICdtb2RlbC5mcmVxJyBvciAnbW9kZWwuc2V2JyBtdXN0IGJlIG5vbi1OVUxMXCIpXG4gICAgfVxuXG4gICAgIyMgVGhlIGZ1bmN0aW9uIGlzIHdyaXR0ZW4gZm9yIG1vZGVscyB3aXRoIGF0IGxlYXN0IHR3byBsZXZlbHNcbiAgICAjIyAoZW50aXR5IGFuZCB5ZWFyKS4gSWYgdGhlcmUgaXMgb25seSBvbmUsIGFkZCBhIGR1bW15IGxldmVsIHRvXG4gICAgIyMgYXZvaWQgc2NhdHRlcmluZyB0aGUgY29kZSB3aXRoIGNvbmRpdGlvbnMuXG4gICAgaWYgKGxlbmd0aChub2RlcykgPCAyTClcbiAgICB7XG4gICAgICAgIG5vZGVzIDwtIGMobm9kZSA9IDEsIG5vZGVzKVxuICAgICAgICBtb2RlbC5mcmVxIDwtXG4gICAgICAgICAgICBpZiAoaGFzLmZyZXEpIGMoZXhwcmVzc2lvbihub2RlID0gTlVMTCksIG1vZGVsLmZyZXEpIGVsc2UgTlVMTFxuICAgICAgICBtb2RlbC5zZXYgPC1cbiAgICAgICAgICAgIGlmIChoYXMuc2V2KSBjKGV4cHJlc3Npb24obm9kZSA9IE5VTEwpLCBtb2RlbC5zZXYpIGVsc2UgTlVMTFxuICAgIH1cblxuICAgICMjIEZyZXF1ZW50bHkgdXNlZCBxdWFudGl0aWVzXG4gICAgbGV2ZWwubmFtZXMgPC0gbmFtZXMobm9kZXMpICAgICAgICAgIyBuZWVkIHRvIHJlc2V0IVxuICAgIG5sZXZlbHMgPC0gbGVuZ3RoKG5vZGVzKSAgICAgICAgICAgICMgbnVtYmVyIG9mIGxldmVsc1xuXG4gICAgIyMgUmVjeWNsaW5nIG9mIHRoZSBudW1iZXIgb2Ygbm9kZXMgKGlmIG5lZWRlZCkgbXVzdCBiZSBkb25lXG4gICAgIyMgXCJtYW51YWxseVwiLiBXZSBkbyBpdCBoZXJlIG9uY2UgYW5kIGZvciBhbGwgc2luY2UgaW4gYW55IGNhc2VcbiAgICAjIyBiZWxvdyB3ZSB3aWxsIG5lZWQgdG8ga25vdyB0aGUgdG90YWwgbnVtYmVyIG9mIG5vZGVzIGluIHRoZVxuICAgICMjIHBvcnRmb2xpby4gRnVydGhlcm1vcmUsIHRoZSByZWN5Y2xlZCBsaXN0ICdub2Rlcycgd2lsbCBiZVxuICAgICMjIHJldHVybmVkIGJ5IHRoZSBmdW5jdGlvbi5cbiAgICBmb3IgKGkgaW4gMkw6bmxldmVscykgICAgICAgIyBmaXJzdCBub2RlIGRvZXNuJ3QgbmVlZCByZWN5Y2xpbmdcbiAgICAgICAgbm9kZXNbW2ldXSA8LSByZXAobm9kZXNbW2ldXSwgbGVuZ3RoID0gc3VtKG5vZGVzW1tpIC0gMUxdXSkpXG5cbiAgICAjIyBTaW11bGF0aW9uIG9mIHRoZSBmcmVxdWVuY3kgbWl4aW5nIHBhcmFtZXRlcnMgZm9yIGVhY2ggbGV2ZWxcbiAgICAjIyAoZS5nLiBjbGFzcywgY29udHJhY3QpIGFuZCwgYXQgdGhlIGxhc3QgbGV2ZWwsIHRoZSBhY3R1YWxcbiAgICAjIyBmcmVxdWVuY2llcy4gSWYgJ21vZGVsLmZyZXEnIGlzIE5VTEwsIHRoaXMgaXMgZXF1aXZhbGVudCB0b1xuICAgICMjIGhhdmluZyBvbmUgY2xhaW0gcGVyIG5vZGUuXG4gICAgaWYgKGhhcy5mcmVxKVxuICAgIHtcbiAgICAgICAgIyMgTm9ybWFsbHksIG9ubHkgdGhlIGltbWVkaWF0ZWx5IGFib3ZlIG1peGluZyBwYXJhbWV0ZXIgd2lsbFxuICAgICAgICAjIyBiZSB1c2VkIGluIHRoZSBtb2RlbCBmb3IgYSBsZXZlbCwgYnV0IHRoZSBjb2RlIGhlcmUgYWxsb3dzXG4gICAgICAgICMjIGZvciBtb3JlIGdlbmVyYWwgc2NoZW1lcy4gRm9yIHRoaXMgdG8gd29yaywgYWxsIG1peGluZ1xuICAgICAgICAjIyBwYXJhbWV0ZXJzIGhhdmUgdG8gYmUgY29ycmVjdGx5IHJlY3ljbGVkIGF0IGVhY2ggbGV2ZWxcbiAgICAgICAgIyMgd2hlcmUgdGhleSAqY291bGQqIGJlIHVzZWQuIFNpbmNlIHRoZSBtb2RlbCBhdCBhbnkgbGV2ZWxcbiAgICAgICAgIyMgY291bGQgYmUgTlVMTCwgJ3BhcmFtcycgd2lsbCBrZWVwIHRyYWNrIG9mIHRoZSBtaXhpbmdcbiAgICAgICAgIyMgcGFyYW1ldGVycyB0aGF0IHdlcmUgc2ltdWxhdGVkIGluIHByZXZpb3VzIGl0ZXJhdGlvbiBvZiB0aGVcbiAgICAgICAgIyMgZm9ydGhjb21pbmcgbG9vcC5cbiAgICAgICAgcGFyYW1zIDwtIGNoYXJhY3RlcigwKVxuXG4gICAgICAgIGZvciAoaSBpbiBzZXFfbGVuKG5sZXZlbHMpKVxuICAgICAgICB7XG4gICAgICAgICAgICAjIyBOdW1iZXIgb2Ygbm9kZXMgYXQgdGhlIGN1cnJlbnQgbGV2ZWxcbiAgICAgICAgICAgIG4uY3VycmVudCA8LSBub2Rlc1tbaV1dXG5cbiAgICAgICAgICAgICMjIEV4dHJhY3Qgc2ltdWxhdGlvbiBtb2RlbCBmb3IgdGhlIGxldmVsLlxuICAgICAgICAgICAgQ2FsbCA8LSBtb2RlbC5mcmVxW1tpXV1cblxuICAgICAgICAgICAgIyMgUmVwZWF0IHRoZSBtaXhpbmcgcGFyYW1ldGVycyBvZiBhbGwgbGV2ZWxzIGFib3ZlIHRoZVxuICAgICAgICAgICAgIyMgY3VycmVudCBvbmUgdGhhdCB3ZXJlIHNpbXVsYXRlZCBpbiB0aGUgcGFzdC5cbiAgICAgICAgICAgIGZvciAoaiBpbiBzZXFfYWxvbmcocGFyYW1zKSlcbiAgICAgICAgICAgICAgICBldmFsKHN1YnN0aXR1dGUoeCA8LSByZXAuaW50KHgsIG4uY3VycmVudCksXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGxpc3QoeCA9IGFzLm5hbWUocGFyYW1zW1tqXV0pKSkpXG5cbiAgICAgICAgICAgICMjIFNpbXVsYXRlIGRhdGEgb25seSBpZiB0aGVyZSBpcyBhIG1vZGVsIGF0IHRoZSBjdXJyZW50XG4gICAgICAgICAgICAjIyBsZXZlbC5cbiAgICAgICAgICAgIGlmICghaXMubnVsbChDYWxsKSlcbiAgICAgICAgICAgIHtcbiAgICAgICAgICAgICAgICAjIyBBZGQgdGhlIG51bWJlciBvZiB2YXJpYXRlcyB0byB0aGUgY2FsbC5cbiAgICAgICAgICAgICAgICBDYWxsJG4gPC0gc3VtKG4uY3VycmVudClcblxuICAgICAgICAgICAgICAgICMjIFNpbXVsYXRpb24gb2YgdGhlIG1peGluZyBwYXJhbWV0ZXJzIG9yIHRoZSBkYXRhLiBJblxuICAgICAgICAgICAgICAgICMjIHRoZSBsYXR0ZXIgY2FzZSwgc3RvcmUgdGhlIHJlc3VsdHMgaW4gYSBmaXhlZFxuICAgICAgICAgICAgICAgICMjIHZhcmlhYmxlIG5hbWUuXG4gICAgICAgICAgICAgICAgaWYgKGkgPCBubGV2ZWxzKVxuICAgICAgICAgICAgICAgIHtcbiAgICAgICAgICAgICAgICAgICAgYXNzaWduKGxldmVsLm5hbWVzW1tpXV0sIGV2YWwoQ2FsbCkpXG4gICAgICAgICAgICAgICAgICAgIHBhcmFtc1tpXSA8LSBsZXZlbC5uYW1lc1tbaV1dICMgcmVtZW1iZXIgdGhlIHBhcmFtZXRlclxuICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICBlbHNlXG4gICAgICAgICAgICAgICAgICAgIGZyZXF1ZW5jaWVzIDwtIGV2YWwoQ2FsbClcbiAgICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgIH1cbiAgICBlbHNlXG4gICAgICAgIGZyZXF1ZW5jaWVzIDwtIHJlcC5pbnQoMSwgc3VtKG5vZGVzW1tubGV2ZWxzXV0pKVxuXG4gICAgIyMgU2ltdWxhdGlvbiBvZiB0aGUgY2xhaW0gYW1vdW50cy4gSWYgJ21vZGVsLnNldicgaXMgTlVMTCwgdGhpc1xuICAgICMjIGlzIGVxdWl2YWxlbnQgdG8gc2ltdWxhdGluZyBmcmVxdWVuY2llcyBvbmx5LlxuICAgIGlmIChoYXMuc2V2KVxuICAgIHtcbiAgICAgICAgIyMgUmVwZWF0IHRoZSBzYW1lIHByb2NlZHVyZSBhcyBmb3IgdGhlIGZyZXF1ZW5jeSBtb2RlbCwgd2l0aFxuICAgICAgICAjIyBvbmUgZGlmZmVyZW5jZTogd2hlbiByZWFjaGluZyB0aGUgbGFzdCBsZXZlbCAoY2xhaW1cbiAgICAgICAgIyMgYW1vdW50cyksIHRoZSBudW1iZXIgb2YgdmFyaWF0ZXMgdG8gc2ltdWxhdGUgaXMgbm90IGdpdmVuXG4gICAgICAgICMjIGJ5IHRoZSBudW1iZXIgb2Ygbm9kZXMgYnV0IHJhdGhlciBieSB0aGUgbnVtYmVyIG9mIGNsYWltc1xuICAgICAgICAjIyBhcyBmb3VuZCBpbiAnZnJlcXVlbmNpZXMnLlxuICAgICAgICBwYXJhbXMgPC0gY2hhcmFjdGVyKDApXG5cbiAgICAgICAgZm9yIChpIGluIHNlcV9sZW4obmxldmVscykpXG4gICAgICAgIHtcbiAgICAgICAgICAgIG4uY3VycmVudCA8LSBub2Rlc1tbaV1dXG4gICAgICAgICAgICBDYWxsIDwtIG1vZGVsLnNldltbaV1dXG5cbiAgICAgICAgICAgIGZvciAoaiBpbiBzZXFfYWxvbmcocGFyYW1zKSlcbiAgICAgICAgICAgICAgICBldmFsKHN1YnN0aXR1dGUoeCA8LSByZXAuaW50KHgsIG4uY3VycmVudCksXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGxpc3QoeCA9IGFzLm5hbWUocGFyYW1zW1tqXV0pKSkpXG5cbiAgICAgICAgICAgIGlmICghaXMubnVsbChDYWxsKSlcbiAgICAgICAgICAgIHtcbiAgICAgICAgICAgICAgICAjIyBUaGUgcmVzdCBvZiB0aGUgcHJvY2VkdXJlIGRpZmZlcnMgZGVwZW5kaW5nIGlmIHdlXG4gICAgICAgICAgICAgICAgIyMgYXJlIHN0aWxsIHNpbXVsYXRpbmcgbWl4aW5nIHBhcmFtZXRlcnMgb3IgY2xhaW1cbiAgICAgICAgICAgICAgICAjIyBhbW91bnRzLlxuICAgICAgICAgICAgICAgIGlmIChpIDwgbmxldmVscylcbiAgICAgICAgICAgICAgICB7XG4gICAgICAgICAgICAgICAgICAgICMjIFNpbXVsYXRpb24gb2YgbWl4aW5nIHBhcmFtZXRlcnMgaXMgaWRlbnRpY2FsIHRvIHRoZVxuICAgICAgICAgICAgICAgICAgICAjIyBzaW11bGF0aW9uIG9mIGZyZXF1ZW5jaWVzLlxuICAgICAgICAgICAgICAgICAgICBDYWxsJG4gPC0gc3VtKG4uY3VycmVudClcbiAgICAgICAgICAgICAgICAgICAgYXNzaWduKGxldmVsLm5hbWVzW1tpXV0sIGV2YWwoQ2FsbCkpXG4gICAgICAgICAgICAgICAgICAgIHBhcmFtc1tpXSA8LSBsZXZlbC5uYW1lc1tbaV1dXG4gICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgIGVsc2VcbiAgICAgICAgICAgICAgICB7XG4gICAgICAgICAgICAgICAgICAgICMjIEZvciB0aGUgc2ltdWxhdGlvbiBvZiBjbGFpbSBhbW91bnRzLCB0aGUgbnVtYmVyXG4gICAgICAgICAgICAgICAgICAgICMjIG9mIHZhcmlhdGVzIGlzIHJhdGhlciBnaXZlbiBieSB0aGVcbiAgICAgICAgICAgICAgICAgICAgIyMgJ2ZyZXF1ZW5jaWVzJyBvYmplY3QuIEZ1cnRoZXJtb3JlLCB0aGUgbWl4aW5nXG4gICAgICAgICAgICAgICAgICAgICMjIHBhcmFtZXRlcnMgbXVzdCBiZSByZWN5Y2xlZCBvbmNlIG1vcmUgdG8gbWF0Y2hcbiAgICAgICAgICAgICAgICAgICAgIyMgdGhlIHZlY3RvciBvZiBmcmVxdWVuY2llcy5cbiAgICAgICAgICAgICAgICAgICAgZm9yIChwIGluIGludGVyc2VjdChhbGwudmFycyhDYWxsKSwgcGFyYW1zKSlcbiAgICAgICAgICAgICAgICAgICAgICAgIGV2YWwoc3Vic3RpdHV0ZSh4IDwtIHJlcC5pbnQoeCwgZnJlcXVlbmNpZXMpLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGxpc3QoeCA9IGFzLm5hbWUocCkpKSlcbiAgICAgICAgICAgICAgICAgICAgQ2FsbCRuIDwtIHN1bShmcmVxdWVuY2llcylcbiAgICAgICAgICAgICAgICAgICAgc2V2ZXJpdGllcyA8LWV2YWwoQ2FsbClcbiAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICB9XG4gICAgZWxzZVxuICAgICAgICBzZXZlcml0aWVzIDwtIHJlcC5pbnQoMSwgc3VtKGZyZXF1ZW5jaWVzKSlcblxuICAgICMjIFdlIG11c3Qgbm93IGRpc3RyaWJ1dGUgdGhlIGNsYWltIGFtb3VudHMgaW4gdmVjdG9yICdzZXZlcml0aWVzJ1xuICAgICMjIHRvIHRoZSBhcHByb3ByaWF0ZSBub2Rlcy4gVGhpcyBpcyBjb21wbGljYXRlZCBieSB0aGVcbiAgICAjIyBwb3NzaWJpbGl0eSB0byBoYXZlIGRpZmZlcmVudCBudW1iZXIgb2Ygbm9kZXMgKHllYXJzIG9mXG4gICAgIyMgb2JzZXJ2YXRpb24pIGZvciBlYWNoIGVudGl0eS4gVGhlIHJlc3VsdCBtdXN0IGJlIGEgbWF0cml4XG4gICAgIyMgd2l0aCB0aGUgbnVtYmVyIG9mIGNvbHVtbnMgZXF1YWwgdG8gdGhlIG1heGltdW0gbnVtYmVyIG9mIGxhc3RcbiAgICAjIyBsZXZlbCBub2Rlcy5cbiAgICAjI1xuICAgICMjIFRoZSBudW1iZXIgb2Ygbm9kZXMgKHllYXJzIG9mIG9ic2VydmF0aW9uKSBwZXIgZW50aXR5IGlzXG4gICAgIyMgZ2l2ZW4gYnkgJ24uY3VycmVudCcgc2luY2Ugd2UgcmVhY2hlZCB0aGUgbGFzdCBsZXZlbCBpbiAoZWl0aGVyXG4gICAgIyMgb25lIG9mKSB0aGUgYWJvdmUgbG9vcHMuXG4gICAgIyNcbiAgICAjIyBBc3NpZ24gYSB1bmlxdWUgSUQgdG8gZWFjaCBub2RlLCBsZWF2aW5nIGdhcHMgZm9yIG5vZGVzIHdpdGhvdXRcbiAgICAjIyBvYnNlcnZhdGlvbnMuXG4gICAgaW5kIDwtIHVubGlzdChtYXBwbHkoc2VxLFxuICAgICAgICAgICAgICAgICAgICAgICAgIGZyb20gPSBzZXEoYnkgPSBtYXgobi5jdXJyZW50KSwgYWxvbmcgPSBuLmN1cnJlbnQpLFxuICAgICAgICAgICAgICAgICAgICAgICAgIGxlbmd0aCA9IG4uY3VycmVudCkpXG5cbiAgICAjIyBSZXBlYXRpbmcgdGhlIHZlY3RvciBvZiBJRHMgYWNjb3JkaW5nIHRvIHRoZSBmcmVxdWVuY2llc1xuICAgICMjIGVmZmVjdGl2ZWx5IGFzc2lnbnMgYSBub2RlIElEIHRvIGVhY2ggY2xhaW0gYW1vdW50LiBUaGUgdmVjdG9yXG4gICAgIyMgb2YgY2xhaW0gYW1vdW50cyBpcyB0aGVuIHNwbGl0IGJ5IG5vZGUsIHlpZWxkaW5nIGEgbGlzdCB3aGVyZVxuICAgICMjIGVhY2ggZWxlbWVudCBjb3JyZXNwb25kcyB0byBhIG5vZGUgd2l0aCBjbGFpbXMuXG4gICAgZiA8LSByZXAuaW50KGluZCwgZnJlcXVlbmNpZXMpXG4gICAgc2V2ZXJpdGllcyA8LSBzcGxpdChzZXZlcml0aWVzLCBmKVxuXG4gICAgIyMgSWRlbnRpZnkgbm9kZXMgd2l0aCBmcmVxdWVuY3kgZXF1YWwgdG8gMCwgd2hpY2ggaXMgZGlmZmVyZW50XG4gICAgIyMgZnJvbSBoYXZpbmcgbm8gb2JzZXJ2YXRpb24gKE5BKS5cbiAgICBmcmVxMCA8LSBpbmRbd2hpY2goZnJlcXVlbmNpZXMgPT0gMCldXG5cbiAgICAjIyBSZWFycmFuZ2UgdGhlIGxpc3Qgb2YgY2xhaW0gYW1vdW50cyBpbiBhIG1hdHJpeDtcbiAgICAjI1xuICAgICMjICAgICAgbnVtYmVyIG9mIHJvd3M6IG51bWJlciBvZiBub2RlcyBhdCB0aGUgcGVudWx0aW1hdGUgbGV2ZWxcbiAgICAjIyAgICAgICAgICAgICAgICAgICAgICAobnVtYmVyIG9mIGVudGl0aWVzKVxuICAgICMjICAgbnVtYmVyIG9mIGNvbHVtbnM6IG1heGltdW0gbnVtYmVyIG9mIG5vZGVzIGF0IHRoZSBsYXN0IGxldmVsXG4gICAgIyMgICAgICAgICAgICAgICAgICAgICAgKG51bWJlciBvZiB5ZWFycyBvZiBvYnNlcnZhdGlvbikuXG4gICAgIyNcbiAgICAjIyBNb3Jlb3ZlciwgYXNzaWduIGEgdmFsdWUgb2YgJ251bWVyaWMoMCknIHRvIG5vZGVzIHdpdGggYVxuICAgICMjIGZyZXF1ZW5jeSBvZiAwLlxuICAgIG5yb3cgPC0gbGVuZ3RoKG4uY3VycmVudCkgICAgICAgICAgICMgbnVtYmVyIG9mIGVudGl0aWVzXG4gICAgbmNvbCA8LSBtYXgobi5jdXJyZW50KSAgICAgICAgICAgICAgIyBudW1iZXIgb2YgeWVhcnNcbiAgICByZXMgPC0gYXMubGlzdChyZXAuaW50KE5BLCBucm93ICogbmNvbCkpXG4gICAgcmVzW3VuaXF1ZShmKV0gPC0gc2V2ZXJpdGllc1xuICAgIHJlc1tmcmVxMF0gPC0gbGFwcGx5KHJlcC5pbnQoMCwgbGVuZ3RoKGZyZXEwKSksIG51bWVyaWMpXG4gICAgcmVzIDwtIG1hdHJpeChyZXMsIG5yb3csIG5jb2wsIGJ5cm93ID0gVFJVRSxcbiAgICAgICAgICAgICAgICAgIGRpbW5hbWVzID0gbGlzdChOVUxMLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3RlKGxldmVsLm5hbWVzW25sZXZlbHNdLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNlcV9sZW4obmNvbCksIHNlcCA9IFwiLlwiKSkpXG5cbiAgICAjIyBSZXNoYXBlIHdlaWdodHMgYXMgYSBtYXRyaXgsIGlmIG5lY2Vzc2FyeS5cbiAgICB3ZWlnaHRzIDwtIGlmIChpcy5udWxsKHdlaWdodHMpKVxuICAgICAgICBOVUxMXG4gICAgZWxzZVxuICAgIHtcbiAgICAgICAgIyMgSW50ZWdyYXRlIE5BcyBpbnRvIHRoZSB3ZWlnaHRzIG1hdHJpeCBhcyBhcHByb3ByaWF0ZS5cbiAgICAgICAgdyA8LSByZXAuaW50KE5BLCBucm93ICogbmNvbClcbiAgICAgICAgd1tpbmRdIDwtIHdlaWdodHNcbiAgICAgICAgbWF0cml4KHcsIG5yb3cgPSBucm93LCBieXJvdyA9IFRSVUUsIGRpbW5hbWVzID0gZGltbmFtZXMocmVzKSlcbiAgICB9XG5cbiAgICAjIyBGaW5hbGx5LCBjcmVhdGUgYSBtYXRyaXggd2hlcmUgZWFjaCByb3cgY29udGFpbnMgdGhlIHNlcmllcyBvZlxuICAgICMjIGlkZW50aWZpZXJzIGZvciBhbiBlbnRpdHkgaW4gdGhlIHBvcnRmb2xpbywgZS5nLiBpZiB0aGUgZGF0YVxuICAgICMjIGlzIGRlbm90ZWQgWF97aWprdH0sIG9uZSBsaW5lIG9mIHRoZSBtYXRyaXggd2lsbCBjb250YWluXG4gICAgIyMgc3Vic2NyaXB0cyBpLCBqIGFuZCBrLiBBcyB3ZSBtb3ZlIGZyb20gcmlnaHQgdG8gbGVmdCBpbiB0aGVcbiAgICAjIyBjb2x1bW5zIG9mICdtJywgdGhlIHN1YnNjcmlwdHMgYXJlIGluY3JlYXNpbmdseSByZXBlYXRlZC5cbiAgICBuY29sIDwtIG5sZXZlbHMgLSAxTFxuICAgIG0gPC0gbWF0cml4KDEsIG5yb3csIG5jb2wsXG4gICAgICAgICAgICAgICAgZGltbmFtZXMgPSBsaXN0KE5VTEwsIGhlYWQobGV2ZWwubmFtZXMsIG5jb2wpKSlcbiAgICBmb3IgKGkgaW4gc2VxX2xlbihuY29sIC0gMUwpKSAgICAjIGFsbCBidXQgdGhlIGxhc3QgY29sdW1uXG4gICAge1xuICAgICAgICAjIyBWZWN0b3IgJ3gnIHdpbGwgb3JpZ2luYWxseSBjb250YWluIGFsbCBzdWJzY3JpcHRzIGZvciBvbmVcbiAgICAgICAgIyMgbGV2ZWwuIFRoZXNlIHN1YnNjcmlwdHMgYXJlIHRoZW4gcmVwZWF0ZWQgYXMgbmVlZGVkIHRvIGdpdmVcbiAgICAgICAgIyMgdGhlIGRlc2lyZWQgcmVzdWx0LiBUbyBhdm9pZCBhbm90aGVyIGV4cGxpY2l0IGxvb3AsIEkgdXNlIGFcbiAgICAgICAgIyMgJ2xhcHBseScgd2l0aCBhIGRpcmVjdCBhc3NpZ25tZW50IGluIHRoZSBjdXJyZW50XG4gICAgICAgICMjIGZyYW1lLiBTb21ld2hhdCB1bnVzdWFsLCBidXQgdGhpcyBpcyB0aGUgc2ltcGxlc3QgcHJvY2VkdXJlXG4gICAgICAgICMjIEkgbWFuYWdlZCB0byBjb21lIHVwIHdpdGguXG4gICAgICAgIHggPC0gdW5saXN0KGxhcHBseShub2Rlc1tbaV1dLCBzZXEpKVxuICAgICAgICBsYXBwbHkobm9kZXNbKGkgKyAxTCk6KG5sZXZlbHMgLSAxTCldLFxuICAgICAgICAgICAgICAgZnVuY3Rpb24odikgYXNzaWduKFwieFwiLCByZXAuaW50KHgsIHYpLCBlbnZpciA9IHBhcmVudC5mcmFtZSgyKSkpXG4gICAgICAgIG1bLCBpXSA8LSB4XG4gICAgfVxuICAgIG1bLCBuY29sXSA8LSB1bmxpc3QobGFwcGx5KG5vZGVzW1tuY29sXV0sIHNlcSkpICMgbGFzdCBjb2x1bW5cblxuICAgICMjIFJldHVybiBvYmplY3Qgb2YgY2xhc3MgJ3BvcnRmb2xpbydcbiAgICBzdHJ1Y3R1cmUobGlzdChkYXRhID0gcmVzLFxuICAgICAgICAgICAgICAgICAgIHdlaWdodHMgPSB3ZWlnaHRzLFxuICAgICAgICAgICAgICAgICAgIGNsYXNzaWZpY2F0aW9uID0gbSxcbiAgICAgICAgICAgICAgICAgICBub2RlcyA9IG5vZGVzLFxuICAgICAgICAgICAgICAgICAgIG1vZGVsLmZyZXEgPSBtb2RlbC5mcmVxLFxuICAgICAgICAgICAgICAgICAgIG1vZGVsLnNldiA9IG1vZGVsLnNldiksXG4gICAgICAgICAgICAgIGNsYXNzID0gXCJwb3J0Zm9saW9cIilcbn1cblxuZGxvbWF4IDwtIGZ1bmN0aW9uKHgsIHNoYXBlPTEsIHNjYWxlPTEsIGxvZz1GQUxTRSkge1xuICBpZiAobG9nPT1GQUxTRSkgcmVzdWx0IDwtIHNoYXBlKnNjYWxlXnNoYXBlIC8gKHNjYWxlICsgeCleKHNoYXBlKzEpXG4gIGlmIChsb2c9PVRSVUUgKSByZXN1bHQgPC0gbG9nKHNoYXBlKStzaGFwZSpsb2coc2NhbGUpLShzaGFwZSsxKSpsb2coc2NhbGUgKyB4KVxuICByZXR1cm4ocmVzdWx0KSB9XG5cbnJsb21heCA8LSBmdW5jdGlvbihuLCBzaGFwZT0xLCBzY2FsZT0xKSB7XG4gIHUgPC0gcnVuaWYobilcbiAgcmVzdWx0IDwtIHNjYWxlKigoMSAtIHUpXigtMS9zaGFwZSktMSlcbiAgcmV0dXJuKHJlc3VsdCkgfVxuXG5JbnNhbXBsZVRvd24gPC0gc3Vic2V0KEluc2FtcGxlLCBUeXBlVG93bj09MSlcblxuIyBUaGUgbmVnYXRpdmUgYmlub21pYWwgZnJlcXVlbmN5IG1vZGVsOiBOXG5OIDwtIEluc2FtcGxlVG93biRGcmVxXG5mcmVxX2xpayA8LSBmdW5jdGlvbihwYXJtKSB7XG4gIHIgICAgPC0gcGFybVsxXVxuICBiZXRhIDwtIHBhcm1bMl1cbiAgbGlrICA8LSAtc3VtKGRuYmlub20oTiwgc2l6ZT1yLCBwcm9iPTEvKDErYmV0YSksIGxvZz1UUlVFKSlcbiAgcmV0dXJuKGxpaylcbn1cbmluaXQucGFybS5mcmVxIDwtIGMobWVhbihOKS8odmFyKE4pL21lYW4oTiktMSksIHZhcihOKS9tZWFuKE4pLTEpICMgaW5pdGlhbCBlc3RpbWF0ZXMgYnkgbWV0aG9kIG9mIG1vbWVudHNcbmZyZXFfbW9kICAgICAgIDwtIG9wdGltKHBhcj1pbml0LnBhcm0uZnJlcSwgZm49ZnJlcV9saWspICMgTWF4aW11bSBsaWtlbGlob29kIGVzdGltYXRpb24gZm9yIHRoZSBmcmVxdWVuY3kgbW9kZWxcblxuci5lc3QgICAgPC0gZnJlcV9tb2QkcGFyWzFdXG5iZXRhLmVzdCA8LSBmcmVxX21vZCRwYXJbMl1cblxuXG4jIFRoZSBQYXJldG8gc2V2ZXJpdHkgbW9kZWw6IFhiYXJcblhiYXIgPC0gSW5zYW1wbGVUb3duJHlBdmdbd2hpY2goSW5zYW1wbGVUb3duJEZyZXE+MCldXG5zZXZfbGlrIDwtIGZ1bmN0aW9uKHBhcm0pIHtcbiAgYWxwaGEgPC0gIHBhcm1bMV1cbiAgdGhldGEgPC0gIHBhcm1bMl1cbiAgbGlrICAgPC0gLXN1bShkbG9tYXgoWGJhciwgc2hhcGU9YWxwaGEsIHNjYWxlPXRoZXRhLCBsb2c9VFJVRSkpXG4gIHJldHVybihsaWspXG59XG5pbml0LnBhcm0uc2V2IDwtIGMoIDIvKDEtbWVhbihYYmFyKV4yL3ZhcihYYmFyKSkgICwgbWVhbihYYmFyKSooMi8oMS1tZWFuKFhiYXIpXjIvdmFyKFhiYXIpKS0xKSApICMgaW5pdGlhbCBlc3RpbWF0ZXMgYnkgbWV0aG9kIG9mIG1vbWVudHNcbnNldl9tb2QgICAgICAgPC0gb3B0aW0ocGFyPWluaXQucGFybS5zZXYsIGZuPXNldl9saWssIG1ldGhvZD1cIkwtQkZHUy1CXCIpICMgTWF4aW11bSBsaWtlbGlob29kIGVzdGltYXRpb24gZm9yIHRoZSBzZXZlcml0eSBtb2RlbFxuYWxwaGEuZXN0ICAgICA8LSBzZXZfbW9kJHBhclsxXVxudGhldGEuZXN0ICAgICA8LSBzZXZfbW9kJHBhclsyXSIsInNhbXBsZSI6IiMgUGFyYW1ldGVyIGVzdGltYXRlcyBmcm9tIHRoZSBmcmVxdWVuY3kgbW9kZWw6IGFscGhhLmVzdCwgdGhldGEuZXN0XG4jIFBhcmFtZXRlciBlc3RpbWF0ZXMgZnJvbSB0aGUgc2V2ZXJpdHkgIG1vZGVsOiAgICAgci5lc3QsICBiZXRhLmVzdFxuXG5mcmVxIDwtIGV4cHJlc3Npb24oZGF0YSA9ICA/PyhzaXplPT8/LCBwcm9iPTEvKDErPz8pKSkgICMgcmFuZG9tIHNhbXBsZXMgZnJvbSB0aGUgZml0dGVkIGZyZXF1ZW5jeSBtb2RlbFxuc2V2ICA8LSBleHByZXNzaW9uKGRhdGEgPSAgPz8oc2hhcGU9Pz8sIHNjYWxlPT8/KSkgIyByYW5kb20gc2FtcGxlcyBmcm9tIHRoZSBmaXR0ZWQgc2V2ZXJpdHkgbW9kZWxcbkZzICAgPC0gYWdncmVnYXRlRGlzdChcInNpbXVsYXRpb25cIiwgbmIuc2ltdWwgPSAxMDAwLFxuICAgICAgICAgICAgICAgICAgICAgIG1vZGVsLmZyZXEgPSA/PywgbW9kZWwuc2V2ID0gPz8pXG5wbG90KEZzKVxubGluZXMoZWNkZihJbnNhbXBsZVRvd24keSksICBjb2w9XCJibHVlXCIpXG5cbmxlZ2VuZChcImJvdHRvbXJpZ2h0XCIsIGxlZ2VuZCA9IGMoXCJTaW11bGF0aW9uXCIsIFwiRW1waXJpY2FsXCIpLCBjb2w9YyhcImJsYWNrXCIsXCJibHVlXCIpLCBsdHk9YygxLDIpLCBwY2g9YygxLCAxOSkpIiwic29sdXRpb24iOiIjIFBhcmFtZXRlciBlc3RpbWF0ZXMgZnJvbSB0aGUgZnJlcXVlbmN5IG1vZGVsOiBhbHBoYS5lc3QsIHRoZXRhLmVzdFxuIyBQYXJhbWV0ZXIgZXN0aW1hdGVzIGZyb20gdGhlIHNldmVyaXR5ICBtb2RlbDogICAgIHIuZXN0LCAgYmV0YS5lc3RcblxuZnJlcSA8LSBleHByZXNzaW9uKGRhdGEgPSAgcm5iaW5vbShzaXplPXIuZXN0LCBwcm9iPTEvKDErYmV0YS5lc3QpKSkgIyByYW5kb20gc2FtcGxlcyBmcm9tIHRoZSBmaXR0ZWQgZnJlcXVlbmN5IG1vZGVsXG5zZXYgIDwtIGV4cHJlc3Npb24oZGF0YSA9ICBybG9tYXgoc2hhcGU9YWxwaGEuZXN0LCBzY2FsZT10aGV0YS5lc3QpKSAjIHJhbmRvbSBzYW1wbGVzIGZyb20gdGhlIGZpdHRlZCBzZXZlcml0eSBtb2RlbFxuRnMgICA8LSBhZ2dyZWdhdGVEaXN0KFwic2ltdWxhdGlvblwiLCBuYi5zaW11bCA9IDEwMDAsXG4gICAgICAgICAgICAgICAgICAgICAgbW9kZWwuZnJlcSA9IGZyZXEsIG1vZGVsLnNldiA9IHNldilcbnBsb3QoRnMpXG5saW5lcyhlY2RmKEluc2FtcGxlVG93biR5KSwgIGNvbD1cImJsdWVcIilcblxubGVnZW5kKFwiYm90dG9tcmlnaHRcIiwgbGVnZW5kID0gYyhcIlNpbXVsYXRpb25cIiwgXCJFbXBpcmljYWxcIiksIGNvbD1jKFwiYmxhY2tcIixcImJsdWVcIiksIGx0eT1jKDEsMiksIHBjaD1jKDEsIDE5KSkiLCJzY3QiOiJzdWNjZXNzX21zZyhcIkdvb2Qgam9iISBUaGlzIGlzIHRoZSBzZWNvbmQgdGltZSB0aGF0IHdlIHVzZWQgdGhlIHNpbXVsYXRpb24gdGVjaG5pcXVlLiBOb3RlIHRoYXQgaXQgaXMgdXN1YWwgdG8gb2JzZXJ2ZSB0aGF0IGFuIGFjdHVhbCBjbGFpbXMgZGF0YXNldCBtYXkgY29tZSB3aXRoIHZlcnkgZmV3IHBvc2l0aXZlIGNsYWltcyBidXQgYWxzbyBoZWF2eSB0YWlsIGJlaGF2aW9yLlwiKSIsImhpbnQiOiJXZSBzaG91bGQgdXNlIHRoZSBlc3RpbWF0ZWQgcGFyYW1ldGVycyBmcm9tIHRoZSBmcmVxdWVuY3kgYW5kIHNldmVyaXR5IGRpc3RyaWJ1dGlvbnMgaW4gY2FsY3VsYXRpb24gb2YgdGhlIGFnZ3JlZ2F0ZSBjbGFpbSBhbW91bnQgZGlzdHJpYnV0aW9uLiJ9
+</div>
+</div>
+</div>
+<div id="tweedie-distribution" class="section level2">
+<h2><span class="header-section-number">5.5</span> Tweedie Distribution</h2>
+<p>In this section, we learn how to:</p>
+<ul>
+<li>Construct the Tweedie distribution from a collective risk model.</li>
+<li>Establish the Tweedie distribution as a member of the exponential family of distributions.</li>
+<li>Fit Tweedie distribution as a generalized linear model.</li>
+</ul>
+<hr />
+<div id="video-tweedie-distribution" class="section level4 unnumbered">
+<h4>Video: Tweedie Distribution</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_lxnu6a93&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_jjd6r5f9" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+</div>
+<div id="overheads-tweedie-distribution-click-tab-to-view" class="section level4 unnumbered">
+<h4>Overheads: Tweedie Distribution (Click Tab to View)</h4>
+<div class="tab">
+<button class="tablinks" onclick="openTab(event, 'Sect54A')">A. Tweedie Distribution</button>
+<button class="tablinks" onclick="openTab(event, 'Sect54B')">B. Tweedie Distribution with Exposure</button>
+<button class="tablinks" onclick="openTab(event, 'Sect54C')">C. Distribution Function for Tweedie Distribution</button>
+<button class="tablinks" onclick="openTab(event, 'Sect54D')">D. Example</button>
+<button class="tablinks" onclick="openTab(event, 'Sect54E')">E. Example - R Code</button>
+</div>
+<div id="Sect54A" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=41" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect54B" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=42" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect54C" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=43" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect54D" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=45" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect54E" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=46" width="100%" height="400"> </iframe>
+</div>
+</div>
+<div id="exercise.-tweedie-distribution" class="section level3">
+<h3><span class="header-section-number">5.5.1</span> Exercise. Tweedie Distribution</h3>
+<p><img src = "ContributorPics/hurdler.png" width = "65" height = "65" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
+<p><strong>Assignment Text</strong></p>
+<p>In this assignment, we will fit a Tweedie model for a collective risk model using observed compound losses in LGPIF data with <code>R</code>. Unlike the previous tutorials that required separate model fitting for the frequency and severity components, use of Tweedie distribution enables us to fit a collective risk model in one step.</p>
+<div class="blackbox">
+<p><strong>Instructions</strong></p>
+<ul>
+<li>For the likelihood of the compound loss, We use <a href="https://www.rdocumentation.org/packages/tweedie/versions/2.3.3/topics/Tweedie">dtweedie()</a>, which is one of the built-in functions of <code>R</code> library <a href="https://cran.r-project.org/web/packages/tweedie/tweedie.pdf">tweedie</a> .</li>
+<li>From the fitted Tweedie model via <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/optim">optim()</a>, extract the estimated mu, phi, and p.</li>
+<li>After estimating the parameters of the Tweedie model, plot the empirical quantiles against the quantiles from the fitted model. Note that we generate the theoretical quantiles via <a href="https://www.rdocumentation.org/packages/tweedie/versions/2.3.3/topics/Tweedie">qtweedie()</a> and the estimated Tweedie parameters.</li>
+</ul>
+</div>
+<p><br></p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0RGV2L0xEQUNvdXJzZTEvbWFpbi9EYXRhL0luc2FtcGxlLmNzdlwiLCBoZWFkZXI9VCwgbmEuc3RyaW5ncz1jKFwiLlwiKSwgc3RyaW5nc0FzRmFjdG9ycz1GQUxTRSlcbmxpYnJhcnkobG1lNClcblxuc291cmNlKFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0RGV2L0xEQUNvdXJzZTEvbWFpbi9SQ29kZS9Ud2VlZGllU291cmNlQ29kZS5SbWRcIikiLCJzYW1wbGUiOiJJbnNhbXBsZVRvd24gPC0gc3Vic2V0KEluc2FtcGxlLCBUeXBlVG93bj09MSlcblxuIyBUaGUgVHdlZWRpZSBjb21wb3VuZCBsb3NzIG1vZGVsOiBTXG5TIDwtID8/JHlcbmNvbXBsb3NzX2xpayA8LSBmdW5jdGlvbihwYXJtKSB7XG4gIG11ICAgIDwtIHBhcm1bMV1cbiAgcGhpICAgPC0gcGFybVsyXVxuICBwICAgICA8LSBwYXJtWzNdXG4gIGxpayAgPC0gLXN1bSggIGxvZyhkdHdlZWRpZShTLCBtdT1tdSwgcGhpPXBoaSwgcG93ZXI9XykpIClcbiAgcmV0dXJuKGxpaylcbn1cbmluaXQucGFybS5jb21wbG9zcyA8LSBjKCBtZWFuKFMpLCAzMDAsIDEuNSkgICAgIyBpbml0aWFsIGVzdGltYXRlcyBcbmNvbXBsb3NzX21vZCAgICAgICA8LSBvcHRpbShwYXI9Pz8sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgZm49Pz8sIG1ldGhvZD1cIkwtQkZHUy1CXCIpICMgTWF4aW11bSBsaWtlbGlob29kIGVzdGltYXRpb24gZm9yIHRoZSBjb21wb3VuZCBsb3NzIG1vZGVsXG5cblxubXUuZXN0ICA8LSBjb21wbG9zc19tb2QkcGFyWzFdXG5waGkuZXN0IDwtIGNvbXBsb3NzX21vZCQ/P1xucC5lc3QgICA8LSBjb21wbG9zc19tb2QkPz9cblxucGN0IDwtIHNlcSgwLjAxLDAuOTksMC4wMSlcbnBsb3QocXR3ZWVkaWUocGN0LCBtdT0/PywgcGhpPT8/LCBwb3dlcj1wLmVzdCkgLHF1YW50aWxlKEluc2FtcGxlVG93biR5LCBwcm9icz1wY3QpLCB4bGFiPVwiVGhlb3JldGljYWwgUXVhbnRpbGVcIiwgeWxhYj1cIkVtcGlyaWNhbCBRdWFudGlsZVwiLCB4bGltPWMoMCw1MDAwMCksIHlsaW09YygwLDUwMDAwKSlcbmFibGluZSgwLDEpIiwic29sdXRpb24iOiJJbnNhbXBsZVRvd24gPC0gc3Vic2V0KEluc2FtcGxlLCBUeXBlVG93bj09MSlcblxuIyBUaGUgVHdlZWRpZSBjb21wb3VuZCBsb3NzIG1vZGVsOiBTXG5TIDwtIEluc2FtcGxlVG93biR5XG5jb21wbG9zc19saWsgPC0gZnVuY3Rpb24ocGFybSkge1xuICBtdSAgICA8LSBwYXJtWzFdXG4gIHBoaSAgIDwtIHBhcm1bMl1cbiAgcCAgICAgPC0gcGFybVszXVxuICBsaWsgIDwtIC1zdW0oICBsb2coZHR3ZWVkaWUoUywgbXU9bXUsIHBoaT1waGksIHBvd2VyPXApKSApXG4gIHJldHVybihsaWspXG59XG5pbml0LnBhcm0uY29tcGxvc3MgPC0gYyggbWVhbihTKSwgMzAwLCAxLjUpICAgICMgaW5pdGlhbCBlc3RpbWF0ZXMgXG5jb21wbG9zc19tb2QgICAgICAgPC0gb3B0aW0ocGFyPWluaXQucGFybS5jb21wbG9zcyxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBmbj1jb21wbG9zc19saWssIG1ldGhvZD1cIkNHXCIpICMgTWF4aW11bSBsaWtlbGlob29kIGVzdGltYXRpb24gZm9yIHRoZSBjb21wb3VuZCBsb3NzIG1vZGVsXG5cblxubXUuZXN0ICA8LSBjb21wbG9zc19tb2QkcGFyWzFdXG5waGkuZXN0IDwtIGNvbXBsb3NzX21vZCRwYXJbMl1cbnAuZXN0ICAgPC0gY29tcGxvc3NfbW9kJHBhclszXVxuXG5wY3QgPC0gc2VxKDAuMDEsMC45OSwwLjAxKVxucGxvdChxdHdlZWRpZShwY3QsIG11PW11LmVzdCwgcGhpPXBoaS5lc3QsIHBvd2VyPXAuZXN0KSAscXVhbnRpbGUoSW5zYW1wbGVUb3duJHksIHByb2JzPXBjdCksIHhsYWI9XCJUaGVvcmV0aWNhbCBRdWFudGlsZVwiLCB5bGFiPVwiRW1waXJpY2FsIFF1YW50aWxlXCIsIHhsaW09YygwLDUwMDAwKSwgeWxpbT1jKDAsNTAwMDApKVxuYWJsaW5lKDAsMSkiLCJzY3QiOiJzdWNjZXNzX21zZyhcIldoaWxlIFR3ZWVkaWUgZGlzdHJpYnV0aW9uIGVuYWJsZXMgdXMgdG8gZml0IGEgY29tcG91bmQgbG9zcyBkaXN0cmlidXRpb24gaW4gb25lIHN0ZXAsIGFjdHVhbCBjbGFpbXMgZGF0YXNldCBtaWdodCBub3QgZml0IGludG8gdGhlIGRpc3RyaWJ1dGlvbiBlc3BlY2lhbGx5IHdoZW4gd2Ugb2JzZXJ2ZSBoZWF2eS10YWlsIGJlaGF2aW9yLlwiKSIsImhpbnQiOiJGb3IgVHdlZWRpZSBkaXN0cmlidXRpb24sIHdlIGVzdGltYXRlIHRocmVlIHBhcmFtZXRlcnMgKG11LCBwaGksIHApIHRoYXQgZXhwbGFpbiB0aGUgb3ZlcmFsIG1lYW4sIGRpc3BlcnNpb24sIGFuZCBzaGFwZSBvZiB0aGUgZGlzdHJpYnV0aW9uLiJ9
+</div>
+</div>
+</div>
+<div id="effects-of-coverage-modifications" class="section level2">
+<h2><span class="header-section-number">5.6</span> Effects of Coverage Modifications</h2>
+<hr />
+<p>In this section, we learn how to:</p>
+<ul>
+<li>Examine the impact of aggregate deductible on the aggregate loss.</li>
+<li>Examine the effect of per-occurrence deductible on frequency and severity components in the aggregate loss.</li>
+</ul>
+<hr />
+<div id="video-effects-of-coverage-modifications" class="section level4 unnumbered">
+<h4>Video: Effects of Coverage Modifications</h4>
+<center>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/25717641/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_ux66n6m1&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_t0nnom35" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
+</iframe>
+</center>
+</div>
+<div id="overheads-effects-of-coverage-modifications-click-tab-to-view" class="section level4 unnumbered">
+<h4>Overheads: Effects of Coverage Modifications (Click Tab to View)</h4>
+<div class="tab">
+<button class="tablinks" onclick="openTab(event, 'Sect55A')">A. Aggregate Deductible</button>
+<button class="tablinks" onclick="openTab(event, 'Sect55B')">B. Per-occurrence Deductible</button>
+<button class="tablinks" onclick="openTab(event, 'Sect55C')">C. Per-occurrence Deductible and Frequency</button>
+<button class="tablinks" onclick="openTab(event, 'Sect55D')">D. Example</button>
+<button class="tablinks" onclick="openTab(event, 'Sect55E')">E. Per-occurrence Deductible</button>
+</div>
+<div id="Sect55A" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=51" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect55B" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=53" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect55C" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=54" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect55D" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=56" width="100%" height="400"> </iframe>
+</div>
+<div id="Sect55E" class="tabcontent">
+<span class="topright" onclick="this.parentElement.style.display=&#39;none&#39;">Hide</span>
+<iframe src="./Overheads/LDA1.Chap5.pdf#page=58" width="100%" height="400"> </iframe>
+</div>
+</div>
+</div>
+<div id="contributors-5" class="section level2 unnumbered">
+<h2>Contributors</h2>
+<ul>
+<li><strong>Authors</strong>. <strong>Himchan Jeong</strong>, Simon Fraser University, and <strong>Peng Shi</strong>, University of Wisconsin-Madison, are the principal authors of the initial version of this chapter.</li>
+<li><strong>Chapter Maintainers</strong>. Please contact ??? and/or Jed at <a href="mailto:jfrees@bus.wisc.edu" class="email">jfrees@bus.wisc.edu</a> for chapter comments and suggested improvements.</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="model-selection-and-estimation.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,289 @@
+1
+00:00:01,810 --> 00:00:07,740
+Welcome to the tutorial on an Introduction
+to Loss Data Analytics.
+
+2
+00:00:07,740 --> 00:00:13,871
+My name is Yvonne Chueh. I am a professor
+at Central Washington University. Today, I
+
+3
+00:00:13,871 --> 00:00:31,239
+am going to discuss some key points on the
+relevance of analytics.
+
+4
+00:00:31,239 --> 00:00:36,550
+In this course and book, we are considering
+risk management and insurance techniques,
+
+5
+00:00:36,550 --> 00:00:41,550
+so I want to emphasize the importance of insurance.
+
+6
+00:00:41,550 --> 00:00:47,280
+OVERHEAD 1 - Relevance of Insurance
+
+7
+00:00:47,280 --> 00:00:53,940
+Insurance is an important economic activity.
+A common method for measuring the extent of
+
+8
+00:00:53,940 --> 00:01:02,400
+activity is to examine the insurance premiums.
+By this measure, insurance related activities
+
+9
+00:01:02,400 --> 00:01:10,259
+comprise about 6.3% of world GDP, or gross
+domestic product. As one example, the country
+
+10
+00:01:10,259 --> 00:01:15,700
+with the highest percentage is Japan, where
+insurance premiums accounted for 11.2% of
+
+11
+00:01:15,700 --> 00:01:25,600
+GDP. As another example, in the US insurance
+actities accounted for 7.5% of GDP.
+
+12
+00:01:25,600 --> 00:01:32,020
+Without going into details, insurance is important
+for businesses and governments.
+
+13
+00:01:32,020 --> 00:01:39,030
+On an individual level, insurance touches
+the lives of most people. For example, almost
+
+14
+00:01:39,030 --> 00:01:46,639
+everyone owning a home has insurance to protect
+themselves in the event of a fire, hailstorm,
+
+15
+00:01:46,639 --> 00:01:54,399
+or some other calamitous event. As another
+example, almost every country requires some
+
+16
+00:01:54,399 --> 00:01:58,329
+type of insurance for those driving a car.
+
+17
+00:01:58,329 --> 00:02:03,670
+OVERHEAD 2 - Analytics and Loss Data
+
+18
+00:02:03,670 --> 00:02:11,170
+Because insurance is a big business, it is
+not surprising that insurers employ analytics
+
+19
+00:02:11,170 --> 00:02:20,319
+in the same manner as other large corporations.
+Virtually every large firm uses analytics
+
+20
+00:02:20,319 --> 00:02:26,150
+extensively in sales and marketing, compensation
+and productivity analysis, as well as financial
+
+21
+00:02:26,150 --> 00:02:32,450
+forecasting. For example, in sales and marketing,
+analytics is used to:
+
+22
+00:02:32,450 --> 00:02:39,239
+☻ Predict customer behavior/needs
+☻ Anticipate customer reactions to promotions/rate
+
+23
+00:02:39,239 --> 00:02:44,340
+changes
+☻ Manage acquisition costs such as online
+
+24
+00:02:44,340 --> 00:02:45,340
+sales.
+
+25
+00:02:45,340 --> 00:02:51,680
+Firms use analytics extensively and it is
+highly likely that your role in a firm will
+
+26
+00:02:51,680 --> 00:02:54,920
+involve analytics in some capacity.
+
+27
+00:02:54,920 --> 00:03:01,879
+So, we could introduce analytics from one
+of many perspectives, for example sales data
+
+28
+00:03:01,879 --> 00:03:08,360
+or returns on investments. In this course,
+to keep a firm tie to the insurance industry,
+
+29
+00:03:08,360 --> 00:03:14,440
+we focus on loss data, also known as insurance
+claims or insurance amounts.
+
+30
+00:03:14,440 --> 00:03:19,819
+OVERHEAD 3 - What is Analytics?
+
+31
+00:03:19,819 --> 00:03:27,689
+All firms use analytics, and insurers are
+no exception. Moreover, insurance is a data-driven
+
+32
+00:03:27,689 --> 00:03:34,459
+industry, meaning that analytics is particularly
+important. Analytics is a key to deriving
+
+33
+00:03:34,459 --> 00:03:36,819
+information from data.
+
+34
+00:03:36,819 --> 00:03:43,079
+But what precisely do we mean when say analytics?
+For contrast, we might use
+
+35
+00:03:43,079 --> 00:03:50,829
+☻ "business intelligence". An old phrase
+used by those in operations research. Here,
+
+36
+00:03:50,829 --> 00:03:57,970
+the focus is on processes of collecting data,
+often through databases and data warehouses.
+
+37
+00:03:57,970 --> 00:04:03,870
+Or, we could use
+☻ "business analytics", a description used
+
+38
+00:04:03,870 --> 00:04:11,150
+by many modern business schools. It suggests
+utilizing tools and methods for statistical
+
+39
+00:04:11,150 --> 00:04:18,050
+analyses of data. Another is
+☻ "data science", used by many departments
+
+40
+00:04:18,050 --> 00:04:24,670
+of statistics. This can encompass broader
+applications in many scientific domains.
+
+41
+00:04:24,670 --> 00:04:32,250
+For our purposes, we use the term "Analytics"
+to mean simply the process of using data to
+
+42
+00:04:32,250 --> 00:04:34,050
+make decisions.
+
+43
+00:04:34,050 --> 00:04:40,400
+Specifically, this process involves gathering
+data, understanding models of uncertainty,
+
+44
+00:04:40,400 --> 00:04:45,740
+making general inferences, and communicating
+results.
+
+45
+00:04:45,740 --> 00:04:51,090
+OVERHEAD 4 - Insurance Processes
+
+46
+00:04:51,090 --> 00:04:57,690
+We will be using insurance data to introduce
+analytics and so it is helpful to think about
+
+47
+00:04:57,690 --> 00:05:03,140
+how this data is generated by insurance processes.
+
+48
+00:05:03,140 --> 00:05:09,150
+In a “micro” oriented view, we can think
+specifically about what happens to a contract
+
+49
+00:05:09,150 --> 00:05:17,400
+at various stages of its existence. Here is
+a graph that symbolizes the timeline of a
+
+50
+00:05:17,400 --> 00:05:19,870
+typical insurance policy.
+
+51
+00:05:19,870 --> 00:05:27,169
+It marks when a policy starts with a premium
+payment. Policies that we focus on, such as
+
+52
+00:05:27,169 --> 00:05:34,729
+motor vehicle, are typically short-term contracts
+such as 6 months or a year but that also typically
+
+53
+00:05:34,729 --> 00:05:42,389
+are renewed, resulting in another premium
+payment. Also marked on the graph are claim
+
+54
+00:05:42,389 --> 00:05:50,220
+occurrences, and there may be more than one
+of them even within a single short-term period.
+
+55
+00:05:50,220 --> 00:05:51,410
+REVIEW
+
+56
+00:05:51,410 --> 00:05:58,931
+I hope that you found this overview of the
+relevance of analytics to be useful. In this
+
+57
+00:05:58,931 --> 00:06:02,940
+section, we learned how to:
+
+58
+00:06:02,940 --> 00:06:07,700
+☻ Summarize the importance of insurance
+to consumers and the economy
+
+59
+00:06:07,700 --> 00:06:14,509
+☻ Describe analytics
+☻ Identify data generating events associated
+
+60
+00:06:14,509 --> 00:06:17,770
+with the timeline of a typical insurance contract
+
+61
+00:06:17,770 --> 00:06:23,949
+Thanks for watching.
+

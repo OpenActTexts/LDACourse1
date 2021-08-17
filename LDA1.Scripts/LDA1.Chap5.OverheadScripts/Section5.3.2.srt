@@ -1,0 +1,249 @@
+1
+00:00:01,090 --> 00:00:07,490
+Welcome back to the tutorial on collective
+risk model. My name is Peng Shi, a professor
+
+2
+00:00:07,490 --> 00:00:13,880
+in the Risk and Insurance department at the
+University of Wisconsin-Madison.
+
+3
+00:00:13,880 --> 00:00:20,610
+In this video, I am going to discuss several
+numerical strategies for computing the aggregate
+
+4
+00:00:20,610 --> 00:00:26,130
+loss distribution from the collective risk
+model.
+
+5
+00:00:26,130 --> 00:00:34,070
+Recall that the aggregate loss follows a compound
+distribution, and in general its distribution
+
+6
+00:00:34,070 --> 00:00:44,500
+cannot be derived analytically. We will introduce
+three numerical methods: the direct calculation,
+
+7
+00:00:44,500 --> 00:00:52,850
+the recursive method, and the Monte Carlo
+simulation. We illustrate these methods using
+
+8
+00:00:52,850 --> 00:01:02,079
+R package actuar. The direct calculation involves
+the convolution of a distribution, the recursive
+
+9
+00:01:02,079 --> 00:01:11,270
+method avoids convolution and saves some computational
+time, and the Monte Carlo simulation approximates
+
+10
+00:01:11,270 --> 00:01:18,509
+the distribution using the empirical cdf.
+
+11
+00:01:18,509 --> 00:01:26,350
+The first method is the direct calculation.
+As we see, the calculation involves the n
+
+12
+00:01:26,350 --> 00:01:34,719
+-fold convolution of the severity distribution.
+For computing the distribution in Rusing the
+
+13
+00:01:34,719 --> 00:01:41,490
+convolution, the distributions of frequency
+N and severity X
+
+14
+00:01:41,490 --> 00:01:51,659
+must be defined on non-negative integers and
+have a finite support. Thus, one has to discretize
+
+15
+00:01:51,659 --> 00:02:02,209
+the severity distribution so that its support
+is discrete and finite.
+
+16
+00:02:02,209 --> 00:02:12,840
+Consider an example. The frequency and severity
+distributions are given in the table. We observe
+
+17
+00:02:12,840 --> 00:02:21,819
+that the severity outcomes are multiples of
+50, so we first discretize its distribution
+
+18
+00:02:21,819 --> 00:02:32,739
+so that it has support of {0,1,2,3,4,5}.
+
+19
+00:02:32,739 --> 00:02:40,579
+We use function aggregateDist in the actuar
+package to compute the distribution of the
+
+20
+00:02:40,579 --> 00:02:50,680
+aggregate loss. First one defines the frequency
+probability pnand the severity probability
+
+21
+00:02:50,680 --> 00:03:05,670
+fx. In aggregateDist function, one specifies
+method = convolution. Arguments model.freq
+
+22
+00:03:05,670 --> 00:03:20,980
+and model.sev are supplied by pn and fx respectively.
+x.scale=50 indicates possible outcomes of
+
+23
+00:03:20,980 --> 00:03:28,379
+the claim amount are multiples of 50.
+
+24
+00:03:28,379 --> 00:03:38,920
+One names the distribution Fs. plot(Fs) shows
+the cdf of the aggregate loss. The jumps in
+
+25
+00:03:38,920 --> 00:03:47,639
+the cdf indicates the discreteness of the
+aggregate loss, which is anticipated because
+
+26
+00:03:47,639 --> 00:03:56,060
+both frequency and severity distributions
+are discrete.
+
+27
+00:03:56,060 --> 00:04:03,819
+The second approach for computing aggregate
+loss distribution is the recursive method.
+
+28
+00:04:03,819 --> 00:04:11,469
+To use recursive method, the probability function
+for the frequency component has to satisfy
+
+29
+00:04:11,469 --> 00:04:25,720
+relation pn=(a+b/n)pn−1
+for some constants a and b. Similar to direct
+
+30
+00:04:25,720 --> 00:04:35,139
+calculation, the severity distribution must
+have a finite support on non-negative integers.
+
+31
+00:04:35,139 --> 00:04:41,370
+For continuous distributions, one needs to
+discretize them before using the recursive
+
+32
+00:04:41,370 --> 00:04:51,000
+method. Finally, the method can be extended
+to the more general case where the recursive
+
+33
+00:04:51,000 --> 00:05:03,070
+relationship in frequency distribution starts
+from n=2 instead of n=1.
+
+34
+00:05:03,070 --> 00:05:12,180
+Consider an example where the number of claims
+is Poisson with mean of 5. The distribution
+
+35
+00:05:12,180 --> 00:05:21,090
+of individual claim amount is the same as
+the previous example.
+
+36
+00:05:21,090 --> 00:05:30,100
+In R, one specifies method = recursive in
+the aggregateDist function to indicate using
+
+37
+00:05:30,100 --> 00:05:42,410
+recursive method. model.freq must be from
+either (a,b,0) or (a,b,1) class, i.e. to satisfy
+
+38
+00:05:42,410 --> 00:05:48,770
+the recursive relationship.
+
+39
+00:05:48,770 --> 00:05:56,610
+The aggregate loss distribution can also be
+approximated using the empirical cdf. We could
+
+40
+00:05:56,610 --> 00:06:05,680
+use Monte Carlo simulation to generate a random
+sample of the aggregate loss. To do this,
+
+41
+00:06:05,680 --> 00:06:13,699
+one first generates the number of claims.
+Given claim count, one generates the amount
+
+42
+00:06:13,699 --> 00:06:24,009
+of loss for each claim. Calculating the total
+losses from all claims, we obtain one realization
+
+43
+00:06:24,009 --> 00:06:32,530
+of aggregate loss. A random sample is obtained
+by repeating the process for a large number
+
+44
+00:06:32,530 --> 00:06:37,949
+of times.
+
+45
+00:06:37,949 --> 00:06:47,460
+In this example, we define the frequency distribution
+to be a Poisson with lambda 3, and the severity
+
+46
+00:06:47,460 --> 00:06:59,780
+distribution to be a gamma with shape parameter
+100, and scale parameter 5. In function aggregateDist,
+
+47
+00:06:59,780 --> 00:07:12,270
+one indicates method = simulation. The plot
+of the empirical cdf is based on 2500 realizations
+
+48
+00:07:12,270 --> 00:07:17,000
+of the aggregate loss.
+
+49
+00:07:17,000 --> 00:07:24,770
+To summarize, in this section, we have learned
+how to compute the aggregate loss distribution
+
+50
+00:07:24,770 --> 00:07:33,740
+using convolution, recursive method, and Monte
+Carlo simulation. We have also demonstrated
+
+51
+00:07:33,740 --> 00:07:38,089
+these numerical strategies in R. Thanks for
+watching.
+

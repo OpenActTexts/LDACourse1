@@ -1,0 +1,497 @@
+1
+00:00:00,060 --> 00:00:05,750
+Hello, welcome back to this video on introduction
+to Loss Data Analytics
+
+2
+00:00:05,750 --> 00:00:13,460
+My name is Nii Okine; I am an assistant professor
+at the Maths Department of Appalachian State
+
+3
+00:00:13,460 --> 00:00:14,460
+University.
+
+4
+00:00:14,460 --> 00:00:18,080
+In this video, we are going to continue our
+discussion on different methods of creating
+
+5
+00:00:18,080 --> 00:00:20,730
+new distributions.
+
+6
+00:00:20,730 --> 00:00:25,300
+In this section, we introduce two main approaches
+to creating new distributions.
+
+7
+00:00:25,300 --> 00:00:30,050
+In the previous video, we discussed an approach
+that concerns creating new distributions by
+
+8
+00:00:30,050 --> 00:00:35,040
+transforming the random variable of a distribution.
+We looked at three transformation techniques
+
+9
+00:00:35,040 --> 00:00:40,680
+for creating new distributions, i.e., multiplying
+by a constant, raising to a power, and exponentiating.
+
+10
+00:00:40,680 --> 00:00:46,970
+This video will discuss the second approach,
+which deals with creating a new distribution
+
+11
+00:00:46,970 --> 00:00:52,500
+by combining other distributions. Two common
+techniques we are going to discuss are Mixing
+
+12
+00:00:52,500 --> 00:00:53,500
+and Splicing.
+
+13
+00:00:53,500 --> 00:00:58,190
+In the following slides, we will discuss these
+common techniques in detail.
+
+14
+00:00:58,190 --> 00:01:04,850
+We begin with a technique called Mixing. Mixing
+distributions represent a useful way of modeling
+
+15
+00:01:04,850 --> 00:01:08,799
+data that are drawn from a heterogeneous parent
+population.
+
+16
+00:01:08,799 --> 00:01:14,170
+This parent population can be thought to be
+divided into multiple homogenous subpopulations
+
+17
+00:01:14,170 --> 00:01:15,439
+with distinct distributions.
+
+18
+00:01:15,439 --> 00:01:21,450
+Suppose the underlying phenomenon is diverse
+and can be described as k phenomena representing
+
+19
+00:01:21,450 --> 00:01:27,310
+k subpopulations with different modes. In
+that case, we can construct a k-point mixture
+
+20
+00:01:27,310 --> 00:01:29,200
+random variable Y.
+
+21
+00:01:29,200 --> 00:01:37,479
+Let random variables X1 to Xk represent the
+subpopulations, then Y is defined as piecewise
+
+22
+00:01:37,479 --> 00:01:44,810
+function of the X1, to Xk random variables
+where the alphas are the mixing parameters
+
+23
+00:01:44,810 --> 00:01:49,640
+representing the proportion of data points
+that fall under each of the subpopulations.
+
+24
+00:01:49,640 --> 00:01:55,439
+We have to note that the sum of the alpha
+must add up to one.
+
+25
+00:01:55,439 --> 00:02:02,359
+The distribution function of Y is given as
+the weighted average of the components distribution
+
+26
+00:02:02,359 --> 00:02:04,820
+functions. The same applies to the pdfs.
+
+27
+00:02:04,820 --> 00:02:10,929
+This weighted average can be applied to many
+other distribution-related quantities, such
+
+28
+00:02:10,929 --> 00:02:13,160
+as the k-th raw moment.
+
+29
+00:02:13,160 --> 00:02:22,489
+Therefore the mean of Y is the weighted average
+of the component means.
+
+30
+00:02:22,489 --> 00:02:25,739
+We now consider an actuarial exam question.
+
+31
+00:02:25,739 --> 00:02:31,860
+We have been given that a collection of insurance
+policies consists of two types. 25% of policies
+
+32
+00:02:31,860 --> 00:02:39,890
+are Type 1 and 75% of policies are Type 2.
+For a policy of Type 1, the loss amount per
+
+33
+00:02:39,890 --> 00:02:45,730
+year follows an exponential distribution with
+mean 200, and for a policy of Type 2, the
+
+34
+00:02:45,730 --> 00:02:50,769
+loss amount per year follows a Pareto distribution
+with parameters alpha=3 and theta=200.
+
+35
+00:02:50,769 --> 00:02:59,030
+We are asked to calculate the probability
+that the annual loss will be less than 100,
+
+36
+00:02:59,030 --> 00:03:01,780
+and also find the average loss.
+
+37
+00:03:01,780 --> 00:03:06,799
+To answer this question, first, we need to
+recall that for the two-point mixture variable
+
+38
+00:03:06,799 --> 00:03:13,010
+X, to find the probability that X less than
+100, we need to use the weighted average of
+
+39
+00:03:13,010 --> 00:03:16,140
+the components distribution functions.
+
+40
+00:03:16,140 --> 00:03:22,480
+For the exponential distribution, the distribution
+function is given by 1- e to the power negative
+
+41
+00:03:22,480 --> 00:03:30,769
+x divided by theta. Given theta equals 200
+and x equals 100, solving gives us the cdf
+
+42
+00:03:30,769 --> 00:03:34,160
+of X1 at 100 to be 0.393.
+
+43
+00:03:34,160 --> 00:03:46,090
+For the pareto distribution the distribution
+function is given by 1- (theta/(theta +x))^alpha.
+
+44
+00:03:46,090 --> 00:03:54,520
+With alpha equals 3, theta equals 200, and
+x equals 100, solving gives us the cdf of
+
+45
+00:03:54,520 --> 00:03:57,530
+X2 at 100 to be 0.704.
+
+46
+00:03:57,530 --> 00:04:05,129
+Finally, substituting the distribution functions
+into the weighted average equation and solving,
+
+47
+00:04:05,129 --> 00:04:09,730
+we get the cdf at 100 to be 0.626
+
+48
+00:04:09,730 --> 00:04:15,191
+Further, the average loss is given by the
+weighted average of the component means. Solving
+
+49
+00:04:15,191 --> 00:04:21,109
+gives us an average loss to be 125.
+
+50
+00:04:21,109 --> 00:04:26,449
+Now we discuss an example of R code that we
+can use to generate a mixture distribution.
+
+51
+00:04:26,449 --> 00:04:32,500
+For this example, we assume the claim severities
+for each subpopulation are expected to follow
+
+52
+00:04:32,500 --> 00:04:38,850
+Gamma distributions with different shape parameters
+alpha and different scale parameters theta.
+
+53
+00:04:38,850 --> 00:04:44,340
+This R code combines the Gamma probability
+density functions together to produce a mixture
+
+54
+00:04:44,340 --> 00:04:49,810
+distribution, plot the pdfs for the log of
+the claim severities for each subpopulation,
+
+55
+00:04:49,810 --> 00:04:52,880
+and the mixture distribution.
+
+56
+00:04:52,880 --> 00:04:58,690
+The first chunk of codes creates a vector
+of alphas and thetas for the two subpopulations
+
+57
+00:04:58,690 --> 00:05:03,259
+and plot the pdfs for each subpopulation on
+the same plot.
+
+58
+00:05:03,259 --> 00:05:09,080
+The second chunk of codes creates a vector
+of weights to use for the mixture and creates
+
+59
+00:05:09,080 --> 00:05:17,030
+an object called pdfmix for the mixture pdf
+via a user defined function and then superimposes
+
+60
+00:05:17,030 --> 00:05:26,810
+a plot of the mixture pdf onto the plot of
+the individual subpopulation pdfs.
+
+61
+00:05:26,810 --> 00:05:34,419
+Under a continuous mixture, we are dealing
+with a mixture with an infinite number of
+
+62
+00:05:34,419 --> 00:05:38,550
+subpopulations, which means the k goes to
+infinity.
+
+63
+00:05:38,550 --> 00:05:46,250
+Here, the subpopulations are not distinguished
+by a discrete mixing parameter but by a continuous
+
+64
+00:05:46,250 --> 00:05:51,930
+variable, theta, where theta plays the role
+of the alphas in the finite mixture.
+
+65
+00:05:51,930 --> 00:05:58,290
+Now, consider a random variable X with a distribution
+depending on a parameter theta, where theta
+
+66
+00:05:58,290 --> 00:06:00,669
+itself is a continuous variable.
+
+67
+00:06:00,669 --> 00:06:06,281
+We assume the random variable theta has a
+pdf f of theta. In the Bayesian context, this
+
+68
+00:06:06,281 --> 00:06:12,270
+is known as the prior distribution of theta,
+which is prior information or experts opinion
+
+69
+00:06:12,270 --> 00:06:14,360
+used in the analysis.
+
+70
+00:06:14,360 --> 00:06:21,190
+The cdf of X is equal to the expected value
+of the conditional cdf of X given theta. Which
+
+71
+00:06:21,190 --> 00:06:29,000
+breaks down to the integral of the conditional
+cdf of X given theta multiplied by pdf of
+
+72
+00:06:29,000 --> 00:06:30,000
+theta
+
+73
+00:06:30,000 --> 00:06:34,990
+Then we obtain the pdf of X by differentiating
+the cdf.
+
+74
+00:06:34,990 --> 00:06:43,870
+Now we show that Gama mixtures of exponential
+lead to Pareto distribution.
+
+75
+00:06:43,870 --> 00:06:48,910
+Suppose we have the conditional pdf of X given
+theta follows an exponential distribution
+
+76
+00:06:48,910 --> 00:06:53,940
+with parameter theta. Also, suppose theta
+follows a Gamma distribution with parameters
+
+77
+00:06:53,940 --> 00:06:55,280
+alpha and Beta,
+
+78
+00:06:55,280 --> 00:07:02,590
+Then, the pdf of X is given by the integral
+of the conditional pdf of X given theta multiplied
+
+79
+00:07:02,590 --> 00:07:04,800
+by the pdf of theta.
+
+80
+00:07:04,800 --> 00:07:10,319
+With some algebra, the results break down
+to a Pareto distribution with parameters alpha
+
+81
+00:07:10,319 --> 00:07:11,710
+and theta=1/beta.
+
+82
+00:07:11,710 --> 00:07:24,720
+Using the laws of iterated expectations, the
+Expected value of X is equal to the expected
+
+83
+00:07:24,720 --> 00:07:29,810
+value of the conditional Expected value of
+X given theta.
+
+84
+00:07:29,810 --> 00:07:33,750
+Then we can easily extend this to the kth
+moment of the mixture distribution. Which
+
+85
+00:07:33,750 --> 00:07:41,080
+implies, the Expected value of X to the power
+k is equal to the expected value of the conditional
+
+86
+00:07:41,080 --> 00:07:45,620
+Expected value of X to the power k given theta
+
+87
+00:07:45,620 --> 00:07:51,909
+Using the law of total variance, we obtain
+the unconditional variance X to be the expectation
+
+88
+00:07:51,909 --> 00:07:56,440
+of the conditional variance plus the variance
+of the conditional expectation.
+
+89
+00:07:56,440 --> 00:08:07,960
+In splicing, we join together different probability
+density functions to form a pdf over the support
+
+90
+00:08:07,960 --> 00:08:10,099
+of a random variable X.
+
+91
+00:08:10,099 --> 00:08:17,160
+Let alpha_k be the proportion of data points
+that fall under known intervals of support
+
+92
+00:08:17,160 --> 00:08:18,160
+c_k-1 to c_k.
+
+93
+00:08:18,160 --> 00:08:26,479
+Then, the pdf of X is given as a piecewise
+function of the alphas multiplied by the different
+
+94
+00:08:26,479 --> 00:08:28,290
+pdfs over the different support intervals.
+
+95
+00:08:28,290 --> 00:08:34,200
+It has to be noted that the sum of the alphas
+is equal to one and the integral of the different
+
+96
+00:08:34,200 --> 00:08:42,349
+pdfs over each interval is equal to 1.
+
+97
+00:08:42,349 --> 00:08:46,700
+In this video, we continued with the foundations
+for creating new distributions. Specifically,
+
+98
+00:08:46,700 --> 00:08:51,570
+we discussed an approach which involves combining
+distributions to get new distributions.
+
+99
+00:08:51,570 --> 00:08:57,390
+Under this approach, we talked about mixing,
+which represents a useful way of modeling
+
+100
+00:08:57,390 --> 00:09:03,930
+data drawn from a heterogeneous population.
+We also discussed splicing, which means joining
+
+101
+00:09:03,930 --> 00:09:09,420
+together different probability density functions
+to form a pdf over the support of a random
+
+102
+00:09:09,420 --> 00:09:10,420
+variable.
+
+103
+00:09:10,420 --> 00:09:16,220
+In this video, we also provided connections
+among distributions. For example, we explained
+
+104
+00:09:16,220 --> 00:09:21,579
+that a Gamma mixture of Exponentials gives
+us a Pareto distribution.
+
+105
+00:09:21,579 --> 00:09:23,800
+Thank you for watching this video.
+

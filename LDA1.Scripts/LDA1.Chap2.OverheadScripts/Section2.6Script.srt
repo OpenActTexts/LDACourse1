@@ -1,0 +1,182 @@
+1
+00:00:00,599 --> 00:00:07,029
+Hello! I am Shyamal Kumar from the Department
+of Statistics and Actuarial Science at the
+
+2
+00:00:07,029 --> 00:00:14,980
+University of Iowa. In this lecture, I will
+talk on the goodness of fit problem. 
+
+3
+00:00:14,980 --> 00:00:21,020
+We have discussed three basic frequency distributions,
+along with their extensions through zero modification
+
+4
+00:00:21,020 --> 00:00:27,560
+and mixing. Nevertheless, such distributions
+remain a small subset of the class of all
+
+5
+00:00:27,560 --> 00:00:30,710
+possible frequency distributions. 
+
+6
+00:00:30,710 --> 00:00:37,679
+Hence, despite methods for efficiently estimating
+the unknown parameters when the model is correct,
+
+7
+00:00:37,679 --> 00:00:43,199
+the fitted distribution need not be a good
+representation of the underlying distribution
+
+8
+00:00:43,199 --> 00:00:49,559
+when the latter is far from the class of distributions
+used for modeling. Determining if this is
+
+9
+00:00:49,559 --> 00:00:53,179
+the case is the goodness of fit problem. 
+
+10
+00:00:53,179 --> 00:00:58,379
+Below we present one statistical test - based
+on the Pearson's chi-square test statistic
+
+11
+00:00:58,379 --> 00:01:04,330
+- to check for the appropriateness of the
+fitted distribution as a model for the observed
+
+12
+00:01:04,330 --> 00:01:12,850
+data. We do so through an example based on
+Singaporean auto insurance data. 
+
+13
+00:01:12,850 --> 00:01:20,810
+In 1993, a portfolio of 7,483 auto insurance
+policies from a major Singaporean insurance
+
+14
+00:01:20,810 --> 00:01:27,470
+company had the distribution of accidents
+per policy as given in the displayed table.
+
+15
+00:01:27,470 --> 00:01:33,109
+The observed maximum number of accidents per
+policy was three, and on average, there were
+
+16
+00:01:33,109 --> 00:01:38,909
+about 70 accidents per 1,000 policies. 
+
+17
+00:01:38,909 --> 00:01:44,909
+Consider an actuary who is evaluating the
+Poisson model for this data. 
+
+18
+00:01:44,909 --> 00:01:50,770
+The first step would be to fit the Poisson
+model to this data, and for this, one can
+
+19
+00:01:50,770 --> 00:01:57,460
+employ the maximum likelihood method for estimating
+the Poisson mean. Doing so would result in
+
+20
+00:01:57,460 --> 00:02:04,369
+the fitted Poisson mean equal to the sample
+mean of about 0.069. 
+
+21
+00:02:04,369 --> 00:02:10,110
+Next, one would partition the non-negative
+integers into cells or bins such that the
+
+22
+00:02:10,110 --> 00:02:18,390
+expected number of counts in at least 80%
+of the cells, for the sample size of 7,483,
+
+23
+00:02:18,390 --> 00:02:20,880
+is above 5. 
+
+24
+00:02:20,880 --> 00:02:30,081
+In our case, it is natural to have four singleton
+cells for counts 0, 1, 2, and 3 and a cell
+
+25
+00:02:30,081 --> 00:02:36,610
+for counts greater than 3. The table displayed
+gives for each cell the observed and fitted
+
+26
+00:02:36,610 --> 00:02:41,100
+counts derived using the fitted Poisson.  
+
+27
+00:02:41,100 --> 00:02:45,690
+It is natural to ask, is the Poisson model
+a good fit? 
+
+28
+00:02:45,690 --> 00:02:52,571
+To evaluate the fit, we will use the shown
+Pearson's chi-square statistic. Chi-square
+
+29
+00:02:52,571 --> 00:02:58,910
+refers to its limiting distribution if the
+Poisson model is correct. Its degrees of freedom
+
+30
+00:02:58,910 --> 00:03:08,220
+equals the number of cells minus one minus
+the number of estimated parameters. In our
+
+31
+00:03:08,220 --> 00:03:16,720
+example, we estimated one parameter, lambda,
+and have five cells, and hence the degrees
+
+32
+00:03:16,720 --> 00:03:19,840
+of freedom equals three. 
+
+33
+00:03:19,840 --> 00:03:26,700
+For the data given the Pearson's chi-square
+statistic equals about 42, while even the
+
+34
+00:03:26,700 --> 00:03:34,770
+99th percentile of chi-square with three degrees
+of freedom is below 12. Hence, we deem the
+
+35
+00:03:34,770 --> 00:03:41,650
+Poisson model to be an inadequate representation
+of the underlying data. 
+
+36
+00:03:41,650 --> 00:03:49,790
+In the exercise below, you would evaluate
+the adequacy instead of the larger zero-modified
+
+37
+00:03:49,790 --> 00:03:52,430
+Poisson model. 
+
+38
+00:03:52,430 --> 00:03:53,030
+Thank you!
+

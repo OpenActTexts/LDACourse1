@@ -1,0 +1,398 @@
+1
+00:00:01,250 --> 00:00:04,850
+Welcome back to the tutorial on an Introduction
+to Loss Data Analytics.
+
+2
+00:00:04,850 --> 00:00:10,690
+Hello, my name is Jed Frees, an emeritus professor
+with University of Wisconsin and Australian
+
+3
+00:00:10,690 --> 00:00:16,250
+National University. In this video, I am going
+to discuss some key points on insurance company
+
+4
+00:00:16,250 --> 00:00:17,250
+operations.
+
+5
+00:00:17,250 --> 00:00:20,140
+OVERHEAD 1 - Insurance Company Operations
+
+6
+00:00:20,140 --> 00:00:25,119
+In the prior video, we discussed how claims
+data are likely to come from the lifetime
+
+7
+00:00:25,119 --> 00:00:31,210
+of a policy. For analysts, it is also important
+to see how these data may be used in the firm
+
+8
+00:00:31,210 --> 00:00:34,260
+operations.
+
+9
+00:00:34,260 --> 00:00:39,150
+From an Insurer’s viewpoint, to operate
+they need ways of bringing money in, paying
+
+10
+00:00:39,150 --> 00:00:45,070
+it out, managing costs, and making sure that
+the insurer has enough money to meet obligations.
+
+11
+00:00:45,070 --> 00:00:51,390
+To make this happen, insurers aggregate detailed
+insurance processes into larger operational
+
+12
+00:00:51,390 --> 00:00:56,420
+units. Here is a list of the five units commonly
+used within the insurance industry.
+
+13
+00:00:56,420 --> 00:01:03,160
+The first unit is about when the insurers
+initiates the policy. Here, analysts are involved
+
+14
+00:01:03,160 --> 00:01:08,549
+in determining an appropriate price for a
+risk. Before the pricing, risks are grouped
+
+15
+00:01:08,549 --> 00:01:13,840
+into appropriate categories that are similar
+to one another. "Adverse selection" is a common
+
+16
+00:01:13,840 --> 00:01:20,689
+phenomena in insurance such as has a policyholder
+with a risky tendency, like a history of alcoholism,
+
+17
+00:01:20,689 --> 00:01:25,820
+that the insurer is unaware of. Identifying
+adverse selection is an important component
+
+18
+00:01:25,820 --> 00:01:28,340
+of pricing risks.
+
+19
+00:01:28,340 --> 00:01:33,380
+Pricing is also important at the renewal of
+insurance. Many personal insurance contracts,
+
+20
+00:01:33,380 --> 00:01:38,890
+such as auto and homeowners, have relatively
+short terms such as 6 months or a year but
+
+21
+00:01:38,890 --> 00:01:45,240
+are typically renewed. In this way, the effective
+length of the relationship between policyholder
+
+22
+00:01:45,240 --> 00:01:50,810
+and insurer is much longer than the contract
+term and insurers want to retain customers
+
+23
+00:01:50,810 --> 00:01:51,810
+deemed profitable.
+
+24
+00:01:51,810 --> 00:01:54,110
+OVERHEAD 2 - Insurance Company Operations
+
+25
+00:01:54,110 --> 00:01:58,810
+Pricing is most visibile to the public but
+an equally important part of insurance company
+
+26
+00:01:58,810 --> 00:02:05,090
+operations is paying, and managing, claims.
+Insurers use analytics for early identification
+
+27
+00:02:05,090 --> 00:02:11,200
+of costly claims so they can field the appropriate
+teams to pay, and in some cases, litigate
+
+28
+00:02:11,200 --> 00:02:18,180
+responsibility for claims. They also use analytics
+to manage mischief, as fraud can raise costs
+
+29
+00:02:18,180 --> 00:02:20,400
+for all parties.
+
+30
+00:02:20,400 --> 00:02:25,980
+Another unit of insurance operations is that
+of setting aside money for future obligations,
+
+31
+00:02:25,980 --> 00:02:32,010
+a process known as reserving. Medical costs
+associated with some lines of business such
+
+32
+00:02:32,010 --> 00:02:38,530
+as workers compensation can take many years
+to evolve. As another example, claims that
+
+33
+00:02:38,530 --> 00:02:44,599
+associatied general obligations and liabilities
+of firms can also take many years to evolve
+
+34
+00:02:44,599 --> 00:02:49,049
+due to extensive legal activities. These are
+two examples where analysts
+
+35
+00:02:49,049 --> 00:02:53,650
+☻ Predict future obligations
+☻ Quantify the uncertainty of the estimates
+
+36
+00:02:53,650 --> 00:02:58,400
+☻ Match projections of obligations to income
+streams
+
+37
+00:02:58,400 --> 00:03:03,260
+The fifth and final operational unit regards
+determining the amount of money to be held
+
+38
+00:03:03,260 --> 00:03:08,410
+to keep an insurer financial stability, the
+solvency, and the business units that can
+
+39
+00:03:08,410 --> 00:03:14,440
+most productively use the money, capital allocation.
+Analysts in this domain work to decide appropriate
+
+40
+00:03:14,440 --> 00:03:18,940
+level of necessary capital and to help manage
+external stakeholders’ expectations.
+
+41
+00:03:18,940 --> 00:03:23,209
+OVERHEAD 3 - Operations – Initiating Insurance
+
+42
+00:03:23,209 --> 00:03:28,970
+Analysts work extensively with pricing insurance
+at the initial contract. The public cares
+
+43
+00:03:28,970 --> 00:03:34,120
+about pricing and so this is the focus of
+our introduction to insurance analytics.
+
+44
+00:03:34,120 --> 00:03:40,159
+But, setting the price of an insurance good
+can be a perplexing problem. We are bit more
+
+45
+00:03:40,159 --> 00:03:43,599
+familiar with pricing in other sectors. For
+example,
+
+46
+00:03:43,599 --> 00:03:49,040
+☻ In manufacturing, the cost of a good is
+(relatively) known, making pricing simpler.
+
+47
+00:03:49,040 --> 00:03:53,690
+☻ In other areas of financial services,
+market prices are available.
+
+48
+00:03:53,690 --> 00:03:59,030
+In many lines of insurance, start with an
+expected cost, add “margins” to account
+
+49
+00:03:59,030 --> 00:04:05,180
+for the product’s riskiness, expenses incurred
+in servicing the product, and a profit/surplus
+
+50
+00:04:05,180 --> 00:04:07,420
+allowance for the insurance company.
+
+51
+00:04:07,420 --> 00:04:13,689
+with this structure, getting the expected
+cost is a key ingredient. Especially in automobile
+
+52
+00:04:13,689 --> 00:04:19,560
+and homeowners insurance, analytics to sharpen
+the market by making the calculation of the
+
+53
+00:04:19,560 --> 00:04:21,449
+distribution more precise.
+
+54
+00:04:21,449 --> 00:04:27,310
+In this course, we build the foundations.
+Later, you will see that multivariate pricing
+
+55
+00:04:27,310 --> 00:04:33,530
+strategies routinely employ advanced statistical
+methods such as generalized linear modeling.
+
+56
+00:04:33,530 --> 00:04:36,440
+OVERHEAD 4 - Big Data
+
+57
+00:04:36,440 --> 00:04:41,940
+Much of the gain in popularity in advancing
+analytics in the recent years is due to increased
+
+58
+00:04:41,940 --> 00:04:49,020
+willingness to use data to make business decisions.
+Some call this movement "Big Data," referring
+
+59
+00:04:49,020 --> 00:04:55,740
+to the increasing capacity and computational
+abilities of computers, availability of new
+
+60
+00:04:55,740 --> 00:05:01,530
+and innovative sources of data, and advanced
+algorithms that can detect patterns in insurance
+
+61
+00:05:01,530 --> 00:05:04,750
+activities that were previously unknown.
+
+62
+00:05:04,750 --> 00:05:11,199
+Traditionally, insurers used only information
+reported by policyholders on application forms,
+
+63
+00:05:11,199 --> 00:05:18,100
+combined with selected external sources. For
+example, for decades auto insurers used police
+
+64
+00:05:18,100 --> 00:05:24,000
+reports to price automobile insurance and
+medical exam results for life insurance.
+
+65
+00:05:24,000 --> 00:05:29,940
+Now, there is interest in collecting more
+information about policyholders. Some credit
+
+66
+00:05:29,940 --> 00:05:35,380
+the interest in using more and different data
+to Progressive Insurance who used credit scores
+
+67
+00:05:35,380 --> 00:05:42,580
+for pricing automobile insurance. From an
+analyst’s viewpoint, these additional sources
+
+68
+00:05:42,580 --> 00:05:48,090
+have proven to be significant from predictive
+and economic viewpoints.
+
+69
+00:05:48,090 --> 00:05:54,930
+There are serious questions as what types
+of data are ethically permissible for insurers
+
+70
+00:05:54,930 --> 00:06:00,000
+to use. For example, it has long been held
+that use of racial and ethnic information
+
+71
+00:06:00,000 --> 00:06:06,949
+is illegal in most jurisdictions. The resulting
+debates are important.
+
+72
+00:06:06,949 --> 00:06:11,750
+Our position is not that analysts should dictate
+whether or not use of information should be
+
+73
+00:06:11,750 --> 00:06:17,940
+restricted or prohibited. Rather, these considerations
+involve policy choices that should also involve
+
+74
+00:06:17,940 --> 00:06:23,430
+legal and economic scholars, as well as government
+representatives and advocates for the industry
+
+75
+00:06:23,430 --> 00:06:29,860
+and for consumers. Analysts can make important
+contributions to these discussions by quantifying
+
+76
+00:06:29,860 --> 00:06:35,770
+the financial impact of policy alternatives.
+
+77
+00:06:35,770 --> 00:06:38,900
+REVIEW
+
+78
+00:06:38,900 --> 00:06:45,550
+I hope that you found this overview of insurance
+company operations to be useful. In this section,
+
+79
+00:06:45,550 --> 00:06:46,550
+we learned how to:
+
+80
+00:06:46,550 --> 00:06:50,990
+☻ Describe five major operational areas
+of insurance companies.
+
+81
+00:06:50,990 --> 00:06:55,210
+☻ Identify the role of data and analytics
+opportunities within the pricing area.
+
+82
+00:06:55,210 --> 00:06:56,210
+Thanks for watching!
+
+83
+00:06:56,210 --> 00:06:56,620
+(963 Words)
+

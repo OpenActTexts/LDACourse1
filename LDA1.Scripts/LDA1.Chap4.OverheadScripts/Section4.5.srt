@@ -1,0 +1,104 @@
+1
+00:00:01,800 --> 00:00:06,240
+Hello and welcome back. My name is Brian Hartman
+and I am an associate professor at Brigham
+
+2
+00:00:06,240 --> 00:00:09,290
+Young University.
+This slide reviews grouped data from the first
+
+3
+00:00:09,290 --> 00:00:13,610
+video in this section. If you would like to
+review this slide, please pause the presentation
+
+4
+00:00:13,610 --> 00:00:19,609
+or go back to the earlier video.
+Censoring occurs when we observe only a limited
+
+5
+00:00:19,609 --> 00:00:25,600
+value of an observation. Suppose that X represents
+a loss due to an insured event and that u
+
+6
+00:00:25,600 --> 00:00:31,240
+is a known censoring point. If observations
+are censored from the right (or from above),
+
+7
+00:00:31,240 --> 00:00:37,489
+then we observe Y equals the minimum of X
+and u. In this case, u may represent the upper
+
+8
+00:00:37,489 --> 00:00:43,730
+limit of coverage for an insurer. The loss
+exceeds the amount u but the insurer does
+
+9
+00:00:43,730 --> 00:00:48,929
+not have in its records the amount of the
+actual loss. If observations are censored
+
+10
+00:00:48,929 --> 00:00:55,129
+from the left (or from below), then we observe
+the maximum of X and u. Let u represents the
+
+11
+00:00:55,129 --> 00:01:00,429
+upper limit of coverage but now Y − u represents
+the amount that a reinsurer is responsible
+
+12
+00:01:00,429 --> 00:01:07,090
+for. If the loss X is less than u, then Y
+equals 0, no loss for the reinsurer. If the
+
+13
+00:01:07,090 --> 00:01:13,510
+loss X is greater than or equal to u, then
+Y equals X – u and represents the reinsurer’s
+
+14
+00:01:13,510 --> 00:01:18,460
+retained claims.
+In this case, you can use the Kaplan-Meier
+
+15
+00:01:18,460 --> 00:01:25,460
+estimator. Let t sub one through t sub c be
+distinct points at which an event of interest
+
+16
+00:01:25,460 --> 00:01:30,950
+occurs, or non-censored losses, and let s
+sub j be the number of events at time point
+
+17
+00:01:30,950 --> 00:01:36,021
+t sub j. Further, the corresponding “risk
+set” is the number of observations that
+
+18
+00:01:36,021 --> 00:01:44,320
+are active at an instant just prior to t sub
+j. Using notation, the risk set is R sub j
+
+19
+00:01:44,320 --> 00:01:49,611
+equals the sum of the indicators. With this
+notation, the product-limit estimator of the
+
+20
+00:01:49,611 --> 00:01:56,450
+distribution function is as follows. Greenwood
+in 1926 derived the formula for the estimated
+
+21
+00:01:56,450 --> 00:01:59,280
+variance.
+
