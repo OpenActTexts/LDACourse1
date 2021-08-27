@@ -11,7 +11,7 @@ Model selection and estimation are fundamental aspects of statistical modeling. 
 
 :::: {.blackbox }
 
--  Although not needed to go through the tutorials, some users may wish to download the overheads that the videos are based on. <button download><a href="https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/LDA1.Overheads/LDA1.Chap4.pdf">Download Chapter Four overheads as a .pdf file.</a></button>
+-  Although not needed to go through the tutorials, some users may wish to download the overheads that the videos are based on. <button download><a href="https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/LDA1.Overheads/LDA1.Chap4.pdf">Download Chapter Four overheads as a .pdf file.</a></button>
 -  By watching the videos and working through the tutorial exercises, you will get an appreciation for model selection and estimation. For a deeper dive, see the corresponding chapter in the textbook, [Chapter Four of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-ModelSelection.html).
 :::: 
 
@@ -139,7 +139,7 @@ Which `type` should we use for quantile()?
 
 
 ```{r ex="LDA1.4.1.1_23", type="pre-exercise-code", tut=TRUE}
-Insample <- read.csv("https://urldefense.com/v3/__https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv__;!!DZ3fjg!rawhS1aVIBSc6WSrxFUqxR7FSBuybP1qk3oTO61Xb9WOM39NSMgYzniENO39cfZYcg$ ", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
 ```
 
 
@@ -210,7 +210,7 @@ The syntax log(data$x) produces log of x.
 
 
 ```{r ex="LDA1.4.1.1_4", type="pre-exercise-code", tut=TRUE}
-Insample <- read.csv("https://urldefense.com/v3/__https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv__;!!DZ3fjg!rawhS1aVIBSc6WSrxFUqxR7FSBuybP1qk3oTO61Xb9WOM39NSMgYzniENO39cfZYcg$ ", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
 ```
 
 
@@ -275,7 +275,7 @@ The output from the `table()` function can be used as an argument in the `barplo
 ```{r ex="LDA4.2.1.1", type="pre-exercise-code", tut=TRUE}
 set.seed(4)
 claims = rnbinom(n = 100, size = 3, prob = 0.5)
-#Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T,
+#Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/Insample.csv", header=T,
 #                      na.strings=c("."), stringsAsFactors=FALSE)
 ```
 
@@ -325,7 +325,7 @@ Fitting the distribution involves estimating the parameter $\lambda$.  Do you re
 ```{r ex="LDA4.2.1.2", type="pre-exercise-code", tut=TRUE}
 set.seed(4)
 claims = rnbinom(n = 100, size = 3, prob = 0.5)
-#Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T,
+#Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/Insample.csv", header=T,
 #                      na.strings=c("."), stringsAsFactors=FALSE)
 ```
 
@@ -407,7 +407,7 @@ This matches the definition in the textbook by equating probability $p = \frac{1
 ```{r ex="LDA4.2.1.3", type="pre-exercise-code", tut=TRUE}
 set.seed(4)
 claims = rnbinom(n = 100, size = 3, prob = 0.5)
-#Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T,
+#Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/Insample.csv", header=T,
 #                      na.strings=c("."), stringsAsFactors=FALSE)
 ```
 
@@ -542,7 +542,7 @@ We show the code that uses *glm* to find parameters.
 
 
 ```{r ex="LDA1.4.1.2_1", type="pre-exercise-code", tut=TRUE}
-Insample <- read.csv("https://urldefense.com/v3/__https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv__;!!DZ3fjg!rawhS1aVIBSc6WSrxFUqxR7FSBuybP1qk3oTO61Xb9WOM39NSMgYzniENO39cfZYcg$ ", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
 library(MASS)
 positive_loss <- subset(Insample, y>0)
 ```
@@ -637,8 +637,7 @@ We directly used the sample mean and variance to find parameters. i.e. Gaussian 
 
 
 ```{r ex="LDA1.4.1.2_2", type="pre-exercise-code", tut=TRUE}
-Insample <- read.csv("https://urldefense.com/v3/__https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv__;!!DZ3fjg!rawhS1aVIBSc6WSrxFUqxR7FSBuybP1qk3oTO61Xb9WOM39NSMgYzniENO39cfZYcg$ ", header=T, na.strings=c("."), stringsAsFactors=FALSE)
-
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
 positive_loss <- subset(Insample, y>0)
 
 ```
@@ -741,7 +740,7 @@ Take some time to explore the online `R` documentation. `theta`, `alpha`, and `g
 library(MASS)
 library(stats)
 
-Insample <- read.csv("https://urldefense.com/v3/__https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv__;!!DZ3fjg!rawhS1aVIBSc6WSrxFUqxR7FSBuybP1qk3oTO61Xb9WOM39NSMgYzniENO39cfZYcg$ ", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
 
 # Subset for positive loss
 positive_loss <- subset(Insample, y>0)
@@ -908,7 +907,7 @@ We will use `dplyr` and traditional methods to perform data wrangling.
 library(MASS)
 library(dplyr)
 
-Insample <- read.csv("https://urldefense.com/v3/__https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv__;!!DZ3fjg!rawhS1aVIBSc6WSrxFUqxR7FSBuybP1qk3oTO61Xb9WOM39NSMgYzniENO39cfZYcg$ ", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
 
 # Subset for positive loss
 positive_loss <- subset(Insample, y>0)
@@ -983,7 +982,7 @@ library(MASS)
 library(dplyr)
 library(survival) 
 
-Insample <- read.csv("https://urldefense.com/v3/__https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv__;!!DZ3fjg!rawhS1aVIBSc6WSrxFUqxR7FSBuybP1qk3oTO61Xb9WOM39NSMgYzniENO39cfZYcg$ ", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
 
 # Subset for positive loss
 positive_loss <- subset(Insample, y>0)
@@ -1318,5 +1317,5 @@ success_msg("Nice!")
 ## Contributors {-}
 
 -  **Authors**. **Rob Erhardt**, Wake Forest University, **Brian Hartman**, Brigham Young University, and **Zhiyu (Frank) Quan**, University of Illinois at Urbana-Champaign, are the principal authors of the initial version of this chapter.
--  **Chapter Maintainers**. Please contact ??? and/or Jed at <jfrees@bus.wisc.edu> for chapter comments and suggested improvements.
+-  **Chapter Maintainers**. Please contact Frank <zquan@illinois.edu> and/or Jed at <jfrees@bus.wisc.edu> for chapter comments and suggested improvements.
 

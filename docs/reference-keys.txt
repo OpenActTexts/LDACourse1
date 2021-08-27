@@ -22,7 +22,7 @@ Ex:CountDataCompression
 exercise.-count-data-compression---2
 exercise.-graphing-likelihoods
 exercise.-fitting-a-binomial-distribution
-exercise.-fitting-a-negative-binomial-distribution
+Exer:FitNegBinomialDistrn
 other-frequency-distributions
 exercise.-the-ab1-distribution-and-its-moments
 mixture-distributions
@@ -73,11 +73,11 @@ aggregate-loss-models
 introduction
 individual-risk-model
 Ex:IRM1
-exercise.-individual-risk-model-ii
-collective-risk-model---part-i
-exercise.-collective-risk-model-i
-collective-risk-model---part-ii
-exercise.-collective-risk-model-ii
+exercise.-individual-risk-model
+Sec:CollRisk1
+Ex:FreqCollectRM
+exercise.-estimating-the-severity-component-of-the-collective-risk-model
+computation-strategies-for-a-collective-risk-model
 tweedie-distribution
-exercise.-tweedie-distribution
+exercise.-fitting-a-tweedie-distribution
 effects-of-coverage-modifications

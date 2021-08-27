@@ -10,7 +10,7 @@ biblio-style: econPeriod
 link-citations: yes
 references:
 - type: article-journal
-github-repo: https://github.com/OpenActTextDev/LDAShortCourse1
+github-repo: https://github.com/OpenActTexts/LDACourse1
 description: "This is an interactive, online, freely available short course. It will contain many interactive objects (quizzes, computer demonstrations, interactive graphs, video, and the like) to promote deeper learning."
 ---
 
@@ -36,11 +36,11 @@ The intent is that this type of short course will eventually permeate throughout
 ## Resources {-}
 
 - This tutorial is based on the first five chapters of the **open and freely available book** [Loss Data Analytics](https://openacttexts.github.io/).
-    -  [Sample code](https://openacttexts.github.io/LDARcode/) is available for the book, although not needed for this tutorial.
+    -  As the name suggests, [R for Loss Data Analytics](https://openacttexts.github.io/LDARcode/) provides sample `R` code for the book, although not needed for this tutorial.
 - As described in how to navigate this tutorial below, you will not need to download any data for this course. However, if you want to have the data to follow up, we generally make it available through buttons such as:
-    *  <button download><a href="https://raw.githubusercontent.com/OpenActTextDev/LDAShortCourse1/main/Data/PropertyFundInsample.csv">View the Property Fund Data as a .csv file.</a></button> Then, do a "Save Page as" if you wish to download.
-    *  Alternatively, go directly to the [Github page](https://github.com/OpenActTextDev/LDAShortCourse1/tree/main/Data) to access the data.
-- For advanced data applications in insurance, you may be interested in the series, [Predictive Modeling Applications in Actuarial Science](http://www.cambridge.org/us/academic/subjects/statistics-probability/statistics-econometrics-finance-and-insurance/predictive-modeling-applications-actuarial-science-volume-1). 
+    *  <button download><a href="https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/PropertyFundInsample.csv">View the Property Fund Data as a .csv file.</a></button> Then, do a "Save Page as" if you wish to download.
+    *  Alternatively, go directly to the [Github page](https://github.com/OpenActTexts/LDACourse1/tree/main/Data) to access the data.
+- For advanced data applications in insurance, you may be interested in the series [Predictive Modeling Applications in Actuarial Science](http://www.cambridge.org/us/academic/subjects/statistics-probability/statistics-econometrics-finance-and-insurance/predictive-modeling-applications-actuarial-science-volume-1). Although the books are not free, for many of the chapters you will find the data and sample `R` code [freely available](https://instruction.bus.wisc.edu/jfrees/jfreesbooks/PredictiveModelingVol1/index.htm).
 
 
 ## How to Navigate this Tutorial {-}
@@ -190,6 +190,8 @@ Our goal is to have the actuarial community author our textbooks and short cours
 *  Motoharu Dei 
 *  Yumo Dong, Australian National University
 *  Motoya Kosaki
+*  Aisha Nuval Othman, Malaysian Reinsurance
+*  Alyaa Nuval Othman, Malaysian Reinsurance
 *  Sahadeb Upretee, Central Washington University
 
 

@@ -8,7 +8,7 @@ This chapter introduces probability models for describing the aggregate (total) 
 
 :::: {.blackbox }
 
--  Although not needed to go through the tutorials, some users may wish to download the overheads that the videos are based on. <button download><a href="https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/LDA1.Overheads/LDA1.Chap5.pdf">Download Chapter Five overheads as a .pdf file.</a></button>
+-  Although not needed to go through the tutorials, some users may wish to download the overheads that the videos are based on. <button download><a href="https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/LDA1.Overheads/LDA1.Chap5.pdf">Download Chapter Five overheads as a .pdf file.</a></button>
 -  By watching the videos and working through the tutorial exercises, you will get an appreciation for aggregate loss models. For a deeper dive, see the corresponding chapter in the textbook, [Chapter Five of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-AggLossModels.html).
 :::: 
 
@@ -121,7 +121,7 @@ In this section, we learn how to:
   <iframe src="./Overheads/LDA1.Chap5.pdf#page=17" width="100%" height="400"> </iframe>
   </div>
 
-### Exercise. Individual Risk Model I {#Ex:IRM1}
+### Exercise. Simulating Claim Frequency {#Ex:IRM1}
 
 **Assignment Text**
   
@@ -137,7 +137,7 @@ In this assignment, we revisit [Example 5.2.1 of *Loss Data Analytics*](https://
 <br>
 
 ```{r ex="LDA5.5.2.1", type="hint", tut=TRUE}
-Note that number of policies and probability of claim per policy correspond to the size and incidence probability in a binomial distribution for a claim frequency random variable, respectively.
+Note that number of policies and probability of claim per policy correspond to the size and incidence probability in a binomial distribution for a claim frequency random variable.
 ```
 
 
@@ -162,19 +162,22 @@ q2 <- 0.06         # Probability of claim from policy 2
 n1 <- 100          # Number of type 1 policies
 n2 <- 200          # Number of type 2 policies
 
-
 n1 <- rbinom(r, size=n1, prob=q1) # Generate r=10000 observations of N1 from Binomial
 n2 <- rbinom(r, size=n2, prob=q2) # Generate r=10000 observations of N2 from Binomial
 ```
 
 
 ```{r ex="LDA5.5.2.1", type="sct", tut=TRUE}
-success_msg("Good job! This exercise is basically a recapitulation of Chapter 2 but still quite important as one of the building blocks of Individual Risk Models.")
+n1msg <- "Did you correctly specify the object `n1`?"
+ex() %>% check_object("n1", undefined_msg = "Make sure to not remove `n1`!") %>% check_equal(incorrect_msg=n1msg)
+n2msg <- "Did you correctly specify the object `n2`?"
+ex() %>% check_object("n2", undefined_msg = "Make sure to not remove `n2`!") %>% check_equal(incorrect_msg=n2msg)
+success_msg("Good job! In Chapter 2, we reviewed frequency modeling. This tutorial introduces simulation techniques that considerably enhace the breadth of actuarial applications. As noted in the assignment text of this tutorial, you can check out Chapter 6 of Loss Data Analytics for more background on simulation techniques.")
 ```
 
 
 
-### Exercise. Individual Risk Model II
+### Exercise. Individual Risk Model 
 
 **Assignment Text**
   
@@ -187,6 +190,7 @@ Continuing our work in Exercise \@ref(Ex:IRM1), we now reproduce the theoretical
 - Specify the parameters of uniform random variables, minimum and maximum values of claim amounts from each type of policies.
 - Initialize an empty vector of length $R$ to store $R$ observations of simulated $S$. In each simulation,  calculate the $j$th simulated aggregate loss and store it in $j$th component of $S$ for $j=1, \ldots, R$.
 -  Compute the mean and variance of $S$ by simulation using [mean()](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/mean) and [var()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor). Then, compare these values to their corresponding theoretical values, 2,800 and 600,467, respectively.
+-  Produce a visual summary of the distribution of $S$ using the histogram function, [hist()](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/hist) .
 ::::
 
 <br>
@@ -212,12 +216,10 @@ Note that we need to simulate claim amounts that corresponds to the number of cl
 ```{r ex="LDA5.5.2.2", type="sample-code", tut=TRUE}
 set.seed(1000)     
 r  <- 10000        
-m1 <- 0; M1 <- ?? 
-m2 <- _; M2 <- 300 
-
+m1 <- 0;  M1 <- ?? 
+m2 <- ??; M2 <- 300 
 # n1: Generated 10000 observations of claim frequency from the first  group of policies with Binomial
 # n2: Generated 10000 observations of claim frequency from the second group of policies with Binomial
-
 S <- rep(??, r) 
 
 for(j in 1:r) { 
@@ -226,7 +228,8 @@ for(j in 1:r) {
   S[j] <- sum(x1_j)+sum(??)
 }
 ??(S) 
-var(_)  
+var(??)
+??(S)
 ```
 
 
@@ -235,29 +238,30 @@ set.seed(1000)     # For reproducibility of results
 r  <- 10000        # Number of observations to simulate for each policy
 m1 <- 0; M1 <- 400 # Parameters for severity distribution X_1
 m2 <- 0; M2 <- 300 # Parameters for severity distribution X_2
-
 # n1: Generated 10000 observations of claim frequency from the first  group of policies with Binomial
 # n2: Generated 10000 observations of claim frequency from the second group of policies with Binomial
-
 S <- rep(NA, r) # Initialize an empty vector to store S observations
-
 
 for(j in 1:r) { 
   x1_j <- runif(n1[j], min=m1, max=M1)
   x2_j <- runif(n2[j], min=m2, max=M2)
   S[j]  <- sum(x1_j)+sum(x2_j) # Calculate jth simulated aggregate loss and store it at S[j]
 }
-  
 mean(S) # Compare to theoretical value of 2,800
 var(S)  # Compare to theoretical value of 600,467
+hist(S)
 ```
 
 ```{r ex="LDA5.5.2.2", type="sct", tut=TRUE}
-success_msg("Good job! Note that simulation is one of the most powerful techniques in loss data analytics so we believe this exercise helped you a bit to grow as an expert in loss data analytics.")
+M1msg <- "Did you correctly specify the object `M1`?"
+ex() %>% check_object("M1", undefined_msg = "Make sure to not remove `M1`!") %>% check_equal(incorrect_msg=M1msg)
+n2msg <- "Did you correctly specify the object `n2`?"
+ex() %>% check_object("n2", undefined_msg = "Make sure to not remove `n2`!") %>% check_equal(incorrect_msg=n2msg)
+success_msg("Good job! Despite the seeming simplicity of this example (with uniform size distributions), computing the distribution of claims S is at best tedious when using exact methods. You can use simulation to quickly get a sense of the distribution and use this as a base as you adjust the model to make it better suited to approximate an actuarial application of interest.")
 ```
 
 
-## Collective Risk Model  - Part I
+## Fitting a Collective Risk Model in Two Parts {#Sec:CollRisk1}
 
 ***
 
@@ -269,7 +273,7 @@ In this section, we learn how to:
 
 ***
 
-####  Video: Collective Risk Model - Part I {-}
+####  Video: Fitting a Two Part Collective Risk Model {-}
 
 <center>
 
@@ -277,7 +281,7 @@ In this section, we learn how to:
 
 </center>
 
-#### Overheads: Collective Risk Model  - Part I (Click Tab to View) {-}
+#### Overheads: Fitting a Two Part Collective Risk Model (Click Tab to View) {-}
 
 <div class="tab">
   <button class="tablinks" onclick="openTab(event, 'Sect531A')">A. Collective Risk Model</button>
@@ -309,18 +313,23 @@ In this section, we learn how to:
   </div>
   
 
-### Exercise. Collective Risk Model I
+### Exercise. Estimating the Frequency Component of the Collective Risk Model {#Ex:FreqCollectRM}
 
 **Assignment Text**
-  
-In this assignment, we will fit a collective risk model for an actual portfolio of insurance contracts, **LGPIF** data with `R`. We use *negative binomial* and *Pareto* distributions for the frequency and severity components, respectively.
+
+In this exercise and the next, you will use data to calibrate the frequency and severity components of the collective risk model. The basis for this is the **LGPIF** data, introduced in Section \@ref(Sec:LGPIF) and used in many exercises.
+
+In this assignment, we fit a *negative binomial* distribution to the frequency component. You may wish to review Exercise \@ref(Exer:FitNegBinomialDistrn) where we fit a negative binomial distribution to a small synthetic data set.
 
 :::: {.blackbox }
 **Instructions**
 
--  Use the function [optim()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/optim) to find the maximum likelihood estimates of the frequency and severity distributions.
-- For the likelihood of frequency component, we use [dnbinom()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/NegBinomial). Note that we use the same parametrization as in the [Section 2.2 of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-Frequency-Modeling.html#S:important-frequency-distributions) so that $\text{size}=r$ and $\text{prob}=1/(1+\beta)$.
-- For the likelihood of severity component, we use [dlomax()](https://www.rdocumentation.org/packages/bayesmeta/versions/2.6/topics/dlomax). Note that we use the same parametrization as in the [Section 3.2 of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-Severity.html#S:ContinuousDistn) so that $\text{shape}=\alpha$ and $\text{scale}=\theta$.
+-  Restrict the sample to the subset of towns and identify the claims counts as a global variable $N$.
+-  Construct a function to determine the negative log-likelihood. Do this based on the probability mass function for the negative binomial distribution,  [dnbinom()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/NegBinomial). Note that we use the same parametrization as in the [Section 2.2 of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-Frequency-Modeling.html#S:important-frequency-distributions) so that $\text{size}=r$ and $\text{prob}=1/(1+\beta)$.
+-  Determine initial, or starting, values for the algorithm using the method of moments.
+-  Use the function [optim()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/optim) to find the maximum likelihood estimates of the frequency distribution.
+-  Provide a table to compare the empirical distribution to the fitted negative binomial distribution.
+
 ::::
 
 <br>
@@ -330,7 +339,98 @@ Since *optim* minimizes given function by default, we put the negative likelihoo
 ```
 
 ```{r ex="LDA5.5.3.1", type="pre-exercise-code", tut=TRUE}
-Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+library(lme4)
+```
+
+```{r ex="LDA5.5.3.1", type="sample-code", tut=TRUE}
+InsampleTown <- subset(Insample, TypeTown==1)
+N <- InsampleTown$Freq
+# The negative Log - likelihood
+freq_lik <- function(parm) {
+  r    <- parm[1]
+  beta <- parm[2]
+  lik  <- -sum(dnbinom(N, size= ??, prob=1/(1+??), log=TRUE))
+  return(lik) }
+# initial estimates by method of moments
+init.parm.freq <- c(mean(N)/(var(N)/mean(N)-1), var(N)/mean(N)-1) 
+# Maximum likelihood estimation for the frequency model
+freq_mod       <- ??(par=init.parm.freq, fn=??) 
+r.est    <- freq_mod$par[1]
+beta.est <- freq_mod$par[2]
+# Empirical and fitted distributions of observed N
+freq_table <- cbind(table(N)[1:4]/length(N), dnbinom(0:3, size=??, prob=1/(1+beta.est)))
+freq_table <- rbind(freq_table, 1-colSums(freq_table)) # so probs sum to one
+rownames(freq_table)[5] <- "4+"
+colnames(freq_table) <- c("Empirical", "Fitted")
+round(freq_table, digits = 6)
+
+```
+
+
+```{r ex="LDA5.5.3.1", type="solution", tut=TRUE}
+InsampleTown <- subset(Insample, TypeTown==1)
+N <- InsampleTown$Freq
+# The negative Log - likelihood
+freq_lik <- function(parm) {
+  r    <- parm[1]
+  beta <- parm[2]
+  lik  <- -sum(dnbinom(N, size=r, prob=1/(1+beta), log=TRUE))
+  return(lik) }
+# initial estimates by method of moments
+init.parm.freq <- c(mean(N)/(var(N)/mean(N)-1), var(N)/mean(N)-1) 
+# Maximum likelihood estimation for the frequency model
+freq_mod       <- optim(par=init.parm.freq, fn=freq_lik) 
+r.est    <- freq_mod$par[1]
+beta.est <- freq_mod$par[2]
+# Empirical and fitted distributions of observed N
+freq_table <- cbind(table(N)[1:4]/length(N), dnbinom(0:3, size=r.est, prob=1/(1+beta.est)))
+freq_table <- rbind(freq_table, 1-colSums(freq_table)) # so probs sum to one
+rownames(freq_table)[5] <- "4+"
+colnames(freq_table) <- c("Empirical", "Fitted")
+round(freq_table, digits = 6)
+
+```
+
+```{r ex="LDA5.5.3.1", type="sct", tut=TRUE}
+Nmsg <- "Did you correctly specify the object `N`?"
+ex() %>% check_object("N", undefined_msg = "Make sure to not remove `N`!") %>% check_equal(incorrect_msg=Nmsg)
+initfreqmsg <- "Did you correctly specify the object `init.parm.freq`?"
+ex() %>% check_object("init.parm.freq", undefined_msg = "Make sure to not remove `init.parm.freq`!") %>% check_equal(incorrect_msg=initfreqmsg)
+freq_modmsg <- "Did you correctly specify the object `freq_mod`?"
+ex() %>% check_object("freq_mod", undefined_msg = "Make sure to not remove `freq_mod`!") %>% check_equal(incorrect_msg=freq_modmsg)
+freq_tablemsg <- "Did you correctly specify the object `freq_table`?"
+ex() %>% check_object("freq_table", undefined_msg = "Make sure to not remove `freq_table`!") %>% check_equal(incorrect_msg=freq_tablemsg)
+success_msg("Cheers! This exercise provides a quick overview of the important steps needed for frequency modeling. In actuarial practice, it is common to add covariates (rating factors) for risk classification purposes.")
+```
+  
+
+
+### Exercise. Estimating the Severity Component of the Collective Risk Model
+
+
+**Assignment Text**
+
+This is a continuation of Exercise \@ref(Ex:FreqCollectRM). In this assignment, we fit a *Pareto* distribution to the severity component. You may wish to review Exercise \@ref(Ex:MLEPareto) where we fit a Pareto distribution to a different subset of the **LGPIF** data.
+
+:::: {.blackbox }
+**Instructions**
+
+-  Restrict the sample to the subset of towns and identify the average claim severity as a global variable $Xbar$.
+-  Construct a function to determine the negative log-likelihood. Do this based on the probability density function  [dlomax()](https://www.rdocumentation.org/packages/bayesmeta/versions/2.6/topics/dlomax). Note that we use the same parametrization as in the [Section 3.2 of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-Severity.html#S:ContinuousDistn) so that $\text{shape}=\alpha$ and $\text{scale}=\theta$.
+-  Determine initial, or starting, values for the algorithm using the method of moments.
+-  Use the function [optim()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/optim) to find the maximum likelihood estimates of the severity distribution.
+-  Provide a $qq$ plots of the empirical versus fitted quantiles to assess the adequacy of the model fit.
+::::
+
+<br>
+
+```{r ex="LDA5.5.3.2", type="hint", tut=TRUE}
+Since *optim* minimizes given function by default, we put the negative likelihood as an objective function to be minimized.
+```
+
+```{r ex="LDA5.5.3.2", type="pre-exercise-code", tut=TRUE}
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
 library(lme4)
 
 dlomax <- function(x, shape=1, scale=1, log=FALSE) {
@@ -339,105 +439,68 @@ dlomax <- function(x, shape=1, scale=1, log=FALSE) {
   return(result) }
 ```
 
-```{r ex="LDA5.5.3.1", type="sample-code", tut=TRUE, warning=FALSE, message=FALSE}
+```{r ex="LDA5.5.3.2", type="sample-code", tut=TRUE}
 InsampleTown <- subset(Insample, TypeTown==1)
-
-# The negative binomial frequency model: N
-N <- InsampleTown$Freq
-freq_lik <- function(parm) {
-  r    <- parm[1]
-  beta <- parm[2]
-  lik  <- -sum(dnbinom(N, size=_, prob=1/(1+??), log=TRUE))
-  return(lik)
-}
-init.parm.freq <- c(mean(N)/(var(N)/mean(N)-1), var(N)/mean(N)-1) # initial estimates by method of moments
-freq_mod       <- ??(par=init.parm.freq, fn=??) # Maximum likelihood estimation for the frequency model
-
-r.est    <- freq_mod$par[1]
-beta.est <- freq_mod$par[2]
-
-freq_table <- cbind(table(N)[1:4]/length(N), dnbinom(0:3, size=??, prob=1/(1+beta.est)))
-freq_table <- rbind(freq_table, 1-colSums(freq_table))
-rownames(freq_table)[5] <- "4+"
-colnames(freq_table)    <- c("Empirical", "Theoretical")
-# Empirical and fitted distributions of observed N
-freq_table
-
-# The Pareto severity model: Xbar
 Xbar <- InsampleTown$yAvg[which(InsampleTown$Freq>0)]
+# The negative Log - likelihood
 sev_lik <- function(parm) {
   alpha <-  parm[1]
   theta <-  parm[2]
   lik   <- -sum(dlomax(Xbar, shape=??, scale=??, log=TRUE))
   return(lik)
 }
-init.parm.sev <- c( 2/(1-mean(Xbar)^2/var(Xbar))  , mean(Xbar)*(2/(1-mean(Xbar)^2/var(Xbar))-1) ) # initial estimates by method of moments
-sev_mod       <- ??(par=??, fn=sev_lik, method="L-BFGS-B") # Maximum likelihood estimation for the severity model
-alpha.est     <- sev_mod$par[1]
-theta.est     <- sev_mod$par[2]
-
+# initial estimates by method of moments
+init.parm.sev <- c( 2/(1-mean(Xbar)^2/var(Xbar))  , mean(Xbar)*(2/(1-mean(Xbar)^2/var(Xbar))-1) ) 
+# Maximum likelihood estimation for the severity model
+sev_mod    <- ??(par=??, fn=sev_lik, method="L-BFGS-B") 
+alpha.est  <- sev_mod$par[1]
+theta.est  <- sev_mod$par[2]
 # Empirical and fitted distributions of observed Xbar
 plot(1-(theta.est/(theta.est+sort(Xbar)))^alpha.est, rank(sort(Xbar))/(length(Xbar)+1),
-     ylab = "Empirical Quantiles", xlab = "Theoretical Quantiles",
-     main = "Severity Model")
+     ylab = "Empirical Quantiles", xlab = "Fitted Quantiles",
+     main = "Severity Model QQ Plot")
 
 ```
 
 
-```{r ex="LDA5.5.3.1", type="solution", tut=TRUE, warning=FALSE, message=FALSE}
+```{r ex="LDA5.5.3.2", type="solution", tut=TRUE}
 InsampleTown <- subset(Insample, TypeTown==1)
-
-# The negative binomial frequency model: N
-N <- InsampleTown$Freq
-freq_lik <- function(parm) {
-  r    <- parm[1]
-  beta <- parm[2]
-  lik  <- -sum(dnbinom(N, size=r, prob=1/(1+beta), log=TRUE))
-  return(lik)
-}
-init.parm.freq <- c(mean(N)/(var(N)/mean(N)-1), var(N)/mean(N)-1) # initial estimates by method of moments
-freq_mod       <- optim(par=init.parm.freq, fn=freq_lik) # Maximum likelihood estimation for the frequency model
-
-r.est    <- freq_mod$par[1]
-beta.est <- freq_mod$par[2]
-
-freq_table <- cbind(table(N)[1:4]/length(N), dnbinom(0:3, size=r.est, prob=1/(1+beta.est)))
-freq_table <- rbind(freq_table, 1-colSums(freq_table))
-rownames(freq_table)[5] <- "4+"
-colnames(freq_table)    <- c("Empirical", "Theoretical")
-# Empirical and fitted distributions of observed N
-freq_table
-
-# The Pareto severity model: Xbar
 Xbar <- InsampleTown$yAvg[which(InsampleTown$Freq>0)]
+# The negative Log - likelihood
 sev_lik <- function(parm) {
   alpha <-  parm[1]
   theta <-  parm[2]
   lik   <- -sum(dlomax(Xbar, shape=alpha, scale=theta, log=TRUE))
   return(lik)
 }
-init.parm.sev <- c( 2/(1-mean(Xbar)^2/var(Xbar))  , mean(Xbar)*(2/(1-mean(Xbar)^2/var(Xbar))-1) ) # initial estimates by method of moments
-sev_mod       <- optim(par=init.parm.sev, fn=sev_lik, method="L-BFGS-B") # Maximum likelihood estimation for the severity model
+# initial estimates by method of moments
+init.parm.sev <- c( 2/(1-mean(Xbar)^2/var(Xbar))  , mean(Xbar)*(2/(1-mean(Xbar)^2/var(Xbar))-1) ) 
+# Maximum likelihood estimation for the severity model
+sev_mod       <- optim(par=init.parm.sev, fn=sev_lik, method="L-BFGS-B") 
 alpha.est     <- sev_mod$par[1]
 theta.est     <- sev_mod$par[2]
-
 # Empirical and fitted distributions of observed Xbar
 plot(1-(theta.est/(theta.est+sort(Xbar)))^alpha.est, rank(sort(Xbar))/(length(Xbar)+1),
-     ylab = "Empirical Quantiles", xlab = "Theoretical Quantiles",
-     main = "Severity Model")
+     ylab = "Empirical Quantiles", xlab = "Fitted Quantiles",
+     main = "Severity Model QQ Plot")
 
 ```
 
-```{r ex="LDA5.5.3.1", type="sct", tut=TRUE}
-success_msg("Cheers! Note that we usually add covariates in the frequency and severity models for risk classification purpose in practice.")
+```{r ex="LDA5.5.3.2", type="sct", tut=TRUE}
+Xbarmsg <- "Did you correctly specify the object `Xbar`?"
+ex() %>% check_object("Xbar", undefined_msg = "Make sure to not remove `Xbar`!") %>% check_equal(incorrect_msg=Xbarmsg)
+initsevmsg <- "Did you correctly specify the object `init.parm.sev`?"
+ex() %>% check_object("init.parm.sev", undefined_msg = "Make sure to not remove `init.parm.sev`!") %>% check_equal(incorrect_msg=initsevmsg)
+sev_modmsg <- "Did you correctly specify the object `sev_mod`?"
+ex() %>% check_object("sev_mod", undefined_msg = "Make sure to not remove `sev_mod`!") %>% check_equal(incorrect_msg=sev_modmsg)
+success_msg("Cheers! This exercise provides a quick overview of the important steps needed for severity modeling. Note that it is usual to observe that an actual claims dataset may come with very few positive claims but also heavy tail behavior.")
 ```
   
 
 
-## Collective Risk Model - Part II
+## Computation Strategies for a Collective Risk Model
 
 ***
-
 
 In this section, we learn how to:
 
@@ -446,7 +509,7 @@ In this section, we learn how to:
 
 ***
 
-####  Video: Collective Risk Model  - Part II {-}
+####  Video: Computing a Collective Risk Model Distribution {-}
 
 <center>
 
@@ -454,7 +517,7 @@ In this section, we learn how to:
 
 </center>
 
-#### Overheads: Collective Risk Model  - Part II (Click Tab to View) {-}
+#### Overheads: Computing a Collective Risk Model Distribution (Click Tab to View) {-}
 
 <div class="tab">
   <button class="tablinks" onclick="openTab(event, 'Sect532A')">A. Computing the Aggregate Loss Distribution</button>
@@ -490,22 +553,23 @@ In this section, we learn how to:
   <iframe src="./Overheads/LDA1.Chap5.pdf#page=37" width="100%" height="400"> </iframe>
   </div>
 
-
+xx
 ### Exercise. Collective Risk Model II
 <img src = "ContributorPics\hurdler.png" width = "65" height = "65" style = "float:right; margin-left: 10px; margin-top: 7px" />
 
 **Assignment Text**
   
-In this assignment, we will analyze the aggregate loss distribution by combining fitted frequency and severity components. Since it is usually very hard to obtain a closed form expression for the distribution function of the compound loss in a collective risk model, we rely on simulations to compute the aggregate loss distribution. 
+In this assignment, we analyze the aggregate loss distribution by combining fitted frequency and severity components. Because it is usually very hard to obtain a closed form expression for the distribution function of the compound loss in a collective risk model, we rely on simulations to compute the aggregate loss distribution. We use the fitted parameters from the exercises in Section \@ref(Sec:CollRisk1). Specifically, fitted shape and scale negative binomial parameters have already been recorded as the global variables `r.est` and `beta.est`, respectively. In the same way, fitted shape and scale Pareto parameters have already been recorded as the global variables `alpha.est` and `theta.est`, respectively.
+
 
 
 :::: {.blackbox }
 **Instructions**
 
-
-- We use the fitted frequency and severity models using **LGPIF** data as we have done in Tutorial 5.3, with negative binomial and Pareto distributions, respectively.
-- To generate random samples from the fitted frequency and severity models, we use [rnbinom()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/NegBinomial) and  [rlomax()](https://www.rdocumentation.org/packages/bayesmeta/versions/2.6/topics/dlomax). Note that these generated random samples are used as inputs to compute the aggregate claim amount distribution.
-- We use [aggregateDist()](https://www.rdocumentation.org/packages/actuar/versions/3.1-1/topics/aggregateDist) to simulate compound losses that match the observed data upon the fitted frequency and severity models. It is an important task in order to visualize the distribution of compound losses and make subsequent decisions on ratemaking.
+-  As an input to calculating the aggregate distribution, we need the [expression](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/expression) function. This function allows to call functions without actually evaluating them.
+-  Also, to generate random samples from the fitted frequency and severity models, we use [rnbinom()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/NegBinomial) and  [rlomax()](https://www.rdocumentation.org/packages/bayesmeta/versions/2.6/topics/dlomax). Note that these generated random samples are also used as inputs to compute the aggregate claim amount distribution.
+-  We use [aggregateDist()](https://www.rdocumentation.org/packages/actuar/versions/3.1-1/topics/aggregateDist) to simulate compound losses that match the observed data upon the fitted frequency and severity models. 
+-  With the aggregate distribution, plot its distribution function. For comparison, superimpose on this plot the empiricial (cumulative) distribution function, created using the [ecdf()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/ecdf) function. 
 ::::
 
 <br>
@@ -515,7 +579,7 @@ We should use the estimated parameters from the frequency and severity distribut
 ```
 
 ```{r ex="LDA5.5.4.1", type="pre-exercise-code", tut=TRUE}
-Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
 library(lme4)
 
 aggregate.portfolio <- function(x, by = names(x$nodes), FUN = sum,
@@ -1036,7 +1100,6 @@ freq_mod       <- optim(par=init.parm.freq, fn=freq_lik) # Maximum likelihood es
 r.est    <- freq_mod$par[1]
 beta.est <- freq_mod$par[2]
 
-
 # The Pareto severity model: Xbar
 Xbar <- InsampleTown$yAvg[which(InsampleTown$Freq>0)]
 sev_lik <- function(parm) {
@@ -1054,40 +1117,42 @@ theta.est     <- sev_mod$par[2]
 
 
 ```{r ex="LDA5.5.4.1", type="sample-code", tut=TRUE}
-
 # Parameter estimates from the frequency model: alpha.est, theta.est
 # Parameter estimates from the severity  model:     r.est,  beta.est
 
-freq <- expression(data =  ??(size=??, prob=1/(1+??)))  # random samples from the fitted frequency model
-sev  <- expression(data =  ??(shape=??, scale=??)) # random samples from the fitted severity model
-Fs   <- aggregateDist("simulation", nb.simul = 1000,
-                      model.freq = ??, model.sev = ??)
+# Random samples from fitted frequency and severity models
+freq <- expression(data =  ??(size=??, prob=1/(1+??)))
+sev  <- expression(data =  ??(shape=??, scale=??))
+# The aggregate distribution 
+Fs   <- aggregateDist("simulation", nb.simul = 1000, model.freq = ??, model.sev = ??)
 plot(Fs)
 lines(ecdf(InsampleTown$y),  col="blue")
-
 legend("bottomright", legend = c("Simulation", "Empirical"), col=c("black","blue"), lty=c(1,2), pch=c(1, 19))
 ```
 
 ```{r ex="LDA5.5.4.1", type="solution", tut=TRUE}
-
 # Parameter estimates from the frequency model: alpha.est, theta.est
 # Parameter estimates from the severity  model:     r.est,  beta.est
 
-freq <- expression(data =  rnbinom(size=r.est, prob=1/(1+beta.est))) # random samples from the fitted frequency model
-sev  <- expression(data =  rlomax(shape=alpha.est, scale=theta.est)) # random samples from the fitted severity model
-Fs   <- aggregateDist("simulation", nb.simul = 1000,
-                      model.freq = freq, model.sev = sev)
+# Random samples from fitted frequency and severity models
+freq <- expression(data =  rnbinom(size=r.est, prob=1/(1+beta.est)))
+sev  <- expression(data =  rlomax(shape=alpha.est, scale=theta.est))
+# The aggregate distribution 
+Fs   <- aggregateDist("simulation", nb.simul = 1000, model.freq = freq, model.sev = sev)
 plot(Fs)
 lines(ecdf(InsampleTown$y),  col="blue")
-
 legend("bottomright", legend = c("Simulation", "Empirical"), col=c("black","blue"), lty=c(1,2), pch=c(1, 19))
 ```
 
-
 ```{r ex="LDA5.5.4.1", type="sct", tut=TRUE}
-success_msg("Good job! This is the second time that we used the simulation technique. Note that it is usual to observe that an actual claims dataset may come with very few positive claims but also heavy tail behavior.")
+Fsmsg <- "Did you correctly specify the object `Fs`?"
+ex() %>% check_object("Fs", undefined_msg = "Make sure to not remove `Fs`!") %>% check_equal(incorrect_msg=Fsmsg)
+freqmsg <- "Did you correctly specify the object `freq`?"
+ex() %>% check_object("freq", undefined_msg = "Make sure to not remove `freq`!") %>% check_equal(incorrect_msg=freqmsg)
+sevmsg <- "Did you correctly specify the object `sev`?"
+ex() %>% check_object("sev", undefined_msg = "Make sure to not remove `sev`!") %>% check_equal(incorrect_msg=sevmsg)
+success_msg("Good job! This example demonstrates how to use simulation to calculate a complicated (distribution) function. It is an important task in order to visualize the distribution of compound losses and make subsequent decisions.")
 ```
-
 
 
 ## Tweedie Distribution 
@@ -1100,7 +1165,6 @@ In this section, we learn how to:
 *  Fit Tweedie distribution as a generalized linear model.
 
 ***
-
 
 
 ####  Video: Tweedie Distribution {-}
@@ -1144,19 +1208,20 @@ In this section, we learn how to:
 
 
 
-### Exercise. Tweedie Distribution
+### Exercise. Fitting a Tweedie Distribution
 <img src = "ContributorPics\hurdler.png" width = "65" height = "65" style = "float:right; margin-left: 10px; margin-top: 7px" />
 
 **Assignment Text**
   
-In this assignment, we will fit a Tweedie model for a collective risk model using observed compound losses in LGPIF data with `R`. Unlike the previous tutorials that required separate model fitting for the frequency and severity components, use of Tweedie distribution enables us to fit a collective risk model in one step.
+In this assignment, we fit a Tweedie model for a collective risk model using observed compound losses in LGPIF data with `R`. Unlike the previous tutorials that required separate model fitting for the frequency and severity components, use of the Tweedie distribution enables us to fit a collective risk model in a single step.
 
 :::: {.blackbox }
 **Instructions**
 
-- For the likelihood of the compound loss, We use [dtweedie()](https://www.rdocumentation.org/packages/tweedie/versions/2.3.3/topics/Tweedie), which is one of the built-in functions of `R` library [tweedie](https://cran.r-project.org/web/packages/tweedie/tweedie.pdf) .
-- From the fitted Tweedie model via [optim()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/optim), extract the estimated mu, phi, and p.
-- After estimating the parameters of the Tweedie model, plot the empirical quantiles against the quantiles from the fitted model. Note that we generate the theoretical quantiles via [qtweedie()](https://www.rdocumentation.org/packages/tweedie/versions/2.3.3/topics/Tweedie) and the estimated Tweedie parameters.
+-  Restrict the sample to the subset of towns and identify the total claim severity as a global variable $S$.
+-  Construct a function to determine the negative log-likelihood. Do this based on the hybrid probability mass/density function  [dtweedie()](https://www.rdocumentation.org/packages/tweedie/versions/2.3.3/topics/Tweedie). This is a built-in function from `R` library [tweedie](https://cran.r-project.org/web/packages/tweedie/tweedie.pdf) .
+- From the fitted Tweedie model via [optim()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/optim), extract the estimated `mu`, `phi`, and `p`.
+- After estimating the parameters of the Tweedie model, plot the empirical quantiles against the quantiles from the fitted model. Note that we generate the fitted quantiles via [qtweedie()](https://www.rdocumentation.org/packages/tweedie/versions/2.3.3/topics/Tweedie) and the estimated Tweedie parameters.
 ::::
 
 <br>
@@ -1167,71 +1232,69 @@ For Tweedie distribution, we estimate three parameters (mu, phi, p) that explain
 ```
 
 ```{r ex="LDA5.5.5.1", type="pre-exercise-code", tut=TRUE}
-Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
 library(lme4)
 
-source("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/RCode/TweedieSourceCode.Rmd")
-
+source("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/RCode/TweedieSourceCode.Rmd")
 ```
 
 
 ```{r ex="LDA5.5.5.1", type="sample-code", tut=TRUE}
 InsampleTown <- subset(Insample, TypeTown==1)
-
-# The Tweedie compound loss model: S
 S <- ??$y
+# The negative Log - likelihood
 comploss_lik <- function(parm) {
   mu    <- parm[1]
   phi   <- parm[2]
   p     <- parm[3]
-  lik  <- -sum(  log(dtweedie(S, mu=mu, phi=phi, power=_)) )
-  return(lik)
-}
+  lik  <- -sum( log(dtweedie(S, mu=mu, phi=phi, power= ??)) )
+  return(lik) }
 init.parm.comploss <- c( mean(S), 300, 1.5)    # initial estimates 
-comploss_mod       <- optim(par=??,
-                            fn=??, method="L-BFGS-B") # Maximum likelihood estimation for the compound loss model
-
+# Maximum likelihood estimation for the compound loss model
+comploss_mod <- optim(par=??,  fn=??, method="L-BFGS-B") 
 
 mu.est  <- comploss_mod$par[1]
 phi.est <- comploss_mod$??
 p.est   <- comploss_mod$??
 
 pct <- seq(0.01,0.99,0.01)
-plot(qtweedie(pct, mu=??, phi=??, power=p.est) ,quantile(InsampleTown$y, probs=pct), xlab="Theoretical Quantile", ylab="Empirical Quantile", xlim=c(0,50000), ylim=c(0,50000))
+plot(qtweedie(pct, mu=??, phi=??, power=p.est) ,quantile(InsampleTown$y, probs=pct), xlab="Fitted Quantile", ylab="Empirical Quantile", xlim=c(0,50000), ylim=c(0,50000))
 abline(0,1)
 
 ```
 
 ```{r ex="LDA5.5.5.1", type="solution", tut=TRUE}
 InsampleTown <- subset(Insample, TypeTown==1)
-
-# The Tweedie compound loss model: S
 S <- InsampleTown$y
+# The negative Log - likelihood
 comploss_lik <- function(parm) {
   mu    <- parm[1]
   phi   <- parm[2]
   p     <- parm[3]
-  lik  <- -sum(  log(dtweedie(S, mu=mu, phi=phi, power=p)) )
-  return(lik)
-}
+  lik  <- -sum( log(dtweedie(S, mu=mu, phi=phi, power=p)) )
+  return(lik) }
 init.parm.comploss <- c( mean(S), 300, 1.5)    # initial estimates 
-comploss_mod       <- optim(par=init.parm.comploss,
-                            fn=comploss_lik, method="CG") # Maximum likelihood estimation for the compound loss model
-
-
+# Maximum likelihood estimation for the compound loss model
+comploss_mod <- optim(par=init.parm.comploss, fn=comploss_lik, method="CG") 
 mu.est  <- comploss_mod$par[1]
 phi.est <- comploss_mod$par[2]
 p.est   <- comploss_mod$par[3]
 
 pct <- seq(0.01,0.99,0.01)
-plot(qtweedie(pct, mu=mu.est, phi=phi.est, power=p.est) ,quantile(InsampleTown$y, probs=pct), xlab="Theoretical Quantile", ylab="Empirical Quantile", xlim=c(0,50000), ylim=c(0,50000))
+plot(qtweedie(pct, mu=mu.est, phi=phi.est, power=p.est) ,quantile(InsampleTown$y, probs=pct), xlab="Fitted Quantile", ylab="Empirical Quantile", xlim=c(0,50000), ylim=c(0,50000))
 abline(0,1)
 
 ```
 
 
 ```{r ex="LDA5.5.5.1", type="sct", tut=TRUE}
-success_msg("While Tweedie distribution enables us to fit a compound loss distribution in one step, actual claims dataset might not fit into the distribution especially when we observe heavy-tail behavior.")
+Smsg <- "Did you correctly specify the object `S`?"
+ex() %>% check_object("S", undefined_msg = "Make sure to not remove `S`!") %>% check_equal(incorrect_msg=Smsg)
+comploss_modmsg <- "Did you correctly specify the object `comploss_mod`?"
+ex() %>% check_object("comploss_mod", undefined_msg = "Make sure to not remove `comploss_mod`!") %>% check_equal(incorrect_msg=comploss_modmsg)
+p.estmsg <- "Did you correctly specify the object `p.est`?"
+ex() %>% check_object("p.est", undefined_msg = "Make sure to not remove `p.est`!") %>% check_equal(incorrect_msg=p.estmsg)
+success_msg("Last tutorial exercise. Well done! Compare to the model constructed in two parts, the Tweedie has few parameters. This means it may not fit as well for some datasets, especially thoses with longer tails. However, the few parameters means that it is easier to intrepret. Further, this simplicity of parameters can become very important when introducing covariates/rating factors into the modeling process.")
 ```
 
 ## Effects of Coverage Modifications
@@ -1288,7 +1351,7 @@ In this section, we learn how to:
 ## Contributors {-}
 
 -  **Authors**. **Himchan Jeong**, Simon Fraser University, and **Peng Shi**, University of Wisconsin-Madison, are the principal authors of the initial version of this chapter.
--  **Chapter Maintainers**. Please contact ??? and/or Jed at <jfrees@bus.wisc.edu> for chapter comments and suggested improvements.
+-  **Chapter Maintainers**. Please contact Himchan <himchan_jeong@sfu.ca> and/or Jed at <jfrees@bus.wisc.edu> for chapter comments and suggested improvements.
 
 
   

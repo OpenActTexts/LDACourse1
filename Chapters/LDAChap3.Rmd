@@ -1762,6 +1762,6 @@ success_msg("Well done!")
 ## Contributors {-}
 
 -  **Authors**. **Tim Higgins** , Australian National University, **Fei Huang**, University of New South Wales (UNSW) Sydney, **Nii-Armah Okine**, Appalachian State University, and **Rajesh (Raj) Sahasrabuddhe**, Oliver Wyman Actuarial Consulting, are the principal authors of the initial version of this chapter.
--  **Chapter Maintainers**. Please contact ??? and/or Jed at <jfrees@bus.wisc.edu> for chapter comments and suggested improvements.
+-  **Chapter Maintainers**. Please contact Nii <okinean@appstate.edu> and/or Jed at <jfrees@bus.wisc.edu> for chapter comments and suggested improvements.
 
 

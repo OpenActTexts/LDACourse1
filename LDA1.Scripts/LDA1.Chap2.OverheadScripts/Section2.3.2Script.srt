@@ -1,0 +1,389 @@
+1
+00:00:01,939 --> 00:00:10,679
+Alright, so in this tutorial.
+We've been asked to fit a Poisson density
+
+2
+00:00:10,679 --> 00:00:16,330
+to claims data using the method of maximum
+likelihood estimation.
+
+3
+00:00:16,330 --> 00:00:23,520
+So here we will quickly review how to estimate
+the mean parameter of a Poisson, using the
+
+4
+00:00:23,520 --> 00:00:31,840
+method of maximum likelihood estimation.
+Going to the problem.
+
+5
+00:00:31,840 --> 00:00:37,809
+Okay.
+We're deriving the maximum likelihood estimator
+
+6
+00:00:37,809 --> 00:00:44,010
+from the Poisson. So the starting point here
+is to make sure we have the probability mass
+
+7
+00:00:44,010 --> 00:00:56,010
+function for a Poisson random variable probability
+mass function. f of x equals e to the minus
+
+8
+00:00:56,010 --> 00:01:00,870
+lambda --- and that's
+our parameter we will be estimating --- lambda
+
+9
+00:01:00,870 --> 00:01:08,720
+to the x, divided by x-factorial.
+But we always want to be in the habit of giving
+
+10
+00:01:08,720 --> 00:01:16,680
+the permissible ranges of these parameters.
+This parameter lambda has to be greater than
+
+11
+00:01:16,680 --> 00:01:21,730
+zero.
+And the support
+
+12
+00:01:21,730 --> 00:01:30,380
+takes integer values, unbounded.
+So that's the complete, mathematically thorough
+
+13
+00:01:30,380 --> 00:01:36,660
+way of writing the probability mass function.
+Now we imagine that we've observed a sample
+
+14
+00:01:36,660 --> 00:01:42,100
+x-one through x-n.
+And we need to construct the likelihood function,
+
+15
+00:01:42,100 --> 00:01:49,570
+which is the function we will maximize to
+produce the maximum likelihood estimate.
+
+16
+00:01:49,570 --> 00:01:53,150
+So here, recall the definition of the likelihood
+function.
+
+17
+00:01:53,150 --> 00:01:58,909
+It's a function of our parameter, and all
+of our observations.
+
+18
+00:01:58,909 --> 00:02:13,060
+This is the joint probability mass function.
+All n random variables...
+
+19
+00:02:13,060 --> 00:02:21,520
+Based on the parameter lambda.
+But if we assume that our sample is independent.
+
+20
+00:02:21,520 --> 00:02:29,920
+We know the joint probability mass function
+can be written as the product i goes from
+
+21
+00:02:29,920 --> 00:02:38,340
+one to n of the marginal probability mass
+functions f of x-i, and lambda.
+
+22
+00:02:38,340 --> 00:02:51,470
+And this of course is made true by independence.
+So to complete this likelihood
+
+23
+00:02:51,470 --> 00:02:58,930
+all we have to do is take a product of N of
+these terms, we get the product i goes from
+
+24
+00:02:58,930 --> 00:03:10,770
+one to n, e to the negative lambda, lambda
+to the x-i, divided by x-i factorial.
+
+25
+00:03:10,770 --> 00:03:16,760
+So, let's treat this as three distinct terms
+--- we have, e to the minus lambda.
+
+26
+00:03:16,760 --> 00:03:23,990
+Then we have lambda to the x-i, then downstairs
+and the denominator we have x-i factorial.
+
+27
+00:03:23,990 --> 00:03:31,260
+So if each of these probability mass functions
+contributes an e to the negative lambda
+
+28
+00:03:31,260 --> 00:03:40,560
+when I multiply n of them, I will be left
+with an e to the minus n times lambda.
+
+29
+00:03:40,560 --> 00:03:46,190
+Then of course I have a bunch of terms lambda
+to the x-one times lambda to the x-two times
+
+30
+00:03:46,190 --> 00:03:51,020
+lambda to the x-three and so on.
+We have the common base.
+
+31
+00:03:51,020 --> 00:04:00,110
+So, these combine to give lambda, and I will
+simply add up the xs.
+
+32
+00:04:00,110 --> 00:04:07,820
+And then finally, we have this term downstairs.
+We're just going to leave it alone.
+
+33
+00:04:07,820 --> 00:04:12,730
+I can... I'm seeing into the future, we can
+leave this term alone, because it does not
+
+34
+00:04:12,730 --> 00:04:19,090
+involve the parameter lambda, so don't waste
+a lot of time and energy, seeing if you can
+
+35
+00:04:19,090 --> 00:04:22,790
+simplify this expression, it will all become
+moot.
+
+36
+00:04:22,790 --> 00:04:31,810
+So downstairs I will simply keep the product.
+I equals one to N of x-i factorial.
+
+37
+00:04:31,810 --> 00:04:39,770
+And that is my likelihood function.
+And I suppose I should remind everyone that
+
+38
+00:04:39,770 --> 00:04:46,680
+lambda is greater than zero.
+So finally, we derive the maximum likelihood
+
+39
+00:04:46,680 --> 00:04:53,270
+estimator.
+This is the value, which will maximize the
+
+40
+00:04:53,270 --> 00:04:57,810
+likelihood function.
+So we take a derivative, we set that derivative
+
+41
+00:04:57,810 --> 00:05:04,990
+equal to zero and we solve for the parameter.
+But the trick with these problems is it's
+
+42
+00:05:04,990 --> 00:05:16,720
+often easier
+to maximize the log likelihood.
+
+43
+00:05:16,720 --> 00:05:25,160
+I'm going to call the log likelihood lowercase
+L.
+
+44
+00:05:25,160 --> 00:05:35,970
+It's a function of my parameter.
+It's equal to the logarithm of capital L.
+
+45
+00:05:35,970 --> 00:05:41,240
+So if I take the logarithm of this likelihood
+function I've got three terms in here it's
+
+46
+00:05:41,240 --> 00:05:46,160
+where it's useful to remind ourselves of the
+rules for logarithms.
+
+47
+00:05:46,160 --> 00:05:55,199
+Maybe I'll put those over here.
+Recall that the log of A times B divided by
+
+48
+00:05:55,199 --> 00:06:06,490
+C is the log of A plus the log of B minus
+the log of C,
+
+49
+00:06:06,490 --> 00:06:12,190
+that's the first rule we're going to remind
+ourselves of. The second... that looks like
+
+50
+00:06:12,190 --> 00:06:15,130
+a minus sign and I really shouldn't do that
+we'll make it a bullet point...
+
+51
+00:06:15,130 --> 00:06:28,449
+The second rule is that the log of D. to the
+Eth power is equal to E times log D. These
+
+52
+00:06:28,449 --> 00:06:33,820
+two rules will come in handy.
+So if I want to take the logarithm of this
+
+53
+00:06:33,820 --> 00:06:38,590
+whole function.
+What I'm imagining here is that
+
+54
+00:06:38,590 --> 00:06:50,510
+this term in the beginning is A.
+And then next...
+
+55
+00:06:50,510 --> 00:06:55,180
+This term
+is B.
+
+56
+00:06:55,180 --> 00:07:09,259
+And finally, The denominator
+is C.
+
+57
+00:07:09,259 --> 00:07:16,340
+So when I calculate this logarithm.
+I'm going to get log A plus log B minus log
+
+58
+00:07:16,340 --> 00:07:20,280
+C, let's see how that simplifies, I get log
+of the first term.
+
+59
+00:07:20,280 --> 00:07:29,590
+And I can bring that exponent down, minus
+n lambda times the log of e, which is just
+
+60
+00:07:29,590 --> 00:07:35,750
+one,
+plus the log of the second term, which gives
+
+61
+00:07:35,750 --> 00:07:47,110
+me the sum of x-i times the log of lambda.
+I'm using this second rule down here.
+
+62
+00:07:47,110 --> 00:07:56,520
+And then I get minus the log of this messy-looking
+term.
+
+63
+00:07:56,520 --> 00:08:05,460
+Okay, now that we have to log likelihood we
+maximize that. So we take the derivative,
+
+64
+00:08:05,460 --> 00:08:11,850
+and we said it equal to zero.
+l-prime of lambda.
+
+65
+00:08:11,850 --> 00:08:15,669
+Let's see Let's take the derivative of each
+of these terms, the first term will give me
+
+66
+00:08:15,669 --> 00:08:21,720
+a minus n, the derivative as lambda, being
+one.
+
+67
+00:08:21,720 --> 00:08:28,620
+The second term will give me the sum of x-i,
+divided by lambda.
+
+68
+00:08:28,620 --> 00:08:35,640
+And here I'm just using the rule the derivative
+of log lambda is one over lambda.
+
+69
+00:08:35,640 --> 00:08:43,750
+And the third term, you'll notice
+is zero. There are no lambdas in this term.
+
+70
+00:08:43,750 --> 00:08:49,209
+And this is why we didn't trouble ourselves
+seeing if we could more intelligently simplify
+
+71
+00:08:49,209 --> 00:08:56,459
+that term we were looking ahead, understanding
+that only terms involving lambda would feature
+
+72
+00:08:56,459 --> 00:09:03,680
+in the computation of the log likelihood.
+So that's the derivatives of the log likelihood.
+
+73
+00:09:03,680 --> 00:09:12,899
+I set this derivative equal to zero.
+And as soon as I do, the parameter lambda
+
+74
+00:09:12,899 --> 00:09:22,390
+becomes lambda-hat. The particular value which
+will maximize this log likelihood.
+
+75
+00:09:22,390 --> 00:09:32,070
+So then we solve for lambda-hat.
+What do I get? I get the sum of x-i divided
+
+76
+00:09:32,070 --> 00:09:40,540
+by lambda-hat is equal to n.
+Therefore, the maximum likelihood estimator,
+
+77
+00:09:40,540 --> 00:10:01,810
+lambda-hat is the sum of x-i over n.
+That's also known as 
+
+78
+00:10:01,810 --> 00:10:12,910
+the sample mean.
+

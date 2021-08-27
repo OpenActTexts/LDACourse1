@@ -6,14 +6,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Model Selection and Estimation | Loss Data Analytics: Short Course</title>
   <meta name="description" content="This is an interactive, online, freely available short course. It will contain many interactive objects (quizzes, computer demonstrations, interactive graphs, video, and the like) to promote deeper learning." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Model Selection and Estimation | Loss Data Analytics: Short Course" />
   <meta property="og:type" content="book" />
   
   
   <meta property="og:description" content="This is an interactive, online, freely available short course. It will contain many interactive objects (quizzes, computer demonstrations, interactive graphs, video, and the like) to promote deeper learning." />
-  <meta name="github-repo" content="https://github.com/OpenActTextDev/LDAShortCourse1" />
+  <meta name="github-repo" content="https://github.com/OpenActTexts/LDACourse1" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 4 Model Selection and Estimation | Loss Data Analytics: Short Course" />
@@ -32,6 +32,7 @@
   
 <link rel="prev" href="modeling-loss-severity.html"/>
 <link rel="next" href="aggregate-loss-models.html"/>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,6 +50,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 <!-- Various toggle functions used throughout --> 
 <script language="javascript">
@@ -98,6 +101,7 @@ $(document).ready(function(){
 
   gtag('config', 'G-K7GRETHNZH');
 </script>
+
 <script language="javascript">
 function openTab(evt, tabName) {
     var i, tabcontent, tablinks;
@@ -215,6 +219,7 @@ var submitAnswer = function() {
 
 
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -231,124 +236,150 @@ var submitAnswer = function() {
 <li><a href="./">Loss Data Analytics: Short Course</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-loss-data-analytics"><i class="fa fa-check"></i>Why Loss Data Analytics?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i>Resources</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#how-to-navigate-this-tutorial"><i class="fa fa-check"></i>How to Navigate this Tutorial</a></li>
 <li><a href="index.html#a-word-from-our-sponsor-astin-education-astin-academy">A Word from our Sponsor: <br> Astin + Education = Astin Academy</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i>Contributors</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html"><i class="fa fa-check"></i><b>1</b> Introduction to Loss Data Analytics</a><ul>
+<li class="chapter" data-level="1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html"><i class="fa fa-check"></i><b>1</b> Introduction to Loss Data Analytics</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:Intro"><i class="fa fa-check"></i><b>1.1</b> Relevance of Analytics to Insurance Activities</a></li>
 <li class="chapter" data-level="1.2" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:PredModApps"><i class="fa fa-check"></i><b>1.2</b> Insurance Company Operations</a></li>
-<li class="chapter" data-level="1.3" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:LGPIF"><i class="fa fa-check"></i><b>1.3</b> Case Study: Property Fund Introduction</a><ul>
+<li class="chapter" data-level="1.3" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:LGPIF"><i class="fa fa-check"></i><b>1.3</b> Case Study: Property Fund Introduction</a>
+<ul>
 <li class="chapter" data-level="1.3.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-claim-frequency"><i class="fa fa-check"></i><b>1.3.1</b> Exercise. Claim Frequency</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:PropertyFundSeverity"><i class="fa fa-check"></i><b>1.4</b> Property Fund Claim Severity</a><ul>
+<li class="chapter" data-level="1.4" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:PropertyFundSeverity"><i class="fa fa-check"></i><b>1.4</b> Property Fund Claim Severity</a>
+<ul>
 <li class="chapter" data-level="1.4.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-exploring-claim-severities"><i class="fa fa-check"></i><b>1.4.1</b> Exercise. Exploring Claim Severities</a></li>
 <li class="chapter" data-level="1.4.2" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-skewness-of-the-claim-severity-distribution"><i class="fa fa-check"></i><b>1.4.2</b> Exercise. Skewness of the Claim Severity Distribution</a></li>
 <li class="chapter" data-level="1.4.3" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-claim-severity-by-year"><i class="fa fa-check"></i><b>1.4.3</b> Exercise. Claim Severity by Year</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:LGPIFRatingVariaables"><i class="fa fa-check"></i><b>1.5</b> Property Fund Rating Variables</a><ul>
+<li class="chapter" data-level="1.5" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:LGPIFRatingVariaables"><i class="fa fa-check"></i><b>1.5</b> Property Fund Rating Variables</a>
+<ul>
 <li class="chapter" data-level="1.5.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Ex:ClaimByType"><i class="fa fa-check"></i><b>1.5.1</b> Exercise. Claim by Entity Type, Fire Class, and No Claim Credit</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#contributors-1"><i class="fa fa-check"></i>Contributors</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="frequency-modeling.html"><a href="frequency-modeling.html"><i class="fa fa-check"></i><b>2</b> Frequency Modeling</a><ul>
-<li class="chapter" data-level="2.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#basic-frequency-distributions"><i class="fa fa-check"></i><b>2.1</b> Basic Frequency Distributions</a><ul>
+<li class="chapter" data-level="2" data-path="frequency-modeling.html"><a href="frequency-modeling.html"><i class="fa fa-check"></i><b>2</b> Frequency Modeling</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#basic-frequency-distributions"><i class="fa fa-check"></i><b>2.1</b> Basic Frequency Distributions</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-representing-the-number-of-cyber-events-with-a-binomial-distribution"><i class="fa fa-check"></i><b>2.1.1</b> Exercise. Representing the Number of Cyber Events with a Binomial Distribution</a></li>
 <li class="chapter" data-level="2.1.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-representing-the-number-of-cyber-events-with-a-poisson-distribution"><i class="fa fa-check"></i><b>2.1.2</b> Exercise. Representing the Number of Cyber Events with a Poisson Distribution</a></li>
 <li class="chapter" data-level="2.1.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-comparing-basic-count-distributions"><i class="fa fa-check"></i><b>2.1.3</b> Exercise. Comparing Basic Count Distributions</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#the-ab0-class"><i class="fa fa-check"></i><b>2.2</b> The (a,b,0) Class</a><ul>
+<li class="chapter" data-level="2.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#the-ab0-class"><i class="fa fa-check"></i><b>2.2</b> The (a,b,0) Class</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-determining-probabilities-recursively"><i class="fa fa-check"></i><b>2.2.1</b> Exercise. Determining Probabilities Recursively</a></li>
 <li class="chapter" data-level="2.2.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-reverse-engineering-and-recursive-r-functions"><i class="fa fa-check"></i><b>2.2.2</b> Exercise. Reverse Engineering and Recursive <code>R</code> Functions</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#estimating-frequency-distributions"><i class="fa fa-check"></i><b>2.3</b> Estimating Frequency Distributions</a><ul>
+<li class="chapter" data-level="2.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#estimating-frequency-distributions"><i class="fa fa-check"></i><b>2.3</b> Estimating Frequency Distributions</a>
+<ul>
 <li class="chapter" data-level="2.3.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#Ex:CountDataCompression"><i class="fa fa-check"></i><b>2.3.1</b> Exercise. Count Data Compression - 1</a></li>
 <li class="chapter" data-level="2.3.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-count-data-compression---2"><i class="fa fa-check"></i><b>2.3.2</b> Exercise. Count Data Compression - 2</a></li>
 <li class="chapter" data-level="2.3.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-graphing-likelihoods"><i class="fa fa-check"></i><b>2.3.3</b> Exercise. Graphing Likelihoods</a></li>
 <li class="chapter" data-level="2.3.4" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-fitting-a-binomial-distribution"><i class="fa fa-check"></i><b>2.3.4</b> Exercise. Fitting a Binomial Distribution</a></li>
-<li class="chapter" data-level="2.3.5" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-fitting-a-negative-binomial-distribution"><i class="fa fa-check"></i><b>2.3.5</b> Exercise. Fitting a Negative Binomial Distribution</a></li>
+<li class="chapter" data-level="2.3.5" data-path="frequency-modeling.html"><a href="frequency-modeling.html#Exer:FitNegBinomialDistrn"><i class="fa fa-check"></i><b>2.3.5</b> Exercise. Fitting a Negative Binomial Distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="frequency-modeling.html"><a href="frequency-modeling.html#other-frequency-distributions"><i class="fa fa-check"></i><b>2.4</b> Other Frequency Distributions</a><ul>
+<li class="chapter" data-level="2.4" data-path="frequency-modeling.html"><a href="frequency-modeling.html#other-frequency-distributions"><i class="fa fa-check"></i><b>2.4</b> Other Frequency Distributions</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-the-ab1-distribution-and-its-moments"><i class="fa fa-check"></i><b>2.4.1</b> Exercise. The (<em>a,b</em>,1) Distribution and its Moments</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="frequency-modeling.html"><a href="frequency-modeling.html#mixture-distributions"><i class="fa fa-check"></i><b>2.5</b> Mixture Distributions</a><ul>
+<li class="chapter" data-level="2.5" data-path="frequency-modeling.html"><a href="frequency-modeling.html#mixture-distributions"><i class="fa fa-check"></i><b>2.5</b> Mixture Distributions</a>
+<ul>
 <li class="chapter" data-level="2.5.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-mixtures-of-workers-compensation-claims"><i class="fa fa-check"></i><b>2.5.1</b> Exercise. Mixtures of Workers’ Compensation Claims</a></li>
 <li class="chapter" data-level="2.5.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-finite-number-of-mixture-distributions"><i class="fa fa-check"></i><b>2.5.2</b> Exercise. Finite Number of Mixture Distributions</a></li>
 <li class="chapter" data-level="2.5.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-gamma-mixture-of-poissons"><i class="fa fa-check"></i><b>2.5.3</b> Exercise. Gamma Mixture of Poissons</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="frequency-modeling.html"><a href="frequency-modeling.html#goodness-of-fit"><i class="fa fa-check"></i><b>2.6</b> Goodness of Fit</a><ul>
+<li class="chapter" data-level="2.6" data-path="frequency-modeling.html"><a href="frequency-modeling.html#goodness-of-fit"><i class="fa fa-check"></i><b>2.6</b> Goodness of Fit</a>
+<ul>
 <li class="chapter" data-level="2.6.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-goodness-of-fit-zero-modified-poisson"><i class="fa fa-check"></i><b>2.6.1</b> Exercise. Goodness of Fit: Zero-Modified Poisson</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="frequency-modeling.html"><a href="frequency-modeling.html#contributors-2"><i class="fa fa-check"></i>Contributors</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html"><i class="fa fa-check"></i><b>3</b> Modeling Loss Severity</a><ul>
-<li class="chapter" data-level="3.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#basic-distributional-quantities"><i class="fa fa-check"></i><b>3.1</b> Basic Distributional Quantities</a><ul>
+<li class="chapter" data-level="3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html"><i class="fa fa-check"></i><b>3</b> Modeling Loss Severity</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#basic-distributional-quantities"><i class="fa fa-check"></i><b>3.1</b> Basic Distributional Quantities</a>
+<ul>
 <li class="chapter" data-level="3.1.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-moments-can-be-misleading"><i class="fa fa-check"></i><b>3.1.1</b> Exercise. Moments Can Be Misleading</a></li>
 <li class="chapter" data-level="3.1.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-determining-boxplots-and-quantiles"><i class="fa fa-check"></i><b>3.1.2</b> Exercise. Determining Boxplots and Quantiles</a></li>
 <li class="chapter" data-level="3.1.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-gamma-moment-generating-function"><i class="fa fa-check"></i><b>3.1.3</b> Exercise. Gamma Moment Generating Function</a></li>
 <li class="chapter" data-level="3.1.4" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-visualizing-moment-generating-functions"><i class="fa fa-check"></i><b>3.1.4</b> Exercise. Visualizing Moment Generating Functions</a></li>
 <li class="chapter" data-level="3.1.5" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-determining-moments-using-moment-generating-functions"><i class="fa fa-check"></i><b>3.1.5</b> Exercise. Determining Moments using Moment Generating Functions</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#continuous-distributions"><i class="fa fa-check"></i><b>3.2</b> Continuous Distributions</a><ul>
+<li class="chapter" data-level="3.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#continuous-distributions"><i class="fa fa-check"></i><b>3.2</b> Continuous Distributions</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise."><i class="fa fa-check"></i><b>3.2.1</b> Exercise.</a></li>
 <li class="chapter" data-level="3.2.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-visualizing-the-gamma-distribution"><i class="fa fa-check"></i><b>3.2.2</b> Exercise. Visualizing the Gamma Distribution</a></li>
 <li class="chapter" data-level="3.2.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#Ex:CreateParetoDensityFct"><i class="fa fa-check"></i><b>3.2.3</b> Exercise. Creating a Pareto Density Function</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#methods-of-creating-new-distributions"><i class="fa fa-check"></i><b>3.3</b> Methods of Creating New Distributions</a><ul>
+<li class="chapter" data-level="3.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#methods-of-creating-new-distributions"><i class="fa fa-check"></i><b>3.3</b> Methods of Creating New Distributions</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-using-the-logarithmic-transformation-to-create-a-new-distribution"><i class="fa fa-check"></i><b>3.3.1</b> Exercise. Using the Logarithmic Transformation to Create a New Distribution</a></li>
 <li class="chapter" data-level="3.3.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-creating-a-mixture-distribution"><i class="fa fa-check"></i><b>3.3.2</b> Exercise. Creating a Mixture Distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#coverage-modifications"><i class="fa fa-check"></i><b>3.4</b> Coverage Modifications</a><ul>
+<li class="chapter" data-level="3.4" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#coverage-modifications"><i class="fa fa-check"></i><b>3.4</b> Coverage Modifications</a>
+<ul>
 <li class="chapter" data-level="3.4.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-calculate-moments-of-the-lognormal-distribution"><i class="fa fa-check"></i><b>3.4.1</b> Exercise. Calculate Moments of the Lognormal Distribution</a></li>
 <li class="chapter" data-level="3.4.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-calculate-limited-expected-value-of-the-lognormal-distribution"><i class="fa fa-check"></i><b>3.4.2</b> Exercise. Calculate Limited Expected Value of the Lognormal Distribution</a></li>
 <li class="chapter" data-level="3.4.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-expected-claims-subject-to-a-deductible"><i class="fa fa-check"></i><b>3.4.3</b> Exercise. Expected Claims Subject to a Deductible</a></li>
 <li class="chapter" data-level="3.4.4" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-expected-claims-subject-to-a-deductible-and-coinsurance"><i class="fa fa-check"></i><b>3.4.4</b> Exercise. Expected Claims Subject to a Deductible and Coinsurance</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>3.5</b> Maximum Likelihood Estimation</a><ul>
+<li class="chapter" data-level="3.5" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>3.5</b> Maximum Likelihood Estimation</a>
+<ul>
 <li class="chapter" data-level="3.5.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#Ex:MLEPareto"><i class="fa fa-check"></i><b>3.5.1</b> Exercise. Maximum Likelihood Estimation for a Pareto Distribution</a></li>
 <li class="chapter" data-level="3.5.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-finding-standard-errors-for-maximum-likelihood-estimates"><i class="fa fa-check"></i><b>3.5.2</b> Exercise. Finding Standard Errors for Maximum Likelihood Estimates</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#contributors-3"><i class="fa fa-check"></i>Contributors</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html"><i class="fa fa-check"></i><b>4</b> Model Selection and Estimation</a><ul>
-<li class="chapter" data-level="4.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#Sec:NonInf"><i class="fa fa-check"></i><b>4.1</b> Nonparametric Inference</a><ul>
+<li class="chapter" data-level="4" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html"><i class="fa fa-check"></i><b>4</b> Model Selection and Estimation</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#Sec:NonInf"><i class="fa fa-check"></i><b>4.1</b> Nonparametric Inference</a>
+<ul>
 <li class="chapter" data-level="4.1.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-empirical-distribution-function-and-quartiles-percentiles-and-quantiles"><i class="fa fa-check"></i><b>4.1.1</b> Exercise. Empirical Distribution Function and Quartiles, Percentiles and Quantiles</a></li>
 <li class="chapter" data-level="4.1.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-density-estimators"><i class="fa fa-check"></i><b>4.1.2</b> Exercise. Density Estimators</a></li>
 <li class="chapter" data-level="4.1.3" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-claim-frequency-1"><i class="fa fa-check"></i><b>4.1.3</b> Exercise. Claim Frequency</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#tools-for-model-selection"><i class="fa fa-check"></i><b>4.2</b> Tools for Model Selection</a><ul>
+<li class="chapter" data-level="4.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#tools-for-model-selection"><i class="fa fa-check"></i><b>4.2</b> Tools for Model Selection</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-probability-probability-pp-plot"><i class="fa fa-check"></i><b>4.2.1</b> Exercise. Probability-Probability (<span class="math inline">\(pp\)</span>) plot</a></li>
 <li class="chapter" data-level="4.2.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-quantile-quantile-qq-plot"><i class="fa fa-check"></i><b>4.2.2</b> Exercise. Quantile-Quantile (<span class="math inline">\(qq\)</span>) plot</a></li>
 <li class="chapter" data-level="4.2.3" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-kolmogorov-smirnov-test"><i class="fa fa-check"></i><b>4.2.3</b> Exercise. Kolmogorov-Smirnov test</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#model-selection-likelihood-ratio-tests-and-goodness-of-fit"><i class="fa fa-check"></i><b>4.3</b> Model Selection: Likelihood Ratio Tests and Goodness of Fit</a></li>
-<li class="chapter" data-level="4.4" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#estimation-using-modified-data-nonparametric-approach"><i class="fa fa-check"></i><b>4.4</b> Estimation using Modified Data: Nonparametric Approach</a><ul>
+<li class="chapter" data-level="4.4" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#estimation-using-modified-data-nonparametric-approach"><i class="fa fa-check"></i><b>4.4</b> Estimation using Modified Data: Nonparametric Approach</a>
+<ul>
 <li class="chapter" data-level="4.4.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-nonparametric-estimation-using-modified-data"><i class="fa fa-check"></i><b>4.4.1</b> Exercise. Nonparametric Estimation using Modified Data</a></li>
 <li class="chapter" data-level="4.4.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-nonparametric-estimation-using-modified-data-ii"><i class="fa fa-check"></i><b>4.4.2</b> Exercise. Nonparametric Estimation using Modified Data II</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#estimation-using-modified-data-parametric-approach"><i class="fa fa-check"></i><b>4.5</b> Estimation using Modified Data: Parametric Approach</a></li>
-<li class="chapter" data-level="4.6" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#bayesian-inference"><i class="fa fa-check"></i><b>4.6</b> Bayesian Inference</a><ul>
+<li class="chapter" data-level="4.6" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#bayesian-inference"><i class="fa fa-check"></i><b>4.6</b> Bayesian Inference</a>
+<ul>
 <li class="chapter" data-level="4.6.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#visualizing-bayesian-methods"><i class="fa fa-check"></i><b>4.6.1</b> Visualizing Bayesian Methods</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#contributors-4"><i class="fa fa-check"></i>Contributors</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html"><i class="fa fa-check"></i><b>5</b> Aggregate Loss Models</a><ul>
+<li class="chapter" data-level="5" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html"><i class="fa fa-check"></i><b>5</b> Aggregate Loss Models</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#introduction"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
-<li class="chapter" data-level="5.2" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#individual-risk-model"><i class="fa fa-check"></i><b>5.2</b> Individual Risk Model</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#Ex:IRM1"><i class="fa fa-check"></i><b>5.2.1</b> Exercise. Individual Risk Model I</a></li>
-<li class="chapter" data-level="5.2.2" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-individual-risk-model-ii"><i class="fa fa-check"></i><b>5.2.2</b> Exercise. Individual Risk Model II</a></li>
+<li class="chapter" data-level="5.2" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#individual-risk-model"><i class="fa fa-check"></i><b>5.2</b> Individual Risk Model</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#Ex:IRM1"><i class="fa fa-check"></i><b>5.2.1</b> Exercise. Simulating Claim Frequency</a></li>
+<li class="chapter" data-level="5.2.2" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-individual-risk-model"><i class="fa fa-check"></i><b>5.2.2</b> Exercise. Individual Risk Model</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#collective-risk-model---part-i"><i class="fa fa-check"></i><b>5.3</b> Collective Risk Model - Part I</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-collective-risk-model-i"><i class="fa fa-check"></i><b>5.3.1</b> Exercise. Collective Risk Model I</a></li>
+<li class="chapter" data-level="5.3" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#Sec:CollRisk1"><i class="fa fa-check"></i><b>5.3</b> Fitting a Collective Risk Model in Two Parts</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#Ex:FreqCollectRM"><i class="fa fa-check"></i><b>5.3.1</b> Exercise. Estimating the Frequency Component of the Collective Risk Model</a></li>
+<li class="chapter" data-level="5.3.2" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-estimating-the-severity-component-of-the-collective-risk-model"><i class="fa fa-check"></i><b>5.3.2</b> Exercise. Estimating the Severity Component of the Collective Risk Model</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#collective-risk-model---part-ii"><i class="fa fa-check"></i><b>5.4</b> Collective Risk Model - Part II</a><ul>
-<li class="chapter" data-level="5.4.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-collective-risk-model-ii"><i class="fa fa-check"></i><b>5.4.1</b> Exercise. Collective Risk Model II</a></li>
-</ul></li>
-<li class="chapter" data-level="5.5" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#tweedie-distribution"><i class="fa fa-check"></i><b>5.5</b> Tweedie Distribution</a><ul>
-<li class="chapter" data-level="5.5.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-tweedie-distribution"><i class="fa fa-check"></i><b>5.5.1</b> Exercise. Tweedie Distribution</a></li>
+<li class="chapter" data-level="5.4" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#computation-strategies-for-a-collective-risk-model"><i class="fa fa-check"></i><b>5.4</b> Computation Strategies for a Collective Risk Model</a></li>
+<li class="chapter" data-level="5.5" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#tweedie-distribution"><i class="fa fa-check"></i><b>5.5</b> Tweedie Distribution</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-fitting-a-tweedie-distribution"><i class="fa fa-check"></i><b>5.5.1</b> Exercise. Fitting a Tweedie Distribution</a></li>
 </ul></li>
 <li class="chapter" data-level="5.6" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#effects-of-coverage-modifications"><i class="fa fa-check"></i><b>5.6</b> Effects of Coverage Modifications</a></li>
 <li class="chapter" data-level="" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#contributors-5"><i class="fa fa-check"></i>Contributors</a></li>
@@ -373,18 +404,18 @@ var submitAnswer = function() {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="model-selection-and-estimation" class="section level1">
+<div id="model-selection-and-estimation" class="section level1" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Model Selection and Estimation</h1>
 <p><strong>Chapter Description</strong></p>
 <p>Chapters 2 and 3 have described how to fit parametric models to frequency and severity data, respectively. This chapter begins with the selection of models. To compare alternative parametric models, it is helpful to summarize data without reference to a specific parametric distribution. Section 4.1 describes nonparametric estimation, how we can use it for model comparisons and how it can be used to provide starting values for parametric procedures. The process of model selection is then summarized in Sections 4.2 and 4.3. Although our focus is on data from continuous distributions, the same process can be used for discrete versions or data that come from a hybrid combination of discrete and continuous distributions.</p>
 <p>Model selection and estimation are fundamental aspects of statistical modeling. To provide a flavor as to how they can be adapted to alternative sampling schemes, Sections 4.4 and 4.5 describes estimation for grouped, censored and truncated data. To see how they can be adapted to alternative models, the chapter closes with Section 4.6 on Bayesian inference, an alternative procedure where the (typically unknown) parameters are treated as random variables.</p>
 <div class="blackbox">
 <ul>
-<li>Although not needed to go through the tutorials, some users may wish to download the overheads that the videos are based on. <button download><a href="https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/LDA1.Overheads/LDA1.Chap4.pdf">Download Chapter Four overheads as a .pdf file.</a></button></li>
+<li>Although not needed to go through the tutorials, some users may wish to download the overheads that the videos are based on. <button download><a href="https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/LDA1.Overheads/LDA1.Chap4.pdf">Download Chapter Four overheads as a .pdf file.</a></button></li>
 <li>By watching the videos and working through the tutorial exercises, you will get an appreciation for model selection and estimation. For a deeper dive, see the corresponding chapter in the textbook, <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-ModelSelection.html">Chapter Four of <em>Loss Data Analytics</em></a>.</li>
 </ul>
 </div>
-<div id="Sec:NonInf" class="section level2">
+<div id="Sec:NonInf" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Nonparametric Inference</h2>
 <hr />
 <p>In this section, you learn how to:</p>
@@ -470,7 +501,7 @@ var submitAnswer = function() {
 <iframe src="./Overheads/LDA1.Chap4.pdf#page=15" width="100%" height="400"> </iframe>
 </div>
 </div>
-<div id="exercise.-empirical-distribution-function-and-quartiles-percentiles-and-quantiles" class="section level3">
+<div id="exercise.-empirical-distribution-function-and-quartiles-percentiles-and-quantiles" class="section level3" number="4.1.1">
 <h3><span class="header-section-number">4.1.1</span> Exercise. Empirical Distribution Function and Quartiles, Percentiles and Quantiles</h3>
 <p><strong>Assignment Text</strong></p>
 <p>In this tutorial, you will find empirical (cumulative) distribution and quantiles for the loss. The Wisconsin Property Fund data has already been read into a data frame called <code>Insample</code>. These data consist of claim experience for fund members over the years 2006-2010, inclusive. It includes the claim year <code>Year</code> and claim loss <code>y</code>.</p>
@@ -483,10 +514,10 @@ var submitAnswer = function() {
 </div>
 <p><br></p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9PcGVuQWN0VGV4dERldi9MREFDb3Vyc2UxL21haW4vRGF0YS9JbnNhbXBsZS5jc3ZfXzshIURaM2ZqZyFyYXdoUzFhVklCU2M2V1NyeEZVcXhSN0ZTQnV5YlAxcWszb1RPNjFYYjlXT00zOU5TTWdZem5pRU5PMzljZlpZY2ckIFwiLCBoZWFkZXI9VCwgbmEuc3RyaW5ncz1jKFwiLlwiKSwgc3RyaW5nc0FzRmFjdG9ycz1GQUxTRSkiLCJzYW1wbGUiOiIjIENyZWF0ZSBlbXBpcmljYWwgZGlzdHJpYnV0aW9uXG5lbXBpcmljYWwgPC0gPz9cbiMgUGxvdCBlbXBpcmljYWwgZGlzdHJpYnV0aW9uXG5wbG90KD8/KVxuXG5saWJyYXJ5KGRwbHlyKVxuIyBHcm91cCBkYXRhIGJ5IHllYXIgYW5kIHN1bW1hcmlzZSBkYXRhIHVzaW5nIHF1YW50aWxlXG5JbnNhbXBsZSAlPiUgXG4gIGdyb3VwX2J5KD8/KSAlPiUgXG4gIHN1bW1hcmlzZSg/PykiLCJzb2x1dGlvbiI6IiMgQ3JlYXRlIGVtcGlyaWNhbCBkaXN0cmlidXRpb25cbmVtcGlyaWNhbCA8LSBlY2RmKEluc2FtcGxlJHkpXG4jIFBsb3QgZW1waXJpY2FsIGRpc3RyaWJ1dGlvblxucGxvdChlbXBpcmljYWwsIG1haW49XCJcIiwgeGxhYj1cImxvc3NcIixcbiAgICAgdmVydGljYWxzPVRSVUUsIGNvbC5wb2ludHM9XCJibHVlXCIsXG4gICAgIGNvbC5ob3I9XCJyZWRcIiwgY29sLnZlcnQ9XCJiaXNxdWVcIilcblxubGlicmFyeShkcGx5cilcbiMgR3JvdXAgZGF0YSBieSB5ZWFyIGFuZCBzdW1tYXJpc2UgZGF0YSB1c2luZyBxdWFudGlsZVxuSW5zYW1wbGUgJT4lIFxuICBncm91cF9ieShZZWFyKSAlPiUgXG4gIHN1bW1hcmlzZShxdWFudGlsZV9lYWNoX3llYXI9cXVhbnRpbGUoeSwgcHJvYnM9YygwLjkpLCB0eXBlPTYpKSIsInNjdCI6InN1Y2Nlc3NfbXNnKFwiRXhjZWxsZW50IHN0YXJ0ISBZZWFyIDIwMDcgaGFzIHRoZSBsYXJnZXN0IDkwdGggcGVyY2VudGlsZXMuXCIpIiwiaGludCI6Imdyb3VwX2J5KCkgdGFrZXMgYW4gZXhpc3RpbmcgZGF0YSBhbmQgY29udmVydHMgaXQgaW50byBhIGdyb3VwZWQgZGF0YSB3aGVyZSBvcGVyYXRpb25zIGFyZSBwZXJmb3JtZWQgYnkgZ3JvdXAuXG5zdW1tYXJpc2UoKSBvdXRwdXRzIGEgc2luZ2xlIHJvdyBzdW1tYXJpc2luZyBhbGwgb2JzZXJ2YXRpb25zIGluIHRoZSBpbnB1dC4gSXQgd2lsbCBjb250YWluIG9uZSBjb2x1bW4gZm9yIGVhY2ggZ3JvdXBpbmcgdmFyaWFibGUgYW5kIG9uZSBjb2x1bW4gZm9yIGVhY2ggb2YgdGhlIHN1bW1hcnkgc3RhdGlzdGljcyB0aGF0IHlvdSBoYXZlIHNwZWNpZmllZC5cbldoaWNoIDxjb2RlPnR5cGU8L2NvZGU+IHNob3VsZCB3ZSB1c2UgZm9yIHF1YW50aWxlKCk/In0=
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0cy9MREFDb3Vyc2UxL21haW4vRGF0YS9JbnNhbXBsZS5jc3ZcIiwgaGVhZGVyPVQsIG5hLnN0cmluZ3M9YyhcIi5cIiksIHN0cmluZ3NBc0ZhY3RvcnM9RkFMU0UpIiwic2FtcGxlIjoiIyBDcmVhdGUgZW1waXJpY2FsIGRpc3RyaWJ1dGlvblxuZW1waXJpY2FsIDwtID8/XG4jIFBsb3QgZW1waXJpY2FsIGRpc3RyaWJ1dGlvblxucGxvdCg/PylcblxubGlicmFyeShkcGx5cilcbiMgR3JvdXAgZGF0YSBieSB5ZWFyIGFuZCBzdW1tYXJpc2UgZGF0YSB1c2luZyBxdWFudGlsZVxuSW5zYW1wbGUgJT4lIFxuICBncm91cF9ieSg/PykgJT4lIFxuICBzdW1tYXJpc2UoPz8pIiwic29sdXRpb24iOiIjIENyZWF0ZSBlbXBpcmljYWwgZGlzdHJpYnV0aW9uXG5lbXBpcmljYWwgPC0gZWNkZihJbnNhbXBsZSR5KVxuIyBQbG90IGVtcGlyaWNhbCBkaXN0cmlidXRpb25cbnBsb3QoZW1waXJpY2FsLCBtYWluPVwiXCIsIHhsYWI9XCJsb3NzXCIsXG4gICAgIHZlcnRpY2Fscz1UUlVFLCBjb2wucG9pbnRzPVwiYmx1ZVwiLFxuICAgICBjb2wuaG9yPVwicmVkXCIsIGNvbC52ZXJ0PVwiYmlzcXVlXCIpXG5cbmxpYnJhcnkoZHBseXIpXG4jIEdyb3VwIGRhdGEgYnkgeWVhciBhbmQgc3VtbWFyaXNlIGRhdGEgdXNpbmcgcXVhbnRpbGVcbkluc2FtcGxlICU+JSBcbiAgZ3JvdXBfYnkoWWVhcikgJT4lIFxuICBzdW1tYXJpc2UocXVhbnRpbGVfZWFjaF95ZWFyPXF1YW50aWxlKHksIHByb2JzPWMoMC45KSwgdHlwZT02KSkiLCJzY3QiOiJzdWNjZXNzX21zZyhcIkV4Y2VsbGVudCBzdGFydCEgWWVhciAyMDA3IGhhcyB0aGUgbGFyZ2VzdCA5MHRoIHBlcmNlbnRpbGVzLlwiKSIsImhpbnQiOiJncm91cF9ieSgpIHRha2VzIGFuIGV4aXN0aW5nIGRhdGEgYW5kIGNvbnZlcnRzIGl0IGludG8gYSBncm91cGVkIGRhdGEgd2hlcmUgb3BlcmF0aW9ucyBhcmUgcGVyZm9ybWVkIGJ5IGdyb3VwLlxuc3VtbWFyaXNlKCkgb3V0cHV0cyBhIHNpbmdsZSByb3cgc3VtbWFyaXNpbmcgYWxsIG9ic2VydmF0aW9ucyBpbiB0aGUgaW5wdXQuIEl0IHdpbGwgY29udGFpbiBvbmUgY29sdW1uIGZvciBlYWNoIGdyb3VwaW5nIHZhcmlhYmxlIGFuZCBvbmUgY29sdW1uIGZvciBlYWNoIG9mIHRoZSBzdW1tYXJ5IHN0YXRpc3RpY3MgdGhhdCB5b3UgaGF2ZSBzcGVjaWZpZWQuXG5XaGljaCA8Y29kZT50eXBlPC9jb2RlPiBzaG91bGQgd2UgdXNlIGZvciBxdWFudGlsZSgpPyJ9
 </div>
 </div>
-<div id="exercise.-density-estimators" class="section level3">
+<div id="exercise.-density-estimators" class="section level3" number="4.1.2">
 <h3><span class="header-section-number">4.1.2</span> Exercise. Density Estimators</h3>
 <p><strong>Assignment Text</strong></p>
 <p>Nonparametric density estimators, such as the kernel estimator, are regularly used in practice. In this tutorial, We will use the Wisconsin Property Fund data, which already has been read into a data frame called <code>Insample</code>, to plot a histogram and overlay density curves with various density estimators.</p>
@@ -505,10 +536,10 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwi
 </div>
 <p><br></p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9PcGVuQWN0VGV4dERldi9MREFDb3Vyc2UxL21haW4vRGF0YS9JbnNhbXBsZS5jc3ZfXzshIURaM2ZqZyFyYXdoUzFhVklCU2M2V1NyeEZVcXhSN0ZTQnV5YlAxcWszb1RPNjFYYjlXT00zOU5TTWdZem5pRU5PMzljZlpZY2ckIFwiLCBoZWFkZXI9VCwgbmEuc3RyaW5ncz1jKFwiLlwiKSwgc3RyaW5nc0FzRmFjdG9ycz1GQUxTRSkiLCJzYW1wbGUiOiIjIFBsb3QgaGlzdG9ncmFtXG5oaXN0KD8/LCBmcmVxPUZBTFNFKVxuIyBHYXVzc2lhbiBrZXJuZWwgZGVuc2l0eSAtIGJsdWUgY3VydmVcbmxpbmVzKGRlbnNpdHkoPz8sIGNvbD1cImJsdWVcIiwgbHdkPTIpXG4jIEdhdXNzaWFuIGtlcm5lbCBkZW5zaXR5IHdpdGggYSBiYW5kd2lkdGggZXF1YWwgdG8gMSAtIGdyZWVuIGN1cnZlXG5saW5lcyhkZW5zaXR5KD8/LCBidz0/PyksIGNvbD1cImdyZWVuXCIsIGx3ZD0yKVxuIyBUcmlhbmd1bGFyIGtlcm5lbCBkZW5zaXR5IHdpdGggYSBiYW5kd2lkdGggZXF1YWwgdG8gMC4xIC0gcmVkIGN1cnZlXG5saW5lcyhkZW5zaXR5KD8/LCBrZXJuZWw9Pz8sIGJ3PT8/KSwgY29sPVwicmVkXCIsIGx3ZD0yKSIsInNvbHV0aW9uIjoiIyBQbG90IGhpc3RvZ3JhbVxuaGlzdChsb2coSW5zYW1wbGUkeSksIGZyZXE9RkFMU0UpXG4jIEdhdXNzaWFuIGtlcm5lbCBkZW5zaXR5IC0gYmx1ZSBjdXJ2ZVxubGluZXMoZGVuc2l0eShsb2coSW5zYW1wbGUkeSkpLCBjb2w9XCJibHVlXCIsIGx3ZD0yKVxuIyBHYXVzc2lhbiBrZXJuZWwgZGVuc2l0eSBhIGJhbmR3aWR0aCBlcXVhbCB0byAxIC0gZ3JlZW4gY3VydmVcbmxpbmVzKGRlbnNpdHkobG9nKEluc2FtcGxlJHkpLCBidz0xKSwgY29sPVwiZ3JlZW5cIiwgbHdkPTIpXG4jIFRyaWFuZ3VsYXIga2VybmVsIGRlbnNpdHkgYSBiYW5kd2lkdGggZXF1YWwgdG8gMC4xIC0gcmVkIGN1cnZlXG5saW5lcyhkZW5zaXR5KGxvZyhJbnNhbXBsZSR5KSwga2VybmVsPVwidHJpYW5ndWxhclwiLCBidz0wLjEpLCBjb2w9XCJyZWRcIiwgbHdkPTIpIiwic2N0Ijoic3VjY2Vzc19tc2coXCJFeGNlbGxlbnQhIFRoaXMgaXMgYSB2ZXJ5IGJlYXV0aWZ1bCBncmFwaGljIHdpdGggY29sb3JzISBXZSBvYnNlcnZlZCBkaWZmZXJlbnQgZGVuc2l0eSBjdXJ2ZXMuXCIpIiwiaGludCI6IlRoZSBzeW50YXggbG9nKGRhdGEkeCkgcHJvZHVjZXMgbG9nIG9mIHguIn0=
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0cy9MREFDb3Vyc2UxL21haW4vRGF0YS9JbnNhbXBsZS5jc3ZcIiwgaGVhZGVyPVQsIG5hLnN0cmluZ3M9YyhcIi5cIiksIHN0cmluZ3NBc0ZhY3RvcnM9RkFMU0UpIiwic2FtcGxlIjoiIyBQbG90IGhpc3RvZ3JhbVxuaGlzdCg/PywgZnJlcT1GQUxTRSlcbiMgR2F1c3NpYW4ga2VybmVsIGRlbnNpdHkgLSBibHVlIGN1cnZlXG5saW5lcyhkZW5zaXR5KD8/LCBjb2w9XCJibHVlXCIsIGx3ZD0yKVxuIyBHYXVzc2lhbiBrZXJuZWwgZGVuc2l0eSB3aXRoIGEgYmFuZHdpZHRoIGVxdWFsIHRvIDEgLSBncmVlbiBjdXJ2ZVxubGluZXMoZGVuc2l0eSg/PywgYnc9Pz8pLCBjb2w9XCJncmVlblwiLCBsd2Q9MilcbiMgVHJpYW5ndWxhciBrZXJuZWwgZGVuc2l0eSB3aXRoIGEgYmFuZHdpZHRoIGVxdWFsIHRvIDAuMSAtIHJlZCBjdXJ2ZVxubGluZXMoZGVuc2l0eSg/Pywga2VybmVsPT8/LCBidz0/PyksIGNvbD1cInJlZFwiLCBsd2Q9MikiLCJzb2x1dGlvbiI6IiMgUGxvdCBoaXN0b2dyYW1cbmhpc3QobG9nKEluc2FtcGxlJHkpLCBmcmVxPUZBTFNFKVxuIyBHYXVzc2lhbiBrZXJuZWwgZGVuc2l0eSAtIGJsdWUgY3VydmVcbmxpbmVzKGRlbnNpdHkobG9nKEluc2FtcGxlJHkpKSwgY29sPVwiYmx1ZVwiLCBsd2Q9MilcbiMgR2F1c3NpYW4ga2VybmVsIGRlbnNpdHkgYSBiYW5kd2lkdGggZXF1YWwgdG8gMSAtIGdyZWVuIGN1cnZlXG5saW5lcyhkZW5zaXR5KGxvZyhJbnNhbXBsZSR5KSwgYnc9MSksIGNvbD1cImdyZWVuXCIsIGx3ZD0yKVxuIyBUcmlhbmd1bGFyIGtlcm5lbCBkZW5zaXR5IGEgYmFuZHdpZHRoIGVxdWFsIHRvIDAuMSAtIHJlZCBjdXJ2ZVxubGluZXMoZGVuc2l0eShsb2coSW5zYW1wbGUkeSksIGtlcm5lbD1cInRyaWFuZ3VsYXJcIiwgYnc9MC4xKSwgY29sPVwicmVkXCIsIGx3ZD0yKSIsInNjdCI6InN1Y2Nlc3NfbXNnKFwiRXhjZWxsZW50ISBUaGlzIGlzIGEgdmVyeSBiZWF1dGlmdWwgZ3JhcGhpYyB3aXRoIGNvbG9ycyEgV2Ugb2JzZXJ2ZWQgZGlmZmVyZW50IGRlbnNpdHkgY3VydmVzLlwiKSIsImhpbnQiOiJUaGUgc3ludGF4IGxvZyhkYXRhJHgpIHByb2R1Y2VzIGxvZyBvZiB4LiJ9
 </div>
 </div>
-<div id="exercise.-claim-frequency-1" class="section level3">
+<div id="exercise.-claim-frequency-1" class="section level3" number="4.1.3">
 <h3><span class="header-section-number">4.1.3</span> Exercise. Claim Frequency</h3>
 <p><strong>Assignment Text</strong></p>
 <p>In this tutorial, you will model claim count data and decide whether a Poisson<span class="math inline">\((\lambda)\)</span> or a negative binomial<span class="math inline">\((r=3,p)\)</span> better fits the data. The raw data are the number of claims filed by <span class="math inline">\(n=100\)</span> policyholders. Recall that claim count data are discrete and take values <span class="math inline">\(0, 1, 2, \dots\)</span>. So, we consider two discrete probability models. You will apply tools learned in Section <a href="model-selection-and-estimation.html#Sec:NonInf">4.1</a> to make a decision on which model fits these data better.</p>
@@ -523,7 +554,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwi
 </div>
 <p><br></p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNldC5zZWVkKDQpXG5jbGFpbXMgPSBybmJpbm9tKG4gPSAxMDAsIHNpemUgPSAzLCBwcm9iID0gMC41KVxuI0luc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0RGV2L0xEQUNvdXJzZTEvbWFpbi9EYXRhL0luc2FtcGxlLmNzdlwiLCBoZWFkZXI9VCxcbiMgICAgICAgICAgICAgICAgICAgICAgbmEuc3RyaW5ncz1jKFwiLlwiKSwgc3RyaW5nc0FzRmFjdG9ycz1GQUxTRSkiLCJzYW1wbGUiOiJ0YWJsZShjbGFpbXMpXG5iYXJwbG90KD8/LCB4bGFiPVwiIyBDbGFpbXNcIilcblxubWVhbihjbGFpbXMpXG4/PyhjbGFpbXMpIiwic29sdXRpb24iOiJ0YWJsZShjbGFpbXMpXG5iYXJwbG90KHRhYmxlKGNsYWltcyksIHhsYWI9XCIjIENsYWltc1wiKVxubWVhbihjbGFpbXMpXG52YXIoY2xhaW1zKSIsInNjdCI6InN1Y2Nlc3NfbXNnKFwiQW5kIHlvdSdyZSBvZmYhICBQUyAtIGRpZCB5b3UgbGFiZWwgeW91ciBheGVzP1wiKSIsImhpbnQiOiJUaGUgb3V0cHV0IGZyb20gdGhlIDxjb2RlPnRhYmxlKCk8L2NvZGU+IGZ1bmN0aW9uIGNhbiBiZSB1c2VkIGFzIGFuIGFyZ3VtZW50IGluIHRoZSA8Y29kZT5iYXJwbG90KCk8L2NvZGU+IGZ1bmN0aW9uIn0=
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNldC5zZWVkKDQpXG5jbGFpbXMgPSBybmJpbm9tKG4gPSAxMDAsIHNpemUgPSAzLCBwcm9iID0gMC41KVxuI0luc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0cy9MREFDb3Vyc2UxL21haW4vRGF0YS9JbnNhbXBsZS5jc3ZcIiwgaGVhZGVyPVQsXG4jICAgICAgICAgICAgICAgICAgICAgIG5hLnN0cmluZ3M9YyhcIi5cIiksIHN0cmluZ3NBc0ZhY3RvcnM9RkFMU0UpIiwic2FtcGxlIjoidGFibGUoY2xhaW1zKVxuYmFycGxvdCg/PywgeGxhYj1cIiMgQ2xhaW1zXCIpXG5cbm1lYW4oY2xhaW1zKVxuPz8oY2xhaW1zKSIsInNvbHV0aW9uIjoidGFibGUoY2xhaW1zKVxuYmFycGxvdCh0YWJsZShjbGFpbXMpLCB4bGFiPVwiIyBDbGFpbXNcIilcbm1lYW4oY2xhaW1zKVxudmFyKGNsYWltcykiLCJzY3QiOiJzdWNjZXNzX21zZyhcIkFuZCB5b3UncmUgb2ZmISAgUFMgLSBkaWQgeW91IGxhYmVsIHlvdXIgYXhlcz9cIikiLCJoaW50IjoiVGhlIG91dHB1dCBmcm9tIHRoZSA8Y29kZT50YWJsZSgpPC9jb2RlPiBmdW5jdGlvbiBjYW4gYmUgdXNlZCBhcyBhbiBhcmd1bWVudCBpbiB0aGUgPGNvZGU+YmFycGxvdCgpPC9jb2RlPiBmdW5jdGlvbiJ9
 </div>
 <p>Observe that the distribution is heavily right-skewed, and the sample variance is much larger than the sample mean. You may recall that if <span class="math inline">\(X \sim\)</span> Poisson<span class="math inline">\((\lambda)\)</span>,
 <span class="math display">\[
@@ -540,7 +571,7 @@ We would expect the sample mean and sample variance to be roughly equal if the c
 </div>
 <p><br></p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNldC5zZWVkKDQpXG5jbGFpbXMgPSBybmJpbm9tKG4gPSAxMDAsIHNpemUgPSAzLCBwcm9iID0gMC41KVxuI0luc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0RGV2L0xEQUNvdXJzZTEvbWFpbi9EYXRhL0luc2FtcGxlLmNzdlwiLCBoZWFkZXI9VCxcbiMgICAgICAgICAgICAgICAgICAgICAgbmEuc3RyaW5ncz1jKFwiLlwiKSwgc3RyaW5nc0FzRmFjdG9ycz1GQUxTRSkiLCJzYW1wbGUiOiJsYW1iZGEgPSA/P1xubGFtYmRhXG5cbiMjIG1ha2UgdGhlIHF1YW50aWxlc1xucD1zZXEoMC4wMSwwLjk5LCBieT0wLjAxKVxucXAgPSBxcG9pcyhwLCBsYW1iZGE9MylcblxuIyMgY29tcHV0ZSB0aGUgcXVhbnRpbGVzXG5xY2xhaW1zID0gcXVhbnRpbGUoPz8sIHApXG5cbiMjIE1ha2UgYSBwbG90IChhbmQgbGFiZWwgYXhlcyEpXG5wbG90KD8/LCA/PywgeWxpbT1jKDAsMTIpLHhsaW09YygwLDEyKSwgeGxhYj1cIk1vZGVsIFF1YW50aWxlc1wiLCB5bGFiPVwiRW1waXJpY2FsIFF1YW50aWxlc1wiKVxuYWJsaW5lKDAsMSkiLCJzb2x1dGlvbiI6ImxhbWJkYSA9IG1lYW4oY2xhaW1zKVxubGFtYmRhXG5cbiMjIG1ha2UgdGhlIHF1YW50aWxlc1xucHI9c2VxKDAuMDEsMC45OSwgYnk9MC4wMSlcbnFwID0gcXBvaXMocHIsIGxhbWJkYT0zKVxuXG4jIyBjb21wdXRlIHRoZSBxdWFudGlsZXNcbnFjbGFpbXMgPSBxdWFudGlsZShjbGFpbXMsIHByKVxuXG4jIyBNYWtlIGEgcGxvdCAoYW5kIGxhYmVsIGF4ZXMhKVxucGxvdChxcCwgcWNsYWltcywgeWxpbT1jKDAsMTIpLHhsaW09YygwLDEyKSwgeGxhYj1cIk1vZGVsIFF1YW50aWxlc1wiLCB5bGFiPVwiRW1waXJpY2FsIFF1YW50aWxlc1wiKVxuYWJsaW5lKDAsMSkiLCJzY3QiOiJzdWNjZXNzX21zZyhcIk5pY2UhICBCdXQgaXQncyBub3QgYSAqZ3JlYXQqIGZpdCwgaXMgaXQ/XCIpIiwiaGludCI6IlJlbWVtYmVyIHRoZSBNTEUgZm9yIGEgUG9pc3NvbiBpcyBqdXN0IHRoZSBzYW1wbGUgbWVhbiE8L3A+XG5cbjxwPlNob3VsZCB5b3UgYnJ1c2ggdXAgb24gdGhlICA8YSBocmVmPVwiaHR0cHM6Ly93d3cucmRvY3VtZW50YXRpb24ub3JnL3BhY2thZ2VzL2Jhc2UvdmVyc2lvbnMvMy42LjIvdG9waWNzL3F1YW50aWxlXCI+cXVhbnRpbGU8L2E+IGZ1bmN0aW9uPyJ9
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNldC5zZWVkKDQpXG5jbGFpbXMgPSBybmJpbm9tKG4gPSAxMDAsIHNpemUgPSAzLCBwcm9iID0gMC41KVxuI0luc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0cy9MREFDb3Vyc2UxL21haW4vRGF0YS9JbnNhbXBsZS5jc3ZcIiwgaGVhZGVyPVQsXG4jICAgICAgICAgICAgICAgICAgICAgIG5hLnN0cmluZ3M9YyhcIi5cIiksIHN0cmluZ3NBc0ZhY3RvcnM9RkFMU0UpIiwic2FtcGxlIjoibGFtYmRhID0gPz9cbmxhbWJkYVxuXG4jIyBtYWtlIHRoZSBxdWFudGlsZXNcbnA9c2VxKDAuMDEsMC45OSwgYnk9MC4wMSlcbnFwID0gcXBvaXMocCwgbGFtYmRhPTMpXG5cbiMjIGNvbXB1dGUgdGhlIHF1YW50aWxlc1xucWNsYWltcyA9IHF1YW50aWxlKD8/LCBwKVxuXG4jIyBNYWtlIGEgcGxvdCAoYW5kIGxhYmVsIGF4ZXMhKVxucGxvdCg/PywgPz8sIHlsaW09YygwLDEyKSx4bGltPWMoMCwxMiksIHhsYWI9XCJNb2RlbCBRdWFudGlsZXNcIiwgeWxhYj1cIkVtcGlyaWNhbCBRdWFudGlsZXNcIilcbmFibGluZSgwLDEpIiwic29sdXRpb24iOiJsYW1iZGEgPSBtZWFuKGNsYWltcylcbmxhbWJkYVxuXG4jIyBtYWtlIHRoZSBxdWFudGlsZXNcbnByPXNlcSgwLjAxLDAuOTksIGJ5PTAuMDEpXG5xcCA9IHFwb2lzKHByLCBsYW1iZGE9MylcblxuIyMgY29tcHV0ZSB0aGUgcXVhbnRpbGVzXG5xY2xhaW1zID0gcXVhbnRpbGUoY2xhaW1zLCBwcilcblxuIyMgTWFrZSBhIHBsb3QgKGFuZCBsYWJlbCBheGVzISlcbnBsb3QocXAsIHFjbGFpbXMsIHlsaW09YygwLDEyKSx4bGltPWMoMCwxMiksIHhsYWI9XCJNb2RlbCBRdWFudGlsZXNcIiwgeWxhYj1cIkVtcGlyaWNhbCBRdWFudGlsZXNcIilcbmFibGluZSgwLDEpIiwic2N0Ijoic3VjY2Vzc19tc2coXCJOaWNlISAgQnV0IGl0J3Mgbm90IGEgKmdyZWF0KiBmaXQsIGlzIGl0P1wiKSIsImhpbnQiOiJSZW1lbWJlciB0aGUgTUxFIGZvciBhIFBvaXNzb24gaXMganVzdCB0aGUgc2FtcGxlIG1lYW4hPC9wPlxuXG48cD5TaG91bGQgeW91IGJydXNoIHVwIG9uIHRoZSAgPGEgaHJlZj1cImh0dHBzOi8vd3d3LnJkb2N1bWVudGF0aW9uLm9yZy9wYWNrYWdlcy9iYXNlL3ZlcnNpb25zLzMuNi4yL3RvcGljcy9xdWFudGlsZVwiPnF1YW50aWxlPC9hPiBmdW5jdGlvbj8ifQ==
 </div>
 <p>Do you notice how the empirical quantiles do not match the model for some of the larger values in the right tail? This plot says the empirical quantiles are too large, that’s why they are above the diagonal line <span class="math inline">\(y=x\)</span>. Our claims data are too right-skewed, and that’s why the <span class="math inline">\(qq\)</span> plot seems off for larger quantiles. Might the negative binomial might be more promising?</p>
 <div class="blackbox">
@@ -569,13 +600,13 @@ Solving the above for <span class="math inline">\(\beta\)</span>, we see <span c
 \]</span></p>
 <p>This matches the definition in the textbook by equating probability <span class="math inline">\(p = \frac{1}{1+\beta}\)</span>, and size <span class="math inline">\(r=n\)</span>. It is very important to carefully consider the parameterization of any distribution you use in <code>R</code>.</p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNldC5zZWVkKDQpXG5jbGFpbXMgPSBybmJpbm9tKG4gPSAxMDAsIHNpemUgPSAzLCBwcm9iID0gMC41KVxuI0luc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0RGV2L0xEQUNvdXJzZTEvbWFpbi9EYXRhL0luc2FtcGxlLmNzdlwiLCBoZWFkZXI9VCxcbiMgICAgICAgICAgICAgICAgICAgICAgbmEuc3RyaW5ncz1jKFwiLlwiKSwgc3RyaW5nc0FzRmFjdG9ycz1GQUxTRSkiLCJzYW1wbGUiOiJwcj1zZXEoMC4wMSwwLjk5LCBieT0wLjAxKVxucWIgPSBxbmJpbm9tKHByLCBzaXplPT8/LCBwcm9iID0gPz8pXG5cbiMjIGNvbXB1dGUgdGhlIHF1YW50aWxlc1xucWNsYWltcyA9IHF1YW50aWxlKGNsYWltcywgcHIpXG5cbnBsb3QocWIsIHFjbGFpbXMsIHlsaW09YygwLDEyKSwgeGxpbT1jKDAsMTIpLCB5bGFiPVwiRW1waXJpY2FsIFF1YW50aWxlc1wiLCB4bGFiPVwiTW9kZWwgUXVhbnRpbGVzXCIpXG5hYmxpbmUoMCwxKSIsInNvbHV0aW9uIjoicCA9IDAuNVxucHI9c2VxKDAuMDEsMC45OSwgYnk9MC4wMSlcbnFiID0gcW5iaW5vbShwciwgc2l6ZT0zLCBwcm9iID0gcClcblxuIyMgY29tcHV0ZSB0aGUgcXVhbnRpbGVzXG5xY2xhaW1zID0gcXVhbnRpbGUoY2xhaW1zLCBwcilcblxucGxvdChxYiwgcWNsYWltcywgeWxpbT1jKDAsMTIpLCB4bGltPWMoMCwxMiksIHlsYWI9XCJFbXBpcmljYWwgUXVhbnRpbGVzXCIsIHhsYWI9XCJNb2RlbCBRdWFudGlsZXNcIilcbmFibGluZSgwLDEpIiwic2N0Ijoic3VjY2Vzc19tc2coXCJUaGlzIHNlZW1zIHRvIGJlIGEgYmV0dGVyIGZpdCB0aGFuIFBvaXNzb24uXCIpIiwiaGludCI6IlNob3VsZCB5b3UgYnJ1c2ggdXAgb24gdGhlICA8YSBocmVmPVwiaHR0cHM6Ly93d3cucmRvY3VtZW50YXRpb24ub3JnL3BhY2thZ2VzL2Jhc2UvdmVyc2lvbnMvMy42LjIvdG9waWNzL3FuYmlub21cIj5xbmJpbm9tPC9hPiBmdW5jdGlvbj8gIEl0IGNhbiBiZSBlYXN5IHRvIGVudGVyIHRoZSB3cm9uZyBwYXJhbWV0ZXJzIGZvciBhIGRpc3RyaWJ1dGlvbiwgZXNwZWNpYWxseSBpZiB0aGUgbmFtZXMgb3IgZGVmaW5pdGlvbnMgb2YgdGhlIHBhcmFtZXRlcnMgYXJlIG5vdCB1bml2ZXJzYWxseSBhZ3JlZWQgdXBvbi4gIEFsd2F5cyBjaGVjayEifQ==
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNldC5zZWVkKDQpXG5jbGFpbXMgPSBybmJpbm9tKG4gPSAxMDAsIHNpemUgPSAzLCBwcm9iID0gMC41KVxuI0luc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0cy9MREFDb3Vyc2UxL21haW4vRGF0YS9JbnNhbXBsZS5jc3ZcIiwgaGVhZGVyPVQsXG4jICAgICAgICAgICAgICAgICAgICAgIG5hLnN0cmluZ3M9YyhcIi5cIiksIHN0cmluZ3NBc0ZhY3RvcnM9RkFMU0UpIiwic2FtcGxlIjoicHI9c2VxKDAuMDEsMC45OSwgYnk9MC4wMSlcbnFiID0gcW5iaW5vbShwciwgc2l6ZT0/PywgcHJvYiA9ID8/KVxuXG4jIyBjb21wdXRlIHRoZSBxdWFudGlsZXNcbnFjbGFpbXMgPSBxdWFudGlsZShjbGFpbXMsIHByKVxuXG5wbG90KHFiLCBxY2xhaW1zLCB5bGltPWMoMCwxMiksIHhsaW09YygwLDEyKSwgeWxhYj1cIkVtcGlyaWNhbCBRdWFudGlsZXNcIiwgeGxhYj1cIk1vZGVsIFF1YW50aWxlc1wiKVxuYWJsaW5lKDAsMSkiLCJzb2x1dGlvbiI6InAgPSAwLjVcbnByPXNlcSgwLjAxLDAuOTksIGJ5PTAuMDEpXG5xYiA9IHFuYmlub20ocHIsIHNpemU9MywgcHJvYiA9IHApXG5cbiMjIGNvbXB1dGUgdGhlIHF1YW50aWxlc1xucWNsYWltcyA9IHF1YW50aWxlKGNsYWltcywgcHIpXG5cbnBsb3QocWIsIHFjbGFpbXMsIHlsaW09YygwLDEyKSwgeGxpbT1jKDAsMTIpLCB5bGFiPVwiRW1waXJpY2FsIFF1YW50aWxlc1wiLCB4bGFiPVwiTW9kZWwgUXVhbnRpbGVzXCIpXG5hYmxpbmUoMCwxKSIsInNjdCI6InN1Y2Nlc3NfbXNnKFwiVGhpcyBzZWVtcyB0byBiZSBhIGJldHRlciBmaXQgdGhhbiBQb2lzc29uLlwiKSIsImhpbnQiOiJTaG91bGQgeW91IGJydXNoIHVwIG9uIHRoZSAgPGEgaHJlZj1cImh0dHBzOi8vd3d3LnJkb2N1bWVudGF0aW9uLm9yZy9wYWNrYWdlcy9iYXNlL3ZlcnNpb25zLzMuNi4yL3RvcGljcy9xbmJpbm9tXCI+cW5iaW5vbTwvYT4gZnVuY3Rpb24/ICBJdCBjYW4gYmUgZWFzeSB0byBlbnRlciB0aGUgd3JvbmcgcGFyYW1ldGVycyBmb3IgYSBkaXN0cmlidXRpb24sIGVzcGVjaWFsbHkgaWYgdGhlIG5hbWVzIG9yIGRlZmluaXRpb25zIG9mIHRoZSBwYXJhbWV0ZXJzIGFyZSBub3QgdW5pdmVyc2FsbHkgYWdyZWVkIHVwb24uICBBbHdheXMgY2hlY2shIn0=
 </div>
 <!-- ```{r child = './Quizzes/Quiz41.html', eval = QUIZ} -->
 <!-- ``` -->
 </div>
 </div>
-<div id="tools-for-model-selection" class="section level2">
+<div id="tools-for-model-selection" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Tools for Model Selection</h2>
 <hr />
 <p>In this section, you learn how to:</p>
@@ -627,7 +658,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNldC5zZWVkKDQpXG5jbGFpbXMgPSBy
 <iframe src="./Overheads/LDA1.Chap4.pdf#page=23" width="100%" height="400"> </iframe>
 </div>
 </div>
-<div id="exercise.-probability-probability-pp-plot" class="section level3">
+<div id="exercise.-probability-probability-pp-plot" class="section level3" number="4.2.1">
 <h3><span class="header-section-number">4.2.1</span> Exercise. Probability-Probability (<span class="math inline">\(pp\)</span>) plot</h3>
 <p><img src = "ContributorPics/hurdler.png" width = "65" height = "65" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
 <p><strong>Assignment Text</strong></p>
@@ -647,11 +678,11 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNldC5zZWVkKDQpXG5jbGFpbXMgPSBy
 </div>
 <p><br></p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9PcGVuQWN0VGV4dERldi9MREFDb3Vyc2UxL21haW4vRGF0YS9JbnNhbXBsZS5jc3ZfXzshIURaM2ZqZyFyYXdoUzFhVklCU2M2V1NyeEZVcXhSN0ZTQnV5YlAxcWszb1RPNjFYYjlXT00zOU5TTWdZem5pRU5PMzljZlpZY2ckIFwiLCBoZWFkZXI9VCwgbmEuc3RyaW5ncz1jKFwiLlwiKSwgc3RyaW5nc0FzRmFjdG9ycz1GQUxTRSlcbmxpYnJhcnkoTUFTUylcbnBvc2l0aXZlX2xvc3MgPC0gc3Vic2V0KEluc2FtcGxlLCB5PjApIiwic2FtcGxlIjoiIyBGaXQgZ2FtbWFcbmZpdF9nYW1tYSA8LSBnbG0oZm9ybXVsYT0/PywgZGF0YT0/PywgZmFtaWx5PUdhbW1hKGxpbms9bG9nKSlcbnRoZXRhIDwtIGV4cChjb2VmKGZpdF9nYW1tYSkpKmdhbW1hLmRpc3BlcnNpb24oZml0X2dhbW1hKSBcbmFscGhhIDwtIDEvZ2FtbWEuZGlzcGVyc2lvbihmaXRfZ2FtbWEpXG4jIEZpdCBHYXVzc2lhblxuZml0X2dhdXNzaWFuIDwtIGdsbShmb3JtdWxhPT8/LCBkYXRhPT8/LCBmYW1pbHk9Z2F1c3NpYW4obGluaz1sb2cpKVxubXUgPC0gZXhwKGNvZWYoZml0X2dhdXNzaWFuKSkgIFxuc2lnbWEgPC0gc3FydChzdW1tYXJ5KGZpdF9nYXVzc2lhbikkZGlzcGVyc2lvbikgXG4jIENyZWF0ZSBlbXBpcmljYWwgZGlzdHJpYnV0aW9uXG5lbXBpcmljYWwgPC0gPz9cbiMgZ2FtbWEgcHAgcGxvdFxuZ2FtbWEgPC0gcGdhbW1hKD8/LCBzaGFwZT1hbHBoYSwgc2NhbGU9dGhldGEpXG5wbG90KD8/LCBnYW1tYSwgeGxhYj1cIkVtcGlyaWNhbCBERlwiLCB5bGFiPVwiR2FtbWEgREZcIiwgY2V4PTEpXG5hYmxpbmUoMCwxKVxuIyBnYXVzc2lhbiBwcCBwbG90XG5nYXVzc2lhbiA8LSBwbm9ybSg/PywgbWVhbj1tdSwgc2Q9c2lnbWEpXG5wbG90KD8/LCBnYXVzc2lhbiwgeGxhYj1cIkVtcGlyaWNhbCBERlwiLCB5bGFiPVwiR2F1c3NpYW4gREZcIiwgY2V4PTEpXG5hYmxpbmUoMCwxKSIsInNvbHV0aW9uIjoiIyBGaXQgZ2FtbWFcbmZpdF9nYW1tYSA8LSBnbG0ocG9zaXRpdmVfbG9zcyR5fjEsIFxuICAgICAgICAgICAgICAgICBkYXRhPXBvc2l0aXZlX2xvc3MsIFxuICAgICAgICAgICAgICAgICBmYW1pbHk9R2FtbWEobGluaz1sb2cpKVxudGhldGEgPC0gZXhwKGNvZWYoZml0X2dhbW1hKSkqZ2FtbWEuZGlzcGVyc2lvbihmaXRfZ2FtbWEpICNtdT10aGV0YS9hbHBoYVxuYWxwaGEgPC0gMS9nYW1tYS5kaXNwZXJzaW9uKGZpdF9nYW1tYSlcblxuIyBGaXQgZ2F1c3NpYW5cbmZpdF9nYXVzc2lhbiA8LSBnbG0ocG9zaXRpdmVfbG9zcyR5fjEsIFxuICAgICAgICAgICAgICAgICBkYXRhPXBvc2l0aXZlX2xvc3MsIFxuICAgICAgICAgICAgICAgICBmYW1pbHk9Z2F1c3NpYW4obGluaz1sb2cpKVxubXUgPC0gZXhwKGNvZWYoZml0X2dhdXNzaWFuKSkgIyBvciBtZWFuKHBvc2l0aXZlX2xvc3MkeSlcbnNpZ21hIDwtIHNxcnQoc3VtbWFyeShmaXRfZ2F1c3NpYW4pJGRpc3BlcnNpb24pICMgb3Igc2QocG9zaXRpdmVfbG9zcyR5KSBzbGlnaHRseSBkaWZmZXJlbnRcblxuIyBDcmVhdCBlbXBpcmljYWwgZGlzdHJpYnV0aW9uXG5lbXBpcmljYWwgPC0gZWNkZihwb3NpdGl2ZV9sb3NzJHkpXG5cbiMgZ2FtbWEgcHAgcGxvdFxuZ2FtbWEgPC0gcGdhbW1hKHBvc2l0aXZlX2xvc3MkeSwgc2hhcGU9YWxwaGEsIHNjYWxlPXRoZXRhKVxucGxvdChlbXBpcmljYWwocG9zaXRpdmVfbG9zcyR5KSwgZ2FtbWEsICAjIGVtcGlyaWNhbCgpIHJldHVybnMgdGhlIHBlcmNlbnRpbGVzIGZvciBwb3NpdGl2ZV9sb3NzJHlcbiAgICAgeGxhYj1cIkVtcGlyaWNhbCBERlwiLCB5bGFiPVwiR2FtbWEgREZcIiwgY2V4PTEpXG5hYmxpbmUoMCwxKVxuXG4jIGdhdXNzaWFuIHBwIHBsb3RcbmdhdXNzaWFuIDwtIHBub3JtKHBvc2l0aXZlX2xvc3MkeSwgbWVhbj1tdSwgc2Q9c2lnbWEpXG5wbG90KGVtcGlyaWNhbChwb3NpdGl2ZV9sb3NzJHkpLCBnYXVzc2lhbiwgXG4gICAgIHhsYWI9XCJFbXBpcmljYWwgREZcIiwgeWxhYj1cIkdhdXNzaWFuIERGXCIsIGNleD0xKVxuYWJsaW5lKDAsMSkiLCJzY3QiOiJzdWNjZXNzX21zZyhcIkdvb2Qgam9iISBUaGUgKnBwKiBwbG90IGlzIGFibGUgdG8gY29tcGFyZSBjdW11bGF0aXZlIHByb2JhYmlsaXRpZXMgdW5kZXIgdHdvIG1vZGVscy4gVGhlIGdhbW1hIGRpc3RyaWJ1dGlvbiBpcyBjbG9zZXIgdG8gdGhlIGVtcGlyaWNhbCBkaXN0cmlidXRpb24gYW5kIHNvIHByb3ZpZGVzIGEgYmV0dGVyIHJlcHJlc2VudGF0aW9uIG9mIHRoZSBkYXRhLlwiKSIsImhpbnQiOiJXZSBzaG93IHRoZSBjb2RlIHRoYXQgdXNlcyA8ZW0+Z2xtPC9lbT4gdG8gZmluZCBwYXJhbWV0ZXJzLiJ9
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0cy9MREFDb3Vyc2UxL21haW4vRGF0YS9JbnNhbXBsZS5jc3ZcIiwgaGVhZGVyPVQsIG5hLnN0cmluZ3M9YyhcIi5cIiksIHN0cmluZ3NBc0ZhY3RvcnM9RkFMU0UpXG5saWJyYXJ5KE1BU1MpXG5wb3NpdGl2ZV9sb3NzIDwtIHN1YnNldChJbnNhbXBsZSwgeT4wKSIsInNhbXBsZSI6IiMgRml0IGdhbW1hXG5maXRfZ2FtbWEgPC0gZ2xtKGZvcm11bGE9Pz8sIGRhdGE9Pz8sIGZhbWlseT1HYW1tYShsaW5rPWxvZykpXG50aGV0YSA8LSBleHAoY29lZihmaXRfZ2FtbWEpKSpnYW1tYS5kaXNwZXJzaW9uKGZpdF9nYW1tYSkgXG5hbHBoYSA8LSAxL2dhbW1hLmRpc3BlcnNpb24oZml0X2dhbW1hKVxuIyBGaXQgR2F1c3NpYW5cbmZpdF9nYXVzc2lhbiA8LSBnbG0oZm9ybXVsYT0/PywgZGF0YT0/PywgZmFtaWx5PWdhdXNzaWFuKGxpbms9bG9nKSlcbm11IDwtIGV4cChjb2VmKGZpdF9nYXVzc2lhbikpICBcbnNpZ21hIDwtIHNxcnQoc3VtbWFyeShmaXRfZ2F1c3NpYW4pJGRpc3BlcnNpb24pIFxuIyBDcmVhdGUgZW1waXJpY2FsIGRpc3RyaWJ1dGlvblxuZW1waXJpY2FsIDwtID8/XG4jIGdhbW1hIHBwIHBsb3RcbmdhbW1hIDwtIHBnYW1tYSg/Pywgc2hhcGU9YWxwaGEsIHNjYWxlPXRoZXRhKVxucGxvdCg/PywgZ2FtbWEsIHhsYWI9XCJFbXBpcmljYWwgREZcIiwgeWxhYj1cIkdhbW1hIERGXCIsIGNleD0xKVxuYWJsaW5lKDAsMSlcbiMgZ2F1c3NpYW4gcHAgcGxvdFxuZ2F1c3NpYW4gPC0gcG5vcm0oPz8sIG1lYW49bXUsIHNkPXNpZ21hKVxucGxvdCg/PywgZ2F1c3NpYW4sIHhsYWI9XCJFbXBpcmljYWwgREZcIiwgeWxhYj1cIkdhdXNzaWFuIERGXCIsIGNleD0xKVxuYWJsaW5lKDAsMSkiLCJzb2x1dGlvbiI6IiMgRml0IGdhbW1hXG5maXRfZ2FtbWEgPC0gZ2xtKHBvc2l0aXZlX2xvc3MkeX4xLCBcbiAgICAgICAgICAgICAgICAgZGF0YT1wb3NpdGl2ZV9sb3NzLCBcbiAgICAgICAgICAgICAgICAgZmFtaWx5PUdhbW1hKGxpbms9bG9nKSlcbnRoZXRhIDwtIGV4cChjb2VmKGZpdF9nYW1tYSkpKmdhbW1hLmRpc3BlcnNpb24oZml0X2dhbW1hKSAjbXU9dGhldGEvYWxwaGFcbmFscGhhIDwtIDEvZ2FtbWEuZGlzcGVyc2lvbihmaXRfZ2FtbWEpXG5cbiMgRml0IGdhdXNzaWFuXG5maXRfZ2F1c3NpYW4gPC0gZ2xtKHBvc2l0aXZlX2xvc3MkeX4xLCBcbiAgICAgICAgICAgICAgICAgZGF0YT1wb3NpdGl2ZV9sb3NzLCBcbiAgICAgICAgICAgICAgICAgZmFtaWx5PWdhdXNzaWFuKGxpbms9bG9nKSlcbm11IDwtIGV4cChjb2VmKGZpdF9nYXVzc2lhbikpICMgb3IgbWVhbihwb3NpdGl2ZV9sb3NzJHkpXG5zaWdtYSA8LSBzcXJ0KHN1bW1hcnkoZml0X2dhdXNzaWFuKSRkaXNwZXJzaW9uKSAjIG9yIHNkKHBvc2l0aXZlX2xvc3MkeSkgc2xpZ2h0bHkgZGlmZmVyZW50XG5cbiMgQ3JlYXQgZW1waXJpY2FsIGRpc3RyaWJ1dGlvblxuZW1waXJpY2FsIDwtIGVjZGYocG9zaXRpdmVfbG9zcyR5KVxuXG4jIGdhbW1hIHBwIHBsb3RcbmdhbW1hIDwtIHBnYW1tYShwb3NpdGl2ZV9sb3NzJHksIHNoYXBlPWFscGhhLCBzY2FsZT10aGV0YSlcbnBsb3QoZW1waXJpY2FsKHBvc2l0aXZlX2xvc3MkeSksIGdhbW1hLCAgIyBlbXBpcmljYWwoKSByZXR1cm5zIHRoZSBwZXJjZW50aWxlcyBmb3IgcG9zaXRpdmVfbG9zcyR5XG4gICAgIHhsYWI9XCJFbXBpcmljYWwgREZcIiwgeWxhYj1cIkdhbW1hIERGXCIsIGNleD0xKVxuYWJsaW5lKDAsMSlcblxuIyBnYXVzc2lhbiBwcCBwbG90XG5nYXVzc2lhbiA8LSBwbm9ybShwb3NpdGl2ZV9sb3NzJHksIG1lYW49bXUsIHNkPXNpZ21hKVxucGxvdChlbXBpcmljYWwocG9zaXRpdmVfbG9zcyR5KSwgZ2F1c3NpYW4sIFxuICAgICB4bGFiPVwiRW1waXJpY2FsIERGXCIsIHlsYWI9XCJHYXVzc2lhbiBERlwiLCBjZXg9MSlcbmFibGluZSgwLDEpIiwic2N0Ijoic3VjY2Vzc19tc2coXCJHb29kIGpvYiEgVGhlICpwcCogcGxvdCBpcyBhYmxlIHRvIGNvbXBhcmUgY3VtdWxhdGl2ZSBwcm9iYWJpbGl0aWVzIHVuZGVyIHR3byBtb2RlbHMuIFRoZSBnYW1tYSBkaXN0cmlidXRpb24gaXMgY2xvc2VyIHRvIHRoZSBlbXBpcmljYWwgZGlzdHJpYnV0aW9uIGFuZCBzbyBwcm92aWRlcyBhIGJldHRlciByZXByZXNlbnRhdGlvbiBvZiB0aGUgZGF0YS5cIikiLCJoaW50IjoiV2Ugc2hvdyB0aGUgY29kZSB0aGF0IHVzZXMgPGVtPmdsbTwvZW0+IHRvIGZpbmQgcGFyYW1ldGVycy4ifQ==
 </div>
 <p><strong>Editorial Note</strong>. This exercise uses the <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/glm">glm()</a> function to produce maximum likelihood estimates of certain classes of distributions including the gamma and Gaussian (normal). <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-Severity.html#S:MaxLikeEstimation">Section 3.5 of <em>Loss Data Analytics</em></a> employs a comparable function, <a href="https://www.rdocumentation.org/packages/VGAM/versions/1.1-5/topics/vglm">vlgm()</a>. These functions are even more useful when employed in regression modeling contexts. Although regression modeling is outside the scope of this course, the exercise provides an initial exposure to these functions that are very useful in actuarial practice.</p>
 </div>
-<div id="exercise.-quantile-quantile-qq-plot" class="section level3">
+<div id="exercise.-quantile-quantile-qq-plot" class="section level3" number="4.2.2">
 <h3><span class="header-section-number">4.2.2</span> Exercise. Quantile-Quantile (<span class="math inline">\(qq\)</span>) plot</h3>
 <p><strong>Assignment Text</strong></p>
 <p>The <span class="math inline">\(pp\)</span> plot shows cumulative distribution functions, which can sometimes be difficult to detect where a fitted parametric distribution is deficient. As an alternative, it is common to use a quantile-quantile (<span class="math inline">\(qq\)</span>) plot. The Wisconsin Property Fund data has already been read into a data frame called <code>Insample</code> and we also created a subset data which includes only positive loss data called <code>positive_loss</code>. In this tutorial, you will generate <span class="math inline">\(qq\)</span> plots with Gaussian and gamma distribution.</p>
@@ -667,11 +698,11 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwi
 </div>
 <p><br></p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9PcGVuQWN0VGV4dERldi9MREFDb3Vyc2UxL21haW4vRGF0YS9JbnNhbXBsZS5jc3ZfXzshIURaM2ZqZyFyYXdoUzFhVklCU2M2V1NyeEZVcXhSN0ZTQnV5YlAxcWszb1RPNjFYYjlXT00zOU5TTWdZem5pRU5PMzljZlpZY2ckIFwiLCBoZWFkZXI9VCwgbmEuc3RyaW5ncz1jKFwiLlwiKSwgc3RyaW5nc0FzRmFjdG9ycz1GQUxTRSlcblxucG9zaXRpdmVfbG9zcyA8LSBzdWJzZXQoSW5zYW1wbGUsIHk+MCkiLCJzYW1wbGUiOiIjIFNhbXBsZSBzaXplXG5uIDwtID8/XG4jIFBvc2l0aXZlIGxvc3MgbWVhblxubWVhbiA8LSA/P1xuIyBQb3NpdGl2ZSBsb3NzIHZhcmlhbmNlXG52YXJpYW5jZSA8LSA/P1xuIyBQb3NpdGl2ZSBsb3NzIHN0YW5kYXJkIHZhcmlhbmNlXG5zZCA8LSA/P1xuIyBQcm9iYWJpbGl0aWVzXG5wX3ZhbHVlcyA8LSBzZXEoMS8obisxKSwgbi8obisxKSwgYnk9MS8obisxKSlcbm5vcm1hbF9xdWFudGlsZXMgPC0gcW5vcm0oPz8pXG4jIEdhdXNzaWFuIFFRIFBsb3RcbnBsb3QoPz8sID8/LCB4bGFiID0gJ1RoZW9yZXRpY2FsIFF1YW50aWxlcyBmcm9tIEdhdXNzaWFuIERpc3RyaWJ1dGlvbicsIHlsYWIgPSAnU2FtcGxlIFF1YW50aWxlcyBvZiBQb3NpdGl2ZSBMb3NzJywgbWFpbiA9ICdHYXVzc2lhbiBRUSBQbG90IG9mIFBvc2l0aXZlIExvc3MnKVxuYWJsaW5lKDAsMSlcbmdhbW1hX3F1YW50aWxlcyA8LSBxZ2FtbWEoPz8pXG4jIEdhbW1hIFFRIFBsb3RcbnBsb3QoPz8sID8/LCB4bGFiID0gJ1RoZW9yZXRpY2FsIFF1YW50aWxlcyBmcm9tIEdhbW1hIERpc3RyaWJ1dGlvbicsIHlsYWIgPSAnU2FtcGxlIFF1YW50aWxlcyBvZiBQb3NpdGl2ZSBMb3NzJywgbWFpbiA9ICdHYW1tYSBRUSBQbG90IG9mIFBvc2l0aXZlIExvc3MnKVxuYWJsaW5lKDAsMSkiLCJzb2x1dGlvbiI6IiMgU2FtcGxlIHNpemVcbm4gPC0gbGVuZ3RoKHBvc2l0aXZlX2xvc3MkeSlcbiMgUG9zaXRpdmUgbG9zcyBtZWFuXG5tZWFuIDwtIG1lYW4ocG9zaXRpdmVfbG9zcyR5KVxuIyBQb3NpdGl2ZSBsb3NzIHZhcmlhbmNlXG52YXJpYW5jZSA8LSB2YXIocG9zaXRpdmVfbG9zcyR5KVxuIyBQb3NpdGl2ZSBsb3NzIHN0YW5kYXJkIHZhcmlhbmNlXG5zZCA8LSBzZChwb3NpdGl2ZV9sb3NzJHkpXG5cbiMgUHJvYmFiaWxpdGllc1xucF92YWx1ZXMgPC0gc2VxKDEvKG4rMSksIG4vKG4rMSksIGJ5PTEvKG4rMSkpXG5cbiMgQ2FsY3VsYXRlIEdhdXNzaWFuIHF1YW50aWxlcyB1c2luZyBtZWFuIGFuZCBzdGFuZGFyZCBkZXZpYXRpb24gZnJvbSBwb3NpdGl2ZSBsb3NzXG5ub3JtYWxfcXVhbnRpbGVzIDwtIHFub3JtKHBfdmFsdWVzLCBtZWFuLCBzZClcblxuIyBHYXVzc2lhbiBRUSBQbG90XG5wbG90KHNvcnQobm9ybWFsX3F1YW50aWxlcyksIFxuICAgICBzb3J0KHBvc2l0aXZlX2xvc3MkeSksIFxuICAgICB4bGFiID0gJ1RoZW9yZXRpY2FsIFF1YW50aWxlcyBmcm9tIEdhdXNzaWFuIERpc3RyaWJ1dGlvbicsIFxuICAgICB5bGFiID0gJ1NhbXBsZSBRdWFudGlsZXMgb2YgUG9zaXRpdmUgTG9zcycsIFxuICAgICBtYWluID0gJ0dhdXNzaWFuIFFRIFBsb3Qgb2YgUG9zaXRpdmUgTG9zcycpXG5hYmxpbmUoMCwxKVxuXG4jIENhbGN1bGF0ZSBHYW1tYSBxdWFudGlsZXMgdXNpbmcgbWVhbiBhbmQgc3RhbmRhcmQgZGV2aWF0aW9uIGZyb20gcG9zaXRpdmUgbG9zcyB0byBjYWxjdWxhdGUgc2hhcGUgYW5kIHNjYWxlIHBhcmFtZXRlcnNcbmdhbW1hX3F1YW50aWxlcyA8LSBxZ2FtbWEocF92YWx1ZXMsIFxuICAgICAgICAgICAgICAgICAgICAgICAgICBzaGFwZSA9IG1lYW5eMi92YXJpYW5jZSwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgIHNjYWxlID0gdmFyaWFuY2UvbWVhbilcblxuIyBHYW1tYSBRUSBQbG90XG5wbG90KHNvcnQoZ2FtbWFfcXVhbnRpbGVzKSwgXG4gICAgIHNvcnQocG9zaXRpdmVfbG9zcyR5KSwgXG4gICAgIHhsYWIgPSAnVGhlb3JldGljYWwgUXVhbnRpbGVzIGZyb20gR2FtbWEgRGlzdHJpYnV0aW9uJywgXG4gICAgIHlsYWIgPSAnU2FtcGxlIFF1YW50aWxlcyBvZiBQb3NpdGl2ZSBMb3NzJywgXG4gICAgIG1haW4gPSAnR2FtbWEgUVEgUGxvdCBvZiBQb3NpdGl2ZSBMb3NzJylcbmFibGluZSgwLDEpIiwic2N0Ijoic3VjY2Vzc19tc2coXCJHb29kIGpvYiEgVGhlICpxcSogcGxvdCBjb21wYXJlcyB0d28gZml0dGVkIG1vZGVscyB0aHJvdWdoIHRoZWlyIHF1YW50aWxlcy4gQWdhaW4sIHRoZSBnYW1tYSBpcyBiZXR0ZXIgZml0LlwiKSIsImhpbnQiOiJXZSBkaXJlY3RseSB1c2VkIHRoZSBzYW1wbGUgbWVhbiBhbmQgdmFyaWFuY2UgdG8gZmluZCBwYXJhbWV0ZXJzLiBpLmUuIEdhdXNzaWFuIHF1YW50aWxlcyBpcyBjYWxjdWxhdGVkIGJhc2VkIG9uIG1lYW4gYW5kIHN0YW5kYXJkIGRldmlhdGlvbiBmcm9tIHBvc2l0aXZlIGxvc3MuIn0=
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0cy9MREFDb3Vyc2UxL21haW4vRGF0YS9JbnNhbXBsZS5jc3ZcIiwgaGVhZGVyPVQsIG5hLnN0cmluZ3M9YyhcIi5cIiksIHN0cmluZ3NBc0ZhY3RvcnM9RkFMU0UpXG5wb3NpdGl2ZV9sb3NzIDwtIHN1YnNldChJbnNhbXBsZSwgeT4wKSIsInNhbXBsZSI6IiMgU2FtcGxlIHNpemVcbm4gPC0gPz9cbiMgUG9zaXRpdmUgbG9zcyBtZWFuXG5tZWFuIDwtID8/XG4jIFBvc2l0aXZlIGxvc3MgdmFyaWFuY2VcbnZhcmlhbmNlIDwtID8/XG4jIFBvc2l0aXZlIGxvc3Mgc3RhbmRhcmQgdmFyaWFuY2VcbnNkIDwtID8/XG4jIFByb2JhYmlsaXRpZXNcbnBfdmFsdWVzIDwtIHNlcSgxLyhuKzEpLCBuLyhuKzEpLCBieT0xLyhuKzEpKVxubm9ybWFsX3F1YW50aWxlcyA8LSBxbm9ybSg/PylcbiMgR2F1c3NpYW4gUVEgUGxvdFxucGxvdCg/PywgPz8sIHhsYWIgPSAnVGhlb3JldGljYWwgUXVhbnRpbGVzIGZyb20gR2F1c3NpYW4gRGlzdHJpYnV0aW9uJywgeWxhYiA9ICdTYW1wbGUgUXVhbnRpbGVzIG9mIFBvc2l0aXZlIExvc3MnLCBtYWluID0gJ0dhdXNzaWFuIFFRIFBsb3Qgb2YgUG9zaXRpdmUgTG9zcycpXG5hYmxpbmUoMCwxKVxuZ2FtbWFfcXVhbnRpbGVzIDwtIHFnYW1tYSg/PylcbiMgR2FtbWEgUVEgUGxvdFxucGxvdCg/PywgPz8sIHhsYWIgPSAnVGhlb3JldGljYWwgUXVhbnRpbGVzIGZyb20gR2FtbWEgRGlzdHJpYnV0aW9uJywgeWxhYiA9ICdTYW1wbGUgUXVhbnRpbGVzIG9mIFBvc2l0aXZlIExvc3MnLCBtYWluID0gJ0dhbW1hIFFRIFBsb3Qgb2YgUG9zaXRpdmUgTG9zcycpXG5hYmxpbmUoMCwxKSIsInNvbHV0aW9uIjoiIyBTYW1wbGUgc2l6ZVxubiA8LSBsZW5ndGgocG9zaXRpdmVfbG9zcyR5KVxuIyBQb3NpdGl2ZSBsb3NzIG1lYW5cbm1lYW4gPC0gbWVhbihwb3NpdGl2ZV9sb3NzJHkpXG4jIFBvc2l0aXZlIGxvc3MgdmFyaWFuY2VcbnZhcmlhbmNlIDwtIHZhcihwb3NpdGl2ZV9sb3NzJHkpXG4jIFBvc2l0aXZlIGxvc3Mgc3RhbmRhcmQgdmFyaWFuY2VcbnNkIDwtIHNkKHBvc2l0aXZlX2xvc3MkeSlcblxuIyBQcm9iYWJpbGl0aWVzXG5wX3ZhbHVlcyA8LSBzZXEoMS8obisxKSwgbi8obisxKSwgYnk9MS8obisxKSlcblxuIyBDYWxjdWxhdGUgR2F1c3NpYW4gcXVhbnRpbGVzIHVzaW5nIG1lYW4gYW5kIHN0YW5kYXJkIGRldmlhdGlvbiBmcm9tIHBvc2l0aXZlIGxvc3Ncbm5vcm1hbF9xdWFudGlsZXMgPC0gcW5vcm0ocF92YWx1ZXMsIG1lYW4sIHNkKVxuXG4jIEdhdXNzaWFuIFFRIFBsb3RcbnBsb3Qoc29ydChub3JtYWxfcXVhbnRpbGVzKSwgXG4gICAgIHNvcnQocG9zaXRpdmVfbG9zcyR5KSwgXG4gICAgIHhsYWIgPSAnVGhlb3JldGljYWwgUXVhbnRpbGVzIGZyb20gR2F1c3NpYW4gRGlzdHJpYnV0aW9uJywgXG4gICAgIHlsYWIgPSAnU2FtcGxlIFF1YW50aWxlcyBvZiBQb3NpdGl2ZSBMb3NzJywgXG4gICAgIG1haW4gPSAnR2F1c3NpYW4gUVEgUGxvdCBvZiBQb3NpdGl2ZSBMb3NzJylcbmFibGluZSgwLDEpXG5cbiMgQ2FsY3VsYXRlIEdhbW1hIHF1YW50aWxlcyB1c2luZyBtZWFuIGFuZCBzdGFuZGFyZCBkZXZpYXRpb24gZnJvbSBwb3NpdGl2ZSBsb3NzIHRvIGNhbGN1bGF0ZSBzaGFwZSBhbmQgc2NhbGUgcGFyYW1ldGVyc1xuZ2FtbWFfcXVhbnRpbGVzIDwtIHFnYW1tYShwX3ZhbHVlcywgXG4gICAgICAgICAgICAgICAgICAgICAgICAgIHNoYXBlID0gbWVhbl4yL3ZhcmlhbmNlLCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgc2NhbGUgPSB2YXJpYW5jZS9tZWFuKVxuXG4jIEdhbW1hIFFRIFBsb3RcbnBsb3Qoc29ydChnYW1tYV9xdWFudGlsZXMpLCBcbiAgICAgc29ydChwb3NpdGl2ZV9sb3NzJHkpLCBcbiAgICAgeGxhYiA9ICdUaGVvcmV0aWNhbCBRdWFudGlsZXMgZnJvbSBHYW1tYSBEaXN0cmlidXRpb24nLCBcbiAgICAgeWxhYiA9ICdTYW1wbGUgUXVhbnRpbGVzIG9mIFBvc2l0aXZlIExvc3MnLCBcbiAgICAgbWFpbiA9ICdHYW1tYSBRUSBQbG90IG9mIFBvc2l0aXZlIExvc3MnKVxuYWJsaW5lKDAsMSkiLCJzY3QiOiJzdWNjZXNzX21zZyhcIkdvb2Qgam9iISBUaGUgKnFxKiBwbG90IGNvbXBhcmVzIHR3byBmaXR0ZWQgbW9kZWxzIHRocm91Z2ggdGhlaXIgcXVhbnRpbGVzLiBBZ2FpbiwgdGhlIGdhbW1hIGlzIGJldHRlciBmaXQuXCIpIiwiaGludCI6IldlIGRpcmVjdGx5IHVzZWQgdGhlIHNhbXBsZSBtZWFuIGFuZCB2YXJpYW5jZSB0byBmaW5kIHBhcmFtZXRlcnMuIGkuZS4gR2F1c3NpYW4gcXVhbnRpbGVzIGlzIGNhbGN1bGF0ZWQgYmFzZWQgb24gbWVhbiBhbmQgc3RhbmRhcmQgZGV2aWF0aW9uIGZyb20gcG9zaXRpdmUgbG9zcy4ifQ==
 </div>
 <hr />
 </div>
-<div id="exercise.-kolmogorov-smirnov-test" class="section level3">
+<div id="exercise.-kolmogorov-smirnov-test" class="section level3" number="4.2.3">
 <h3><span class="header-section-number">4.2.3</span> Exercise. Kolmogorov-Smirnov test</h3>
 <p><strong>Assignment Text</strong></p>
 <p>For reporting results, it can be effective to supplement the graphical displays with selected statistics that summarize model goodness of fit. The Wisconsin Property Fund data has already been read into a data frame called <code>Insample</code>. Previously, we also created a subset, <code>positive_loss</code>, which included only positive losses. Perform Kolmogorov-Smirnov tests.</p>
@@ -684,12 +715,12 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwi
 </div>
 <p><br></p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkoTUFTUylcbmxpYnJhcnkoc3RhdHMpXG5cbkluc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9PcGVuQWN0VGV4dERldi9MREFDb3Vyc2UxL21haW4vRGF0YS9JbnNhbXBsZS5jc3ZfXzshIURaM2ZqZyFyYXdoUzFhVklCU2M2V1NyeEZVcXhSN0ZTQnV5YlAxcWszb1RPNjFYYjlXT00zOU5TTWdZem5pRU5PMzljZlpZY2ckIFwiLCBoZWFkZXI9VCwgbmEuc3RyaW5ncz1jKFwiLlwiKSwgc3RyaW5nc0FzRmFjdG9ycz1GQUxTRSlcblxuIyBTdWJzZXQgZm9yIHBvc2l0aXZlIGxvc3NcbnBvc2l0aXZlX2xvc3MgPC0gc3Vic2V0KEluc2FtcGxlLCB5PjApXG5cbiMgRml0IGdhbW1hXG5maXRfZ2FtbWEgPC0gZ2xtKHBvc2l0aXZlX2xvc3MkeX4xLCBcbiAgICAgICAgICAgICAgICAgZGF0YT1wb3NpdGl2ZV9sb3NzLCBcbiAgICAgICAgICAgICAgICAgZmFtaWx5PUdhbW1hKGxpbms9bG9nKSlcbnRoZXRhIDwtIGV4cChjb2VmKGZpdF9nYW1tYSkpKmdhbW1hLmRpc3BlcnNpb24oZml0X2dhbW1hKSAjbXU9dGhldGEvYWxwaGFcbmFscGhhIDwtIDEvZ2FtbWEuZGlzcGVyc2lvbihmaXRfZ2FtbWEpXG5cbmdhbW1hIDwtIHBnYW1tYShwb3NpdGl2ZV9sb3NzJHksIHNoYXBlPWFscGhhLCBzY2FsZT10aGV0YSkiLCJzYW1wbGUiOiIjIFBlcmZvcm1zIEtvbG1vZ29yb3YtU21pcm5vdiB0ZXN0c1xua3MudGVzdCg/PywgXCJwZ2FtbWFcIiwgPz8sID8/KVxuXG4jIFBlcmZvcm1zIEtvbG1vZ29yb3YtU21pcm5vdiB0ZXN0c1xua3MudGVzdCg/PywgPz8pIiwic29sdXRpb24iOiIjIFBlcmZvcm1zIEtvbG1vZ29yb3YtU21pcm5vdiB0ZXN0c1xua3MudGVzdChwb3NpdGl2ZV9sb3NzJHksIFwicGdhbW1hXCIsIHRoZXRhLCBhbHBoYSlcblxuIyBQZXJmb3JtcyBLb2xtb2dvcm92LVNtaXJub3YgdGVzdHNcbmtzLnRlc3QocG9zaXRpdmVfbG9zcyR5LCBnYW1tYSkiLCJzY3QiOiJzdWNjZXNzX21zZyhcIkFjY29yZGluZyB0byB0aGUgS29sbW9nb3Jvdi1TbWlybm92IHRlc3QsIHRoZSB0d28gZGlzdHJpYnV0aW9uIGZ1bmN0aW9ucyBhcmUgbm90IGVxdWFsLiBXZSBoYXZlIHNlZW4gc29tZSBkZXZpYXRpb25zIGZyb20gdGhlICpxcSogZ3JhcGggYW5kICpwcCogZ3JhcGguIFdlIG5lZWQgdG8gZmluZCBhIGJldHRlciBwYXJhbWV0cmljIG1vZGVsLlwiKSIsImhpbnQiOiJUYWtlIHNvbWUgdGltZSB0byBleHBsb3JlIHRoZSBvbmxpbmUgPGNvZGU+UjwvY29kZT4gZG9jdW1lbnRhdGlvbi4gPGNvZGU+dGhldGE8L2NvZGU+LCA8Y29kZT5hbHBoYTwvY29kZT4sIGFuZCA8Y29kZT5nYW1tYTwvY29kZT4gY2FuIGJlIGZvdW5kIGluIHRoZSBwcmV2aW91cyBxdWVzdGlvbi4ifQ==
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkoTUFTUylcbmxpYnJhcnkoc3RhdHMpXG5cbkluc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0cy9MREFDb3Vyc2UxL21haW4vRGF0YS9JbnNhbXBsZS5jc3ZcIiwgaGVhZGVyPVQsIG5hLnN0cmluZ3M9YyhcIi5cIiksIHN0cmluZ3NBc0ZhY3RvcnM9RkFMU0UpXG5cbiMgU3Vic2V0IGZvciBwb3NpdGl2ZSBsb3NzXG5wb3NpdGl2ZV9sb3NzIDwtIHN1YnNldChJbnNhbXBsZSwgeT4wKVxuXG4jIEZpdCBnYW1tYVxuZml0X2dhbW1hIDwtIGdsbShwb3NpdGl2ZV9sb3NzJHl+MSwgXG4gICAgICAgICAgICAgICAgIGRhdGE9cG9zaXRpdmVfbG9zcywgXG4gICAgICAgICAgICAgICAgIGZhbWlseT1HYW1tYShsaW5rPWxvZykpXG50aGV0YSA8LSBleHAoY29lZihmaXRfZ2FtbWEpKSpnYW1tYS5kaXNwZXJzaW9uKGZpdF9nYW1tYSkgI211PXRoZXRhL2FscGhhXG5hbHBoYSA8LSAxL2dhbW1hLmRpc3BlcnNpb24oZml0X2dhbW1hKVxuXG5nYW1tYSA8LSBwZ2FtbWEocG9zaXRpdmVfbG9zcyR5LCBzaGFwZT1hbHBoYSwgc2NhbGU9dGhldGEpIiwic2FtcGxlIjoiIyBQZXJmb3JtcyBLb2xtb2dvcm92LVNtaXJub3YgdGVzdHNcbmtzLnRlc3QoPz8sIFwicGdhbW1hXCIsID8/LCA/PylcblxuIyBQZXJmb3JtcyBLb2xtb2dvcm92LVNtaXJub3YgdGVzdHNcbmtzLnRlc3QoPz8sID8/KSIsInNvbHV0aW9uIjoiIyBQZXJmb3JtcyBLb2xtb2dvcm92LVNtaXJub3YgdGVzdHNcbmtzLnRlc3QocG9zaXRpdmVfbG9zcyR5LCBcInBnYW1tYVwiLCB0aGV0YSwgYWxwaGEpXG5cbiMgUGVyZm9ybXMgS29sbW9nb3Jvdi1TbWlybm92IHRlc3RzXG5rcy50ZXN0KHBvc2l0aXZlX2xvc3MkeSwgZ2FtbWEpIiwic2N0Ijoic3VjY2Vzc19tc2coXCJBY2NvcmRpbmcgdG8gdGhlIEtvbG1vZ29yb3YtU21pcm5vdiB0ZXN0LCB0aGUgdHdvIGRpc3RyaWJ1dGlvbiBmdW5jdGlvbnMgYXJlIG5vdCBlcXVhbC4gV2UgaGF2ZSBzZWVuIHNvbWUgZGV2aWF0aW9ucyBmcm9tIHRoZSAqcXEqIGdyYXBoIGFuZCAqcHAqIGdyYXBoLiBXZSBuZWVkIHRvIGZpbmQgYSBiZXR0ZXIgcGFyYW1ldHJpYyBtb2RlbC5cIikiLCJoaW50IjoiVGFrZSBzb21lIHRpbWUgdG8gZXhwbG9yZSB0aGUgb25saW5lIDxjb2RlPlI8L2NvZGU+IGRvY3VtZW50YXRpb24uIDxjb2RlPnRoZXRhPC9jb2RlPiwgPGNvZGU+YWxwaGE8L2NvZGU+LCBhbmQgPGNvZGU+Z2FtbWE8L2NvZGU+IGNhbiBiZSBmb3VuZCBpbiB0aGUgcHJldmlvdXMgcXVlc3Rpb24uIn0=
 </div>
 <hr />
 </div>
 </div>
-<div id="model-selection-likelihood-ratio-tests-and-goodness-of-fit" class="section level2">
+<div id="model-selection-likelihood-ratio-tests-and-goodness-of-fit" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Model Selection: Likelihood Ratio Tests and Goodness of Fit</h2>
 <div id="video-likelihood-ratio-tests-and-goodness-of-fit" class="section level4 unnumbered">
 <h4>Video: Likelihood Ratio Tests and Goodness of Fit</h4>
@@ -727,7 +758,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkoTUFTUylcbmxpYnJhcnko
 <!-- ``` -->
 </div>
 </div>
-<div id="estimation-using-modified-data-nonparametric-approach" class="section level2">
+<div id="estimation-using-modified-data-nonparametric-approach" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Estimation using Modified Data: Nonparametric Approach</h2>
 <hr />
 <p>In this section, you learn how to:</p>
@@ -763,7 +794,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkoTUFTUylcbmxpYnJhcnko
 <iframe src="./Overheads/LDA1.Chap4.pdf#page=33" width="100%" height="400"> </iframe>
 </div>
 </div>
-<div id="exercise.-nonparametric-estimation-using-modified-data" class="section level3">
+<div id="exercise.-nonparametric-estimation-using-modified-data" class="section level3" number="4.4.1">
 <h3><span class="header-section-number">4.4.1</span> Exercise. Nonparametric Estimation using Modified Data</h3>
 <p><strong>Assignment Text</strong></p>
 <p>Placing insurance deductibles generate truncated data (from the left), while policy limits produce censored data (from the right). The Wisconsin Property Fund data has already been read into a data frame called <code>Insample</code>. These data consist of claim experience for fund members over the years 2006-2010, inclusive. In addition, we created a subset data which included only positive loss data called <code>positive_loss</code>. Under hypothetical policy limit, 100000 USD, and deductible information, <code>Deduct</code>, in dataset, please find Kaplan-Meier Product Limit Estimator and the Nelson-Äalen estimator of the positive loss distribution function. Plot the survival function accordingly.</p>
@@ -777,10 +808,10 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkoTUFTUylcbmxpYnJhcnko
 </div>
 <p><br></p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkoTUFTUylcbmxpYnJhcnkoZHBseXIpXG5cbkluc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9PcGVuQWN0VGV4dERldi9MREFDb3Vyc2UxL21haW4vRGF0YS9JbnNhbXBsZS5jc3ZfXzshIURaM2ZqZyFyYXdoUzFhVklCU2M2V1NyeEZVcXhSN0ZTQnV5YlAxcWszb1RPNjFYYjlXT00zOU5TTWdZem5pRU5PMzljZlpZY2ckIFwiLCBoZWFkZXI9VCwgbmEuc3RyaW5ncz1jKFwiLlwiKSwgc3RyaW5nc0FzRmFjdG9ycz1GQUxTRSlcblxuIyBTdWJzZXQgZm9yIHBvc2l0aXZlIGxvc3NcbnBvc2l0aXZlX2xvc3MgPC0gc3Vic2V0KEluc2FtcGxlLCB5PjApIiwic2FtcGxlIjoibGlicmFyeShkcGx5cilcbiMgQWRkIHBvbGljeSBsaW1pdCBmb3IgcG9zaXRpdmUgbG9zcyBkYXRhXG5wb3NpdGl2ZV9sb3NzJFBvbGljeUxpbWl0IDwtID8/XG5cbiMgQWRkIGFjdHVhbCBwYXltZW50IGNvbHVtbjogdXNpbmcgZHBseXIgXG5wb3NpdGl2ZV9sb3NzX2xpbWl0IDwtIHBvc2l0aXZlX2xvc3MgJT4lIHJvd3dpc2UoKSAlPiUgbXV0YXRlKEFtb3VudFBhaWQ9Pz8pXG5cbiMgQWRkIFVuQ2Vuc29yZWQgY29sdW1uOiB0cmFkaXRpb25hbCBtZXRob2RcbnBvc2l0aXZlX2xvc3NfbGltaXQkVW5DZW5zb3JlZCA8LSA/P1xuXG4jIFByaW50IHRoZSBiZWdpbm5pbmcgb2YgdGhlIGRhdGFzZXRcbmhlYWQoPz8pIiwic29sdXRpb24iOiJsaWJyYXJ5KGRwbHlyKVxuXG4jIEFkZCBwb2xpY3kgbGltaXQgZm9yIHBvc2l0aXZlIGxvc3MgZGF0YVxucG9zaXRpdmVfbG9zcyRQb2xpY3lMaW1pdCA8LSAxMDAwMDBcblxuIyBBZGQgYWN0dWFsIHBheW1lbnQgY29sdW1uOiB1c2luZyBkcGx5ciBcbnBvc2l0aXZlX2xvc3NfbGltaXQgPC0gcG9zaXRpdmVfbG9zcyAlPiUgcm93d2lzZSgpICU+JSBtdXRhdGUoQW1vdW50UGFpZD1taW4oeSwgUG9saWN5TGltaXQpKVxuXG4jIEFkZCBVbkNlbnNvcmVkIGNvbHVtbjogdHJhZGl0aW9uYWwgbWV0aG9kXG5wb3NpdGl2ZV9sb3NzX2xpbWl0JFVuQ2Vuc29yZWQgPC0gMSoocG9zaXRpdmVfbG9zc19saW1pdCRBbW91bnRQYWlkIDwgcG9zaXRpdmVfbG9zc19saW1pdCRQb2xpY3lMaW1pdClcblxuIyBQcmludCB0aGUgYmVnaW5uaW5nIG9mIHRoZSBkYXRhc2V0XG5oZWFkKHBvc2l0aXZlX2xvc3NfbGltaXQpIiwic2N0Ijoic3VjY2Vzc19tc2coXCJHZXR0aW5nIHN0YXJ0ZWQgaXMgYWx3YXlzIHRoZSBoYXJkZXN0IHRoaW5nIHRvIGRvLiBFeGNlbGxlbnQgc3RhcnQhIFRoZXJlIGFyZSBtYW55IHdheXMgdG8gZG8gZGF0YSBtYW5pcHVsYXRpb25cIikiLCJoaW50IjoiV2Ugd2lsbCB1c2UgPGNvZGU+ZHBseXI8L2NvZGU+IGFuZCB0cmFkaXRpb25hbCBtZXRob2RzIHRvIHBlcmZvcm0gZGF0YSB3cmFuZ2xpbmcuIn0=
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkoTUFTUylcbmxpYnJhcnkoZHBseXIpXG5cbkluc2FtcGxlIDwtIHJlYWQuY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0cy9MREFDb3Vyc2UxL21haW4vRGF0YS9JbnNhbXBsZS5jc3ZcIiwgaGVhZGVyPVQsIG5hLnN0cmluZ3M9YyhcIi5cIiksIHN0cmluZ3NBc0ZhY3RvcnM9RkFMU0UpXG5cbiMgU3Vic2V0IGZvciBwb3NpdGl2ZSBsb3NzXG5wb3NpdGl2ZV9sb3NzIDwtIHN1YnNldChJbnNhbXBsZSwgeT4wKSIsInNhbXBsZSI6ImxpYnJhcnkoZHBseXIpXG4jIEFkZCBwb2xpY3kgbGltaXQgZm9yIHBvc2l0aXZlIGxvc3MgZGF0YVxucG9zaXRpdmVfbG9zcyRQb2xpY3lMaW1pdCA8LSA/P1xuXG4jIEFkZCBhY3R1YWwgcGF5bWVudCBjb2x1bW46IHVzaW5nIGRwbHlyIFxucG9zaXRpdmVfbG9zc19saW1pdCA8LSBwb3NpdGl2ZV9sb3NzICU+JSByb3d3aXNlKCkgJT4lIG11dGF0ZShBbW91bnRQYWlkPT8/KVxuXG4jIEFkZCBVbkNlbnNvcmVkIGNvbHVtbjogdHJhZGl0aW9uYWwgbWV0aG9kXG5wb3NpdGl2ZV9sb3NzX2xpbWl0JFVuQ2Vuc29yZWQgPC0gPz9cblxuIyBQcmludCB0aGUgYmVnaW5uaW5nIG9mIHRoZSBkYXRhc2V0XG5oZWFkKD8/KSIsInNvbHV0aW9uIjoibGlicmFyeShkcGx5cilcblxuIyBBZGQgcG9saWN5IGxpbWl0IGZvciBwb3NpdGl2ZSBsb3NzIGRhdGFcbnBvc2l0aXZlX2xvc3MkUG9saWN5TGltaXQgPC0gMTAwMDAwXG5cbiMgQWRkIGFjdHVhbCBwYXltZW50IGNvbHVtbjogdXNpbmcgZHBseXIgXG5wb3NpdGl2ZV9sb3NzX2xpbWl0IDwtIHBvc2l0aXZlX2xvc3MgJT4lIHJvd3dpc2UoKSAlPiUgbXV0YXRlKEFtb3VudFBhaWQ9bWluKHksIFBvbGljeUxpbWl0KSlcblxuIyBBZGQgVW5DZW5zb3JlZCBjb2x1bW46IHRyYWRpdGlvbmFsIG1ldGhvZFxucG9zaXRpdmVfbG9zc19saW1pdCRVbkNlbnNvcmVkIDwtIDEqKHBvc2l0aXZlX2xvc3NfbGltaXQkQW1vdW50UGFpZCA8IHBvc2l0aXZlX2xvc3NfbGltaXQkUG9saWN5TGltaXQpXG5cbiMgUHJpbnQgdGhlIGJlZ2lubmluZyBvZiB0aGUgZGF0YXNldFxuaGVhZChwb3NpdGl2ZV9sb3NzX2xpbWl0KSIsInNjdCI6InN1Y2Nlc3NfbXNnKFwiR2V0dGluZyBzdGFydGVkIGlzIGFsd2F5cyB0aGUgaGFyZGVzdCB0aGluZyB0byBkby4gRXhjZWxsZW50IHN0YXJ0ISBUaGVyZSBhcmUgbWFueSB3YXlzIHRvIGRvIGRhdGEgbWFuaXB1bGF0aW9uXCIpIiwiaGludCI6IldlIHdpbGwgdXNlIDxjb2RlPmRwbHlyPC9jb2RlPiBhbmQgdHJhZGl0aW9uYWwgbWV0aG9kcyB0byBwZXJmb3JtIGRhdGEgd3JhbmdsaW5nLiJ9
 </div>
 </div>
-<div id="exercise.-nonparametric-estimation-using-modified-data-ii" class="section level3">
+<div id="exercise.-nonparametric-estimation-using-modified-data-ii" class="section level3" number="4.4.2">
 <h3><span class="header-section-number">4.4.2</span> Exercise. Nonparametric Estimation using Modified Data II</h3>
 <div class="blackbox">
 <p><strong>Instructions</strong></p>
@@ -792,11 +823,11 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkoTUFTUylcbmxpYnJhcnko
 </div>
 <p><br></p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkoTUFTUylcbmxpYnJhcnkoZHBseXIpXG5saWJyYXJ5KHN1cnZpdmFsKSBcblxuSW5zYW1wbGUgPC0gcmVhZC5jc3YoXCJodHRwczovL3VybGRlZmVuc2UuY29tL3YzL19faHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL09wZW5BY3RUZXh0RGV2L0xEQUNvdXJzZTEvbWFpbi9EYXRhL0luc2FtcGxlLmNzdl9fOyEhRFozZmpnIXJhd2hTMWFWSUJTYzZXU3J4RlVxeFI3RlNCdXliUDFxazNvVE82MVhiOVdPTTM5TlNNZ1l6bmlFTk8zOWNmWlljZyQgXCIsIGhlYWRlcj1ULCBuYS5zdHJpbmdzPWMoXCIuXCIpLCBzdHJpbmdzQXNGYWN0b3JzPUZBTFNFKVxuXG4jIFN1YnNldCBmb3IgcG9zaXRpdmUgbG9zc1xucG9zaXRpdmVfbG9zcyA8LSBzdWJzZXQoSW5zYW1wbGUsIHk+MClcblxuIyBBZGQgcG9saWN5IGxpbWl0IGZvciBwb3NpdGl2ZSBsb3NzIGRhdGFcbnBvc2l0aXZlX2xvc3MkUG9saWN5TGltaXQgPC0gMTAwMDAwXG5cbiMgQWRkIGFjdHVhbCBwYXltZW50IGNvbHVtbjogdXNpbmcgZHBseXIgXG5wb3NpdGl2ZV9sb3NzX2xpbWl0IDwtIHBvc2l0aXZlX2xvc3MgJT4lIHJvd3dpc2UoKSAlPiUgbXV0YXRlKEFtb3VudFBhaWQ9bWluKHksIFBvbGljeUxpbWl0KSlcblxuIyBBZGQgVW5DZW5zb3JlZCBjb2x1bW46IHRyYWRpdGlvbmFsIG1ldGhvZFxucG9zaXRpdmVfbG9zc19saW1pdCRVbkNlbnNvcmVkIDwtIDEqKHBvc2l0aXZlX2xvc3NfbGltaXQkQW1vdW50UGFpZCA8IHBvc2l0aXZlX2xvc3NfbGltaXQkUG9saWN5TGltaXQpIiwic2FtcGxlIjoiIyBLTSBlc3RpbWF0ZVxuS00wIDwtIHN1cnZmaXQoPz8sIHR5cGU9XCJrYXBsYW4tbWVpZXJcIiwgZGF0YT0/PylcbiMgUGxvdCBmdW5jdGlvbiBzdXJ2aXZhbCBmdW5jdGlvblxucGxvdCg/PywgY29uZi5pbnQ9RkFMU0UsIHhsYWI9XCJ4XCIsIHlsYWI9XCJLYXBsYW4gTWVpZXIgU3Vydml2YWxcIilcbiMgTmVsc29uLUFhbGVuIGVzdGltYXRlXG5OQTAgPC0gc3VydmZpdCg/PywgdHlwZT0/PywgZGF0YT0/PylcbnBsb3QoPz8sIGNvbmYuaW50PUZBTFNFLCB4bGFiPVwieFwiLCB5bGFiPVwiTmVsc29uLUFhbGVuIFN1cnZpdmFsXCIpXG4jIE5lbHNvbi1BYWxlbiBlc3RpbWF0ZSB3aXRoIGRlZHVjdGlibGVcbk5BMSA8LSBzdXJ2Zml0KD8/KVxucGxvdCg/PywgY29uZi5pbnQ9RkFMU0UsIHhsYWI9XCJ4XCIsIHlsYWI9XCJOZWxzb24tQWFsZW4gU3Vydml2YWxcIikiLCJzb2x1dGlvbiI6IiMgS00gZXN0aW1hdGVcbktNMCA8LSBzdXJ2Zml0KFN1cnYoQW1vdW50UGFpZCwgVW5DZW5zb3JlZCkgfiAxLCB0eXBlPVwia2FwbGFuLW1laWVyXCIsIGRhdGE9cG9zaXRpdmVfbG9zc19saW1pdClcblxuIyBwbG90IGZ1bmN0aW9uIHN1cnZpdmFsIGZ1bmN0aW9uXG5wbG90KEtNMCwgY29uZi5pbnQ9RkFMU0UsIHhsYWI9XCJ4XCIsIHlsYWI9XCJLYXBsYW4gTWVpZXIgU3Vydml2YWxcIilcblxuIyBOZWxzb24tQWFsZW4gZXN0aW1hdGVcbk5BMCA8LSBzdXJ2Zml0KFN1cnYoQW1vdW50UGFpZCwgVW5DZW5zb3JlZCkgfiAxLCB0eXBlPVwiZmxlbWluZy1oYXJyaW5ndG9uXCIsIGRhdGE9cG9zaXRpdmVfbG9zc19saW1pdClcblxuIyBwbG90IGZ1bmN0aW9uIHN1cnZpdmFsIGZ1bmN0aW9uXG5wbG90KE5BMCwgY29uZi5pbnQ9RkFMU0UsIHhsYWI9XCJ4XCIsIHlsYWI9XCJOZWxzb24tQWFsZW4gU3Vydml2YWxcIilcblxuIyBOZWxzb24tQWFsZW4gZXN0aW1hdGUgd2l0aCBkZWR1Y3RpYmxlXG5OQTEgPC0gc3VydmZpdChTdXJ2KERlZHVjdCwgQW1vdW50UGFpZCwgVW5DZW5zb3JlZCkgfiAxLCB0eXBlPVwiZmxlbWluZy1oYXJyaW5ndG9uXCIsIGRhdGE9cG9zaXRpdmVfbG9zc19saW1pdClcblxuIyBwbG90IGZ1bmN0aW9uIHN1cnZpdmFsIGZ1bmN0aW9uXG5wbG90KE5BMSwgY29uZi5pbnQ9RkFMU0UsIHhsYWI9XCJ4XCIsIHlsYWI9XCJOZWxzb24tQWFsZW4gU3Vydml2YWxcIikiLCJzY3QiOiJzdWNjZXNzX21zZyhcIkV4Y2VsbGVudCEgIE5vdyB3ZSBjYW4gc2VlIGhvdyB0aGUgcG9saWN5IGxpbWl0IGFuZCBkZWR1Y3RpYmxlIGluZm9ybWF0aW9uIGNoYW5nZWQgc3Vydml2YWwgY3VydmUuXCIpIiwiaGludCI6IlRha2Ugc29tZSB0aW1lIHRvIGV4cGxvcmUgdGhlIG9ubGluZSA8Y29kZT5SPC9jb2RlPiBkb2N1bWVudGF0aW9uLjwvcD5cblxuPHA+VXNlIHRoZSBmdW5jdGlvbiBTdXJ2KCkgdG8gY3JlYXRlIHRoZSBlbXBpcmljYWwgZGlzdHJpYnV0aW9uLiJ9
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkoTUFTUylcbmxpYnJhcnkoZHBseXIpXG5saWJyYXJ5KHN1cnZpdmFsKSBcblxuSW5zYW1wbGUgPC0gcmVhZC5jc3YoXCJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vT3BlbkFjdFRleHRzL0xEQUNvdXJzZTEvbWFpbi9EYXRhL0luc2FtcGxlLmNzdlwiLCBoZWFkZXI9VCwgbmEuc3RyaW5ncz1jKFwiLlwiKSwgc3RyaW5nc0FzRmFjdG9ycz1GQUxTRSlcblxuIyBTdWJzZXQgZm9yIHBvc2l0aXZlIGxvc3NcbnBvc2l0aXZlX2xvc3MgPC0gc3Vic2V0KEluc2FtcGxlLCB5PjApXG5cbiMgQWRkIHBvbGljeSBsaW1pdCBmb3IgcG9zaXRpdmUgbG9zcyBkYXRhXG5wb3NpdGl2ZV9sb3NzJFBvbGljeUxpbWl0IDwtIDEwMDAwMFxuXG4jIEFkZCBhY3R1YWwgcGF5bWVudCBjb2x1bW46IHVzaW5nIGRwbHlyIFxucG9zaXRpdmVfbG9zc19saW1pdCA8LSBwb3NpdGl2ZV9sb3NzICU+JSByb3d3aXNlKCkgJT4lIG11dGF0ZShBbW91bnRQYWlkPW1pbih5LCBQb2xpY3lMaW1pdCkpXG5cbiMgQWRkIFVuQ2Vuc29yZWQgY29sdW1uOiB0cmFkaXRpb25hbCBtZXRob2RcbnBvc2l0aXZlX2xvc3NfbGltaXQkVW5DZW5zb3JlZCA8LSAxKihwb3NpdGl2ZV9sb3NzX2xpbWl0JEFtb3VudFBhaWQgPCBwb3NpdGl2ZV9sb3NzX2xpbWl0JFBvbGljeUxpbWl0KSIsInNhbXBsZSI6IiMgS00gZXN0aW1hdGVcbktNMCA8LSBzdXJ2Zml0KD8/LCB0eXBlPVwia2FwbGFuLW1laWVyXCIsIGRhdGE9Pz8pXG4jIFBsb3QgZnVuY3Rpb24gc3Vydml2YWwgZnVuY3Rpb25cbnBsb3QoPz8sIGNvbmYuaW50PUZBTFNFLCB4bGFiPVwieFwiLCB5bGFiPVwiS2FwbGFuIE1laWVyIFN1cnZpdmFsXCIpXG4jIE5lbHNvbi1BYWxlbiBlc3RpbWF0ZVxuTkEwIDwtIHN1cnZmaXQoPz8sIHR5cGU9Pz8sIGRhdGE9Pz8pXG5wbG90KD8/LCBjb25mLmludD1GQUxTRSwgeGxhYj1cInhcIiwgeWxhYj1cIk5lbHNvbi1BYWxlbiBTdXJ2aXZhbFwiKVxuIyBOZWxzb24tQWFsZW4gZXN0aW1hdGUgd2l0aCBkZWR1Y3RpYmxlXG5OQTEgPC0gc3VydmZpdCg/PylcbnBsb3QoPz8sIGNvbmYuaW50PUZBTFNFLCB4bGFiPVwieFwiLCB5bGFiPVwiTmVsc29uLUFhbGVuIFN1cnZpdmFsXCIpIiwic29sdXRpb24iOiIjIEtNIGVzdGltYXRlXG5LTTAgPC0gc3VydmZpdChTdXJ2KEFtb3VudFBhaWQsIFVuQ2Vuc29yZWQpIH4gMSwgdHlwZT1cImthcGxhbi1tZWllclwiLCBkYXRhPXBvc2l0aXZlX2xvc3NfbGltaXQpXG5cbiMgcGxvdCBmdW5jdGlvbiBzdXJ2aXZhbCBmdW5jdGlvblxucGxvdChLTTAsIGNvbmYuaW50PUZBTFNFLCB4bGFiPVwieFwiLCB5bGFiPVwiS2FwbGFuIE1laWVyIFN1cnZpdmFsXCIpXG5cbiMgTmVsc29uLUFhbGVuIGVzdGltYXRlXG5OQTAgPC0gc3VydmZpdChTdXJ2KEFtb3VudFBhaWQsIFVuQ2Vuc29yZWQpIH4gMSwgdHlwZT1cImZsZW1pbmctaGFycmluZ3RvblwiLCBkYXRhPXBvc2l0aXZlX2xvc3NfbGltaXQpXG5cbiMgcGxvdCBmdW5jdGlvbiBzdXJ2aXZhbCBmdW5jdGlvblxucGxvdChOQTAsIGNvbmYuaW50PUZBTFNFLCB4bGFiPVwieFwiLCB5bGFiPVwiTmVsc29uLUFhbGVuIFN1cnZpdmFsXCIpXG5cbiMgTmVsc29uLUFhbGVuIGVzdGltYXRlIHdpdGggZGVkdWN0aWJsZVxuTkExIDwtIHN1cnZmaXQoU3VydihEZWR1Y3QsIEFtb3VudFBhaWQsIFVuQ2Vuc29yZWQpIH4gMSwgdHlwZT1cImZsZW1pbmctaGFycmluZ3RvblwiLCBkYXRhPXBvc2l0aXZlX2xvc3NfbGltaXQpXG5cbiMgcGxvdCBmdW5jdGlvbiBzdXJ2aXZhbCBmdW5jdGlvblxucGxvdChOQTEsIGNvbmYuaW50PUZBTFNFLCB4bGFiPVwieFwiLCB5bGFiPVwiTmVsc29uLUFhbGVuIFN1cnZpdmFsXCIpIiwic2N0Ijoic3VjY2Vzc19tc2coXCJFeGNlbGxlbnQhICBOb3cgd2UgY2FuIHNlZSBob3cgdGhlIHBvbGljeSBsaW1pdCBhbmQgZGVkdWN0aWJsZSBpbmZvcm1hdGlvbiBjaGFuZ2VkIHN1cnZpdmFsIGN1cnZlLlwiKSIsImhpbnQiOiJUYWtlIHNvbWUgdGltZSB0byBleHBsb3JlIHRoZSBvbmxpbmUgPGNvZGU+UjwvY29kZT4gZG9jdW1lbnRhdGlvbi48L3A+XG5cbjxwPlVzZSB0aGUgZnVuY3Rpb24gU3VydigpIHRvIGNyZWF0ZSB0aGUgZW1waXJpY2FsIGRpc3RyaWJ1dGlvbi4ifQ==
 </div>
 </div>
 </div>
-<div id="estimation-using-modified-data-parametric-approach" class="section level2">
+<div id="estimation-using-modified-data-parametric-approach" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> Estimation using Modified Data: Parametric Approach</h2>
 <hr />
 <p>In this section, you learn how to:</p>
@@ -850,7 +881,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkoTUFTUylcbmxpYnJhcnko
 <!-- ``` -->
 </div>
 </div>
-<div id="bayesian-inference" class="section level2">
+<div id="bayesian-inference" class="section level2" number="4.6">
 <h2><span class="header-section-number">4.6</span> Bayesian Inference</h2>
 <hr />
 <p>In this section, you learn how to:</p>
@@ -902,7 +933,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkoTUFTUylcbmxpYnJhcnko
 <iframe src="./Overheads/LDA1.Chap4.pdf#page=49" width="100%" height="400"> </iframe>
 </div>
 </div>
-<div id="visualizing-bayesian-methods" class="section level3">
+<div id="visualizing-bayesian-methods" class="section level3" number="4.6.1">
 <h3><span class="header-section-number">4.6.1</span> Visualizing Bayesian Methods</h3>
 <center>
 <iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1660902/sp/166090200/embedIframeJs/uiconf_id/34298531/partner_id/1660902?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_yv1ioaxl&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_8j9zvdbn" width="649" height="401" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player">
@@ -972,7 +1003,7 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJxID0gc2VxKDAuNiwgMC44LCBieSA9IC4wMSlcbnByaW9y
 <h2>Contributors</h2>
 <ul>
 <li><strong>Authors</strong>. <strong>Rob Erhardt</strong>, Wake Forest University, <strong>Brian Hartman</strong>, Brigham Young University, and <strong>Zhiyu (Frank) Quan</strong>, University of Illinois at Urbana-Champaign, are the principal authors of the initial version of this chapter.</li>
-<li><strong>Chapter Maintainers</strong>. Please contact ??? and/or Jed at <a href="mailto:jfrees@bus.wisc.edu" class="email">jfrees@bus.wisc.edu</a> for chapter comments and suggested improvements.</li>
+<li><strong>Chapter Maintainers</strong>. Please contact Frank <a href="mailto:zquan@illinois.edu" class="email">zquan@illinois.edu</a> and/or Jed at <a href="mailto:jfrees@bus.wisc.edu" class="email">jfrees@bus.wisc.edu</a> for chapter comments and suggested improvements.</li>
 </ul>
 
 </div>
@@ -1006,6 +1037,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

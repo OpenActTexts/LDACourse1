@@ -7,7 +7,7 @@ This course introduces readers to methods of analyzing insurance data. Section \
 
 :::: {.blackbox }
 
--  Although not needed to go through the tutorials, some users may wish to download the overheads that the videos are based on. <button download><a href="https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/LDA1.Overheads/LDA1.Chap1.pdf">Download Chapter One overheads as a .pdf file.</a></button>
+-  Although not needed to go through the tutorials, some users may wish to download the overheads that the videos are based on. <button download><a href="https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/LDA1.Overheads/LDA1.Chap1.pdf">Download Chapter One overheads as a .pdf file.</a></button>
 -  By watching the videos and working through the tutorial exercises, you will get an appreciation for the foundations of loss data analytics. For a deeper dive, see the corresponding chapter in the textbook, [Chapter One of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-Intro.html).
 :::: 
 
@@ -129,7 +129,7 @@ In this section, we use the Wisconsin Property Fund as a case study. You learn h
 ***
 
 :::: {.blackbox }
-Sections \@ref(Sec:LGPIF), \@ref(Sec:PropertyFundSeverity), and \@ref(Sec:LGPIFRatingVariaables) analyze aspects of the Wisconsin Property Fund. Although not needed for these tutorials, you may wish to get further background on these data  that is summarized in [Section 1.3 of *Loss Data Analytics*](https://openacttextdev.github.io/LDACourse1/introduction-to-loss-data-analytics.html#Sec:LGPIF). Further, as noted in the Preface, although not needed for the tutorials, you can go to <button download><a href="https://raw.githubusercontent.com/OpenActTextDev/LDAShortCourse1/main/Data/PropertyFundInsample.csv">View the Property Fund Data as a .csv file.</a></button> Then, do a "Save Page as" if you wish to download. Alternatively, go directly to the [Github page](https://github.com/OpenActTextDev/LDAShortCourse1/tree/main/Data) to access the data.
+Sections \@ref(Sec:LGPIF), \@ref(Sec:PropertyFundSeverity), and \@ref(Sec:LGPIFRatingVariaables) analyze aspects of the Wisconsin Property Fund. Although not needed for these tutorials, you may wish to get further background on these data  that is summarized in [Section 1.3 of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-Intro.html#tab:1.5). Further, as noted in the Preface, although not needed for the tutorials, you can go to <button download><a href="https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/PropertyFundInsample.csv">View the Property Fund Data as a .csv file.</a></button> Then, do a "Save Page as" if you wish to download. Alternatively, go directly to the [Github page](https://github.com/OpenActTexts/LDACourse1/tree/main/Data) to access the data.
 :::: 
 
 ####  Video: Introducing the Wisconsin Property Fund {-}
@@ -203,7 +203,7 @@ Note the double equal signs `==` needed for the the `subset()` function.
 
 
 ```{r ex="LDA1.1.3.1", type="pre-exercise-code", tut=TRUE}
-Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T,
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/Insample.csv", header=T,
                       na.strings=c("."), stringsAsFactors=FALSE)
 ```
 
@@ -212,16 +212,16 @@ Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse
 #  Analysis for Year 2010
 Insample2010 <- subset(Insample, Year==2010)
 Freq2010 <- Insample2010$Freq
-Leng2010<- length(Freq2010)
-Mean2010<- mean(Freq2010)
-Tab2010<- table(Freq2010)
+( Leng2010<- length(Freq2010) )
+( Mean2010<- mean(Freq2010) )
+( Tab2010<- table(Freq2010) )
 
 #  Analysis for Year 2009
 Insample2009 <- ??
 Freq2009 <- ??
-Leng2009<- length(??)
-Mean2009<-mean(??)
-Tab2009<-table(??)
+( Leng2009<- length(??) )
+( Mean2009<-mean(??) )
+( Tab2009<-table(??) )
 ```
 
 
@@ -229,16 +229,16 @@ Tab2009<-table(??)
 #  Analysis for Year 2010
 Insample2010 <- subset(Insample, Year==2010)
 Freq2010 <- Insample2010$Freq
-Leng2010 <- length(Freq2010)
-Mean2010<- mean(Freq2010)
-Tab2010<-table(Freq2010)
+( Leng2010 <- length(Freq2010) )
+( Mean2010<- mean(Freq2010) )
+( Tab2010<-table(Freq2010) )
 
 #  Analysis for Year 2009
 Insample2009 <- subset(Insample, Year==2009)
 Freq2009 <- Insample2009$Freq
-Leng2009 <- length(Freq2009)
-Mean2009<- mean(Freq2009)
-Tab2009<-table(Freq2009)
+( Leng2009 <- length(Freq2009) )
+( Mean2009<- mean(Freq2009) )
+( Tab2009<-table(Freq2009) )
 ```
 
 ```{r ex="LDA1.1.3.1", type="sct", tut=TRUE}
@@ -363,7 +363,7 @@ The Wisconsin Property Fund data covering years 2006-2010 has already been read 
 <br>
 
 ```{r ex="LDA1.1.4.1", type="pre-exercise-code", tut=TRUE}
-Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
 ```
 
 
@@ -464,7 +464,7 @@ Many distributions used in insurance analytics are skewed. In this assignment, w
 <br>
 
 ```{r ex="LDA1.1.4.2", type="pre-exercise-code", tut=TRUE}
-Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
 Insample2010<- subset(Insample, Year==2010)
 InsamplePos2010<- subset(Insample2010, yAvg>0)
 AvgClaim <- InsamplePos2010$yAvg
@@ -553,7 +553,7 @@ Much of insurance analytics is about making predictions of future behavior. To u
 
 
 ```{r ex="LDA1.1.4.3", type="pre-exercise-code", tut=TRUE}
-Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T,
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/Insample.csv", header=T,
                       na.strings=c("."), stringsAsFactors=FALSE)
 ```
 
@@ -651,7 +651,7 @@ Your supervisor finds useful the analysis of claims outcomes by entity type, fir
 <br>
 
 ```{r ex="LDA1.1.5.1", type="pre-exercise-code", tut=TRUE}
-Insample <- read.csv("https://raw.githubusercontent.com/OpenActTextDev/LDACourse1/main/Data/Insample.csv", header=T,
+Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/Insample.csv", header=T,
                       na.strings=c("."), stringsAsFactors=FALSE)
 ```
 
