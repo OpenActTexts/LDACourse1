@@ -739,5 +739,5 @@ success_msg("Excellent! Modifying someone else's code can be more difficult than
 ## Contributors {-}
 
 -  **Authors**. **Yvonne Chueh**, Central Washington University, **Paul Johnson**, University of Wisconsin-Madison, and **Edward (Jed) Frees**, University of Wisconsin-Madison and Australian National University, are the principal authors of the initial version of this chapter.
--  **Chapter Maintainers**. Please contact ??? and/or Jed at <jfrees@bus.wisc.edu> for chapter comments and suggested improvements.
+-  **Chapter Maintainers**. Please contact Yvonne <Chin-mei.Chueh@cwu.edu> and/or Jed at <jfrees@bus.wisc.edu> for chapter comments and suggested improvements.
 

@@ -178,7 +178,11 @@ Insample %>%
 
 
 ```{r ex="LDA1.4.1.1_23", type="sct", tut=TRUE}
-success_msg("Excellent start! Year 2007 has the largest 90th percentiles.")
+empmsg <- "Did you correctly specify the object `empirical`?"
+ex() %>% check_object("empirical", undefined_msg = "Make sure to not remove `empirical`!") %>% check_equal(incorrect_msg=empmsg)
+plot1msg<-"Use `plot` on the `empirical` object"
+ex() %>% check_function("plot", not_called_msg=plot1msg) %>% check_result() %>% check_equal(incorrect_msg=plot1msg)
+success_msg("Well done! As your analysis shows, Year 2007 has the largest 90th percentiles.")
 ```
 
 
@@ -204,7 +208,7 @@ Nonparametric density estimators, such as the kernel estimator, are regularly us
 
 ```{r ex="LDA1.4.1.1_4", type="hint", tut=TRUE}
 
-The syntax log(data$x) produces log of x.
+The syntax `log(data$x)` produces the logarithm of variable `x` in the data frame `data`.
 
 ```
 
@@ -243,18 +247,23 @@ lines(density(log(Insample$y), kernel="triangular", bw=0.1), col="red", lwd=2)
 
 
 ```{r ex="LDA1.4.1.1_4", type="sct", tut=TRUE}
+hist1msg<-"Use the function `hist` on the logarithm of variable `y` in the data frame `Insample`"
+ex() %>% check_function("hist", not_called_msg=hist1msg) %>% check_result() %>% check_equal(incorrect_msg=hist1msg)
+density1msg<-"Use the function `density` on the logarithm of variable `y` in the data frame `Insample`"
+ex() %>% check_function("density", not_called_msg=density1msg) %>% check_result() %>% check_equal(incorrect_msg=density1msg)
 success_msg("Excellent! This is a very beautiful graphic with colors! We observed different density curves.")
 ```
 
 
-### Exercise. Claim Frequency
+### Exercise. Comparing Poisson and Negative Binomial Distributions
+
+In this tutorial, you will model claim count data and decide whether a Poisson$(\lambda)$ or a negative binomial$(r=3,p)$ better fits the data. Because of the number of steps involved, we split this tutorial into several distinct stages.
 
 **Assignment Text**
 
-In this tutorial, you will model claim count data and decide whether a Poisson$(\lambda)$ or a negative binomial$(r=3,p)$ better fits the data.  The raw data are the number of claims filed by $n=100$ policyholders.  Recall that claim count data are discrete and take values $0, 1, 2, \dots$. So, we consider two discrete probability models. You will apply tools learned in Section \@ref(Sec:NonInf) to make a decision on which model fits these data better.
+The raw data are the number of claims filed by $n=100$ policyholders.  Recall that claim count data are discrete and take values $0, 1, 2, \dots$. So, we consider two discrete probability models. You will apply tools learned in Section \@ref(Sec:NonInf) to make a decision on which model fits these data better.
 
-
-We also start with exploratory data analysis, making graphical and numeric summaries of data before fitting a model.
+We start with exploratory data analysis, making graphical and numeric summaries of data before fitting a model.
 
 :::: {.blackbox }
 **Instructions** 
@@ -275,8 +284,7 @@ The output from the `table()` function can be used as an argument in the `barplo
 ```{r ex="LDA4.2.1.1", type="pre-exercise-code", tut=TRUE}
 set.seed(4)
 claims = rnbinom(n = 100, size = 3, prob = 0.5)
-#Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/Insample.csv", header=T,
-#                      na.strings=c("."), stringsAsFactors=FALSE)
+
 ```
 
 
@@ -298,11 +306,13 @@ var(claims)
 ```
 
 ```{r ex="LDA4.2.1.1", type="sct", tut=TRUE}
-success_msg("And you're off!  PS - did you label your axes?")
+
+barplot1msg<-"Use `barplot` on the `table(claims)` object?"
+ex() %>% check_function("barplot", not_called_msg=barplot1msg) %>% check_result() %>% check_equal(incorrect_msg=barplot1msg)
+var1msg<-"Use `var` on the `claims` object?"
+ex() %>% check_function("var", not_called_msg=var1msg) %>% check_result() %>% check_equal(incorrect_msg=var1msg)
+success_msg("And you're off!  By the way - did you label your axes?")
 ```
-
-
-
 
 
 Observe that the distribution is heavily right-skewed, and the sample variance is much larger than the sample mean.  You may recall that if $X \sim$ Poisson$(\lambda)$,
@@ -370,6 +380,15 @@ abline(0,1)
 ```
 
 ```{r ex="LDA4.2.1.2", type="sct", tut=TRUE}
+lambdamsg <- "Did you correctly specify the object `lambda`?"
+ex() %>% check_object("lambda", undefined_msg = "Make sure to not remove `lambda`!") %>% check_equal(incorrect_msg=lambdamsg)
+
+qclaimsmsg <- "Did you correctly specify the object `qclaims`?"
+ex() %>% check_object("qclaims", undefined_msg = "Make sure to not remove `qclaims`!") %>% check_equal(incorrect_msg=qclaimsmsg)
+
+plot2msg<-"Use `plot` on the `qp` object"
+ex() %>% check_function("plot", not_called_msg=plot2msg) %>% check_result() %>% check_equal(incorrect_msg=plot2msg)
+
 success_msg("Nice!  But it's not a *great* fit, is it?")
 ```
 
@@ -418,13 +437,14 @@ Should you brush up on the  [qnbinom](https://www.rdocumentation.org/packages/ba
 ```
 
 ```{r ex="LDA4.2.1.3", type="sample-code", tut=TRUE}
+p = ??
 pr=seq(0.01,0.99, by=0.01)
-qb = qnbinom(pr, size=??, prob = ??)
+qb = qnbinom(pr, size=??, prob = p)
 
 ## compute the quantiles
 qclaims = quantile(claims, pr)
 
-plot(qb, qclaims, ylim=c(0,12), xlim=c(0,12), ylab="Empirical Quantiles", xlab="Model Quantiles")
+plot(??, ??, ylim=c(0,12), xlim=c(0,12), ylab="Empirical Quantiles", xlab="Model Quantiles")
 abline(0,1)
 
 ```
@@ -443,6 +463,15 @@ abline(0,1)
 ```
 
 ```{r ex="LDA4.2.1.3", type="sct", tut=TRUE}
+pmsg <- "Did you correctly specify the object `p`?"
+ex() %>% check_object("p", undefined_msg = "Make sure to not remove `p`!") %>% check_equal(incorrect_msg=pmsg)
+
+qbmsg <- "Did you correctly specify the object `qb`?"
+ex() %>% check_object("qb", undefined_msg = "Make sure to not remove `qb`!") %>% check_equal(incorrect_msg=qbmsg)
+
+plot3msg<-"Use `plot` on the `qb` and `qclaims` objects"
+ex() %>% check_function("plot", not_called_msg=plot3msg) %>% check_result() %>% check_equal(incorrect_msg=plot3msg)
+
 success_msg("This seems to be a better fit than Poisson.")
 ```
 
@@ -512,24 +541,26 @@ In this section, you learn how to:
   <iframe src="./Overheads/LDA1.Chap4.pdf#page=23" width="100%" height="400"> </iframe>
   </div>
   
-### Exercise. Probability-Probability ($pp$) plot
+### Exercise. Probability-Probability ($pp$) plot {#Ex:PPPlot}
 <img src = "ContributorPics\hurdler.png" width = "65" height = "65" style = "float:right; margin-left: 10px; margin-top: 7px" />
 
 **Assignment Text**
 
-Probability-probability ($pp$) plots can be used to corroborate the selection of parametric models. The Wisconsin Property Fund data has already been read into a data frame called `Insample` and we created subset data which contains the positive loss data called `positive_loss`. In this tutorial, you will generate $pp$ plots with Gaussian and gamma distribution.
+Probability-probability ($pp$) plots can be used to corroborate the selection of parametric models. The Wisconsin Property Fund data has already been read into a data frame called `Insample` and we created subset data which contains the positive loss data called `positive_loss`. 
+
+In this tutorial, you will generate $pp$ plots with Gaussian and gamma distribution. Based on the $pp$ plots, which parametric fitted model is closer to the empirical distribution?
 
 :::: {.blackbox }
 **Instructions**
 
--  Generate $pp$ plots for the positive loss amount `y` using Gaussian and gamma. Based on the $pp$ plots, which parametric fitted model is closer to the empirical distribution?
 -  Use the function [glm(response~1,data=,family=Gamma(link=log))](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/glm) to fit generalized linear model (*glm*) with gamma family.
--  Find the shape and rate parameters from the fitted gamma *glm*. (No action required on your part.)
+    -  Find the shape and rate parameters from the fitted gamma *glm*. (No action required on your part.)
 -  Use the function [glm(response~1,data=,family=gaussian(link=log))](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/glm) to fit generalized linear model (*glm*) with Gaussian distribution.
--  Find the mean and standard deviation from the fitted Gaussian *glm*. (No action required on your part.)
+    -  Find the mean and standard deviation from the fitted Gaussian *glm*. (No action required on your part.)
 -  Use the function [ecdf()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/ecdf) to create the empirical distribution for positive loss.
--  Use the function [pgamma()](https://www.rdocumentation.org/packages/Rlab/versions/2.15.1/topics/Gamma) to create distribution function for the gamma distribution.
--  Use the function [pnorm()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Normal) to create distribution function for the Gaussian distribution.
+-  Use the function [pgamma()](https://www.rdocumentation.org/packages/Rlab/versions/2.15.1/topics/Gamma) to create distribution function for the gamma distribution. Generate a $pp$ plot for the positive loss amount `y` using the gamma distribution. 
+-  Use the function [pnorm()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Normal) to create distribution function for the Gaussian distribution.  Generate a $pp$ plot for the positive loss amount `y` using Gaussian  distribution. 
+
 :::: 
 
 <br>
@@ -573,7 +604,7 @@ abline(0,1)
 
 ```{r ex="LDA1.4.1.2_1", type="solution", tut=TRUE}
 # Fit gamma
-fit_gamma <- glm(positive_loss$y~1, 
+fit_gamma <- glm(formula=positive_loss$y~1, 
                  data=positive_loss, 
                  family=Gamma(link=log))
 theta <- exp(coef(fit_gamma))*gamma.dispersion(fit_gamma) #mu=theta/alpha
@@ -606,7 +637,22 @@ abline(0,1)
 
 
 ```{r ex="LDA1.4.1.2_1", type="sct", tut=TRUE}
-success_msg("Good job! The *pp* plot is able to compare cumulative probabilities under two models. The gamma distribution is closer to the empirical distribution and so provides a better representation of the data.")
+fit_gammamsg <- "Did you correctly specify the object `fit_gamma`?"
+ex() %>% check_object("fit_gamma", undefined_msg = "Make sure to not remove `fit_gamma`!") %>% check_equal(incorrect_msg=fit_gammamsg)
+
+fit_gaussianmsg <- "Did you correctly specify the object `fit_gaussian`?"
+ex() %>% check_object("fit_gaussian", undefined_msg = "Make sure to not remove `fit_gaussian`!") %>% check_equal(incorrect_msg=fit_gaussianmsg)
+
+empiricalmsg <- "Did you correctly specify the object `empirical`?"
+ex() %>% check_object("empirical", undefined_msg = "Make sure to not remove `empirical`!") %>% check_equal(incorrect_msg=empiricalmsg)
+
+gammamsg <- "Did you correctly specify the object `gamma`?"
+ex() %>% check_object("gamma", undefined_msg = "Make sure to not remove `gamma`!") %>% check_equal(incorrect_msg=gammamsg)
+
+gaussianmsg <- "Did you correctly specify the object `gaussian`?"
+ex() %>% check_object("gaussian", undefined_msg = "Make sure to not remove `gaussian`!") %>% check_equal(incorrect_msg=gaussianmsg)
+
+success_msg("Good job! The *pp* plot is able to compare cumulative probabilities under two models. For these data, the gamma distribution is closer to the empirical distribution and so provides a better representation of the data.")
 ```
 
 **Editorial Note**. This exercise uses the [glm()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/glm) function to produce maximum likelihood estimates of certain classes of distributions including the gamma and Gaussian (normal). [Section 3.5 of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-Severity.html#S:MaxLikeEstimation) employs a comparable function, [vlgm()](https://www.rdocumentation.org/packages/VGAM/versions/1.1-5/topics/vglm). These functions are even more useful when employed in regression modeling contexts. Although regression modeling is outside the scope of this course, the exercise provides an initial exposure to these functions that are very useful in actuarial practice.
@@ -616,22 +662,25 @@ success_msg("Good job! The *pp* plot is able to compare cumulative probabilities
   
 **Assignment Text**
 
-The $pp$ plot shows cumulative distribution functions, which can sometimes be difficult to detect where a fitted parametric distribution is deficient. As an alternative, it is common to use a quantile-quantile ($qq$) plot. The Wisconsin Property Fund data has already been read into a data frame called `Insample` and we also created a subset data which includes only positive loss data called `positive_loss`. In this tutorial, you will generate $qq$ plots with Gaussian and gamma distribution.
+The $pp$ plot shows *cumulative* distribution functions, discrepancies can sometimes be difficult to detect where a fitted parametric distribution is deficient. As an alternative, it is common to use a quantile-quantile ($qq$) plot. The Wisconsin Property Fund data has already been read into a data frame called `Insample` and we also created a subset data which includes only positive loss data called `positive_loss`. In this exercise, parameter estimates are determined by the method of moments, in contrast to the maximum likelihood approach (with the `glm` function) taken in Exercise \@ref(Ex:PPPlot). This is approach is simpler and demonstrates an alternative method. Recall that we used the method of moments for the gamma distribution in Exercise \@ref(Ex:VisualGamma). 
+
+In this tutorial, you will generate $qq$ plots with Gaussian and gamma distribution. Based on the $qq$ plot, which parametric fitted model is closer to the empirical distribution?
 
 :::: {.blackbox }
 **Instructions**
 
--  Generate $qq$ plots for the positive loss amount `y` using Gaussian and gamma. Based on the $qq$ plot, which parametric fitted model is closer to the empirical distribution?
--  Find sample size, mean, variance, and standard deviation for the positive loss. `p_value` is a list of probabilities that is given here.  
--  Use the function [qnorm()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Normal) to create quantile function for the Gaussian distribution.
--  Use the function [qgamma()](https://www.rdocumentation.org/packages/Rlab/versions/2.15.1/topics/Gamma) to create quantile function for the gamma distribution.
-::::
+-  Find sample size, mean, variance, and standard deviation for the positive loss. 
+-  Determine the method of moments estimators for the gamma distribution.
+-  Calculate `p_value`, a list of probabilities used for plotting quantiles.  
+-  Use the function [qnorm()](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Normal) to create the quantiles for the Gaussian distribution. Generate a $qq$ plot for the positive loss amount `y` using the Gaussian distribution.
+-  Use the function [qgamma()](https://www.rdocumentation.org/packages/Rlab/versions/2.15.1/topics/Gamma) to create the quantiles for the gamma distribution. Generate a $qq$ plot for the positive loss amount `y` using the gamma distribution. 
+
+:::: 
 
 <br>
 
 ```{r ex="LDA1.4.1.2_2", type="hint", tut=TRUE}
-
-We directly used the sample mean and variance to find parameters. i.e. Gaussian quantiles is calculated based on mean and standard deviation from positive loss.
+You can directly use the sample mean and standard deviation to find parameters for the Gaussian (normal) distribution.
 
 ```
 
@@ -644,62 +693,61 @@ positive_loss <- subset(Insample, y>0)
 
 
 ```{r ex="LDA1.4.1.2_2", type="sample-code", tut=TRUE}
-# Sample size
-n <- ??
-# Positive loss mean
+# Positive loss number, mean and standard deviation
+n <- length(??)
 mean <- ??
-# Positive loss variance
-variance <- ??
-# Positive loss standard variance
-sd <- ??
+?? <- sd(positive_loss$y)
+# gamma scale and shape parameter estimate
+theta = sd^2/mean
+alpha = ??
+
 # Probabilities
 p_values <- seq(1/(n+1), n/(n+1), by=1/(n+1))
-normal_quantiles <- qnorm(??)
+
 # Gaussian QQ Plot
-plot(??, ??, xlab = 'Theoretical Quantiles from Gaussian Distribution', ylab = 'Sample Quantiles of Positive Loss', main = 'Gaussian QQ Plot of Positive Loss')
+gaussian_quantiles <- qnorm(p_values, ??, ??)
+plot(sort(gaussian_quantiles), sort(positive_loss$y), 
+     xlab = 'Fitted Quantiles from Gaussian Distribution', 
+     ylab = 'Empirical Quantiles of Positive Loss', 
+     main = 'Gaussian QQ Plot of Positive Loss')
 abline(0,1)
-gamma_quantiles <- qgamma(??)
+
 # Gamma QQ Plot
-plot(??, ??, xlab = 'Theoretical Quantiles from Gamma Distribution', ylab = 'Sample Quantiles of Positive Loss', main = 'Gamma QQ Plot of Positive Loss')
+gamma_quantiles <- qgamma(??)
+plot(sort(gamma_quantiles), sort(positive_loss$y), 
+     xlab = 'Fitted Quantiles from Gamma Distribution', 
+     ylab = 'Empirical Quantiles of Positive Loss', 
+     main = 'Gamma QQ Plot of Positive Loss')
 abline(0,1)
 
 ```
 
 
 ```{r ex="LDA1.4.1.2_2", type="solution", tut=TRUE}
-# Sample size
+# Positive loss number, mean and standard deviation
 n <- length(positive_loss$y)
-# Positive loss mean
 mean <- mean(positive_loss$y)
-# Positive loss variance
-variance <- var(positive_loss$y)
-# Positive loss standard variance
 sd <- sd(positive_loss$y)
+# gamma scale and shape parameter estimate
+theta = sd^2/mean
+alpha = mean^2/sd^2 
 
 # Probabilities
 p_values <- seq(1/(n+1), n/(n+1), by=1/(n+1))
 
-# Calculate Gaussian quantiles using mean and standard deviation from positive loss
-normal_quantiles <- qnorm(p_values, mean, sd)
-
 # Gaussian QQ Plot
-plot(sort(normal_quantiles), 
-     sort(positive_loss$y), 
-     xlab = 'Theoretical Quantiles from Gaussian Distribution', 
-     ylab = 'Sample Quantiles of Positive Loss', 
+gaussian_quantiles <- qnorm(p_values, mean, sd)
+plot(sort(gaussian_quantiles), sort(positive_loss$y), 
+     xlab = 'Fitted Quantiles from Gaussian Distribution', 
+     ylab = 'Empirical Quantiles of Positive Loss', 
      main = 'Gaussian QQ Plot of Positive Loss')
 abline(0,1)
 
-# Calculate Gamma quantiles using mean and standard deviation from positive loss to calculate shape and scale parameters
-gamma_quantiles <- qgamma(p_values, 
-                          shape = mean^2/variance, 
-                          scale = variance/mean)
-
 # Gamma QQ Plot
-plot(sort(gamma_quantiles), 
-     sort(positive_loss$y), 
-     xlab = 'Theoretical Quantiles from Gamma Distribution', 
-     ylab = 'Sample Quantiles of Positive Loss', 
+gamma_quantiles <- qgamma(p_values, shape = alpha , scale = theta)
+plot(sort(gamma_quantiles), sort(positive_loss$y), 
+     xlab = 'Fitted Quantiles from Gamma Distribution', 
+     ylab = 'Empirical Quantiles of Positive Loss', 
      main = 'Gamma QQ Plot of Positive Loss')
 abline(0,1)
 
@@ -707,18 +755,35 @@ abline(0,1)
 
 
 ```{r ex="LDA1.4.1.2_2", type="sct", tut=TRUE}
+nmsg <- "Did you correctly specify the object `n`?"
+ex() %>% check_object("n", undefined_msg = "Make sure to not remove `n`!") %>% check_equal(incorrect_msg=nmsg)
+
+meanmsg <- "Did you correctly specify the object `mean`?"
+ex() %>% check_object("mean", undefined_msg = "Make sure to not remove `mean`!") %>% check_equal(incorrect_msg=meanmsg)
+
+alphamsg <- "Did you correctly specify the object `alpha`?"
+ex() %>% check_object("alpha", undefined_msg = "Make sure to not remove `alpha`!") %>% check_equal(incorrect_msg=alphamsg)
+
+gaussian_qmsg <- "Did you correctly specify the object `gaussian_quantiles`?"
+ex() %>% check_object("gaussian_quantiles", undefined_msg = "Make sure to not remove `gaussian_quantiles`!") %>% check_equal(incorrect_msg=gaussian_qmsg)
+
+gamma_qmsg <- "Did you correctly specify the object `gamma_quantiles`?"
+ex() %>% check_object("gamma_quantiles", undefined_msg = "Make sure to not remove `gamma_quantiles`!") %>% check_equal(incorrect_msg=gamma_qmsg)
+
 success_msg("Good job! The *qq* plot compares two fitted models through their quantiles. Again, the gamma is better fit.")
 ```
 
 ***
 
 
-### Exercise.  Kolmogorov-Smirnov test
+### Exercise.  Kolmogorov-Smirnov statistic
 
 **Assignment Text**
 
-For reporting results, it can be effective to supplement the graphical displays with selected statistics that summarize model goodness of fit. The Wisconsin Property Fund data has already been read into a data frame called `Insample`. Previously, we also created a subset, `positive_loss`, which included only positive losses. Perform Kolmogorov-Smirnov tests.
+For reporting results, it can be effective to supplement the graphical displays with selected statistics that summarize model goodness of fit. For background, you can learn more about the Kolmogorov-Smirnov statistic and other goodness of fit statistics in 
+[Section 4.1.2 of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-ModelSelection.html#S:MS:ToolsModelSelection).
 
+The Wisconsin Property Fund data has already been read into a data frame called `Insample`. Previously, we also created a subset, `positive_loss`, which included only positive losses. Perform Kolmogorov-Smirnov tests.
 
 :::: {.blackbox }
 **Instructions**
@@ -736,7 +801,6 @@ Take some time to explore the online `R` documentation. `theta`, `alpha`, and `g
 ```
 
 ```{r ex="LDA1.4.1.2_3", type="pre-exercise-code", tut=TRUE}
-
 library(MASS)
 library(stats)
 
@@ -779,15 +843,12 @@ ks.test(positive_loss$y, gamma)
 
 
 ```{r ex="LDA1.4.1.2_3", type="sct", tut=TRUE}
+ks.test1msg<-"Use `ks.test` on the `positive_loss$y` object"
+ex() %>% check_function("ks.test", not_called_msg=ks.test1msg) %>% check_result() %>% check_equal(incorrect_msg=ks.test1msg)
+
 success_msg("According to the Kolmogorov-Smirnov test, the two distribution functions are not equal. We have seen some deviations from the *qq* graph and *pp* graph. We need to find a better parametric model.")
 ```
 
-***
-
-
-  
-  
-  
 
 ## Model Selection: Likelihood Ratio Tests and Goodness of Fit
 
@@ -879,18 +940,22 @@ In this section, you learn how to:
   <iframe src="./Overheads/LDA1.Chap4.pdf#page=33" width="100%" height="400"> </iframe>
   </div>
   
-### Exercise. Nonparametric Estimation using Modified Data
+### Exercise. Kaplan-Meier Estimation based on Censored Data {#Ex:KMEstimation}
 
 **Assignment Text**
 
-Placing insurance deductibles generate truncated data (from the left), while policy limits produce censored data (from the right). The Wisconsin Property Fund data has already been read into a data frame called `Insample`. These data consist of claim experience for fund members over the years 2006-2010, inclusive. In addition, we created a subset data which included only positive loss data called `positive_loss`. Under hypothetical policy limit, 100000 USD, and deductible information, `Deduct`, in dataset, please find Kaplan-Meier Product Limit Estimator and the Nelson-Äalen estimator of the positive loss distribution function. Plot the survival function accordingly.
+This exercise is based on the  Wisconsin Property Fund data. These data consist of claim experience for fund members over the years 2006-2010, inclusive. A subset which includes only positive loss data has been read into a data frame called `positive_loss`. In part because the units of observations are governmental units, there are no upper limits on these policies. So, simply to illustrate coding for censored data, in this exercise we impose an upper limit of 50,000 on the first 100 claims as well as 100,000 on the remainder. (As an analyst, this part of the exercise could be useful to you as you test the sensitivity of policy limits.)
+
+After adding censoring information to the data, we use Kaplan-Meier technique to estimate the claims survival distribution (recall that the survival function is one minus the distribution function).
+
 
 :::: {.blackbox }
 **Instructions**
 
--  Create the hypothetical policy limit, 100000 USD, and attach it to `positive_loss` data.
--  Add actual payment column using [dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) data wrangling package. 
--  Add UnCensored column using the traditional method.
+-  Introduce policy limits as part of the `positive_loss` data.
+-  Create a new variable, `AmountPaid`, that is the smaller of the policy limit and the claim amount. In the following sample code, we show how to use the  [dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) data wrangling package. 
+-  Also create a binary variable, `UnCensored `, that is one if the claim is less than or equal to the policy limit, and zero otherwise.
+-  To determine the Kaplan-Meier product limit estimator, use [survfit()](https://www.rdocumentation.org/packages/survival/versions/2.11-4/topics/survfit) to estimate the survival function for the right-censored empirical distribution for the positive loss amount `y`. Plot the result.
 ::::
 
 <br>
@@ -903,12 +968,7 @@ We will use `dplyr` and traditional methods to perform data wrangling.
 
 
 ```{r ex="LDA1.4.3.2_1", type="pre-exercise-code", tut=TRUE}
-
-library(MASS)
-library(dplyr)
-
 Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/main/Data/Insample.csv", header=T, na.strings=c("."), stringsAsFactors=FALSE)
-
 # Subset for positive loss
 positive_loss <- subset(Insample, y>0)
 
@@ -917,52 +977,78 @@ positive_loss <- subset(Insample, y>0)
 
 ```{r ex="LDA1.4.3.2_1", type="sample-code", tut=TRUE}
 
-library(dplyr)
 # Add policy limit for positive loss data
 positive_loss$PolicyLimit <- ??
+positive_loss$PolicyLimit[1:100] <- ??
 
-# Add actual payment column: using dplyr 
-positive_loss_limit <- positive_loss %>% rowwise() %>% mutate(AmountPaid=??)
+# Add AmountPaid column: using dplyr 
+library(dplyr)
+positive_loss_limit <- positive_loss %>% rowwise() %>% mutate(AmountPaid=min(y, ??))
 
 # Add UnCensored column: traditional method
 positive_loss_limit$UnCensored <- ??
 
-# Print the beginning of the dataset
-head(??)
+# KM estimate
+library(survival) 
+KM0 <- survfit(Surv(AmountPaid, UnCensored) ~ 1, type="kaplan-meier", data=??)
 
+# plot function survival function
+plot(??, conf.int=FALSE, xlab="x", ylab="Kaplan Meier Survival")
 ```
 
 
 ```{r ex="LDA1.4.3.2_1", type="solution", tut=TRUE}
 
-library(dplyr)
-
 # Add policy limit for positive loss data
 positive_loss$PolicyLimit <- 100000
+positive_loss$PolicyLimit[1:100] <- 50000
 
-# Add actual payment column: using dplyr 
+# Add AmountPaid column: using dplyr 
+library(dplyr)
 positive_loss_limit <- positive_loss %>% rowwise() %>% mutate(AmountPaid=min(y, PolicyLimit))
 
 # Add UnCensored column: traditional method
 positive_loss_limit$UnCensored <- 1*(positive_loss_limit$AmountPaid < positive_loss_limit$PolicyLimit)
 
-# Print the beginning of the dataset
-head(positive_loss_limit)
+# KM estimate
+library(survival) 
+KM0 <- survfit(Surv(AmountPaid, UnCensored) ~ 1, type="kaplan-meier", data=positive_loss_limit)
+
+# plot function survival function
+plot(KM0, conf.int=FALSE, xlab="x", ylab="Kaplan Meier Survival")
+
 ```
 
 
 ```{r ex="LDA1.4.3.2_1", type="sct", tut=TRUE}
-success_msg("Getting started is always the hardest thing to do. Excellent start! There are many ways to do data manipulation")
+
+positive_lossmsg <- "Did you correctly specify the object `positive_loss`?"
+ex() %>% check_object("positive_loss", undefined_msg = "Make sure to not remove `positive_loss`!") %>% check_equal(incorrect_msg=positive_lossmsg)
+
+KM0msg <- "Did you correctly specify the object `KM0`?"
+ex() %>% check_object("KM0", undefined_msg = "Make sure to not remove `KM0`!") %>% check_equal(incorrect_msg=KM0msg)
+
+plot4msg<-"Use `plot` on the `KM0` object"
+ex() %>% check_function("plot", not_called_msg=plot4msg) %>% check_result() %>% check_equal(incorrect_msg=plot4msg)
+
+success_msg("Excellent! Handling data is an important aspect of the actuarial function. There are many ways to do data manipulation. You will find the flexibility afforded by dplyr package to be terrific as you become familiar with it.")
 ```
 
-### Exercise. Nonparametric Estimation using Modified Data II
+### Exercise. Nonparametric Estimation using Truncated and Censored Information
+
+As described in [Section 4.3.2.2 of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-ModelSelection.html#nonparametric-estimation-using-modified-data), it is very common to have data subject to both deductibles and upper limits. As emphasized in the previous exercise, upper limits typically means that the data are censored from the right. Typically, in the presence of deductibles, the data are truncated from the left (that is, we usually don't see a claim less than the deductible). We make that assumption for this exercise, using the data from Exercise \@ref(Ex:KMEstimation) where the deductible variable is called `Deduct`.
+
+With these modified data, we again estimate the survival distribution. The following code guides you through the estimation using both the  Kaplan-Meier Product Limit  and the Nelson-Äalen estimators. These methods are described in more detail in [Section 4.3.2.2 of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-ModelSelection.html#nonparametric-estimation-using-modified-data).
+
 
 :::: {.blackbox }
 **Instructions**
 
--  Under hypothetical policy limit, 100000 USD, use the Kaplan-Meier product limit [survfit()](https://www.rdocumentation.org/packages/survival/versions/2.11-4/topics/survfit) to estimate the survival function for the right-censored empirical distribution for the positive loss amount `y`.
--  Under hypothetical policy limit, use the Nelson-Aalen estimate of the cumulative hazard function to obtain an estimate of the survival function for the right-censored empirical distribution for the positive loss amount `y`. 
--  Under hypothetical policy limit and deductible information, use the Nelson-Aalen estimate of the cumulative hazard function to obtain an estimate of the survival function for the left-truncated and right-censored empirical distribution function for the positive loss amount `y`.
+-  Calculate and plot the KM estimate of the survival function without deductible information, that is, as in the prior exercise.
+-  Calculate and plot the KM estimate with deductible information.
+-  Calculate and plot the Nelson-Äalen estimate of the survival function without deductible information.
+-  Calculate and plot the Nelson-Äalen estimate with deductible information.
+
 :::: 
 
 <br>
@@ -986,12 +1072,14 @@ Insample <- read.csv("https://raw.githubusercontent.com/OpenActTexts/LDACourse1/
 
 # Subset for positive loss
 positive_loss <- subset(Insample, y>0)
+positive_loss <- subset(positive_loss, Deduct <= y)
 
 # Add policy limit for positive loss data
 positive_loss$PolicyLimit <- 100000
+positive_loss$PolicyLimit[1:100] <- 50000
 
 # Add actual payment column: using dplyr 
-positive_loss_limit <- positive_loss %>% rowwise() %>% mutate(AmountPaid=min(y, PolicyLimit))
+positive_loss_limit <- positive_loss %>% rowwise() %>% mutate(AmountPaid=min(y, PolicyLimit)+.01)
 
 # Add UnCensored column: traditional method
 positive_loss_limit$UnCensored <- 1*(positive_loss_limit$AmountPaid < positive_loss_limit$PolicyLimit)
@@ -1000,46 +1088,61 @@ positive_loss_limit$UnCensored <- 1*(positive_loss_limit$AmountPaid < positive_l
 
 
 ```{r ex="LDA1.4.3.2_2", type="sample-code", tut=TRUE}
+library(survival)
+# Calculate and plot the KM estimate without deductible information
+KM0 <- survfit(??, type="kaplan-meier", data=positive_loss_limit)
+plot(KM0, conf.int=FALSE, xlab="x", ylab="Kaplan Meier Survival")
 
-# KM estimate
-KM0 <- survfit(??, type="kaplan-meier", data=??)
-# Plot function survival function
+# Calculate and plot the KM estimate with deductible information
+KM1 <- survfit(Surv(Deduct, AmountPaid, UnCensored) ~ 1, type="kaplan-meier", data=??)
 plot(??, conf.int=FALSE, xlab="x", ylab="Kaplan Meier Survival")
-# Nelson-Aalen estimate
-NA0 <- survfit(??, type=??, data=??)
+
+# Calculate and plot the Nelson-Aalen estimate without deductible information
+NA0 <- survfit(??, type="fleming-harrington", data=??)
 plot(??, conf.int=FALSE, xlab="x", ylab="Nelson-Aalen Survival")
-# Nelson-Aalen estimate with deductible
-NA1 <- survfit(??)
+
+# Calculate and plot the Nelson-Aalen estimate with deductible information
+NA1 <- survfit(?? ~ 1, type="fleming-harrington", data=??)
 plot(??, conf.int=FALSE, xlab="x", ylab="Nelson-Aalen Survival")
 
 ```
 
 
 ```{r ex="LDA1.4.3.2_2", type="solution", tut=TRUE}
-
-# KM estimate
+library(survival)
+# Calculate and plot the KM estimate without deductible information
 KM0 <- survfit(Surv(AmountPaid, UnCensored) ~ 1, type="kaplan-meier", data=positive_loss_limit)
-
-# plot function survival function
 plot(KM0, conf.int=FALSE, xlab="x", ylab="Kaplan Meier Survival")
 
-# Nelson-Aalen estimate
-NA0 <- survfit(Surv(AmountPaid, UnCensored) ~ 1, type="fleming-harrington", data=positive_loss_limit)
+# Calculate and plot the KM estimate with deductible information
+KM1 <- survfit(Surv(Deduct, AmountPaid, UnCensored) ~ 1, type="kaplan-meier", data=positive_loss_limit)
+plot(KM1, conf.int=FALSE, xlab="x", ylab="Kaplan Meier Survival")
 
-# plot function survival function
+# Calculate and plot the Nelson-Aalen estimate without deductible information
+NA0 <- survfit(Surv(AmountPaid, UnCensored) ~ 1, type="fleming-harrington", data=positive_loss_limit)
 plot(NA0, conf.int=FALSE, xlab="x", ylab="Nelson-Aalen Survival")
 
-# Nelson-Aalen estimate with deductible
+# Calculate and plot the Nelson-Aalen estimate with deductible information
 NA1 <- survfit(Surv(Deduct, AmountPaid, UnCensored) ~ 1, type="fleming-harrington", data=positive_loss_limit)
-
-# plot function survival function
 plot(NA1, conf.int=FALSE, xlab="x", ylab="Nelson-Aalen Survival")
 
 ```
 
 
 ```{r ex="LDA1.4.3.2_2", type="sct", tut=TRUE}
-success_msg("Excellent!  Now we can see how the policy limit and deductible information changed survival curve.")
+KM0msg <- "Did you correctly specify the object `KM0`?"
+ex() %>% check_object("KM0", undefined_msg = "Make sure to not remove `KM0`!") %>% check_equal(incorrect_msg=KM0msg)
+
+KM1msg <- "Did you correctly specify the object `KM1`?"
+ex() %>% check_object("KM1", undefined_msg = "Make sure to not remove `KM1`!") %>% check_equal(incorrect_msg=KM1msg)
+
+NA0msg <- "Did you correctly specify the object `NA0`?"
+ex() %>% check_object("NA0", undefined_msg = "Make sure to not remove `NA0`!") %>% check_equal(incorrect_msg=NA0msg)
+
+NA1msg <- "Did you correctly specify the object `NA1`?"
+ex() %>% check_object("NA1", undefined_msg = "Make sure to not remove `NA1`!") %>% check_equal(incorrect_msg=NA1msg)
+
+success_msg("Excellent!  Now we can see how the policy limit and deductible information change estimates of a survival curve.")
 ```
   
 
@@ -1171,7 +1274,7 @@ In this section, you learn how to:
 
 **Assignment Text**
 
-In this tutorial, we will visually explore the prior and posterior distributions from Example 4.4.1, and explore what would happen if we observed one more observation as well.  Recall that for this problem, the prior distribution was 
+In this tutorial, we will visually explore the prior and posterior distributions from [Example 4.4.1 of *Loss Data Analytics*](https://openacttexts.github.io/Loss-Data-Analytics/C-ModelSelection.html#bayesian-inference), and explore what would happen if we observed one more observation as well.  Recall that for this problem, the prior distribution was 
 \[
 \pi(q) = q^3/0.07, \hspace{5mm} 0.6 \leq q \leq 0.8.
 \]
@@ -1184,9 +1287,9 @@ two observations from a Bernoulli(q) were $X_1 = 1, X_2 = 0$, and the posterior 
 :::: {.blackbox }
 **Instructions** 
 
-- Make a [plot](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot) of the prior distribution.
+- Make a [plot()](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot) of the prior distribution.
 - Think about how you expect the observed data to reshape it to the posterior.
-- Add the posterior and a legend to your plot, to confirm the influence of the observed data.  This requires advanced commands such as [lines](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/lines) and [legend](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/legend).
+- Add the posterior and a legend to your plot, to confirm the influence of the observed data.  This requires advanced commands such as [lines()](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/lines) and [legend()](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/legend).
 ::::
 
 <br>
@@ -1208,6 +1311,13 @@ plot(q, prior, col="red", type="l", ylab="")
 ```
 
 ```{r ex="LDA4.4.1.1", type="sct", tut=TRUE}
+
+priormsg <- "Did you correctly specify the object `prior`?"
+ex() %>% check_object("prior", undefined_msg = "Make sure to not remove `prior`!") %>% check_equal(incorrect_msg=priormsg)
+
+plot5msg<-"Use `plot` on the `q and `prior` objects"
+ex() %>% check_function("plot", not_called_msg=plot5msg) %>% check_result() %>% check_equal(incorrect_msg=plot5msg)
+
 success_msg("Excellent!")
 ```
 
@@ -1242,7 +1352,16 @@ legend("topleft",legend=c("Prior","Posterior"), col=c("red","blue"), lty=c(1,2))
 ```
 
 ```{r ex="LDA4.4.1.2", type="sct", tut=TRUE}
-success_msg("Excellent!  Now we can see how the observed data shifted our understanding of this unknown paramter.")
+prior1msg <- "Did you correctly specify the object `prior`?"
+ex() %>% check_object("prior", undefined_msg = "Make sure to not remove `prior`!") %>% check_equal(incorrect_msg=prior1msg)
+
+posteriormsg <- "Did you correctly specify the object `posterior`?"
+ex() %>% check_object("posterior", undefined_msg = "Make sure to not remove `posterior`!") %>% check_equal(incorrect_msg=posteriormsg)
+
+plot6msg<-"Use `plot` on the `q and `prior` objects"
+ex() %>% check_function("plot", not_called_msg=plot6msg) %>% check_result() %>% check_equal(incorrect_msg=plot6msg)
+
+success_msg("Excellent!  Now we can see how the observed data shifted our understanding of this unknown parameter.")
 ```
 
 Indeed, the posterior has shifted the mass towards lower values, balancing what the data tell us and what the prior tells us.  Since this is only two data points, the shift is not especially dramatic. 
@@ -1310,6 +1429,15 @@ As expected, the new posterior has shifted even more mass towards lower paramete
 
 
 ```{r ex="LDA4.4.1.3", type="sct", tut=TRUE}
+prior1msg <- "Did you correctly specify the object `prior`?"
+ex() %>% check_object("prior", undefined_msg = "Make sure to not remove `prior`!") %>% check_equal(incorrect_msg=prior1msg)
+
+posteriornewmsg <- "Did you correctly specify the object `posterior_new`?"
+ex() %>% check_object("posterior_new", undefined_msg = "Make sure to not remove `posterior_new`!") %>% check_equal(incorrect_msg=posteriornewmsg)
+
+plot7msg<-"Use `plot` on the `q and `prior` objects"
+ex() %>% check_function("plot", not_called_msg=plot7msg) %>% check_result() %>% check_equal(incorrect_msg=plot7msg)
+
 success_msg("Nice!")
 ```
   
@@ -1317,5 +1445,5 @@ success_msg("Nice!")
 ## Contributors {-}
 
 -  **Authors**. **Rob Erhardt**, Wake Forest University, **Brian Hartman**, Brigham Young University, and **Zhiyu (Frank) Quan**, University of Illinois at Urbana-Champaign, are the principal authors of the initial version of this chapter.
--  **Chapter Maintainers**. Please contact Frank <zquan@illinois.edu> and/or Jed at <jfrees@bus.wisc.edu> for chapter comments and suggested improvements.
+-  **Chapter Maintainers**. Please contact Frank at <zquan@illinois.edu> and/or Jed at <jfrees@bus.wisc.edu> for chapter comments and suggested improvements.
 
