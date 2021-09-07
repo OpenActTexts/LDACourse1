@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Frequency Modeling | Loss Data Analytics: Short Course</title>
   <meta name="description" content="This is an interactive, online, freely available short course. It will contain many interactive objects (quizzes, computer demonstrations, interactive graphs, video, and the like) to promote deeper learning." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Frequency Modeling | Loss Data Analytics: Short Course" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,6 @@
   
 <link rel="prev" href="introduction-to-loss-data-analytics.html"/>
 <link rel="next" href="modeling-loss-severity.html"/>
-<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,8 +49,7 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 <!-- Various toggle functions used throughout --> 
 <script language="javascript">
@@ -101,7 +99,6 @@ $(document).ready(function(){
 
   gtag('config', 'G-K7GRETHNZH');
 </script>
-
 <script language="javascript">
 function openTab(evt, tabName) {
     var i, tabcontent, tablinks;
@@ -219,7 +216,6 @@ var submitAnswer = function() {
 
 
 
-
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -236,149 +232,122 @@ var submitAnswer = function() {
 <li><a href="./">Loss Data Analytics: Short Course</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
-<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-loss-data-analytics"><i class="fa fa-check"></i>Why Loss Data Analytics?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i>Resources</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#how-to-navigate-this-tutorial"><i class="fa fa-check"></i>How to Navigate this Tutorial</a></li>
 <li><a href="index.html#a-word-from-our-sponsor-astin-education-astin-academy">A Word from our Sponsor: <br> Astin + Education = Astin Academy</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i>Contributors</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html"><i class="fa fa-check"></i><b>1</b> Introduction to Loss Data Analytics</a>
-<ul>
+<li class="chapter" data-level="1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html"><i class="fa fa-check"></i><b>1</b> Introduction to Loss Data Analytics</a><ul>
 <li class="chapter" data-level="1.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:Intro"><i class="fa fa-check"></i><b>1.1</b> Relevance of Analytics to Insurance Activities</a></li>
 <li class="chapter" data-level="1.2" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:PredModApps"><i class="fa fa-check"></i><b>1.2</b> Insurance Company Operations</a></li>
-<li class="chapter" data-level="1.3" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:LGPIF"><i class="fa fa-check"></i><b>1.3</b> Case Study: Property Fund Introduction</a>
-<ul>
+<li class="chapter" data-level="1.3" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:LGPIF"><i class="fa fa-check"></i><b>1.3</b> Case Study: Property Fund Introduction</a><ul>
 <li class="chapter" data-level="1.3.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-claim-frequency"><i class="fa fa-check"></i><b>1.3.1</b> Exercise. Claim Frequency</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:PropertyFundSeverity"><i class="fa fa-check"></i><b>1.4</b> Property Fund Claim Severity</a>
-<ul>
+<li class="chapter" data-level="1.4" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:PropertyFundSeverity"><i class="fa fa-check"></i><b>1.4</b> Property Fund Claim Severity</a><ul>
 <li class="chapter" data-level="1.4.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-exploring-claim-severities"><i class="fa fa-check"></i><b>1.4.1</b> Exercise. Exploring Claim Severities</a></li>
 <li class="chapter" data-level="1.4.2" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-skewness-of-the-claim-severity-distribution"><i class="fa fa-check"></i><b>1.4.2</b> Exercise. Skewness of the Claim Severity Distribution</a></li>
 <li class="chapter" data-level="1.4.3" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#exercise.-claim-severity-by-year"><i class="fa fa-check"></i><b>1.4.3</b> Exercise. Claim Severity by Year</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:LGPIFRatingVariaables"><i class="fa fa-check"></i><b>1.5</b> Property Fund Rating Variables</a>
-<ul>
+<li class="chapter" data-level="1.5" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Sec:LGPIFRatingVariaables"><i class="fa fa-check"></i><b>1.5</b> Property Fund Rating Variables</a><ul>
 <li class="chapter" data-level="1.5.1" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#Ex:ClaimByType"><i class="fa fa-check"></i><b>1.5.1</b> Exercise. Claim by Entity Type, Fire Class, and No Claim Credit</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="introduction-to-loss-data-analytics.html"><a href="introduction-to-loss-data-analytics.html#contributors-1"><i class="fa fa-check"></i>Contributors</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="frequency-modeling.html"><a href="frequency-modeling.html"><i class="fa fa-check"></i><b>2</b> Frequency Modeling</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#basic-frequency-distributions"><i class="fa fa-check"></i><b>2.1</b> Basic Frequency Distributions</a>
-<ul>
+<li class="chapter" data-level="2" data-path="frequency-modeling.html"><a href="frequency-modeling.html"><i class="fa fa-check"></i><b>2</b> Frequency Modeling</a><ul>
+<li class="chapter" data-level="2.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#basic-frequency-distributions"><i class="fa fa-check"></i><b>2.1</b> Basic Frequency Distributions</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-representing-the-number-of-cyber-events-with-a-binomial-distribution"><i class="fa fa-check"></i><b>2.1.1</b> Exercise. Representing the Number of Cyber Events with a Binomial Distribution</a></li>
 <li class="chapter" data-level="2.1.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-representing-the-number-of-cyber-events-with-a-poisson-distribution"><i class="fa fa-check"></i><b>2.1.2</b> Exercise. Representing the Number of Cyber Events with a Poisson Distribution</a></li>
 <li class="chapter" data-level="2.1.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-comparing-basic-count-distributions"><i class="fa fa-check"></i><b>2.1.3</b> Exercise. Comparing Basic Count Distributions</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#the-ab0-class"><i class="fa fa-check"></i><b>2.2</b> The (a,b,0) Class</a>
-<ul>
+<li class="chapter" data-level="2.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#the-ab0-class"><i class="fa fa-check"></i><b>2.2</b> The (a,b,0) Class</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-determining-probabilities-recursively"><i class="fa fa-check"></i><b>2.2.1</b> Exercise. Determining Probabilities Recursively</a></li>
 <li class="chapter" data-level="2.2.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-reverse-engineering-and-recursive-r-functions"><i class="fa fa-check"></i><b>2.2.2</b> Exercise. Reverse Engineering and Recursive <code>R</code> Functions</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#estimating-frequency-distributions"><i class="fa fa-check"></i><b>2.3</b> Estimating Frequency Distributions</a>
-<ul>
+<li class="chapter" data-level="2.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#estimating-frequency-distributions"><i class="fa fa-check"></i><b>2.3</b> Estimating Frequency Distributions</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#Ex:CountDataCompression"><i class="fa fa-check"></i><b>2.3.1</b> Exercise. Count Data Compression - 1</a></li>
 <li class="chapter" data-level="2.3.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-count-data-compression---2"><i class="fa fa-check"></i><b>2.3.2</b> Exercise. Count Data Compression - 2</a></li>
 <li class="chapter" data-level="2.3.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-graphing-likelihoods"><i class="fa fa-check"></i><b>2.3.3</b> Exercise. Graphing Likelihoods</a></li>
 <li class="chapter" data-level="2.3.4" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-fitting-a-binomial-distribution"><i class="fa fa-check"></i><b>2.3.4</b> Exercise. Fitting a Binomial Distribution</a></li>
 <li class="chapter" data-level="2.3.5" data-path="frequency-modeling.html"><a href="frequency-modeling.html#Exer:FitNegBinomialDistrn"><i class="fa fa-check"></i><b>2.3.5</b> Exercise. Fitting a Negative Binomial Distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="frequency-modeling.html"><a href="frequency-modeling.html#other-frequency-distributions"><i class="fa fa-check"></i><b>2.4</b> Other Frequency Distributions</a>
-<ul>
+<li class="chapter" data-level="2.4" data-path="frequency-modeling.html"><a href="frequency-modeling.html#other-frequency-distributions"><i class="fa fa-check"></i><b>2.4</b> Other Frequency Distributions</a><ul>
 <li class="chapter" data-level="2.4.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-the-ab1-distribution-and-its-moments"><i class="fa fa-check"></i><b>2.4.1</b> Exercise. The (<em>a,b</em>,1) Distribution and its Moments</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="frequency-modeling.html"><a href="frequency-modeling.html#mixture-distributions"><i class="fa fa-check"></i><b>2.5</b> Mixture Distributions</a>
-<ul>
+<li class="chapter" data-level="2.5" data-path="frequency-modeling.html"><a href="frequency-modeling.html#mixture-distributions"><i class="fa fa-check"></i><b>2.5</b> Mixture Distributions</a><ul>
 <li class="chapter" data-level="2.5.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-mixtures-of-workers-compensation-claims"><i class="fa fa-check"></i><b>2.5.1</b> Exercise. Mixtures of Workers’ Compensation Claims</a></li>
 <li class="chapter" data-level="2.5.2" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-finite-number-of-mixture-distributions"><i class="fa fa-check"></i><b>2.5.2</b> Exercise. Finite Number of Mixture Distributions</a></li>
 <li class="chapter" data-level="2.5.3" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-gamma-mixture-of-poissons"><i class="fa fa-check"></i><b>2.5.3</b> Exercise. Gamma Mixture of Poissons</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="frequency-modeling.html"><a href="frequency-modeling.html#goodness-of-fit"><i class="fa fa-check"></i><b>2.6</b> Goodness of Fit</a>
-<ul>
+<li class="chapter" data-level="2.6" data-path="frequency-modeling.html"><a href="frequency-modeling.html#goodness-of-fit"><i class="fa fa-check"></i><b>2.6</b> Goodness of Fit</a><ul>
 <li class="chapter" data-level="2.6.1" data-path="frequency-modeling.html"><a href="frequency-modeling.html#exercise.-goodness-of-fit-zero-modified-poisson"><i class="fa fa-check"></i><b>2.6.1</b> Exercise. Goodness of Fit: Zero-Modified Poisson</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="frequency-modeling.html"><a href="frequency-modeling.html#contributors-2"><i class="fa fa-check"></i>Contributors</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html"><i class="fa fa-check"></i><b>3</b> Modeling Loss Severity</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#basic-distributional-quantities"><i class="fa fa-check"></i><b>3.1</b> Basic Distributional Quantities</a>
-<ul>
+<li class="chapter" data-level="3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html"><i class="fa fa-check"></i><b>3</b> Modeling Loss Severity</a><ul>
+<li class="chapter" data-level="3.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#basic-distributional-quantities"><i class="fa fa-check"></i><b>3.1</b> Basic Distributional Quantities</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-moments-can-be-misleading"><i class="fa fa-check"></i><b>3.1.1</b> Exercise. Moments Can Be Misleading</a></li>
 <li class="chapter" data-level="3.1.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-determining-boxplots-and-quantiles"><i class="fa fa-check"></i><b>3.1.2</b> Exercise. Determining Boxplots and Quantiles</a></li>
 <li class="chapter" data-level="3.1.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-gamma-moment-generating-function"><i class="fa fa-check"></i><b>3.1.3</b> Exercise. Gamma Moment Generating Function</a></li>
 <li class="chapter" data-level="3.1.4" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-visualizing-moment-generating-functions"><i class="fa fa-check"></i><b>3.1.4</b> Exercise. Visualizing Moment Generating Functions</a></li>
 <li class="chapter" data-level="3.1.5" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-determining-moments-using-moment-generating-functions"><i class="fa fa-check"></i><b>3.1.5</b> Exercise. Determining Moments using Moment Generating Functions</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#continuous-distributions"><i class="fa fa-check"></i><b>3.2</b> Continuous Distributions</a>
-<ul>
+<li class="chapter" data-level="3.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#continuous-distributions"><i class="fa fa-check"></i><b>3.2</b> Continuous Distributions</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-visualizing-a-distribution-using-a-histogram"><i class="fa fa-check"></i><b>3.2.1</b> Exercise. Visualizing a Distribution using a Histogram</a></li>
 <li class="chapter" data-level="3.2.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#Ex:VisualGamma"><i class="fa fa-check"></i><b>3.2.2</b> Exercise. Visualizing the Gamma Distribution</a></li>
 <li class="chapter" data-level="3.2.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#Ex:CreateParetoDensityFct"><i class="fa fa-check"></i><b>3.2.3</b> Exercise. Creating a Pareto Density Function</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#methods-of-creating-new-distributions"><i class="fa fa-check"></i><b>3.3</b> Methods of Creating New Distributions</a>
-<ul>
+<li class="chapter" data-level="3.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#methods-of-creating-new-distributions"><i class="fa fa-check"></i><b>3.3</b> Methods of Creating New Distributions</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-using-the-logarithmic-transformation-to-create-a-new-distribution"><i class="fa fa-check"></i><b>3.3.1</b> Exercise. Using the Logarithmic Transformation to Create a New Distribution</a></li>
 <li class="chapter" data-level="3.3.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-creating-a-mixture-distribution"><i class="fa fa-check"></i><b>3.3.2</b> Exercise. Creating a Mixture Distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#coverage-modifications"><i class="fa fa-check"></i><b>3.4</b> Coverage Modifications</a>
-<ul>
+<li class="chapter" data-level="3.4" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#coverage-modifications"><i class="fa fa-check"></i><b>3.4</b> Coverage Modifications</a><ul>
 <li class="chapter" data-level="3.4.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-calculate-moments-of-the-lognormal-distribution"><i class="fa fa-check"></i><b>3.4.1</b> Exercise. Calculate Moments of the Lognormal Distribution</a></li>
 <li class="chapter" data-level="3.4.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-calculate-limited-expected-value-of-the-lognormal-distribution"><i class="fa fa-check"></i><b>3.4.2</b> Exercise. Calculate Limited Expected Value of the Lognormal Distribution</a></li>
 <li class="chapter" data-level="3.4.3" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-expected-claims-subject-to-a-deductible"><i class="fa fa-check"></i><b>3.4.3</b> Exercise. Expected Claims Subject to a Deductible</a></li>
 <li class="chapter" data-level="3.4.4" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-expected-claims-subject-to-a-deductible-and-coinsurance"><i class="fa fa-check"></i><b>3.4.4</b> Exercise. Expected Claims Subject to a Deductible and Coinsurance</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>3.5</b> Maximum Likelihood Estimation</a>
-<ul>
+<li class="chapter" data-level="3.5" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>3.5</b> Maximum Likelihood Estimation</a><ul>
 <li class="chapter" data-level="3.5.1" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#Ex:MLEPareto"><i class="fa fa-check"></i><b>3.5.1</b> Exercise. Maximum Likelihood Estimation for a Pareto Distribution</a></li>
 <li class="chapter" data-level="3.5.2" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#exercise.-finding-standard-errors-for-maximum-likelihood-estimates"><i class="fa fa-check"></i><b>3.5.2</b> Exercise. Finding Standard Errors for Maximum Likelihood Estimates</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="modeling-loss-severity.html"><a href="modeling-loss-severity.html#contributors-3"><i class="fa fa-check"></i>Contributors</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html"><i class="fa fa-check"></i><b>4</b> Model Selection and Estimation</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#Sec:NonInf"><i class="fa fa-check"></i><b>4.1</b> Nonparametric Inference</a>
-<ul>
+<li class="chapter" data-level="4" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html"><i class="fa fa-check"></i><b>4</b> Model Selection and Estimation</a><ul>
+<li class="chapter" data-level="4.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#Sec:NonInf"><i class="fa fa-check"></i><b>4.1</b> Nonparametric Inference</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-empirical-distribution-function-and-quartiles-percentiles-and-quantiles"><i class="fa fa-check"></i><b>4.1.1</b> Exercise. Empirical Distribution Function and Quartiles, Percentiles and Quantiles</a></li>
 <li class="chapter" data-level="4.1.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-density-estimators"><i class="fa fa-check"></i><b>4.1.2</b> Exercise. Density Estimators</a></li>
 <li class="chapter" data-level="4.1.3" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-comparing-poisson-and-negative-binomial-distributions"><i class="fa fa-check"></i><b>4.1.3</b> Exercise. Comparing Poisson and Negative Binomial Distributions</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#tools-for-model-selection"><i class="fa fa-check"></i><b>4.2</b> Tools for Model Selection</a>
-<ul>
+<li class="chapter" data-level="4.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#tools-for-model-selection"><i class="fa fa-check"></i><b>4.2</b> Tools for Model Selection</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#Ex:PPPlot"><i class="fa fa-check"></i><b>4.2.1</b> Exercise. Probability-Probability (<span class="math inline">\(pp\)</span>) plot</a></li>
 <li class="chapter" data-level="4.2.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-quantile-quantile-qq-plot"><i class="fa fa-check"></i><b>4.2.2</b> Exercise. Quantile-Quantile (<span class="math inline">\(qq\)</span>) plot</a></li>
 <li class="chapter" data-level="4.2.3" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-kolmogorov-smirnov-statistic"><i class="fa fa-check"></i><b>4.2.3</b> Exercise. Kolmogorov-Smirnov statistic</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#model-selection-likelihood-ratio-tests-and-goodness-of-fit"><i class="fa fa-check"></i><b>4.3</b> Model Selection: Likelihood Ratio Tests and Goodness of Fit</a></li>
-<li class="chapter" data-level="4.4" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#estimation-using-modified-data-nonparametric-approach"><i class="fa fa-check"></i><b>4.4</b> Estimation using Modified Data: Nonparametric Approach</a>
-<ul>
+<li class="chapter" data-level="4.4" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#estimation-using-modified-data-nonparametric-approach"><i class="fa fa-check"></i><b>4.4</b> Estimation using Modified Data: Nonparametric Approach</a><ul>
 <li class="chapter" data-level="4.4.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#Ex:KMEstimation"><i class="fa fa-check"></i><b>4.4.1</b> Exercise. Kaplan-Meier Estimation based on Censored Data</a></li>
 <li class="chapter" data-level="4.4.2" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#exercise.-nonparametric-estimation-using-truncated-and-censored-information"><i class="fa fa-check"></i><b>4.4.2</b> Exercise. Nonparametric Estimation using Truncated and Censored Information</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#estimation-using-modified-data-parametric-approach"><i class="fa fa-check"></i><b>4.5</b> Estimation using Modified Data: Parametric Approach</a></li>
-<li class="chapter" data-level="4.6" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#bayesian-inference"><i class="fa fa-check"></i><b>4.6</b> Bayesian Inference</a>
-<ul>
+<li class="chapter" data-level="4.6" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#bayesian-inference"><i class="fa fa-check"></i><b>4.6</b> Bayesian Inference</a><ul>
 <li class="chapter" data-level="4.6.1" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#visualizing-bayesian-methods"><i class="fa fa-check"></i><b>4.6.1</b> Visualizing Bayesian Methods</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="model-selection-and-estimation.html"><a href="model-selection-and-estimation.html#contributors-4"><i class="fa fa-check"></i>Contributors</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html"><i class="fa fa-check"></i><b>5</b> Aggregate Loss Models</a>
-<ul>
+<li class="chapter" data-level="5" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html"><i class="fa fa-check"></i><b>5</b> Aggregate Loss Models</a><ul>
 <li class="chapter" data-level="5.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#introduction"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
-<li class="chapter" data-level="5.2" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#individual-risk-model"><i class="fa fa-check"></i><b>5.2</b> Individual Risk Model</a>
-<ul>
+<li class="chapter" data-level="5.2" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#individual-risk-model"><i class="fa fa-check"></i><b>5.2</b> Individual Risk Model</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#Ex:IRM1"><i class="fa fa-check"></i><b>5.2.1</b> Exercise. Simulating Claim Frequency</a></li>
 <li class="chapter" data-level="5.2.2" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-individual-risk-model"><i class="fa fa-check"></i><b>5.2.2</b> Exercise. Individual Risk Model</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#Sec:CollRisk1"><i class="fa fa-check"></i><b>5.3</b> Fitting a Collective Risk Model in Two Parts</a>
-<ul>
+<li class="chapter" data-level="5.3" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#Sec:CollRisk1"><i class="fa fa-check"></i><b>5.3</b> Fitting a Collective Risk Model in Two Parts</a><ul>
 <li class="chapter" data-level="5.3.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#Ex:FreqCollectRM"><i class="fa fa-check"></i><b>5.3.1</b> Exercise. Estimating the Frequency Component of the Collective Risk Model</a></li>
 <li class="chapter" data-level="5.3.2" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-estimating-the-severity-component-of-the-collective-risk-model"><i class="fa fa-check"></i><b>5.3.2</b> Exercise. Estimating the Severity Component of the Collective Risk Model</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#computation-strategies-for-a-collective-risk-model"><i class="fa fa-check"></i><b>5.4</b> Computation Strategies for a Collective Risk Model</a></li>
-<li class="chapter" data-level="5.5" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#tweedie-distribution"><i class="fa fa-check"></i><b>5.5</b> Tweedie Distribution</a>
-<ul>
+<li class="chapter" data-level="5.5" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#tweedie-distribution"><i class="fa fa-check"></i><b>5.5</b> Tweedie Distribution</a><ul>
 <li class="chapter" data-level="5.5.1" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#exercise.-fitting-a-tweedie-distribution"><i class="fa fa-check"></i><b>5.5.1</b> Exercise. Fitting a Tweedie Distribution</a></li>
 </ul></li>
 <li class="chapter" data-level="5.6" data-path="aggregate-loss-models.html"><a href="aggregate-loss-models.html#effects-of-coverage-modifications"><i class="fa fa-check"></i><b>5.6</b> Effects of Coverage Modifications</a></li>
@@ -404,7 +373,7 @@ var submitAnswer = function() {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="frequency-modeling" class="section level1" number="2">
+<div id="frequency-modeling" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Frequency Modeling</h1>
 <p><strong>Chapter Description</strong></p>
 <p>A primary focus for insurers is estimating the magnitude of aggregate claims it must bear under its insurance contracts. Aggregate claims are affected by both the frequency and the severity of the insured event. Decomposing aggregate claims into these two components, each of which warrant significant attention, is essential for analysis and pricing. This chapter discusses frequency distributions, summary measures, and parameter estimation techniques.</p>
@@ -414,7 +383,7 @@ var submitAnswer = function() {
 <li>By watching the videos and working through the tutorial exercises, you will get an appreciation for frequency modeling. For a deeper dive, see the corresponding chapter in the textbook, <a href="https://openacttexts.github.io/Loss-Data-Analytics/C-Frequency-Modeling.html">Chapter Two of <em>Loss Data Analytics</em></a>.</li>
 </ul>
 </div>
-<div id="basic-frequency-distributions" class="section level2" number="2.1">
+<div id="basic-frequency-distributions" class="section level2">
 <h2><span class="header-section-number">2.1</span> Basic Frequency Distributions</h2>
 <hr />
 <p>In this section, you learn how to:</p>
@@ -476,7 +445,7 @@ var submitAnswer = function() {
 <iframe src="./Overheads/LDA1.Chap2.pdf#page=17" width="100%" height="400"> </iframe>
 </div>
 </div>
-<div id="exercise.-representing-the-number-of-cyber-events-with-a-binomial-distribution" class="section level3" number="2.1.1">
+<div id="exercise.-representing-the-number-of-cyber-events-with-a-binomial-distribution" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Exercise. Representing the Number of Cyber Events with a Binomial Distribution</h3>
 <p><strong>Assignment Text</strong></p>
 <p>Cyber risk for a firm is based on its liability for a data breach involving sensitive customer information, such as Social Security numbers, credit card numbers, account numbers, driver’s license numbers and health records. A company models its cyber risk using the following assumptions:</p>
@@ -500,7 +469,7 @@ var submitAnswer = function() {
 eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6IiMgTm9uZSBmb3IgdGhpcyBleGVyY2lzZSIsInNhbXBsZSI6InNpemUgPSA/P1xuQ3liZXIucHJvYiA9ID8/XG5cbm91dGNvbWVzIDwtIDA6c2l6ZVxucG1mIDwtIGRiaW5vbSh4PW91dGNvbWVzLCBzaXplPXNpemUsIHByb2I9Q3liZXIucHJvYikgIFxucG1mXG5cbnBtZjEgPC0gcm91bmQocG1mLCBkaWdpdHMgPSA2KVxub3V0Y29tZWRhdGFmIDwtIHJiaW5kKG91dGNvbWVzLCA/Pylcbm91dGNvbWVkYXRhZiBcblxuYmFycGxvdChwbWYsIG5hbWVzLmFyZz0/PywgY29sPVwibGlnaHRncmVlblwiLCB5bGFiID0gPz8sIHhsYWIgPSA/PykiLCJzb2x1dGlvbiI6InNpemUgPSAxMlxuQ3liZXIucHJvYiA9IDAuMDFcblxub3V0Y29tZXMgPC0gMDpzaXplXG5wbWYgPC0gZGJpbm9tKHg9b3V0Y29tZXMsIHNpemU9c2l6ZSwgcHJvYj1DeWJlci5wcm9iKSAgXG5wbWZcblxucG1mMSA8LSByb3VuZChwbWYsIGRpZ2l0cyA9IDYpXG5vdXRjb21lZGF0YWYgPC0gcmJpbmQob3V0Y29tZXMsIHBtZjEpXG5vdXRjb21lZGF0YWYgXG5cbmJhcnBsb3QocG1mLCBuYW1lcy5hcmc9b3V0Y29tZXMsIGNvbD1cImxpZ2h0Z3JlZW5cIiwgeWxhYiA9IFwiUHJvYmFiaWxpdHlcIiwgeGxhYiA9IFwiQ3liZXIgRXZlbnRzXCIpIiwic2N0Ijoic2l6ZW1zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgc2l6ZWA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcInNpemVcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYHNpemVgIVwiKSAlPiUgY2hlY2tfZXF1YWwoaW5jb3JyZWN0X21zZz1zaXplbXNnKVxuQ3liZXIucHJvYm1zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgQ3liZXIucHJvYmA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcIkN5YmVyLnByb2JcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYEN5YmVyLnByb2JgIVwiKSAlPiUgY2hlY2tfZXF1YWwoaW5jb3JyZWN0X21zZz1DeWJlci5wcm9ibXNnKVxub3V0Y29tZWRhdGFmbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBvdXRjb21lZGF0YWZgP1wiXG5leCgpICU+JSBjaGVja19vYmplY3QoXCJvdXRjb21lZGF0YWZcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYG91dGNvbWVkYXRhZmAhXCIpICU+JSBjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPW91dGNvbWVkYXRhZm1zZylcbmJhcnBsb3Rtc2cgPC0gXCJEaWQgeW91IGNvcnJlY3RseSBzcGVjaWZ5IHRoZSBhcmd1bWVudHM/XCJcbmV4KCkgJT4lIGNoZWNrX2Z1bmN0aW9uKFwiYmFycGxvdFwiLCBub3RfY2FsbGVkX21zZyA9YmFycGxvdG1zZykgJT4lIGNoZWNrX3Jlc3VsdChlcnJvcl9tc2c9YmFycGxvdG1zZykgJT4lIGNoZWNrX2VxdWFsKClcblxuc3VjY2Vzc19tc2coXCJFeGNlbGxlbnQgam9iISBNb3N0IGNvbnN1bWVycyBoYXZlIHNvbWUgZmFtaWxpYXJpdHkgd2l0aCB0aGUgYmlub21pYWwgZGlzdHJpYnV0aW9ucywgc28gaXQgaXMgaW1wb3J0YW50IGluIGFjdHVhcmlhbCBhcHBsaWNhdGlvbnMgdG8gYmUgYWJsZSB0byBjb252ZXkgbWVzc2FnZXMgYWJvdXQgY291bnRzIGluIHRoZSBjb250ZXh0IG9mIHRoaXMgZGlzdHJpYnV0aW9uLlwiKSIsImhpbnQiOiJSZXZpZXcgdGhlIGltcG9ydGFudCBjb3VudCBkaXN0cmlidXRpb25zIGluIDxhIGhyZWY9XCJodHRwczovL29wZW5hY3R0ZXh0cy5naXRodWIuaW8vTG9zcy1EYXRhLUFuYWx5dGljcy9DLUZyZXF1ZW5jeS1Nb2RlbGluZy5odG1sI1M6aW1wb3J0YW50LWZyZXF1ZW5jeS1kaXN0cmlidXRpb25zXCI+TG9zcyBEYXRhIEFuYWx5dGljcyBGcmVxdWVuY3kgTW9kZWxpbmc8L2E+IGNoYXB0ZXIuIn0=
 </div>
 </div>
-<div id="exercise.-representing-the-number-of-cyber-events-with-a-poisson-distribution" class="section level3" number="2.1.2">
+<div id="exercise.-representing-the-number-of-cyber-events-with-a-poisson-distribution" class="section level3">
 <h3><span class="header-section-number">2.1.2</span> Exercise. Representing the Number of Cyber Events with a Poisson Distribution</h3>
 <p><strong>Assignment Text</strong></p>
 <p>Another company is also concerned with cyber risk. Compared to the company in the prior exercise, this company is larger and does not wish to assume at most one cyber event in a quarter. Moreover, it believes that the distribution of cyber events is a function of its technical support staff size that has increased over time. Thus, it wishes to model the number of cyber events as a Poisson distribution with expected number of events as:</p>
@@ -530,7 +499,7 @@ using the functions <a href="https://www.rdocumentation.org/packages/stats/versi
 eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJsYW1iZGF2ZWMgPC0gYyhyZXAoMC4xLDQpLCByZXAoMC4yLDQpLCAwLjMsIDAuMywgMC40LCAwLjUpXG5DeWJlci5sYW1iZGEgPC0gc3VtKD8/KVxuXG5vdXRjb21lcyA8LSAwOjEyXG5DeWJlci5wbWYgPC0gZHBvaXMoeD0/PywgbGFtYmRhPUN5YmVyLmxhbWJkYSlcbmJhcnBsb3QoQ3liZXIucG1mLCBuYW1lcy5hcmc9b3V0Y29tZXMsIGNvbD1cImxpZ2h0Z3JlZW5cIiwgeWxhYiA9IFwiUHJvYmFiaWxpdHlcIiwgeGxhYiA9IFwiQ3liZXIgRXZlbnRzXCIpXG5cbkN5YmVyLmRmIDwtIHBwb2lzKG91dGNvbWVzLCA/Pylcbm91dGNvbWVkYXRhZiA8LSByYmluZChvdXRjb21lcywgQ3liZXIucG1mLCBDeWJlci5kZilcbm91dGNvbWVkYXRhZiBcblxucXBvaXMoPz8sIGxhbWJkYT1DeWJlci5sYW1iZGEpXG5cblByb2J6ZXJvIDwtIGRwb2lzKHg9MCwgbGFtYmRhPWxhbWJkYXZlYylcbnBsb3QoPz8sUHJvYnplcm8sIHR5cGUgPSBcImxcIiwgeGxhYiA9IFwicXVhcnRlclwiLCB5bGFiID0gXCJQcm9iIG9mIFplcm9cIikiLCJzb2x1dGlvbiI6ImxhbWJkYXZlYyA8LSBjKHJlcCgwLjEsNCksIHJlcCgwLjIsNCksIDAuMywgMC4zLCAwLjQsIDAuNSlcbkN5YmVyLmxhbWJkYSA8LSBzdW0obGFtYmRhdmVjKVxuXG5vdXRjb21lcyA8LSAwOjEyXG5DeWJlci5wbWYgPC0gZHBvaXMoeD1vdXRjb21lcywgbGFtYmRhPUN5YmVyLmxhbWJkYSlcbmJhcnBsb3QoQ3liZXIucG1mLCBuYW1lcy5hcmc9b3V0Y29tZXMsIGNvbD1cImxpZ2h0Z3JlZW5cIiwgeWxhYiA9IFwiUHJvYmFiaWxpdHlcIiwgeGxhYiA9IFwiQ3liZXIgRXZlbnRzXCIpXG5cbkN5YmVyLmRmIDwtIHBwb2lzKG91dGNvbWVzLCBsYW1iZGE9Q3liZXIubGFtYmRhKVxub3V0Y29tZWRhdGFmIDwtIHJiaW5kKG91dGNvbWVzLCBDeWJlci5wbWYsIEN5YmVyLmRmKVxub3V0Y29tZWRhdGFmIFxuXG5xcG9pcygwLjk1LCBsYW1iZGE9Q3liZXIubGFtYmRhKVxuXG5Qcm9iemVybyA8LSBkcG9pcyh4PTAsIGxhbWJkYT1sYW1iZGF2ZWMpXG5wbG90KDE6MTIsUHJvYnplcm8sIHR5cGUgPSBcImxcIiwgeGxhYiA9IFwicXVhcnRlclwiLCB5bGFiID0gXCJQcm9iIG9mIFplcm9cIikiLCJzY3QiOiJDeWJlci5sYW1iZGFtc2cgPC0gXCJEaWQgeW91IGNvcnJlY3RseSBzcGVjaWZ5IHRoZSBvYmplY3QgYEN5YmVyLmxhbWJkYWA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcIkN5YmVyLmxhbWJkYVwiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgQ3liZXIubGFtYmRhYCFcIikgJT4lIGNoZWNrX2VxdWFsKGluY29ycmVjdF9tc2c9Q3liZXIubGFtYmRhbXNnKVxuQ3liZXIucG1mbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBDeWJlci5wbWZgP1wiXG5leCgpICU+JSBjaGVja19vYmplY3QoXCJDeWJlci5wbWZcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYEN5YmVyLnBtZmAhXCIpICU+JSBjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPUN5YmVyLnBtZm1zZylcbkN5YmVyLmRmbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBDeWJlci5kZmA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcIkN5YmVyLmRmXCIsIHVuZGVmaW5lZF9tc2cgPSBcIk1ha2Ugc3VyZSB0byBub3QgcmVtb3ZlIGBDeWJlci5kZmAhXCIpICU+JSBjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPUN5YmVyLmRmbXNnKVxuXG5zdWNjZXNzX21zZyhcIkV4Y2VsbGVudCBqb2IhIFRoZSBQb2lzc29uIGlzIHRoZSBiYXNpYyBjb3VudCBkaXN0cmlidXRpb24gaW4gYWN0dWFyaWFsIGFwcGxpY2F0aW9ucy4gQ29uc3VtZXJzIG9mdGVuIGhhdmUgZmFtaWxpYXJpdHkgd2l0aCB0aGUgZXhwZWN0ZWQgbnVtYmVyIG9mIGV2ZW50cyBhcyB3ZWxsIGFzIHRoZSBwcm9iYWJpbGl0eSBvZiB6ZXJvIGV2ZW50cy4gSW4gdGhlIGxhc3QgcGFydCwgeW91IGxlYXJuZWQgaG93IHRvIHBvcnRyYXkgaW5jcmVhc2luZyBtZWFucyBpbiB0ZXJtcyBvZiBkZWNyZWFzaW5nIGZyZXF1ZW5jeSBvZiB6ZXJvIGV2ZW50cywgY29ubmVjdGluZyB0aGVzZSBpbXBvcnRhbnQgc3VtbWFyeSBtZWFzdXJlcy5cIikiLCJoaW50IjoiWW91IHdpbGwgZmluZCBtb3JlIGRpc2N1c3Npb24gb2YgcGVyY2VudGlsZXMgaW4gU2VjdGlvbiA0LjEgb2YgPGEgaHJlZj1cImh0dHBzOi8vb3BlbmFjdHRleHRzLmdpdGh1Yi5pby9Mb3NzLURhdGEtQW5hbHl0aWNzL0MtTW9kZWxTZWxlY3Rpb24uaHRtbCNTOk1TOk5vblBhckluZlwiPkxvc3MgRGF0YSBBbmFseXRpY3M8L2E+LiJ9
 </div>
 </div>
-<div id="exercise.-comparing-basic-count-distributions" class="section level3" number="2.1.3">
+<div id="exercise.-comparing-basic-count-distributions" class="section level3">
 <h3><span class="header-section-number">2.1.3</span> Exercise. Comparing Basic Count Distributions</h3>
 <p><strong>Assignment Text</strong></p>
 <p>Your supervisor would like to have a better understanding of relationships among three important count distributions, the binomial, Poisson, and negative binomial. You could develop a mathematical appendix, demonstrating how:</p>
@@ -558,7 +527,7 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJvdXRjb21lcyA8LSAwOjEyXG5cbkJpbm9tMS5wbWYgIDwt
 </div>
 </div>
 </div>
-<div id="the-ab0-class" class="section level2" number="2.2">
+<div id="the-ab0-class" class="section level2">
 <h2><span class="header-section-number">2.2</span> The (a,b,0) Class</h2>
 <hr />
 <p>In this section, you learn how to:</p>
@@ -595,7 +564,7 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJvdXRjb21lcyA8LSAwOjEyXG5cbkJpbm9tMS5wbWYgIDwt
 <iframe src="./Overheads/LDA1.Chap2.pdf#page=21" width="100%" height="400"> </iframe>
 </div>
 </div>
-<div id="exercise.-determining-probabilities-recursively" class="section level3" number="2.2.1">
+<div id="exercise.-determining-probabilities-recursively" class="section level3">
 <h3><span class="header-section-number">2.2.1</span> Exercise. Determining Probabilities Recursively</h3>
 <p><strong>Assignment Text</strong></p>
 <p>The <span class="math inline">\((a,b,0)\)</span> class can be expressed through the recursion</p>
@@ -625,7 +594,7 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJvdXRjb21lcyA8LSAwOjEyXG5cbkJpbm9tMS5wbWYgIDwt
 eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6IiMgTm9uZSBOZWVkZWQgZm9yIHRoaXMgRXhlcmNpc2UiLCJzYW1wbGUiOiJrdmVjIDwtIGMoMDo/PykgXG5Qb2lzc29uLnBfayA8LSBkcG9pcyh4PWt2ZWMsIGxhbWJkYT0/PykgXG5hID0gPz8gXG5iID0gPz9cbmFiMC52ZWNQIDwtICBleHAoLTEuMjQpIC0+IHAubmV3XG5mb3IgKGsgaW4gMjoyMSl7XG4gIHAubmV3IDwtIHAubmV3ICooYStiLyhrLTEpKVxuICBhYjAudmVjUCA8LSBhcHBlbmQoYWIwLnZlY1AscC5uZXcpXG4gIH1cbnN1bShhYnMoUG9pc3Nvbi5wX2sgLSA/PykpXG5cbk5lZ0Jpbm9tLnBfayA8LSBkbmJpbm9tKGt2ZWMsIHByb2I9MS8xLjEsIHNpemUgPSAxMi40KVxuYSA9ID8/IFxuYiA9ID8/XG5hYjAudmVjTkIgPC0gIDEuMSoqKC0xMi40KSAtPiBwLm5ld1xuZm9yIChrIGluID8/KXtcbiAgcC5uZXcgPC0gcC5uZXcgKihhK2IvaylcbiAgYWIwLnZlY05CIDwtIGFwcGVuZChhYjAudmVjTkIscC5uZXcpXG4gIH1cbnN1bShhYnMoTmVnQmlub20ucF9rIC0gPz8pKSIsInNvbHV0aW9uIjoia3ZlYyA8LSBjKDA6MjApIFxuUG9pc3Nvbi5wX2sgPC0gZHBvaXMoeD1rdmVjLCBsYW1iZGE9MS4yNCkgXG5hID0gMDsgXG5iID0gMS4yNFxuYWIwLnZlY1AgPC0gIGV4cCgtMS4yNCkgLT4gcC5uZXdcbmZvciAoayBpbiAxOjIwKXtcbiAgcC5uZXcgPC0gcC5uZXcgKihhK2IvaylcbiAgYWIwLnZlY1AgPC0gYXBwZW5kKGFiMC52ZWNQLHAubmV3KVxuICB9XG5zdW0oYWJzKFBvaXNzb24ucF9rIC0gYWIwLnZlY1ApKVxuXG5OZWdCaW5vbS5wX2sgPC0gZG5iaW5vbShrdmVjLCBwcm9iPTEvMS4xLCBzaXplID0gMTIuNClcbmEgPSAuMS8xLjE7IFxuYiA9IDExLjQqKDAuMSkvMS4xXG5hYjAudmVjTkIgPC0gIDEuMSoqKC0xMi40KSAtPiBwLm5ld1xuZm9yIChrIGluIDI6MjEpe1xuICBwLm5ldyA8LSBwLm5ldyAqKGErYi8oay0xKSlcbiAgYWIwLnZlY05CIDwtIGFwcGVuZChhYjAudmVjTkIscC5uZXcpXG4gIH1cbnN1bShhYnMoTmVnQmlub20ucF9rIC0gYWIwLnZlY05CKSkiLCJzY3QiOiJrdmVjbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBrdmVjYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwia3ZlY1wiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBga3ZlY2AhXCIpICU+JSBjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPWt2ZWNtc2cpXG5Qb2lzc29uLnBfa21zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgUG9pc3Nvbi5wX2tgP1wiXG5leCgpICU+JSBjaGVja19vYmplY3QoXCJQb2lzc29uLnBfa1wiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgUG9pc3Nvbi5wX2tgIVwiKSAlPiUgY2hlY2tfZXF1YWwoaW5jb3JyZWN0X21zZz1Qb2lzc29uLnBfa21zZylcbmFiMC52ZWNQbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBhYjAudmVjUGA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcImFiMC52ZWNQXCIsIHVuZGVmaW5lZF9tc2cgPSBcIk1ha2Ugc3VyZSB0byBub3QgcmVtb3ZlIGBhYjAudmVjUGAhXCIpICU+JSBjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPWFiMC52ZWNQbXNnKVxuTmVnQmlub20ucF9rbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBOZWdCaW5vbS5wX2tgP1wiXG5leCgpICU+JSBjaGVja19vYmplY3QoXCJOZWdCaW5vbS5wX2tcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYE5lZ0Jpbm9tLnBfa2AhXCIpICU+JSBjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPU5lZ0Jpbm9tLnBfa21zZylcbmFiMC52ZWNOQm1zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgYWIwLnZlY05CYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwiYWIwLnZlY05CXCIsIHVuZGVmaW5lZF9tc2cgPSBcIk1ha2Ugc3VyZSB0byBub3QgcmVtb3ZlIGBhYjAudmVjTkJgIVwiKSAlPiUgY2hlY2tfZXF1YWwoaW5jb3JyZWN0X21zZz1hYjAudmVjTkJtc2cpXG5cbnN1Y2Nlc3NfbXNnKFwiRXhjZWxsZW50IGpvYiEgQmVpbmcgYWJsZSB0byBkbyBjYWxjdWxhdGlvbnMgcmVjdXJzaXZlbHksIHN1Y2ggYXMgdXNpbmcgZm9yIGxvb3BzLCBpcyBhbiBpbXBvcnRhbnQgZm9yIGFjdHVhcmlhbCBtb2RlbHMuXCIpIiwiaGludCI6IlRoZXJlIGFyZSBzZXZlcmFsIHdheXMgdG8gZG8gcmVjdXJzaW9ucyBpbiA8Y29kZT5SPC9jb2RlPiwgeW91IG1pZ2h0IHN0YXJ0IHdpdGggYSBzaW1wbGUgPGEgaHJlZj1cImh0dHBzOi8vd3d3LnJkb2N1bWVudGF0aW9uLm9yZy9wYWNrYWdlcy9iYXNlL3ZlcnNpb25zLzMuNi4yL3RvcGljcy9Db250cm9sXCI+Zm9yKCk8L2E+IGV4cHJlc3Npb24uIn0=
 </div>
 </div>
-<div id="exercise.-reverse-engineering-and-recursive-r-functions" class="section level3" number="2.2.2">
+<div id="exercise.-reverse-engineering-and-recursive-r-functions" class="section level3">
 <h3><span class="header-section-number">2.2.2</span> Exercise. Reverse Engineering and Recursive <code>R</code> Functions</h3>
 <p><strong>Assignment Text</strong></p>
 <p>You want to generate probabilities from the <span class="math inline">\((a,b,0)\)</span> class so that later on you will be able to modify your code to produce alternative distributions (the subject of Section 2.5), a bit of so-called “reverse engineering.” In the first part of this problem, from a known distribution (e.g., the binomial), you will compute the ratio</p>
@@ -654,7 +623,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6IiMgTm9uZSBOZWVkZWQgZm9yIHRoaXMg
 </div>
 </div>
 </div>
-<div id="estimating-frequency-distributions" class="section level2" number="2.3">
+<div id="estimating-frequency-distributions" class="section level2">
 <h2><span class="header-section-number">2.3</span> Estimating Frequency Distributions</h2>
 <hr />
 <p>In this section, you learn how to:</p>
@@ -706,7 +675,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6IiMgTm9uZSBOZWVkZWQgZm9yIHRoaXMg
 <iframe src="./Overheads/LDA1.Chap2.pdf#page=28" width="100%" height="400"> </iframe>
 </div>
 </div>
-<div id="Ex:CountDataCompression" class="section level3" number="2.3.1">
+<div id="Ex:CountDataCompression" class="section level3">
 <h3><span class="header-section-number">2.3.1</span> Exercise. Count Data Compression - 1</h3>
 <p><strong>Assignment Text</strong></p>
 <p>Raw count data can often be compressed without loss of any statistical information. Typically, the compression is to the sequence of values <span class="math inline">\(\{m_k\}_{k\geq 0}\)</span>, where <span class="math inline">\(m_k\)</span> is the number of observations equal to <span class="math inline">\(k\)</span>, that is, <span class="math inline">\(m_k=\sum_{i= 1}^n I(x_i=k).\)</span> In this and the following exercise, we discuss two data structures for this compressed data and suggest implementations in <code>R</code>.</p>
@@ -727,7 +696,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6IiMgTm9uZSBOZWVkZWQgZm9yIHRoaXMg
 eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4IDwtIGMoPz8pXG5cbnRhYmxlKD8/KVxuXG5tLnZlYyA8LSByZXAoMCxtYXgoPz8pKzEpXG4jIEZpbGwgaW4gYXBwcm9wcmlhdGVseVxuPz9bYXMuaW50ZWdlcihuYW1lcyh0YWJsZSg/PykpKSsxXSA9IGFzLnZlY3Rvcih0YWJsZSg/PykpXG5cbnN1bSgoMDoobGVuZ3RoKD8/KS0xKSkqPz8pL3N1bSg/PylcblxuYmFycGxvdCg/PyxuYW1lcy5hcmc9MDoobGVuZ3RoKD8/KS0xKSx5bGFiPVwiRnJlcXVlbmN5XCIsIHhsYWI9XCJDb3VudFwiKSIsInNvbHV0aW9uIjoieCA8LSBjKDMsIDYsIDAsIDIsIDMsIDQsIDQsIDIsIDQsIDQsIDYsIDIsIDMsIDAsIDIsIDMsXG4gICAgIDEsIDIsIDQsIDIpXG5cbnRhYmxlKHgpXG5cbm0udmVjIDwtIHJlcCgwLG1heCh4KSsxKVxuIyBGaWxsIGluIGFwcHJvcHJpYXRlbHlcbm0udmVjW2FzLmludGVnZXIobmFtZXModGFibGUoeCkpKSsxXT1hcy52ZWN0b3IodGFibGUoeCkpXG5cbnN1bSgoMDoobGVuZ3RoKG0udmVjKS0xKSkqbS52ZWMpL3N1bShtLnZlYylcblxuYmFycGxvdChtLnZlYyxuYW1lcy5hcmc9MDoobGVuZ3RoKG0udmVjKS0xKSx5bGFiPVwiRnJlcXVlbmN5XCIseGxhYj1cIkNvdW50XCIpIiwic2N0IjoieG1zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgeGA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcInhcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYHhgIVwiKSAlPiVjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPXhtc2cpXG5tLnZlY21zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgbS52ZWNgP1wiXG5leCgpICU+JSBjaGVja19vYmplY3QoXCJtLnZlY1wiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgbS52ZWNgIVwiKSAlPiVjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPW0udmVjbXNnKVxudGFibGVtc2cgPC0gXCJEaWQgeW91IGNvcnJlY3RseSBzcGVjaWZ5IHRoZSBhcmd1bWVudHM/XCJcbmV4KCkgJT4lIGNoZWNrX2Z1bmN0aW9uKFwidGFibGVcIiwgbm90X2NhbGxlZF9tc2cgPXRhYmxlbXNnKSAlPiUgY2hlY2tfcmVzdWx0KGVycm9yX21zZz10YWJsZW1zZykgJT4lIGNoZWNrX2VxdWFsKClcbmJhcnBsb3Rtc2cgPC0gXCJEaWQgeW91IGNvcnJlY3RseSBzcGVjaWZ5IHRoZSBhcmd1bWVudHM/XCJcbmV4KCkgJT4lIGNoZWNrX2Z1bmN0aW9uKFwiYmFycGxvdFwiLCBub3RfY2FsbGVkX21zZyA9YmFycGxvdG1zZykgJT4lIGNoZWNrX3Jlc3VsdChlcnJvcl9tc2c9YmFycGxvdG1zZykgJT4lIGNoZWNrX2VxdWFsKClcbnN1Y2Nlc3NfbXNnKFwiRXhjZWxsZW50IGpvYiEgQWN0dWFyaWFsIGFwcGxpY2F0aW9ucyBvZnRlbiBpbnZvbHZlIG1hc3NpdmUgZGF0YXNldHMuIEl0IGNhbiBiZSBoYW5keSBpZGVudGlmeWluZyBzaXR1YXRpb25zIGluIHdoaWNoIGRhdGEgY2FuIGJlIGNvbXByZXNzZWQgd2l0aG91dCBsb3NzIG9mIGluZm9ybWF0aW9uLiBTb21lIGFwcGxpY2F0aW9ucyBvZiBjb3VudCBkYXRhIGlzIG9uZSBzdWNoIHNpdHVhdGlvbi5cIikiLCJoaW50IjoiUGxheSB3aXRoIGEgc21hbGxlciBkYXRhIHNldCAoaS5lLiB4KSB0byB1bmRlcnN0YW5kIGVhY2ggbGluZSBvZiBjb2RlLiJ9
 </div>
 </div>
-<div id="exercise.-count-data-compression---2" class="section level3" number="2.3.2">
+<div id="exercise.-count-data-compression---2" class="section level3">
 <h3><span class="header-section-number">2.3.2</span> Exercise. Count Data Compression - 2</h3>
 <p><strong>Assignment Text</strong></p>
 <p>In Exercise <a href="frequency-modeling.html#Ex:CountDataCompression">2.3.1</a>, the count data range was narrow - counts range from 0 to 6. In that case the suggested manner to store <span class="math inline">\(m_k\)</span>’s worked well. In Section <a href="introduction-to-loss-data-analytics.html#Sec:LGPIF">1.3</a> of this short course, the Wisconsin Property Fund data has been introduced which consists of claim experience for fund members over the years 2006-2010, inclusive. It includes the frequency of claims <code>Freq</code> as well as the claim year <code>Year</code>. The Wisconsin Property Fund data has already been read into a data frame called <code>Insample</code>. In this assignment, we will compress the claims frequency data using a data structure that differs from that presented in the preceding exercise.</p>
@@ -755,7 +724,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ikluc2FtcGxlIDwtIHJlYWQuY3N2KFwi
 </center>
 </div>
 </div>
-<div id="exercise.-graphing-likelihoods" class="section level3" number="2.3.3">
+<div id="exercise.-graphing-likelihoods" class="section level3">
 <h3><span class="header-section-number">2.3.3</span> Exercise. Graphing Likelihoods</h3>
 <p><strong>Assignment Text</strong></p>
 <p>In this assignment you are asked to plot the Poisson likelihood and the log-likelihood for the data from Exercise <a href="frequency-modeling.html#Ex:CountDataCompression">2.3.1</a>. It is instructive to see that the maximum for both the curves are attained at the same point, the sample mean. These data have already been read into an array <span class="math inline">\(\bf x\)</span> with the counts in the array <span class="math inline">\(\bf m.vec\)</span>. Once you have a working code, scroll through the plots to understand what each piece of graph code does.</p>
@@ -806,7 +775,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Ing8LWMoMywgNiwgMCwgMiwgMywgNCwg
 </div>
 </div>
 </div>
-<div id="exercise.-fitting-a-binomial-distribution" class="section level3" number="2.3.4">
+<div id="exercise.-fitting-a-binomial-distribution" class="section level3">
 <h3><span class="header-section-number">2.3.4</span> Exercise. Fitting a Binomial Distribution</h3>
 <p><strong>Assignment Text</strong></p>
 <p>In this assignment you are asked to fit the binomial model to a small set of count data, <span class="math inline">\(\{1, 3, 3, 3, 5, 3, 0, 2, 4, 3, 4\}\)</span>. Recall that in this parameterization of the binomial model, <span class="math inline">\(m\)</span> is the potential number of 1’s (the number of “trials”).
@@ -827,7 +796,7 @@ You will recall from <a href="https://openacttexts.github.io/Loss-Data-Analytics
 eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNldC5zZWVkKFwiMTIzNFwiKVxueCA8LSByYmlub20oMTEsOSwxLzMpXG4jIHggPC0gYygxLCAzLCAzLCAzLCA1LCAzLCAwLCAyLCA0LCAzLCA0KVxubS52ZWMgPC0gcmVwKDAsbWF4KHgpKzEpXG5tLnZlY1thcy5pbnRlZ2VyKG5hbWVzKHRhYmxlKHgpKSkrMV0gPSBhcy52ZWN0b3IodGFibGUoeCkpIiwic2FtcGxlIjoiIyBSZWR1Y2VkIExpa2VsaWhvb2QgRnVuY3Rpb24gXG5yZWR1Y2VkX2xpa2U8LWZ1bmN0aW9uKHBhcmFfbSl7XG4gIGlmIChwYXJhX20+PW1heCh4KSlcbiAgICBwcm9kKGRiaW5vbSgwOm1heCh4KSxwYXJhX20sbWVhbih4KS9jZWlsaW5nKHBhcmFfbSkpXm0udmVjKVxuICBlbHNlICAgIDBcbiAgfVxuIyBDb21wdXRlIHRoZSByZWR1Y2VkIGxpa2VsaWhvb2QgYWNyb3NzIGEgcmFuZ2Ugb2YgdmFsdWVzIGZvciBtXG5vYmogPC0gc2FwcGx5KG1heCh4KTooMyptYXgoeCkpLD8/KVxuXG4jIG1sZSBmb3IgbSBhbmQgcVxubV9NTEUgPC0gbWF0Y2gobWF4KG9iaiksb2JqKSttYXgoeCktMVxucV9NTEUgPC0gbWVhbih4KS8/P1xuIyBWaXN1YWxseSBjaGVjayB0aGUgcmVkdWNlZCBsb2ctbGlrZWxpaG9vZFxucGxvdChtYXgoeCk6KDMqbWF4KHgpKSxsb2coPz8pLHR5cGU9XCJsXCIseGxhYj1cIm1cIix5bGFiPWV4cHJlc3Npb24obChtLGJhcih4KS9tKSkpXG5hYmxpbmUodj1tX01MRSxjb2w9XCJncmVlblwiKVxuXG4jIENoZWNrIGlmIHNhbXBsZSBtZWFuID4gc2FtcGxlIHZhcmlhbmNlXG5jKG1lYW4oPz8pLCB2YXIoYyh4LG1lYW4oeCkpKSkiLCJzb2x1dGlvbiI6IiMgTGlrZWxpaG9vZCBGdW5jdGlvbiBcbnJlZHVjZWRfbGlrZTwtZnVuY3Rpb24ocGFyYV9tKXtcbiAgaWYgKHBhcmFfbT49bWF4KHgpKVxuICAgIHByb2QoZGJpbm9tKDA6bWF4KHgpLHBhcmFfbSxtZWFuKHgpL2NlaWxpbmcocGFyYV9tKSlebS52ZWMpXG4gIGVsc2UgICAgICAwXG4gIH1cbiMgIENvbXB1dGUgdGhlIHJlZHVjZWQgbGlrZWxpaG9vZCBhY3Jvc3MgYSByYW5nZSBvZiB2YWx1ZXMgZm9yIG1cbm9iaiA8LSBzYXBwbHkobWF4KHgpOigzKm1heCh4KSkscmVkdWNlZF9saWtlKVxuXG4jIE1MRSBmb3IgbSBhbmQgcVxubV9NTEUgPC0gbWF0Y2gobWF4KG9iaiksb2JqKSttYXgoeCktMVxucV9NTEUgPC0gbWVhbih4KS9tX01MRVxuIyBJbXBvcnRhbnQgdG8gdmlzdWFsbHkgY2hlY2sgdGhlIHJlZHVjZWQgbG9nLWxpa2VsaWhvb2RcbnBsb3QobWF4KHgpOigzKm1heCh4KSksbG9nKG9iaiksdHlwZT1cImxcIix4bGFiPVwibVwiLHlsYWI9ZXhwcmVzc2lvbihsKG0sYmFyKHgpL20pKSlcbmFibGluZSh2PW1fTUxFLGNvbD1cImdyZWVuXCIpXG5cbiMgQ2hlY2sgaWYgc2FtcGxlIG1lYW4gPiBzYW1wbGUgdmFyaWFuY2VcbmMobWVhbih4KSwgdmFyKGMoeCxtZWFuKHgpKSkpIiwic2N0Ijoib2JqbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBvYmpgP1wiXG5leCgpICU+JSBjaGVja19vYmplY3QoXCJvYmpcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYG9iamAhXCIpICU+JWNoZWNrX2VxdWFsKGluY29ycmVjdF9tc2c9b2JqbXNnKVxubV9NTEVtc2cgPC0gXCJEaWQgeW91IGNvcnJlY3RseSBzcGVjaWZ5IHRoZSBvYmplY3QgYG1fTUxFYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwibV9NTEVcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYG1fTUxFYCFcIikgJT4lY2hlY2tfZXF1YWwoaW5jb3JyZWN0X21zZz1tX01MRW1zZylcbnFfTUxFbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBxX01MRWA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcInFfTUxFXCIsIHVuZGVmaW5lZF9tc2cgPSBcIk1ha2Ugc3VyZSB0byBub3QgcmVtb3ZlIGBxX01MRWAhXCIpICU+JWNoZWNrX2VxdWFsKGluY29ycmVjdF9tc2c9cV9NTEVtc2cpXG5zdWNjZXNzX21zZyhcIkV4Y2VsbGVudCBqb2IhIFdoZW4gY29tcGFyaW5nIHRoZSBtZWFuIHRvIHRoZSB2YXJpYW5jZSBmb3IgdGhlIGJhc2ljIGNvdW50IGRpc3RyaWJ1dGlvbnMsIHRoZSB2YXJpYW5jZSBpcyBzbWFsbGVyIGZvciB0aGUgYmlub21pYWwsIGVxdWFsIGZvciB0aGUgUG9pc3NvbiwgYW5kIGxhcmdlciBmb3IgdGhlIG5lZ2F0aXZlIGJpbm9taWFsLiBTbyBjb21wYXJpbmcgdGhlIG1lYW4gdG8gdGhlIHZhcmlhbmNlIGlzIGEgcXVpY2sgc2lnbmFsIHRoYXQgaGVscHMgdG8gc3BlY2lmeSBhIGNvdW50IGRpc3RyaWJ1dGlvbi5cIikiLCJoaW50IjoiV2hlbiBpbnRlcnByZXRpbmcgdGhlIGNvZGUsIHRoaXMgZXhlcmNpc2UgdXNlcyB0aGUgbW9yZSBiYXNpYyBsaWtlbGlob29kLCBpbiBjb250cmFzdCB0byB0aGUgbW9yZSBjb21tb24gbG9nLWxpa2VsaWhvb2QgZnVuY3Rpb24uIEZ1cnRoZXIsIGZvciBhIGZpeGVkIDxlbT5tPC9lbT4sIHRoZSA8ZW0+bWxlPC9lbT4gb2YgPGVtPnE8L2VtPiBpcyBzaW1wbHkgdGhlIGF2ZXJhZ2UuIFNvLCB3ZSBvbmx5IG5lZWQgdG8gZG8gb25lIGRpbWVuc2lvbmFsIG9wdGltaXphdGlvbiBldmVuIHRob3VnaCB0aGVyZSBhcmUgdHdvIHBhcmFtZXRlcnMuIn0=
 </div>
 </div>
-<div id="Exer:FitNegBinomialDistrn" class="section level3" number="2.3.5">
+<div id="Exer:FitNegBinomialDistrn" class="section level3">
 <h3><span class="header-section-number">2.3.5</span> Exercise. Fitting a Negative Binomial Distribution</h3>
 <p><strong>Assignment Text</strong></p>
 <p>In this assignment, you are asked to fit the negative binomial model to a small set of count data, <span class="math inline">\(\{1, 1, 2, 6, 1, 1, 2, 5, 11\}\)</span>. Because <span class="math inline">\(r\)</span>, a parameter of the negative binomial distribution, is a positive real number, it is convenient to use the <code>optimize</code> function for maximizing the <em>reduced</em> likelihood in order to find its <em>mle</em>. It is always advisable to visually confirm the solution by plotting the reduced log-likelihood.</p>
@@ -848,7 +817,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNldC5zZWVkKFwiMTIzNFwiKVxueCA8
 </div>
 </div>
 </div>
-<div id="other-frequency-distributions" class="section level2" number="2.4">
+<div id="other-frequency-distributions" class="section level2">
 <h2><span class="header-section-number">2.4</span> Other Frequency Distributions</h2>
 <hr />
 <p>In this section, you learn how to:</p>
@@ -910,7 +879,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNldC5zZWVkKFwiMTIzNFwiKVxueCA8
 <iframe src="./Overheads/LDA1.Chap2.pdf#page=44" width="100%" height="400"> </iframe>
 </div>
 </div>
-<div id="exercise.-the-ab1-distribution-and-its-moments" class="section level3" number="2.4.1">
+<div id="exercise.-the-ab1-distribution-and-its-moments" class="section level3">
 <h3><span class="header-section-number">2.4.1</span> Exercise. The (<em>a,b</em>,1) Distribution and its Moments</h3>
 <p><img src = "ContributorPics/hurdler.png" width = "65" height = "65" style = "float:right; margin-left: 10px; margin-top: 7px" />
 (<em>As a reminder, when you see this symbol, it means that this exercise is challenging and you may wish to skip it on your first pass through the course.</em>)</p>
@@ -934,7 +903,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImR1bSA8LSAzLzRcbnAgPC0gYyhkdW0s
 </div>
 </div>
 </div>
-<div id="mixture-distributions" class="section level2" number="2.5">
+<div id="mixture-distributions" class="section level2">
 <h2><span class="header-section-number">2.5</span> Mixture Distributions</h2>
 <hr />
 <p>In this section, you learn how to:</p>
@@ -991,7 +960,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImR1bSA8LSAzLzRcbnAgPC0gYyhkdW0s
 <iframe src="./Overheads/LDA1.Chap2.pdf#page=52" width="100%" height="400"> </iframe>
 </div>
 </div>
-<div id="exercise.-mixtures-of-workers-compensation-claims" class="section level3" number="2.5.1">
+<div id="exercise.-mixtures-of-workers-compensation-claims" class="section level3">
 <h3><span class="header-section-number">2.5.1</span> Exercise. Mixtures of Workers’ Compensation Claims</h3>
 <p><strong>Assignment Text</strong></p>
 <p>You are analyzing a set of workers’ compensation claims (claims that pay in the event of injury at a work-place) and focus on the frequency portion. Suppose that it is known that if claims arise from a low-risk class, such as accountants and actuaries working within “four walls,” that the number of claims follows a Poisson distribution with parameter <span class="math inline">\(\lambda=4\)</span>. However, if claims arise from a high-risk class, such as roofers and lumberjacks, then the number follows a negative binomial distribution with parameters <span class="math inline">\(r=4\)</span> and <span class="math inline">\(\beta=3\)</span>. For a particular firm, you do not know whether it is low or high risk but you do know that probability of being low-risk is <span class="math inline">\(\alpha=0.6\)</span>.</p>
@@ -1011,7 +980,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImR1bSA8LSAzLzRcbnAgPC0gYyhkdW0s
 eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJhbHBoYSA8LSAwLjY7IGxhbWJkYSA8LSA/PyAgXG5yIDwtIDQ7ICAgICAgIGJldGEgPC0gPz8gXG5rdmVjIDwtIDA6MjBcblxubG93cmlzayA8LSBkcG9pcyhrdmVjLCBsYW1iZGE9bGFtYmRhKVxuaGlnaHJpc2sgPC0gZG5iaW5vbShrdmVjLCBwcm9iPT8/ICwgc2l6ZSA9ID8/IClcbnBvcHJpc2sgPC0gPz8gXG5cbnBsb3Qoa3ZlYywgcG9wcmlzaywgeWxpbSA9IGMoMCwgLjIpLCB4bGFiID0gXCJOdW1iZXIgb2YgQ2xhaW1zXCIsIHlsYWIgPSBcIlByb2JhYmlsaXR5XCIsIHR5cGUgPSBcImJcIiwgcGNoID0gMTkpXG5saW5lcyhrdmVjLCBsb3dyaXNrLCBjb2wgPSBcImJsdWVcIiwgdHlwZSA9IFwiYlwiKVxubGluZXMoa3ZlYywgaGlnaHJpc2ssIGNvbCA9IFwicmVkXCIsIHR5cGUgPSBcImJcIiwgcGNoID0gMjMpXG5cbmxvd3Jpc2sucCA8LSBwcG9pcyhrdmVjLCBsYW1iZGE9bGFtYmRhKVxuaGlnaHJpc2sucCA8LSBwbmJpbm9tKGt2ZWMsIHByb2I9Pz8gLCBzaXplID0gPz8gKVxucG9wcmlzay5wIDwtID8/IFxuXG5wbG90KGt2ZWMsIHBvcHJpc2sucCwgeWxpbSA9IGMoMCwgMSksIHhsYWIgPSBcIk51bWJlciBvZiBDbGFpbXNcIiwgeWxhYiA9IFwiRGlzdHJpYnV0aW9uIEZ1bmN0aW9uXCIsIHR5cGUgPSBcImJcIiwgcGNoID0gMTkpXG5saW5lcyhrdmVjLCBsb3dyaXNrLnAsIGNvbCA9IFwiYmx1ZVwiLCB0eXBlID0gXCJiXCIpXG5saW5lcyhrdmVjLCBoaWdocmlzay5wLCBjb2wgPSBcInJlZFwiLCB0eXBlID0gXCJiXCIsIHBjaCA9IDIzKSIsInNvbHV0aW9uIjoiYWxwaGEgPC0gMC42OyBsYW1iZGEgPC0gNDsgXG5yIDwtIDQ7ICAgICAgIGJldGEgPC0gM1xua3ZlYyA8LSAwOjIwXG5cbmxvd3Jpc2sgPC0gZHBvaXMoa3ZlYywgbGFtYmRhPWxhbWJkYSlcbmhpZ2hyaXNrIDwtIGRuYmlub20oa3ZlYywgcHJvYj0xLygxK2JldGEpLCBzaXplID0gcilcbnBvcHJpc2sgPC0gYWxwaGEqbG93cmlzayArICgxLWFscGhhKSpoaWdocmlza1xuXG5wbG90KGt2ZWMsIHBvcHJpc2ssIHlsaW0gPSBjKDAsIC4yKSwgeGxhYiA9IFwiTnVtYmVyIG9mIENsYWltc1wiLCB5bGFiID0gXCJQcm9iYWJpbGl0eVwiLCB0eXBlID0gXCJiXCIsIHBjaCA9IDE5KVxubGluZXMoa3ZlYywgbG93cmlzaywgY29sID0gXCJibHVlXCIsIHR5cGUgPSBcImJcIilcbmxpbmVzKGt2ZWMsIGhpZ2hyaXNrLCBjb2wgPSBcInJlZFwiLCB0eXBlID0gXCJiXCIsIHBjaCA9IDIzKVxuXG5sb3dyaXNrLnAgPC0gcHBvaXMoa3ZlYywgbGFtYmRhPWxhbWJkYSlcbmhpZ2hyaXNrLnAgPC0gcG5iaW5vbShrdmVjLCBwcm9iPTEvKDErYmV0YSksIHNpemUgPSByKVxucG9wcmlzay5wIDwtIGFscGhhKmxvd3Jpc2sucCArICgxLWFscGhhKSpoaWdocmlzay5wXG5cbnBsb3Qoa3ZlYywgcG9wcmlzay5wLCB5bGltID0gYygwLCAxKSwgeGxhYiA9IFwiTnVtYmVyIG9mIENsYWltc1wiLCB5bGFiID0gXCJEaXN0cmlidXRpb24gRnVuY3Rpb25cIiwgdHlwZSA9IFwiYlwiLCBwY2ggPSAxOSlcbmxpbmVzKGt2ZWMsIGxvd3Jpc2sucCwgY29sID0gXCJibHVlXCIsIHR5cGUgPSBcImJcIilcbmxpbmVzKGt2ZWMsIGhpZ2hyaXNrLnAsIGNvbCA9IFwicmVkXCIsIHR5cGUgPSBcImJcIiwgcGNoID0gMjMpIiwic2N0IjoibGFtYmRhbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBsYW1iZGFgP1wiXG5leCgpICU+JSBjaGVja19vYmplY3QoXCJsYW1iZGFcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYGxhbWJkYWAhXCIpICU+JWNoZWNrX2VxdWFsKGluY29ycmVjdF9tc2c9bGFtYmRhbXNnKVxuYmV0YW1zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgYmV0YWA/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcImJldGFcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYGJldGFgIVwiKSAlPiVjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPWJldGFtc2cpXG5oaWdocmlza21zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgaGlnaHJpc2tgP1wiXG5leCgpICU+JSBjaGVja19vYmplY3QoXCJoaWdocmlza1wiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgaGlnaHJpc2tgIVwiKSAlPiVjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPWhpZ2hyaXNrbXNnKVxucG9wcmlza21zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgcG9wcmlza2A/XCJcbmV4KCkgJT4lIGNoZWNrX29iamVjdChcInBvcHJpc2tcIiwgdW5kZWZpbmVkX21zZyA9IFwiTWFrZSBzdXJlIHRvIG5vdCByZW1vdmUgYHBvcHJpc2tgIVwiKSAlPiVjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPXBvcHJpc2ttc2cpXG5oaWdocmlzay5wbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBoaWdocmlzay5wYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwiaGlnaHJpc2sucFwiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgaGlnaHJpc2sucGAhXCIpICU+JWNoZWNrX2VxdWFsKGluY29ycmVjdF9tc2c9aGlnaHJpc2sucG1zZylcbnBvcHJpc2sucG1zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgcG9wcmlzay5wYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwicG9wcmlzay5wXCIsIHVuZGVmaW5lZF9tc2cgPSBcIk1ha2Ugc3VyZSB0byBub3QgcmVtb3ZlIGBwb3ByaXNrLnBgIVwiKSAlPiVjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPXBvcHJpc2sucG1zZylcblxuc3VjY2Vzc19tc2coXCJTdXBlcmIhIERldGVybWluaW5nIG1peHR1cmUgZGlzdHJpYnV0aW9ucyBhcmUgdXN1YWxseSBkaWZmaWN1bHQgdG8gZG8gYnkgaGFuZCBidXQgYXJlIHN0cmFpZ2h0Zm9yd2FyZCB3aXRoIGNvbXB1dGF0aW9uYWwgdG9vbHMgc3VjaCBhcyAnUicuIEluc3VyYW5jZSBhbmFseXN0cyBjb250aW51YWxseSBmcmV0IGFib3V0IHVub2JzZXJ2ZWQgY2hhcmFjdGVyaXN0aWNzIChzdWNoIGFzIGxvdyB2ZXJzdXMgaGlnaCByaXNrKSBhbmQgbWl4dHVyZSBkaXN0cmlidXRpb25zIGlzIGEgdG9vbCBvZnRlbiB1c2VkIHRvIGhlbHAgcXVhbnRpZnkgdGhlc2UgdW5vYnNlcnZlZCBwaWVjZXMgb2YgaW5mb3JtYXRpb24uIFwiKSIsImhpbnQiOiJTZWUgdGhlIDxhIGhyZWY9XCJodHRwczovL29wZW5hY3R0ZXh0cy5naXRodWIuaW8vTG9zcy1EYXRhLUFuYWx5dGljcy9DLVN1bW1hcnlEaXN0cmlidXRpb25zLmh0bWwjZGlzY3JldGUtZGlzdHJpYnV0aW9uc1wiPmFwcGVuZGl4IG9mIHRoZSBMb3NzIERhdGEgQW5hbHl0aWNzPC9hPiBcbiAgIGZvciBjb2RlIG9uIHVzaW5nIHBhcmFtZXRlcnMgaW4gUi4ifQ==
 </div>
 </div>
-<div id="exercise.-finite-number-of-mixture-distributions" class="section level3" number="2.5.2">
+<div id="exercise.-finite-number-of-mixture-distributions" class="section level3">
 <h3><span class="header-section-number">2.5.2</span> Exercise. Finite Number of Mixture Distributions</h3>
 <p><strong>Assignment Text</strong></p>
 <p>The following describes a “classic” actuarial exam problem. We use this problem to motivate an introduction of more complex techniques for calculating mixture distributions. Unlike classic exam problems designed for hand calculations, these techniques can readily be extended to a large number of unobserved sub-populations.</p>
@@ -1042,7 +1011,7 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJhbHBoYSA8LSAwLjY7IGxhbWJkYSA8LSA/PyAgXG5yIDwt
 eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJhbHBoYSA8LSBjKDAuMywgMC42LCAwLjEpXG5sYW1iZGEudmVjPC0gPz9cblxuIyBQcm9iYWJpbGl0eSBvZiBoYXZpbmcgMyBjb21tb24gY29sZHMgaW4gYSB5ZWFyXG5ieXJpc2sgPC0gZHBvaXMoPz8sIGxhbWJkYT1sYW1iZGEudmVjKVxuYnlyaXNrICAlKiUgYWxwaGFcblxuIyBQcm9iYWJpbGl0eSBvZiBhdCBtb3N0IDMgY29tbW9uIGNvbGRzIGluIGEgeWVhclxucHBvaXMocT0zLCBsYW1iZGE9bGFtYmRhLnZlYykgJSolID8/XG5cbmt2ZWMgPSAwOjhcbnByb2JzID0gcmVwKDAsbGVuZ3RoKGt2ZWMpKVxuZm9yIChpbmRleCBpbiBrdmVjKSB7cHJvYnNbaW5kZXgrMV0gPSA/PyhpbmRleCwgbGFtYmRhPWxhbWJkYS52ZWMpICUqJSBhbHBoYX1cblxuYmFycGxvdChwcm9icywgeGxhYiA9IFwiTnVtYmVyIG9mIENsYWltc1wiLCBuYW1lcy5hcmcgPSBrdmVjKSIsInNvbHV0aW9uIjoiYWxwaGEgPC0gYygwLjMsIDAuNiwgMC4xKVxubGFtYmRhLnZlYzwtIGMoMywgMSwgNClcbmJ5cmlzayA8LSBkcG9pcygzLCBsYW1iZGE9bGFtYmRhLnZlYylcbiMgUHJvYmFiaWxpdHkgb2YgaGF2aW5nIDMgY29tbW9uIGNvbGRzIGluIGEgeWVhclxuYnlyaXNrICAlKiUgYWxwaGFcblxuIyBQcm9iYWJpbGl0eSBvZiBhdCBtb3N0IDMgY29tbW9uIGNvbGRzIGluIGEgeWVhclxucHBvaXMocT0zLCBsYW1iZGE9bGFtYmRhLnZlYykgJSolIGFscGhhXG5cbmt2ZWMgPSAwOjhcbnByb2JzID0gcmVwKDAsbGVuZ3RoKGt2ZWMpKVxuZm9yIChpbmRleCBpbiBrdmVjKSB7cHJvYnNbaW5kZXgrMV0gPSAgZHBvaXMoaW5kZXgsIGxhbWJkYT1sYW1iZGEudmVjKSAlKiUgYWxwaGF9XG5cbmJhcnBsb3QocHJvYnMsIHhsYWIgPSBcIk51bWJlciBvZiBDbGFpbXNcIiwgbmFtZXMuYXJnID0ga3ZlYykiLCJzY3QiOiJsYW1iZGEudmVjbXNnIDwtIFwiRGlkIHlvdSBjb3JyZWN0bHkgc3BlY2lmeSB0aGUgb2JqZWN0IGBsYW1iZGEudmVjYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwibGFtYmRhLnZlY1wiLCB1bmRlZmluZWRfbXNnID0gXCJNYWtlIHN1cmUgdG8gbm90IHJlbW92ZSBgbGFtYmRhLnZlY2AhXCIpICU+JWNoZWNrX2VxdWFsKGluY29ycmVjdF9tc2c9bGFtYmRhLnZlY21zZylcbmJ5cmlza21zZyA8LSBcIkRpZCB5b3UgY29ycmVjdGx5IHNwZWNpZnkgdGhlIG9iamVjdCBgYnlyaXNrYD9cIlxuZXgoKSAlPiUgY2hlY2tfb2JqZWN0KFwiYnlyaXNrXCIsIHVuZGVmaW5lZF9tc2cgPSBcIk1ha2Ugc3VyZSB0byBub3QgcmVtb3ZlIGBieXJpc2tgIVwiKSAlPiVjaGVja19lcXVhbChpbmNvcnJlY3RfbXNnPWJ5cmlza21zZylcblxuc3VjY2Vzc19tc2coXCJTdXBlcmIhIFRoaXMgZXhlcmNpc2UgZXhwbGljaXRseSBpbmNsdWRlcyBvbmx5IHRocmVlIHN1Yi1wb3B1bGF0aW9ucyBidXQgaG9wZWZ1bGx5IGl0IGlzIGFwcGFyZW50IGhvdyBpdCBjb3VsZCBiZSBleHRlbmRlZCB0byBhIGxhcmdlIG51bWJlciBvZiBzdWItcG9wdWxhdGlvbnMuIEluIHRoZSBuZXh0IGV4ZXJjaXNlLCB3ZSBjb25zaWRlciBhbiBpbmZpbml0ZSBudW1iZXIhXCIpIiwiaGludCI6IlRha2Ugc29tZSB0aW1lIHRvIGV4cGxvcmUgdGhlIG9ubGluZSA8Y29kZT5SPC9jb2RlPiBkb2N1bWVudGF0aW9uLiJ9
 </div>
 </div>
-<div id="exercise.-gamma-mixture-of-poissons" class="section level3" number="2.5.3">
+<div id="exercise.-gamma-mixture-of-poissons" class="section level3">
 <h3><span class="header-section-number">2.5.3</span> Exercise. Gamma Mixture of Poissons</h3>
 <p><img src = "ContributorPics/hurdler.png" width = "65" height = "65" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
 <p><strong>Assignment Text</strong></p>
@@ -1067,7 +1036,7 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJhbHBoYSA9ID8/OyAgICAgdGhldGEgPSA/P1xuXG5wZGZQ
 </div>
 </div>
 </div>
-<div id="goodness-of-fit" class="section level2" number="2.6">
+<div id="goodness-of-fit" class="section level2">
 <h2><span class="header-section-number">2.6</span> Goodness of Fit</h2>
 <hr />
 <p>In this section, you learn how to:</p>
@@ -1108,7 +1077,7 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJhbHBoYSA9ID8/OyAgICAgdGhldGEgPSA/P1xuXG5wZGZQ
 <iframe src="./Overheads/LDA1.Chap2.pdf#page=57" width="100%" height="400"> </iframe>
 </div>
 </div>
-<div id="exercise.-goodness-of-fit-zero-modified-poisson" class="section level3" number="2.6.1">
+<div id="exercise.-goodness-of-fit-zero-modified-poisson" class="section level3">
 <h3><span class="header-section-number">2.6.1</span> Exercise. Goodness of Fit: Zero-Modified Poisson</h3>
 <p><img src = "ContributorPics/hurdler.png" width = "65" height = "65" style = "float:right; margin-left: 10px; margin-top: 7px" /></p>
 <p><strong>Assignment Text</strong></p>
@@ -1201,7 +1170,6 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
